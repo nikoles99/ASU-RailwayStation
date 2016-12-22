@@ -15,8 +15,8 @@ public class Main {
     @ResponseBody
     User home(User user1) {
         User user = new User();
-        user.setLogin("qwer");
-        user.setPassword("zxc");
+        user.setLogin(user1.getLogin());
+        user.setPassword(user1.getPassword());
         return user;
     }
     @ControllerAdvice
