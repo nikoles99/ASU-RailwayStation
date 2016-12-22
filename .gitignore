@@ -1,2 +1,5 @@
 *.iml
 .idea/
+!/ASC-RailwayStationWP-server/
+!/ASC-RaileayStationWP-client/
+
