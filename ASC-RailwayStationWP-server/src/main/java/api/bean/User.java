@@ -1,4 +1,4 @@
-package bean;
+package api.bean;
 
 
 public class User {
