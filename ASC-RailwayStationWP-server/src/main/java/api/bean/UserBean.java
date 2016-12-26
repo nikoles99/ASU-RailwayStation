@@ -1,13 +1,19 @@
 package api.bean;
 
+import org.springframework.stereotype.Component;
 
-public class User {
+import java.io.Serializable;
+
+@Component
+public class UserBean implements Serializable{
+
 
     private String login;
 
     private String password;
 
-    public User() {
+
+    public UserBean() {
     }
 
     public String getLogin() {

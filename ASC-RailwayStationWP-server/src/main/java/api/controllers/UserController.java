@@ -1,6 +1,8 @@
 package api.controllers;
 
-import api.bean.User;
+import api.bean.UserBean;
+import api.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -9,20 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.method.annotation.AbstractJsonpResponseBodyAdvice;
 
-/**
- * Created by nolesuk on 23-Dec-16.
- */
 @Controller
 @EnableAutoConfiguration
-public class LoginController {
+public class UserController {
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    User home(User user1) {
-        User user = new User();
-        user.setLogin(user1.getLogin());
-        user.setPassword(user1.getPassword());
-        return user;
+    UserBean home(UserBean userBean) {
+        userService.addUser(userBean);
+        return userBean;
     }
 
     @ControllerAdvice
