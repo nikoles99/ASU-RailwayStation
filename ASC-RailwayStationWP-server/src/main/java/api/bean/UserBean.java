@@ -2,10 +2,8 @@ package api.bean;
 
 import org.springframework.stereotype.Component;
 
-import java.io.Serializable;
-
 @Component
-public class UserBean implements Serializable{
+public class UserBean extends AbstractBean {
 
 
     private String login;
@@ -30,5 +28,26 @@ public class UserBean implements Serializable{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        UserBean userBean = (UserBean) o;
+
+        if (login != null ? !login.equals(userBean.login) : userBean.login != null) return false;
+        return password != null ? password.equals(userBean.password) : userBean.password == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (login != null ? login.hashCode() : 0);
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        return result;
     }
 }

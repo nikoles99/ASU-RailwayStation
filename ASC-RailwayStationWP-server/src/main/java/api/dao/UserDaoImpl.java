@@ -18,11 +18,15 @@ public class UserDaoImpl implements UserDao {
     @Autowired
     private SessionFactory sessionFactory;
 
+    private Session getSession() {
+        return sessionFactory.getCurrentSession();
+    }
+
     @Override
     public void addUser(UserEntity userEntity) {
-        Session session = sessionFactory.getCurrentSession();
+        Session session = getSession();
         session.persist(userEntity);
-        logger.info("User add successfully" + userEntity);
+        logger.info("User add successfully " + userEntity);
     }
 
     @Override
