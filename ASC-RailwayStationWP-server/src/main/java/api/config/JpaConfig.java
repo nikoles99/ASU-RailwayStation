@@ -1,35 +1,32 @@
-package api;
+package api.config;
 
-import java.util.Properties;
-import javax.sql.DataSource;
-import org.hibernate.SessionFactory;
 import org.apache.commons.dbcp.BasicDataSource;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.sql.DataSource;
+import java.util.Properties;
+
+
 @Configuration
 @EnableTransactionManagement
-@PropertySource({"classpath:persistence-mysql.properties"})
-@ComponentScan({"org.baeldung.spring.persistence"})
-public class PersistenceConfig {
-
+public class JpaConfig {
 
     @Autowired
-    private Environment environment;
+    private Environment env;
 
     @Bean
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(restDataSource());
-        sessionFactory.setPackagesToScan("org.baeldung.spring.persistence.model");
+        sessionFactory.setPackagesToScan("api.entity");
         sessionFactory.setHibernateProperties(hibernateProperties());
 
         return sessionFactory;
@@ -38,10 +35,10 @@ public class PersistenceConfig {
     @Bean
     public DataSource restDataSource() {
         BasicDataSource dataSource = new BasicDataSource();
-        dataSource.setDriverClassName(environment.getProperty("org.postgresql.Driver"));
-        dataSource.setUrl(environment.getProperty("jdbc:postgresql://localhost:5432/railway_station"));
-        dataSource.setUsername(environment.getProperty("postgres"));
-        dataSource.setPassword(environment.getProperty("postgres"));
+        dataSource.setDriverClassName(env.getProperty("spring.datasource.driver-class-name"));
+        dataSource.setUrl(env.getProperty("spring.datasource.url"));
+        dataSource.setUsername(env.getProperty("spring.datasource.username"));
+        dataSource.setPassword(env.getProperty("spring.datasource.password"));
 
         return dataSource;
     }
@@ -63,8 +60,8 @@ public class PersistenceConfig {
     Properties hibernateProperties() {
         return new Properties() {
             {
-                setProperty("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
-                setProperty("hibernate.dialect", environment.getProperty("hibernate.dialect"));
+                setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+                setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
                 setProperty("hibernate.globally_quoted_identifiers", "true");
             }
         };
