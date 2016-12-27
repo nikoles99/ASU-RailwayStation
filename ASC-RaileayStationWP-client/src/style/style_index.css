@@ -96,7 +96,7 @@ p {
     color: #fff;
 }
 
-#login_form form input[type="submit"] {
+#login_form form input[type="button"] {
     border-radius: 3px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -109,7 +109,7 @@ p {
     width: 280px;
 }
 
-#login_form form input[type="submit"]:hover {
+#login_form form input[type="button"]:hover {
     background-color: #d44179;
 }
 

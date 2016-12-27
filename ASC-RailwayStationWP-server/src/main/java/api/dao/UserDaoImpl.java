@@ -18,10 +18,6 @@ public class UserDaoImpl implements UserDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
     @Override
     public void addUser(UserEntity userEntity) {
         Session session = sessionFactory.getCurrentSession();
