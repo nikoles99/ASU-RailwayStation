@@ -18,4 +18,31 @@ public class PlaceEntity extends AbstractEntity {
 
     @Column(name = "train_id")
     TrainEntity  trainEntity;
+
+    public PlaceEntity() {
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
+
+    public CarriageEntity getCarriageEntity() {
+        return carriageEntity;
+    }
+
+    public void setCarriageEntity(CarriageEntity carriageEntity) {
+        this.carriageEntity = carriageEntity;
+    }
+
+    public TrainEntity getTrainEntity() {
+        return trainEntity;
+    }
+
+    public void setTrainEntity(TrainEntity trainEntity) {
+        this.trainEntity = trainEntity;
+    }
 }

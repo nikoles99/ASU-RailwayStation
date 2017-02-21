@@ -1,8 +1,6 @@
 package api.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -15,5 +13,25 @@ public class StationEntity extends AbstractEntity {
     @Column(name = "name")
     String name;
 
-   // List<TrainScheduleEntity> schedules;
+    @OneToMany(mappedBy = "stationEntity", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    List<TrainScheduleEntity> schedules;
+
+    public StationEntity() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<TrainScheduleEntity> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(List<TrainScheduleEntity> schedules) {
+        this.schedules = schedules;
+    }
 }

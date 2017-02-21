@@ -22,7 +22,7 @@ public class CarriageEntity extends AbstractEntity {
     @JoinColumn(name = "train_id")
     TrainEntity trainEntity;
 
-    @OneToMany(mappedBy = "carriageEntity", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    @OneToMany(mappedBy = "carriageEntity", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     Set<PlaceEntity> places;
 
     public CarriageType getCarriageType() {
@@ -41,5 +41,22 @@ public class CarriageEntity extends AbstractEntity {
         this.number = number;
     }
 
+    public CarriageEntity() {
+    }
 
+    public TrainEntity getTrainEntity() {
+        return trainEntity;
+    }
+
+    public void setTrainEntity(TrainEntity trainEntity) {
+        this.trainEntity = trainEntity;
+    }
+
+    public Set<PlaceEntity> getPlaces() {
+        return places;
+    }
+
+    public void setPlaces(Set<PlaceEntity> places) {
+        this.places = places;
+    }
 }
