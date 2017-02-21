@@ -10,7 +10,8 @@ import java.util.List;
 @Table(name = "cabinets")
 public class PersonalCabinetEntity extends AbstractEntity {
 
-    @Column(name = "user_id")
+    @OneToOne
+    @JoinColumn(name = "user_id")
     UserEntity userEntity;
 
     @OneToMany(mappedBy = "personalCabinetEntity", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })

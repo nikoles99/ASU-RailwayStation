@@ -16,7 +16,8 @@ public class PlaceEntity extends AbstractEntity {
     @JoinColumn(name = "carriage_id")
     CarriageEntity  carriageEntity;
 
-    @Column(name = "train_id")
+    @OneToOne
+    @JoinColumn(name = "train_id")
     TrainEntity  trainEntity;
 
     public PlaceEntity() {

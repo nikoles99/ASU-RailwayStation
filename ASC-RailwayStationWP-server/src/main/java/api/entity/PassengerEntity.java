@@ -12,13 +12,15 @@ public class PassengerEntity extends AbstractEntity {
     @Column(name = "name")
     String name;
 
-    @Column(name = "last_name")
+    @OneToOne
+    @JoinColumn(name = "last_name")
     TrainScheduleEntity trainScheduleEntity;
 
     @Column(name = "rate")
     Double rate;
 
-    @Column(name = "place_id")
+    @OneToOne
+    @JoinColumn(name = "place_id")
     PlaceEntity placeEntity;
 
     @ManyToOne(cascade = { CascadeType.ALL })
