@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class AbstractEntity {
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     public AbstractEntity() {
