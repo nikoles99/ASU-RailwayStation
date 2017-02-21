@@ -3,7 +3,7 @@ package api.entity;
 import api.model.CarriageType;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by nolesuk on 21-Feb-17.
@@ -18,7 +18,12 @@ public class CarriageEntity extends AbstractEntity {
     @Column(name = "number")
     Integer number;
 
-    List<PlaceEntity> places;
+    @ManyToOne
+    @JoinColumn(name = "train_id")
+    TrainEntity trainEntity;
+
+    @OneToMany(mappedBy = "carriageEntity", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    Set<PlaceEntity> places;
 
     public CarriageType getCarriageType() {
         return carriageType;
@@ -36,11 +41,5 @@ public class CarriageEntity extends AbstractEntity {
         this.number = number;
     }
 
-    public List<PlaceEntity> getPrices() {
-        return places;
-    }
 
-    public void setPrices(List<PlaceEntity> prices) {
-        this.places = prices;
-    }
 }

@@ -17,9 +17,9 @@ public class OrderEntity extends AbstractEntity {
     @Column(name = "time")
     Date time;
 
-    List<TrainScheduleEntity> schedules;
+   // List<TrainScheduleEntity> schedules;
 
-    List<PassengerEntity> passangers;
+    //List<PassengerEntity> passangers;
 
     @Column(name = "price")
     Double price;

@@ -1,8 +1,6 @@
 package api.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -13,10 +11,12 @@ import java.util.Date;
 @Table(name = "train_schedules")
 public class TrainScheduleEntity extends AbstractEntity {
 
-    @Column(name = "train_id")
+    @ManyToOne(cascade = { CascadeType.ALL })
+    @JoinColumn(name = "train_id")
     TrainEntity trainEntity;
 
-    @Column(name = "station_id")
+    @ManyToOne(cascade = { CascadeType.ALL })
+    @JoinColumn(name = "station_id")
     StationEntity stationEntity;
 
     @Column(name = "arrival_date")

@@ -15,5 +15,5 @@ public class StationEntity extends AbstractEntity {
     @Column(name = "name")
     String name;
 
-    List<TrainScheduleEntity> schedules;
+   // List<TrainScheduleEntity> schedules;
 }

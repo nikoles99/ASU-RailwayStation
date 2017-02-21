@@ -1,8 +1,6 @@
 package api.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * Created by nolesuk on 21-Feb-17.
@@ -14,7 +12,8 @@ public class PlaceEntity extends AbstractEntity {
     @Column(name = "number")
     Integer number;
 
-    @Column(name = "carriage_id")
+    @ManyToOne
+    @JoinColumn(name = "carriage_id")
     CarriageEntity  carriageEntity;
 
     @Column(name = "train_id")

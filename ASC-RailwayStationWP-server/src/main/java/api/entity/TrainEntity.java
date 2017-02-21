@@ -1,9 +1,8 @@
 package api.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by nolesuk on 21-Feb-17.
@@ -15,8 +14,10 @@ public class TrainEntity extends AbstractEntity {
     @Column(name = "number")
     Integer number;
 
-    List<CarriageEntity> carriages;
+    @OneToMany(mappedBy = "train", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    Set<CarriageEntity> carriages;
 
+    @OneToMany(mappedBy = "bankField", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
     List<TrainScheduleEntity> scheduleEntities;
 
 }

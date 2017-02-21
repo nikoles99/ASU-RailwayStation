@@ -15,5 +15,5 @@ public class PersonalCabinetEntity extends AbstractEntity {
     @Column(name = "user_id")
     UserEntity userEntity;
 
-    List<OrderEntity> orders;
+   // List<OrderEntity> orders;
 }
