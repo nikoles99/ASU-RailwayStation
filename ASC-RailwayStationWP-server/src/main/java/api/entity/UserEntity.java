@@ -12,9 +12,76 @@ public class UserEntity extends AbstractEntity {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "name")
+    private String name;
+
+    @Column(name = "last_name")
+    private String lastName;
+
+    @Column(name = "middle_name")
+    private String middleName;
+
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "country")
+    private String country;
+
+    @Column(name = "address")
+    private String address;
+
     public UserEntity() {
 
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getMiddleName() {
+        return middleName;
+    }
+
+    public void setMiddleName(String middleName) {
+        this.middleName = middleName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public String getLogin() {
         return login;
     }
