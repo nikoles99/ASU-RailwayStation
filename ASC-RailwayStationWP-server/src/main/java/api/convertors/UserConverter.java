@@ -1,6 +1,6 @@
 package api.convertors;
 
-import api.bean.UserBean;
+import api.model.UserBean;
 import api.entity.UserEntity;
 import org.springframework.stereotype.Component;
 

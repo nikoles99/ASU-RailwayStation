@@ -1,6 +1,6 @@
-package api.services;
+package api.service;
 
-import api.bean.UserBean;
+import api.model.UserBean;
 import api.convertors.UserConverter;
 import api.dao.UserDao;
 import api.entity.UserEntity;
