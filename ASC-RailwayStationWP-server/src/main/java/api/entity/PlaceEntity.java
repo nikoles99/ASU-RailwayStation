@@ -3,20 +3,20 @@ package api.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.List;
 
 /**
  * Created by nolesuk on 21-Feb-17.
  */
 @Entity
-@Table(name = "trains")
-public class TrainEntity extends AbstractEntity {
+@Table(name = "places")
+public class PlaceEntity extends AbstractEntity {
 
     @Column(name = "number")
     Integer number;
 
-    List<CarriageEntity> carriages;
+    @Column(name = "carriage_id")
+    CarriageEntity  carriageEntity;
 
-    List<TrainScheduleEntity> scheduleEntities;
-
+    @Column(name = "train_id")
+    TrainEntity  trainEntity;
 }
