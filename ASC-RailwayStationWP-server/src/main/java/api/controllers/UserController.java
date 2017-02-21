@@ -22,7 +22,6 @@ public class UserController {
     @ResponseBody
     UserBean home(UserBean userBean) {
         userService.addUser(userBean);
-        userService.addUser(userBean);
         return userBean;
     }
 
