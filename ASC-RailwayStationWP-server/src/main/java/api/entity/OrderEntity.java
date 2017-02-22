@@ -26,7 +26,7 @@ public class OrderEntity extends AbstractEntity {
 
     @ManyToOne
     @JoinColumn(name = "cabinet_id")
-    PersonalCabinetEntity personalCabinetEntity;
+    CabinetEntity cabinetEntity;
 
     public OrderEntity() {
     }
@@ -63,11 +63,11 @@ public class OrderEntity extends AbstractEntity {
         this.price = price;
     }
 
-    public PersonalCabinetEntity getPersonalCabinetEntity() {
-        return personalCabinetEntity;
+    public CabinetEntity getCabinetEntity() {
+        return cabinetEntity;
     }
 
-    public void setPersonalCabinetEntity(PersonalCabinetEntity personalCabinetEntity) {
-        this.personalCabinetEntity = personalCabinetEntity;
+    public void setCabinetEntity(CabinetEntity cabinetEntity) {
+        this.cabinetEntity = cabinetEntity;
     }
 }

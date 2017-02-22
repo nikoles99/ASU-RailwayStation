@@ -1,4 +1,4 @@
-package api.dao;
+package api.dao.user;
 
 import api.entity.UserEntity;
 import org.slf4j.Logger;
@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-@Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
+@Transactional(propagation = Propagation.REQUIRES_NEW)
 @Repository
 public class UserDaoImpl implements UserDao {
 
@@ -28,5 +28,20 @@ public class UserDaoImpl implements UserDao {
     @Override
     public UserEntity getUser(Integer id) {
         return null;
+    }
+
+    @Override
+    public UserEntity getUserByLogin(String login) {
+        return null;
+    }
+
+    @Override
+    public void updateUser(UserEntity userEntity) {
+
+    }
+
+    @Override
+    public void removeUser(UserEntity userEntity) {
+
     }
 }

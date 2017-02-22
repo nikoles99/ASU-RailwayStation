@@ -8,16 +8,16 @@ import java.util.List;
  */
 @Entity
 @Table(name = "cabinets")
-public class PersonalCabinetEntity extends AbstractEntity {
+public class CabinetEntity extends AbstractEntity {
 
     @OneToOne
     @JoinColumn(name = "user_id")
     UserEntity userEntity;
 
-    @OneToMany(mappedBy = "personalCabinetEntity", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    @OneToMany(mappedBy = "cabinetEntity", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
     List<OrderEntity> orders;
 
-    public PersonalCabinetEntity() {
+    public CabinetEntity() {
     }
 
     public UserEntity getUserEntity() {

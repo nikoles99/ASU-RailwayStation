@@ -2,7 +2,7 @@ package api.service;
 
 import api.model.UserBean;
 import api.convertors.UserConverter;
-import api.dao.UserDao;
+import api.dao.user.UserDao;
 import api.entity.UserEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
