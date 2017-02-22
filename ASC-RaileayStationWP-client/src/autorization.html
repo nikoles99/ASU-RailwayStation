@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style/style_index.css" media="screen" type="text/css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="login_form">
+    <form>
+        <fieldset class="clearfix">
+            <p><span class="fontawesome-user"></span><input type="text" id="login" value="Login"
+                                                            onBlur="if(this.value == '') this.value = 'Login'"
+                                                            onFocus="if(this.value == 'Login') this.value = ''" required></p>
+            <p><span class="fontawesome-lock"></span><input type="password" id="password" value="Password"
+                                                            onBlur="if(this.value == '') this.value = 'Password'"
+                                                            onFocus="if(this.value == 'Password') this.value = ''" required></p>
+            <p><input type="button" id="enter" value="ВОЙТИ"></p>
+        </fieldset>
+    </form>
+    <p>Нет аккаунта? &nbsp;&nbsp;<a href="#">Регистрация</a><span class="fontawesome-arrow-right"></span></p>
+</div>
+<script>
+    $("document").ready(function () {
+        $("#enter").click(function () {
+            var url = "http://localhost:8080/login";
+            $.ajax({
+                url: url,
+                type: 'POST',
+                dataType: 'jsonp',
+                data: {login: $('#login').val(), password: $('#password').val()},
+                success: function (data) {
+                    alert(data.login + " " + data.password);
+
+                },
+                error: function (xhr) {
+                    var text = xhr.code;
+                    console.log("readyState: " + xhr.readyState);
+                    console.log("responseText: " + xhr.responseText);
+                    console.log("status: " + xhr.status);
+                    console.log("text status: " + textStatus);
+                    console.log("error: " + err);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

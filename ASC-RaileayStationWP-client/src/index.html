@@ -2,49 +2,95 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style/style_index.css" media="screen" type="text/css"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <title>index</title>
 </head>
 <body>
 
-<div id="login_form">
-    <form>
-        <fieldset class="clearfix">
-            <p><span class="fontawesome-user"></span><input type="text" id="login" value="Login"
-                                                            onBlur="if(this.value == '') this.value = 'Login'"
-                                                            onFocus="if(this.value == 'Login') this.value = ''" required></p>
-            <p><span class="fontawesome-lock"></span><input type="password" id="password" value="Password"
-                                                            onBlur="if(this.value == '') this.value = 'Password'"
-                                                            onFocus="if(this.value == 'Password') this.value = ''" required></p>
-            <p><input type="button" id="enter" value="ВОЙТИ"></p>
-        </fieldset>
-    </form>
-    <p>Нет аккаунта? &nbsp;&nbsp;<a href="#">Регистрация</a><span class="fontawesome-arrow-right"></span></p>
+<div>
+    <p id="rus" onclick="">Русский</p>
+    <p id="eng" onclick="">English</p>
 </div>
-<script>
-    $("document").ready(function () {
-        $("#enter").click(function () {
-            var url = "http://localhost:8080/login";
-            $.ajax({
-                url: url,
-                type: 'POST',
-                dataType: 'jsonp',
-                data: {login: $('#login').val(), password: $('#password').val()},
-                success: function (data) {
-                    alert(data.login + " " + data.password);
 
-                },
-                error: function (xhr) {
-                    var text = xhr.code;
-                    console.log("readyState: " + xhr.readyState);
-                    console.log("responseText: " + xhr.responseText);
-                    console.log("status: " + xhr.status);
-                    console.log("text status: " + textStatus);
-                    console.log("error: " + err);
-                }
-            });
-        });
-    });
-</script>
+<div id="login_form" style="width: 350px">
+    <fieldset>
+        <legend>ExpressNikTrainLine</legend>
+        <table>
+            <tr>
+                <td><p id="station_from_label"/></td>
+                <td><input id="station_from" type="text" name="station_from"></td>
+            </tr>
+            <tr>
+                <td><p id="station_to_label"/></td>
+                <td><input id="station_to" type="text" name="station_to"></td>
+            </tr>
+
+        </table>
+        <div>
+            <fieldset>
+                <legend id="departure_date_block"/>
+                <table>
+                    <tr>
+                        <td><p id="date_departure_label"></td>
+                        <td><input id="date_departure" type="text" name="date_departure"></td>
+                    </tr>
+                    <tr>
+                        <td><p id="time_departure_label"></td>
+                        <td><input id="time_departure" type="text" name="time_departure"></td>
+                    </tr>
+                </table>
+            </fieldset>
+        </div>
+        <div>
+            <fieldset>
+                <legend id="arrival_date_block"/>
+                <table>
+                    <tr>
+                        <td><p id="date_arrival_label"></td>
+                        <td><input id="date_arrival" type="text" name="date_arrival"></td>
+                    </tr>
+                    <tr>
+                        <td><p id="time_arrival_label"></td>
+                        <td><input id="time_arrival" type="text" name="time_arrival"></td>
+                    </tr>
+                </table>
+            </fieldset>
+        </div>
+        </tr>
+        <input type="button" name="search"/>
+    </fieldset>
+</div>
 </body>
+<script>
+    $.redrawLanguage = function (lang) {
+        $.ajax({
+            url: 'languages/' + lang + '.json',
+            dataType: 'json',
+            success: function (response) {
+                LANGUAGE = response;
+                $('body').find("[lng]").each(function () {
+                    var lng = LANGUAGE[$(this).attr('lng')];
+                    var tag = $(this)[0].tagName.toLowerCase();
+                    switch (tag) {
+                        case "input":
+                            $(this).val(lng);
+                            break;
+                        default:
+                            $(this).html(lng);
+                            break;
+                    }
+                });
+            }
+        });
+    }
+
+    $.getLanguage = function (key) {
+        if (typeof(LANGUAGE[key]) != 'undefined') //если есть переменная
+        {
+            return LANGUAGE[key]; //возвращаем значение
+        }
+        return key; //если нет, тогда ключ
+    }
+
+</script>
 </html>
