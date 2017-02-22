@@ -57,14 +57,15 @@
             </fieldset>
         </div>
         </tr>
-        <input type="button" name="search"/>
+        <input type="button" name="search" onclick="fillLabels()"/>
     </fieldset>
 </div>
 </body>
 <script>
-    $.redrawLanguage = function (lang) {
+    var language = "rus";
+    function fillLabels() {
         $.ajax({
-            url: 'languages/' + lang + '.json',
+            url: 'languages/' + language + '.json',
             dataType: 'json',
             success: function (response) {
                 LANGUAGE = response;
@@ -82,14 +83,6 @@
                 });
             }
         });
-    }
-
-    $.getLanguage = function (key) {
-        if (typeof(LANGUAGE[key]) != 'undefined') //если есть переменная
-        {
-            return LANGUAGE[key]; //возвращаем значение
-        }
-        return key; //если нет, тогда ключ
     }
 
 </script>
