@@ -1,4 +1,11 @@
 {
-  "from_station":"From",
-  "to_station":"To"
+  "station_from_label":"From",
+  "station_to_label":"To",
+  "arrival_date_block":"Return",
+  "departure_date_block":"Out",
+  "search_schedule_button":"Search",
+  "date_departure_label":"Departure date",
+  "time_departure_label":"Departure time",
+  "date_arrival_label":"Arrival date",
+  "time_arrival_label":"Arrival time"
 }

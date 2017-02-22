@@ -12,7 +12,7 @@ import java.sql.*;
 /**
  * Created by nolesuk on 21-Feb-17.
  */
-@Component
+@Component("dbUpdater")
 public class DbUpdaterImpl implements DbUpdater {
 
     private final Logger LOGGER = Logger.getLogger(getClass());
