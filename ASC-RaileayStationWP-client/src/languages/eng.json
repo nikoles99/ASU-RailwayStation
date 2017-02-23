@@ -7,5 +7,15 @@
   "date_departure_label":"Departure date",
   "time_departure_label":"Departure time",
   "date_arrival_label":"Arrival date",
-  "time_arrival_label":"Arrival time"
+  "time_arrival_label":"Arrival time",
+  "last_name_label":"Last name",
+  "name_label":"Name",
+  "middle_name_label":"Middle name",
+  "phone_label":"Phone: +375",
+  "address_label":"Address",
+  "email_label":"Email",
+  "login_label":"Login",
+  "password_label":"Password",
+  "confirm_password_label":"Confirm password",
+  "registration_block":"Registration"
 }

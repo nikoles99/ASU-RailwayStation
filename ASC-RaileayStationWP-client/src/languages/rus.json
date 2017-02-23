@@ -7,6 +7,15 @@
   "date_departure_label":"Дата отправления",
   "time_departure_label":"Время отправления",
   "date_arrival_label":"Дата прибытия",
-  "time_arrival_label":"Время прибытия"
-
+  "time_arrival_label":"Время прибытия",
+  "last_name_label":"Фамилия",
+  "name_label":"Имя",
+  "middle_name_label":"Отчество",
+  "phone_label":"Телефон: +375",
+  "address_label":"Адрес",
+  "email_label":"Еmail",
+  "login_label":"Логин",
+  "password_label":"Пароль",
+  "confirm_password_label":"Подтверждение пароля",
+  "registration_block":"Регистрация"
 }
