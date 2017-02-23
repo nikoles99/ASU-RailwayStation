@@ -17,5 +17,11 @@
   "login_label":"Login",
   "password_label":"Password",
   "confirm_password_label":"Confirm password",
-  "registration_block":"Registration"
+  "registration_block":"Registration",
+  "carriage_type_label":"Carriage type",
+  "passenger_info_block":"Passengers info",
+  "carriage_number_label":"Carriage number",
+  "arrival_station_label":"Arrival station",
+  "departure_station_label":"Departure station",
+  "train_label":"Train"
 }

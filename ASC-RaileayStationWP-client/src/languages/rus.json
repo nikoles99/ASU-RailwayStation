@@ -17,5 +17,11 @@
   "login_label":"Логин",
   "password_label":"Пароль",
   "confirm_password_label":"Подтверждение пароля",
-  "registration_block":"Регистрация"
+  "registration_block":"Регистрация",
+  "carriage_type_label":"Тип вагона",
+  "passenger_info_block":"Информация о пассажирах",
+  "carriage_number_label":"Номер вагона",
+  "arrival_station_label":"Станция прибытия",
+  "departure_station_label":"Станция отправления",
+  "train_label":"Поезд"
 }

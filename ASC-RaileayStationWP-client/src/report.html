@@ -2,9 +2,58 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="script/internationalization.js"></script>
+    <title>Report</title>
 </head>
 <body>
+<div>
+    <p id="rus" onclick="setLanguage('rus')">Русский</p>
+    <p id="eng" onclick="setLanguage('eng')">English</p>
+</div>
+<div>
+    <fieldset>
+        <table>
+            <legend id="report_block"/>
+            <tr>
+                <td><p id="train_label"/></td>
+                <td><p id="train"/></td>
+            </tr>
+            <tr>
+                <td><p id="departure_station_label"/></td>
+                <td><p id="departure_station"/></td>
+            </tr>
+            <tr>
+                <td><p id="arrival_station_label"/></td>
+                <td><p id="arrival_station"/></td>
+            </tr>
+            <tr>
+                <td><p id="date_departure_label"/></td>
+                <td><p id="date_departure"/></td>
+            </tr>
+            <tr>
+                <td><p id="date_arrival_label"/></td>
+                <td><p id="date_arrival"/></td>
+            </tr>
+            <tr>
+                <td><p id="carriage_number_label"/></td>
+                <td><p id="carriage_number"/></td>
+            </tr>
+            <tr>
+                <td><p id="carriage_type_label"/></td>
+                <td><p id="carriage_type"/></td>
+            </tr>
+        </table>
+        <div>
+            <fieldset>
+                <table>
+                    <legend id="passenger_info_block"/>
+                    <tr></tr>
+                </table>
+            </fieldset>
+        </div>
+    </fieldset>
+</div>
 
 </body>
 </html>
