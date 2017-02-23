@@ -37,6 +37,11 @@
   "places_count_label":"Количество мест",
   "places_select_block":"Выбор мест",
   "free_places_number_label":"Номера свободных мест",
-  "passengers_block":"Пассажиры"
+  "passengers_block":"Пассажиры",
+  "adult":"Взрослый",
+  "children":"Ребенок",
+  "rate_free":"Безденежный",
+  "rate_children":"Детский",
+  "rate_adult":"Польный"
 
 }

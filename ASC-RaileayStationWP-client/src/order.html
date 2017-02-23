@@ -34,19 +34,13 @@
             <tr>
                 <td><p id="adults_label"></td>
                 <td>
-                    <select id="adults_count"/>
+                    <input type="checkbox" id="adults_checkbox"/>
                 </td>
             </tr>
             <tr>
                 <td><p id="children_with_seats_label"></td>
                 <td>
-                    <select id="children_with_seats_count"/>
-                </td>
-            </tr>
-            <tr>
-                <td><p id="children_with_no_seats_label"></td>
-                <td>
-                    <select id="children_with_no_seats_count"/>
+                    <input type="checkbox" id="children_checkbox"/>
                 </td>
             </tr>
         </table>
@@ -54,7 +48,35 @@
 </div>
 <div id="passengers">
     <fieldset>
-        <legend id="passengers_block"/>
+        <table>
+            <legend id="passengers_block"/>
+            <tr>
+                <td><p id="passenger_type_label"></td>
+                <td><p id="adult"/></td>
+            </tr>
+            <tr>
+                <td><p id="rate_label"></td>
+                <td><p id="rate_adult"/></td>
+            </tr>
+            <tr>
+                <td><p id="last_name_label"></td>
+                <td><input type="text" id="last_name"/></td>
+            </tr>
+            <tr>
+                <td><p id="name_label"></td>
+                <td><input type="text" id="name"/></td>
+            </tr>
+            <tr>
+                <td><p id="middle_name_label"></td>
+                <td><input type="text" id="middle_name"/></td>
+            </tr>
+            <tr>
+                <td><p id="passport_number_label"></td>
+                <td><input type="text" id="passport_number"/></td>
+            </tr>
+        </table>
+
+
     </fieldset>
 </div>
 
@@ -69,10 +91,6 @@
                 </td>
             </tr>
             <tr>
-                <td><p id="rate_label"></td>
-                <td>
-                    <p id="rate"/>
-                </td>
             </tr>
             <tr>
                 <td><p id="free_places_number_label"></td>
@@ -87,9 +105,10 @@
     const ADULTS = "adults";
     const CHILDREN_WITH_NO_SEATS = "children_with_no_seats";
     const CHILDREN_WITH_SEATS = "children_with_seats";
-    var maxPassenger = 3;
+    var countPassenger = 3;
     function fillPassengerCount(select) {
-        for (var i = 0; i < maxPassenger; i++) {
+        select.children().remove();
+        for (var i = 0; i <= countPassenger; i++) {
             select.append($("<option/>", {
                 value: i,
                 text: i,
@@ -97,63 +116,41 @@
 
         }
     }
-    $('#children_with_seats_count').ready(function () {
-        fillPassengerCount($('#children_with_seats_count'));
-    });
-    $('#children_with_no_seats_count').ready(function () {
-        fillPassengerCount($('#children_with_no_seats_count'));
-    });
-    $('#adults_count').ready(function () {
-        fillPassengerCount($('#adults_count'));
-    });
 
-
-    $('#children_with_seats_count').change(function () {
-        createPassengerView(this.value, CHILDREN_WITH_SEATS);
+    $('#adults_checkbox').change(function () {
+        setPassengersBlockVisibility();
+        setPlacesBlockVisibility();
     });
-    $('#children_with_no_seats_count').change(function () {
-        createPassengerView(this.value, CHILDREN_WITH_NO_SEATS);
-    });
-    $('#adults_count').change(function () {
-        createPassengerView(this.value, ADULTS);
+    $('#children_checkbox').change(function () {
+        setPassengersBlockVisibility();
+        setPlacesBlockVisibility();
     });
 
     $("document ").ready(function () {
-        // $('#passengers').hide();
-        //$('#places').hide();
+        $('#passengers').hide();
+        $('#places').hide();
     });
 
+    function setPassengersBlockVisibility() {
+        var isAdultsChecked = $('#adults_checkbox').is(':checked');
+        var isChildrenChecked = $('#children_checkbox').is(':checked');
+        if (isAdultsChecked || isChildrenChecked) {
+            $('#passengers').slideDown();
+        }
+        else {
+            $('#passengers').slideUp();
+        }
+    }
 
-    function createPassengerView(value, s) {
-        var passengerType = "adult";
-        var view = '<table>' +
-            '<tr>' +
-            '<td><p id="passenger_type_label"></td>' +
-            '<td><p id="passengerType">passengerType</p></td>' +
-            '</tr>' +
-            '<tr>' +
-            '<td><p id="rate_label"></td>' +
-            '<td><p id="rate">passengerType</p></td>' +
-            '</tr>' +
-            '<tr>' +
-            '<td><p id="last_name_label"></td>' +
-            '<td><input type="text" id="last_name"/></td>' +
-            '</tr>' +
-            '<tr>' +
-            '<td><p id="name_label"></td>' +
-            '<td><input type="text" id="name"/></td>' +
-            '</tr>' +
-            '<tr>' +
-            '<td><p id="middle_name_label"></td>' +
-            '<td><input type="text" id="middle_name"/></td>' +
-            '</tr>' +
-            '<tr>' +
-            '<td><p id="passport_number_label"></td>' +
-            '<td><input type="text" id="passport_number"/></td>' +
-            '</tr>' +
-            '</table>';
-        $('#passengers').append(view);
-        makeInternationalization();
+    function setPlacesBlockVisibility() {
+        var isAdultsChecked = $('#adults_checkbox').is(':checked');
+        var isChildrenChecked = $('#children_checkbox').is(':checked');
+        if (isAdultsChecked || isChildrenChecked) {
+            $('#places').slideDown();
+        }
+        else {
+            $('#places').slideUp();
+        }
     }
 </script>
 </body>

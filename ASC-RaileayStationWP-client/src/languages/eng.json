@@ -37,5 +37,10 @@
   "places_count_label":"Places count",
   "places_select_block":"Select places",
   "free_places_number_label":"Free places",
-  "passengers_block":"Passengers"
+  "passengers_block":"Passengers",
+  "adult":"Adult",
+  "children":"Children",
+  "rate_free":"Impecunious",
+  "rate_children":"Сhild's",
+  "rate_adult":"Rate adult"
 }
