@@ -23,5 +23,18 @@
   "carriage_number_label":"Номер вагона",
   "arrival_station_label":"Станция прибытия",
   "departure_station_label":"Станция отправления",
-  "train_label":"Поезд"
+  "train_label":"Поезд",
+  "personal_cabinet_block":"Личный кабинет",
+  "route_label":"Маршрут",
+  "route_block":"Маршрут следования",
+  "adults_label":"Взрослые",
+  "children_with_seats_label":"Дети с местом",
+  "children_with_no_seats_label":"Дети без места",
+  "passenger_label":"Пассажир",
+  "passenger_type_label":"Тип пассажира",
+  "rate_label":"Тариф",
+  "passport_number_label":"Номер паспорта",
+  "places_count_label":"Количество мест",
+  "free_places_number_label":"Номера свободных мест"
+
 }

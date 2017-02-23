@@ -23,5 +23,17 @@
   "carriage_number_label":"Carriage number",
   "arrival_station_label":"Arrival station",
   "departure_station_label":"Departure station",
-  "train_label":"Train"
+  "train_label":"Train",
+  "personal_cabinet_block":"Personal cabinet",
+  "route_label":"Route",
+  "route_block":"The route of following",
+  "adults_label":"Adults",
+  "children_with_seats_label":"Children with seats",
+  "children_with_no_seats_label":"Children with no seats",
+  "passenger_label":"Passenger",
+  "passenger_type_label":"Passenger type",
+  "rate_label":"Rate",
+  "passport_number_label":"Passport number",
+  "places_count_label":"Places count",
+  "free_places_number_label":"Free places"
 }

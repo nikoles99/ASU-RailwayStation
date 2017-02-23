@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="script/internationalization.js"></script>
+    <title>Order</title>
 </head>
 <body>
 <div>
@@ -12,8 +14,50 @@
 <div>
     <fieldset>
         <table>
-            <legend id="order_block"/>
-            
+            <legend id="route_block"/>
+            <tr>
+                <td><p id="route_label"></td>
+                <td><p id="route"/></td>
+            </tr>
+        </table>
+        <tr>
+            <td><p id="train_label"></td>
+            <td><p id="train"/></td>
+        </tr>
+        </table>
+    </fieldset>
+</div>
+<div>
+    <fieldset>
+        <table>
+            <legend id="passenger_info_block"/>
+            <tr>
+                <td><p id="adults_label"></td>
+                <td>
+                    <select>
+                        <option>1</option>
+                        <option>2</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><p id="children_with_seats_label"></td>
+                <td>
+                    <select>
+                        <option>1</option>
+                        <option>2</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><p id="children_with_no_seats_label"></td>
+                <td>
+                    <select>
+                        <option>1</option>
+                        <option>2</option>
+                    </select>
+                </td>
+            </tr>
         </table>
     </fieldset>
 </div>
