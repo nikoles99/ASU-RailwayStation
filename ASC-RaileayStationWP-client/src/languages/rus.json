@@ -19,7 +19,7 @@
   "confirm_password_label":"Подтверждение пароля",
   "registration_block":"Регистрация",
   "carriage_type_label":"Тип вагона",
-  "passenger_info_block":"Информация о пассажирах",
+  "passengers_info_block":"Информация о пассажирах",
   "carriage_number_label":"Номер вагона",
   "arrival_station_label":"Станция прибытия",
   "departure_station_label":"Станция отправления",
@@ -35,6 +35,8 @@
   "rate_label":"Тариф",
   "passport_number_label":"Номер паспорта",
   "places_count_label":"Количество мест",
-  "free_places_number_label":"Номера свободных мест"
+  "places_select_block":"Выбор мест",
+  "free_places_number_label":"Номера свободных мест",
+  "passengers_block":"Пассажиры"
 
 }

@@ -19,7 +19,7 @@
   "confirm_password_label":"Confirm password",
   "registration_block":"Registration",
   "carriage_type_label":"Carriage type",
-  "passenger_info_block":"Passengers info",
+  "passengers_info_block":"Passengers info",
   "carriage_number_label":"Carriage number",
   "arrival_station_label":"Arrival station",
   "departure_station_label":"Departure station",
@@ -35,5 +35,7 @@
   "rate_label":"Rate",
   "passport_number_label":"Passport number",
   "places_count_label":"Places count",
-  "free_places_number_label":"Free places"
+  "places_select_block":"Select places",
+  "free_places_number_label":"Free places",
+  "passengers_block":"Passengers"
 }
