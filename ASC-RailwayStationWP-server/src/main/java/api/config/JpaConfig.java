@@ -1,6 +1,5 @@
 package api.config;
 
-import api.db.DbUpdater;
 import org.apache.commons.dbcp.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

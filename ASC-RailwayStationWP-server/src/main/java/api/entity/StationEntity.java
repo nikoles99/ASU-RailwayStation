@@ -1,6 +1,7 @@
 package api.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -10,10 +11,10 @@ import java.util.List;
 @Table(name = "stations")
 public class StationEntity extends AbstractEntity {
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     String name;
 
-    @OneToMany(mappedBy = "stationEntity", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    @OneToMany(mappedBy = "stationEntity", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     List<TrainScheduleEntity> schedules;
 
     public StationEntity() {

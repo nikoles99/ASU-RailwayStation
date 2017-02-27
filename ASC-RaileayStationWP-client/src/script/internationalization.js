@@ -21,7 +21,9 @@ function makeInternationalization() {
 $("document ").ready(function () {
     makeInternationalization();
 });
+
 function setLanguage(language){
     appLanguage = language;
     makeInternationalization();
 }
+

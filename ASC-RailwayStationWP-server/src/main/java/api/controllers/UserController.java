@@ -1,7 +1,7 @@
 package api.controllers;
 
 import api.model.UserBean;
-import api.service.UserService;
+import api.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.MediaType;

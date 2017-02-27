@@ -14,4 +14,5 @@ public interface TrainDao {
     void updateTrain(TrainEntity trainEntity);
 
     void removeTrain(TrainEntity trainEntity);
+
 }

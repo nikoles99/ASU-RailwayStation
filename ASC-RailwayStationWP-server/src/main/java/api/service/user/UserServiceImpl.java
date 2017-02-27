@@ -1,4 +1,4 @@
-package api.service;
+package api.service.user;
 
 import api.model.UserBean;
 import api.convertors.UserConverter;

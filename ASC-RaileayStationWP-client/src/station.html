@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Station</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="script/internationalization.js"></script>
+    <title>ExpressNikTrainLine</title>
+</head>
+<body>
+<div>
+    <fieldset>
+        <table>
+            <legend>Добавить станцию</legend>
+            <tr>
+                <td>
+                    <p>Название</p>
+                </td>
+                <td>
+                    <input type="text" id="nameStation"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                <td>
+                    <input type="button" value="добавить" id="addStation"/>
+                </td>
+            </tr>
+        </table>
+
+    </fieldset>
+</div>
+<script>
+    $("#addStation").click(function () {
+        var nameStation = $('#nameStation').val();
+        if (nameStation == null || nameStation == "") {
+            alert("Введите название станции");
+            return;
+        }
+        var url = "http://localhost:8080/addStation";
+        $.ajax({
+            url: url,
+            type: 'POST',
+            dataType: 'jsonp',
+            data: {name: nameStation},
+            success: function (data) {
+                alert(data.login + " " + data.password);
+
+            },
+            error: function (xhr) {
+                var text = xhr.code;
+                console.log("readyState: " + xhr.readyState);
+                console.log("responseText: " + xhr.responseText);
+                console.log("status: " + xhr.status);
+                console.log("text status: " + textStatus);
+                console.log("error: " + err);
+            }
+        });
+    });
+</script>
+</body>
+</html>

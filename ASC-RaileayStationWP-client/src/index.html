@@ -13,10 +13,10 @@
     <p id="eng" onclick="setLanguage('eng')">English</p>
 </div>
 
-<div id="login_form" style="width: 350px; height: 800px">
+<div id="login_form" style="width: 350px; height: 800px;">
     <fieldset>
         <legend>ExpressNikTrainLine</legend>
-        <table>
+        <table id="from_to_stations" style="horizontal-align: middle;">
             <tr>
                 <td><p id="station_from_label"/></td>
                 <td><input id="station_from" type="text" name="station_from"></td>
@@ -30,7 +30,7 @@
         <div>
             <fieldset style="height: 125px">
                 <table>
-                <legend id="departure_date_block"/>
+                    <legend id="departure_date_block"/>
                     <tr>
                         <td><p id="date_departure_label"></td>
                         <td><input id="date_departure" type="text" name="date_departure"></td>
@@ -45,7 +45,7 @@
         <div>
             <fieldset style="height: 125px">
                 <table>
-                <legend id="arrival_date_block"/>
+                    <legend id="arrival_date_block"/>
                     <tr>
                         <td><p id="date_arrival_label"></td>
                         <td><input id="date_arrival" type="text" name="date_arrival"></td>
@@ -60,6 +60,10 @@
         </tr>
         <input type="button" id="search_schedule_button" name="search"/>
     </fieldset>
+</div>
+<div>
+    <table id="schedules">
+    </table>
 </div>
 </body>
 </html>
