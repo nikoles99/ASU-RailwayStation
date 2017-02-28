@@ -17,7 +17,7 @@
                     <p>Название</p>
                 </td>
                 <td>
-                    <input type="text" id="nameStation" pattern=".{5,19}" required title="Either 0 OR (5 to 19 chars)"/>
+                    <input type="text" id="nameStation"/>
                 </td>
             </tr>
             <tr>
@@ -42,7 +42,7 @@
             url: url,
             type: 'POST',
             dataType: 'jsonp',
-            data: {name: nameStation},
+            data: {name: $('#nameStation').val()},
             success: function (data) {
                 alert(data.message);
             },
