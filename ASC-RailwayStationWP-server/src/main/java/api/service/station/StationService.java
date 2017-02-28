@@ -1,5 +1,6 @@
 package api.service.station;
 
+import api.exception.StationException;
 import api.model.StationBean;
 
 /**
@@ -7,5 +8,5 @@ import api.model.StationBean;
  */
 public interface StationService {
 
-    void addStation(StationBean stationBean);
+    void addStation(StationBean stationBean) throws StationException;
 }

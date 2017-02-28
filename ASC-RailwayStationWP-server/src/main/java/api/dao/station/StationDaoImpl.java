@@ -2,6 +2,7 @@ package api.dao.station;
 
 import api.dao.user.UserDaoImpl;
 import api.entity.StationEntity;
+import api.exception.StationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -13,6 +14,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.List;
 
 /**
  * Created by nikita on 27.02.17.
@@ -28,20 +30,27 @@ public class StationDaoImpl implements StationDao {
 
 
     @Override
-    public void addStation(StationEntity stationEntity) {
-        entityManager.persist(stationEntity);
-        logger.info("Station add successfully " + stationEntity);
-        getStation("Ивье");
+    public void addStation(StationEntity stationEntity) throws StationException {
+        List<StationEntity> stations = getStations(stationEntity.getName());
+        if (stations.isEmpty()) {
+            entityManager.persist(stationEntity);
+            logger.info("Station add successfully " + stationEntity);
+        } else {
+            String message = "Station already exist " + stationEntity;
+            logger.info(message);
+            throw new StationException(message);
+        }
+
     }
 
     @Override
-    public StationEntity getStation(String name) {
+    public List<StationEntity> getStations(String name) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<StationEntity> criteriaQuery = criteriaBuilder.createQuery(StationEntity.class);
         Root<StationEntity> stationEntityRoot = criteriaQuery.from(StationEntity.class);
         criteriaQuery.select(stationEntityRoot);
-        criteriaQuery.where(criteriaBuilder.equal(stationEntityRoot.get("name"),name));
-        StationEntity students = entityManager.createQuery(criteriaQuery).getSingleResult();
+        criteriaQuery.where(criteriaBuilder.equal(stationEntityRoot.get("name"), name));
+        List<StationEntity> students = entityManager.createQuery(criteriaQuery).getResultList();
         return students;
     }
 

@@ -35,4 +35,12 @@ public class StationEntity extends AbstractEntity {
     public void setSchedules(List<TrainScheduleEntity> schedules) {
         this.schedules = schedules;
     }
+
+    @Override
+    public String toString() {
+        return "StationEntity{" +
+                "name='" + name + '\'' +
+                ", schedules=" + schedules +
+                '}';
+    }
 }

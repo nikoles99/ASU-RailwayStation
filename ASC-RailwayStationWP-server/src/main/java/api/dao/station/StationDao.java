@@ -1,7 +1,10 @@
 package api.dao.station;
 
 import api.entity.StationEntity;
+import api.exception.StationException;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * Created by nolesuk on 22-Feb-17.
@@ -9,9 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface StationDao {
 
-    void addStation(StationEntity stationEntity);
+    void addStation(StationEntity stationEntity) throws StationException;
 
-    StationEntity getStation(String name);
+    List<StationEntity> getStations(String name);
 
     void updateStation(StationEntity stationEntity);
 
