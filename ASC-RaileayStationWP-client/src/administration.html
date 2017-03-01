@@ -52,19 +52,19 @@
         </table>
         <div>
             <fieldset>
-                <table>
+                <table id="stations">
                     <legend>Построение маршрута</legend>
                     <tr>
                         <td>
-                            <input type="button" id="+" value="+">
+                            <input type="button" id="addStationToRoute" value="+">
                         </td>
                     </tr>
                     <tr>
                         <td>Станция</td>
-                        <td><select name="stationsCombo"/></td>
+                        <td><input type="text" list="browsers"/></td>
                         <td>Расстояние до следующей станции(км)</td>
                         <td><input type="text"></td>
-                        <td><input type="button" value="-"></td>
+                        <td><input class="removeStationFromRoute" type="button" value="-"></td>
                     </tr>
                 </table>
             </fieldset>
@@ -94,10 +94,28 @@
 
     </fieldset>
 </div>
-
+<datalist id="stationsDataList"/>
 <script>
-    $("#save").click(function () {
-        setDisableRouteDiv(true);
+    $("document").ready(function () {
+        getStationsFromServer();
+    });
+
+    $(".removeStationFromRoute").click(function () {
+        alert("d");
+    });
+    $("#addStationToRoute").click(function () {
+        if ($('#stations tr').length > 10) {
+            alert($('#stations tr').length);
+            $("#addStation").prop('disabled', true);
+        } else {
+            var newStation = "<tr>" +
+                "<td>Станция</td>" +
+                "<td><input type=\"text\" list=\"browsers\"/></td>" +
+                "<td>Расстояние до следующей станции(км)</td>" +
+                "<td><input type=\"text\"></td>" +
+                "<td><input class=\"removeStationFromRoute\" type=\"button\" value=\"-\"></td></tr>";
+            $("#stations tr:last").after(newStation);
+        }
     });
     function setDisableRouteDiv(isDisable) {
         $("#route:not(:last-child) :input").prop('disabled', isDisable);
@@ -115,7 +133,8 @@
             dataType: 'jsonp',
             data: {name: $("#nameStation").val()},
             success: function (data) {
-                alert(data.message);
+                var parse = JSON.parse(data);
+                alert(parse.get(1).name);
             },
             error: function (xhr) {
                 var text = xhr.code;
@@ -128,7 +147,28 @@
         });
     });
 
-
+    function getStationsFromServer() {
+        var url = "http://localhost:8080/getAllStations";
+        $.ajax({
+            url: url,
+            type: 'POST',
+            dataType: 'jsonp',
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var name = data[i].name;
+                    $("#stationsDataList").append("<option value='" + name + "'>");
+                }
+            },
+            error: function (xhr) {
+                var text = xhr.code;
+                console.log("readyState: " + xhr.readyState);
+                console.log("responseText: " + xhr.responseText);
+                console.log("status: " + xhr.status);
+                console.log("text status: " + textStatus);
+                console.log("error: " + err);
+            }
+        });
+    }
 </script>
 </body>
 </html>

@@ -63,4 +63,14 @@ public class StationDaoImpl implements StationDao {
     public void removeStation(StationEntity stationEntity) {
 
     }
+
+    @Override
+    public List<StationEntity> getAllStations() {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<StationEntity> criteriaQuery = criteriaBuilder.createQuery(StationEntity.class);
+        Root<StationEntity> stationEntityRoot = criteriaQuery.from(StationEntity.class);
+        criteriaQuery.select(stationEntityRoot);
+        List<StationEntity> students = entityManager.createQuery(criteriaQuery).getResultList();
+        return students;
+    }
 }
