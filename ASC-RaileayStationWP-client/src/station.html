@@ -32,7 +32,7 @@
 </div>
 <script>
     $("#nameStation").on("change paste keyup", function () {
-        var length = this.value.length;
+        var length = $("#nameStation").val().length;
         var isDisables = length > 4 && length < 20 ? false : true;
         $("#addStation").prop('disabled', isDisables);
     });
@@ -42,7 +42,7 @@
             url: url,
             type: 'POST',
             dataType: 'jsonp',
-            data: {name: nameStation},
+            data: {name: $("#nameStation").val()},
             success: function (data) {
                 alert(data.message);
             },
