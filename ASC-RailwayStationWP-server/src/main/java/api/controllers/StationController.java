@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 
 /**
  * Created by nikita on 27.02.17.
@@ -38,5 +39,11 @@ public class StationController extends AbstractController {
             LOGGER.error(message);
             return new SimpleResponseBean(message);
         }
+    }
+
+    @RequestMapping(value = "/getAllStations", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    List<StationBean> getAllStations() {
+        return stationService.getAllStations();
     }
 }

@@ -19,4 +19,6 @@ public interface StationDao {
     void updateStation(StationEntity stationEntity);
 
     void removeStation(StationEntity stationEntity);
+
+    List<StationEntity> getAllStations();
 }

@@ -27,4 +27,11 @@ public class StationServiceImpl implements StationService {
         StationEntity stationEntity = stationConverter.convertToEntity(stationBean);
         stationDao.addStation(stationEntity);
     }
+
+    @Override
+    public List<StationBean> getAllStations() {
+        List<StationEntity> entities = stationDao.getAllStations();
+        List<StationBean> beans = stationConverter.convertToBean(entities);
+        return beans;
+    }
 }

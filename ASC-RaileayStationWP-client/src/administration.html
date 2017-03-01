@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Administration</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="script/internationalization.js"></script>
+</head>
+<body>
+
+<div>
+    <p id="rus" onclick="setLanguage('rus')">Русский</p>
+    <p id="eng" onclick="setLanguage('eng')">English</p>
+</div>
+<div>
+    <fieldset>
+        <table>
+            <legend>Станции</legend>
+            <tr>
+                <td>
+                    <p>Название</p>
+                </td>
+                <td>
+                    <input type="text" id="nameStation" pattern=".{5,19}" required title="Either 0 OR (5 to 19 chars)"/>
+                </td>
+                <td>
+                    <input type="button" value="добавить" id="addStation" disabled="true"/>
+                </td>
+                <td>
+                    <input type="button" value="удалить" id="deleteStation" disabled="true"/>
+                </td>
+                <td>
+                    <input type="button" value="изменить" id="updateStation" disabled="true"/>
+                </td>
+            </tr>
+        </table>
+
+    </fieldset>
+</div>
+<div id="route">
+    <fieldset>
+        <table>
+            <legend>Добавление поезда по маршруту</legend>
+            <tr>
+                <td>Поезд</td>
+                <td><input type="text"></td>
+                <td>Время отправления</td>
+                <td><input type="text"></td>
+                <td>Время прибытия</td>
+                <td><input type="text"></td>
+            </tr>
+        </table>
+        <div>
+            <fieldset>
+                <table id="stations">
+                    <legend>Построение маршрута</legend>
+                    <tr>
+                        <td>
+                            <input type="button" id="addStationToRoute" value="+">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Станция</td>
+                        <td><input type="text" list="browsers"/></td>
+                        <td>Расстояние до следующей станции(км)</td>
+                        <td><input type="text"></td>
+                        <td><input class="removeStationFromRoute" type="button" value="-"></td>
+                    </tr>
+                </table>
+            </fieldset>
+        </div>
+        <input type="button" value="Построить маршрут">
+        <input type="button" id="save" value="Сохранить">
+    </fieldset>
+</div>
+<div>
+    <fieldset>
+        <table>
+            <legend>Текущие маршруты</legend>
+            <tr>
+                <td>
+                    <p>Название</p>
+                </td>
+                <td>
+                    <input type="text" id="nameSearch" size="200"
+                           placeholder="Маршрут, Номер поезда, Станция отправления, Станция прибытия, Время отправления, Время прибытия"
+                           pattern=".{5,19}" required title="Either 0 OR (5 to 19 chars)"/>
+                </td>
+                <td>
+                    <input type="button" value="Поиск" id="search" disabled="true"/>
+                </td>
+            </tr>
+        </table>
+
+    </fieldset>
+</div>
+<datalist id="stationsDataList"/>
+<script>
+    $("document").ready(function () {
+        getStationsFromServer();
+    });
+
+    $(".removeStationFromRoute").click(function () {
+        alert("d");
+    });
+    $("#addStationToRoute").click(function () {
+        if ($('#stations tr').length > 10) {
+            alert($('#stations tr').length);
+            $("#addStation").prop('disabled', true);
+        } else {
+            var newStation = "<tr>" +
+                "<td>Станция</td>" +
+                "<td><input type=\"text\" list=\"browsers\"/></td>" +
+                "<td>Расстояние до следующей станции(км)</td>" +
+                "<td><input type=\"text\"></td>" +
+                "<td><input class=\"removeStationFromRoute\" type=\"button\" value=\"-\"></td></tr>";
+            $("#stations tr:last").after(newStation);
+        }
+    });
+    function setDisableRouteDiv(isDisable) {
+        $("#route:not(:last-child) :input").prop('disabled', isDisable);
+    }
+    $("#nameStation").on("change paste keyup", function () {
+        var length = $("#nameStation").val().length;
+        var isDisables = length > 4 && length < 20 ? false : true;
+        $("#addStation").prop('disabled', isDisables);
+    });
+    $("#addStation").click(function () {
+        var url = "http://localhost:8080/addStation";
+        $.ajax({
+            url: url,
+            type: 'POST',
+            dataType: 'jsonp',
+            data: {name: $("#nameStation").val()},
+            success: function (data) {
+                var parse = JSON.parse(data);
+                alert(parse.get(1).name);
+            },
+            error: function (xhr) {
+                var text = xhr.code;
+                console.log("readyState: " + xhr.readyState);
+                console.log("responseText: " + xhr.responseText);
+                console.log("status: " + xhr.status);
+                console.log("text status: " + textStatus);
+                console.log("error: " + err);
+            }
+        });
+    });
+
+    function getStationsFromServer() {
+        var url = "http://localhost:8080/getAllStations";
+        $.ajax({
+            url: url,
+            type: 'POST',
+            dataType: 'jsonp',
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var name = data[i].name;
+                    $("#stationsDataList").append("<option value='" + name + "'>");
+                }
+            },
+            error: function (xhr) {
+                var text = xhr.code;
+                console.log("readyState: " + xhr.readyState);
+                console.log("responseText: " + xhr.responseText);
+                console.log("status: " + xhr.status);
+                console.log("text status: " + textStatus);
+                console.log("error: " + err);
+            }
+        });
+    }
+</script>
+</body>
+</html>
