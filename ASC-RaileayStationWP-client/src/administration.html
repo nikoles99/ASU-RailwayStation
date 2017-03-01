@@ -7,6 +7,7 @@
     <script src="script/internationalization.js"></script>
 </head>
 <body>
+
 <div>
     <p id="rus" onclick="setLanguage('rus')">Русский</p>
     <p id="eng" onclick="setLanguage('eng')">English</p>
@@ -36,7 +37,7 @@
 
     </fieldset>
 </div>
-<div>
+<div id="route">
     <fieldset>
         <table>
             <legend>Добавление поезда по маршруту</legend>
@@ -55,12 +56,12 @@
                     <legend>Построение маршрута</legend>
                     <tr>
                         <td>
-                            <input type="button" value="+">
+                            <input type="button" id="+" value="+">
                         </td>
                     </tr>
                     <tr>
                         <td>Станция</td>
-                        <td> <select name="stationsCombo"/></td>
+                        <td><select name="stationsCombo"/></td>
                         <td>Расстояние до следующей станции(км)</td>
                         <td><input type="text"></td>
                         <td><input type="button" value="-"></td>
@@ -69,7 +70,7 @@
             </fieldset>
         </div>
         <input type="button" value="Построить маршрут">
-        <input type="button" value="Сохранить">
+        <input type="button" id="save" value="Сохранить">
     </fieldset>
 </div>
 <div>
@@ -93,7 +94,14 @@
 
     </fieldset>
 </div>
+
 <script>
+    $("#save").click(function () {
+        setDisableRouteDiv(true);
+    });
+    function setDisableRouteDiv(isDisable) {
+        $("#route:not(:last-child) :input").prop('disabled', isDisable);
+    }
     $("#nameStation").on("change paste keyup", function () {
         var length = $("#nameStation").val().length;
         var isDisables = length > 4 && length < 20 ? false : true;
@@ -119,7 +127,6 @@
             }
         });
     });
-
 
 
 </script>
