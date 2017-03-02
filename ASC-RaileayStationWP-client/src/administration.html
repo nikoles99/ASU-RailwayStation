@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <title>Administration</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
+
+
     <script src="script/internationalization.js"></script>
 </head>
 <body>
@@ -41,12 +45,50 @@
             <tr>
                 <td>Поезд</td>
                 <td><input type="text" id="trainRoute" maxlength="30" pattern=".{7,30}" required title="Expected 7 to 30 chars"></td>
-                <td>Время отправления</td>
-                <td><input type="datetime-local"></td>
-                <td>Время прибытия</td>
-                <td><input type="datetime-local" disabled="true"></td>
+                <td>Дата отправления</td>
+                <td><input type="datetime-local" id="departureDate"></td>
+                <td>Дата прибытия</td>
+                <td><input type="datetime-local" id="arrivalDate" disabled="true"></td>
             </tr>
         </table>
+        <div>
+            <fieldset>
+                <table id="carriages">
+                    <legend>Типы вагонов</legend>
+                    <tr>
+                        <td> Общее количесво вагонов</td>
+                        <td>
+                            <input type="number" id="countCarriages" min="10" max="30">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Общий</td>
+                        <td>
+                            <input type="number" id="commonCarriages" min="2" max="8"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Плацкарт</td>
+                        <td>
+                            <input type="number" id="countReservedSeat" min="2" max="8"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Купе</td>
+                        <td>
+                            <input type="number" id="countCoups" min="2" max="8"/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Сидячий</td>
+                        <td>
+                            <input type="number" id="countSeatPlaces" min="2" max="8"/>
+                        </td>
+                    </tr>
+
+                </table>
+            </fieldset>
+        </div>
         <div>
             <fieldset>
                 <table id="stations">
@@ -93,6 +135,31 @@
 </div>
 <datalist id="stationsDataList"/>
 <script>
+    var train;
+    var reservedSeatPlacesCount = 54;
+    var coupPlacesCount = 36;
+    var commonPlacesCount = 81;
+    var seatPlacesCount = 42;
+
+    $("#save").click(function () {
+        if (train != null) {
+            var url = "http://localhost:8080/addTrainSchedule";
+            $.ajax({
+                url: url,
+                type: 'POST',
+                dataType: 'jsonp',
+                data: train,
+                success: function (data) {
+                    $("#nameStation").val('');
+                    getStationsFromServer();
+                },
+                error: function (xhr) {
+                    errorLogging(xhr);
+                }
+            });
+        }
+    });
+
     $("document").ready(function () {
         getStationsFromServer();
     });
@@ -104,14 +171,38 @@
     });
 
     $("#buildRoute").click(function () {
+        var isValidated = routeValidate();
+        if (isValidated) {
+            train = {
+                carriages: [
+                    {carriageType: "", number: "", places: reservedSeatPlacesCount}
+                ],
+                schedules: [
+                    {station: "", arrivalDate: "", departureDate: ""}
+                ]
+            }
 
+        }
+        $("#save").prop('disabled', !isValidated);
     });
-    
+
     function routeValidate() {
+        var errorMessage = "Проверьте правильность ввода";
         var trainRouteLength = $("#trainRoute").val().length;
+        if (!(trainRouteLength > 4 && length < 20)) {
+            alert(errorMessage);
+            return false;
+        }
+        var departureDate = $("#departureDate").val();
+        alert(departureDate);
+        if (departureDate < new Date($.now())) {
+            return false;
+        }
         var isDisables = trainRouteLength > 4 && length < 20 ? false : true;
         var trainRouteLength = $("#trainRoute").val().length;
+        return true;
     }
+
 
     $("#addStationToRoute").click(function () {
         if ($('#stations tr').length > 10) {

@@ -20,7 +20,7 @@ public class TrainScheduleEntity extends AbstractEntity {
     StationEntity stationEntity;
 
     @Column(name = "arrival_date")
-    Date arrivaleDate;
+    Date arrivalDate;
 
     @Column(name = "departure_date")
     Date departureDate;
@@ -48,12 +48,12 @@ public class TrainScheduleEntity extends AbstractEntity {
         this.stationEntity = stationEntity;
     }
 
-    public Date getArrivaleDate() {
-        return arrivaleDate;
+    public Date getArrivalDate() {
+        return arrivalDate;
     }
 
-    public void setArrivaleDate(Date arrivaleDate) {
-        this.arrivaleDate = arrivaleDate;
+    public void setArrivalDate(Date arrivalDate) {
+        this.arrivalDate = arrivalDate;
     }
 
     public Date getDepartureDate() {
