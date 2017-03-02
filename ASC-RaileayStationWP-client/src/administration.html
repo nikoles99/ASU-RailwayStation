@@ -61,7 +61,7 @@
                     </tr>
                     <tr>
                         <td>Станция</td>
-                        <td><input type="text" list="browsers"/></td>
+                        <td><input type="text" list="stationsDataList"/></td>
                         <td>Расстояние до следующей станции(км)</td>
                         <td><input type="text"></td>
                         <td><input class="removeStationFromRoute" type="button" value="-"></td>
@@ -100,31 +100,40 @@
         getStationsFromServer();
     });
 
-    $(".removeStationFromRoute").click(function () {
-        alert("d");
+
+    $("#stations").on("click", ".removeStationFromRoute", function () {
+        $(this).closest('tr').remove();
+        $("#addStationToRoute").prop('disabled', false);
     });
+
+
     $("#addStationToRoute").click(function () {
         if ($('#stations tr').length > 10) {
-            alert($('#stations tr').length);
-            $("#addStation").prop('disabled', true);
+            $("#addStationToRoute").prop('disabled', true);
         } else {
             var newStation = "<tr>" +
                 "<td>Станция</td>" +
-                "<td><input type=\"text\" list=\"browsers\"/></td>" +
+                "<td><input type=\"text\" list=\"stationsDataList\"/></td>" +
                 "<td>Расстояние до следующей станции(км)</td>" +
                 "<td><input type=\"text\"></td>" +
                 "<td><input class=\"removeStationFromRoute\" type=\"button\" value=\"-\"></td></tr>";
             $("#stations tr:last").after(newStation);
         }
     });
+
+
     function setDisableRouteDiv(isDisable) {
         $("#route:not(:last-child) :input").prop('disabled', isDisable);
     }
+
+
     $("#nameStation").on("change paste keyup", function () {
         var length = $("#nameStation").val().length;
         var isDisables = length > 4 && length < 20 ? false : true;
         $("#addStation").prop('disabled', isDisables);
     });
+
+
     $("#addStation").click(function () {
         var url = "http://localhost:8080/addStation";
         $.ajax({
@@ -135,6 +144,10 @@
             success: function (data) {
                 var parse = JSON.parse(data);
                 alert(parse.get(1).name);
+                $("#stationsDataList").empty();
+                for (var i in data) {
+                    $("<option/>").html(data[i].name).appendTo("#stationsDataList");
+                }
             },
             error: function (xhr) {
                 var text = xhr.code;
@@ -146,6 +159,7 @@
             }
         });
     });
+
 
     function getStationsFromServer() {
         var url = "http://localhost:8080/getAllStations";
