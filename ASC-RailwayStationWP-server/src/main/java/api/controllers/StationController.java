@@ -41,6 +41,18 @@ public class StationController extends AbstractController {
         }
     }
 
+    @RequestMapping(value = "/deleteStation", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    void deleteStation(StationBean stationBean) {
+        stationService.deleteStation(stationBean);
+    }
+
+    @RequestMapping(value = "/updateStation", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    void updateStation(StationBean stationBean) {
+        stationService.updateStation(stationBean);
+    }
+
     @RequestMapping(value = "/getAllStations", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     List<StationBean> getAllStations() {

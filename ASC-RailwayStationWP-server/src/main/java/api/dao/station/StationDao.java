@@ -2,6 +2,7 @@ package api.dao.station;
 
 import api.entity.StationEntity;
 import api.exception.StationException;
+import api.model.SimpleResponseBean;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public interface StationDao {
 
     void updateStation(StationEntity stationEntity);
 
-    void removeStation(StationEntity stationEntity);
-
     List<StationEntity> getAllStations();
+
+    void deleteStation(StationEntity stationEntity);
 }

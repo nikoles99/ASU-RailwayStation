@@ -21,16 +21,13 @@
                     <p>Название</p>
                 </td>
                 <td>
-                    <input type="text" id="nameStation" pattern=".{5,19}" required title="Either 0 OR (5 to 19 chars)"/>
+                    <input type="text" id="nameStation" list="stationsDataList" maxlength="19" pattern=".{5,19}" required title="Expected 5 to 19 chars"/>
                 </td>
                 <td>
                     <input type="button" value="добавить" id="addStation" disabled="true"/>
                 </td>
                 <td>
                     <input type="button" value="удалить" id="deleteStation" disabled="true"/>
-                </td>
-                <td>
-                    <input type="button" value="изменить" id="updateStation" disabled="true"/>
                 </td>
             </tr>
         </table>
@@ -43,11 +40,11 @@
             <legend>Добавление поезда по маршруту</legend>
             <tr>
                 <td>Поезд</td>
-                <td><input type="text"></td>
+                <td><input type="text" id="trainRoute" maxlength="30" pattern=".{7,30}" required title="Expected 7 to 30 chars"></td>
                 <td>Время отправления</td>
-                <td><input type="text"></td>
+                <td><input type="datetime-local"></td>
                 <td>Время прибытия</td>
-                <td><input type="text"></td>
+                <td><input type="datetime-local" disabled="true"></td>
             </tr>
         </table>
         <div>
@@ -69,8 +66,8 @@
                 </table>
             </fieldset>
         </div>
-        <input type="button" value="Построить маршрут">
-        <input type="button" id="save" value="Сохранить">
+        <input type="button" id="buildRoute" value="Построить маршрут">
+        <input type="button" id="save" value="Сохранить" disabled="true">
     </fieldset>
 </div>
 <div>
@@ -106,6 +103,15 @@
         $("#addStationToRoute").prop('disabled', false);
     });
 
+    $("#buildRoute").click(function () {
+
+    });
+    
+    function routeValidate() {
+        var trainRouteLength = $("#trainRoute").val().length;
+        var isDisables = trainRouteLength > 4 && length < 20 ? false : true;
+        var trainRouteLength = $("#trainRoute").val().length;
+    }
 
     $("#addStationToRoute").click(function () {
         if ($('#stations tr').length > 10) {
@@ -131,6 +137,8 @@
         var length = $("#nameStation").val().length;
         var isDisables = length > 4 && length < 20 ? false : true;
         $("#addStation").prop('disabled', isDisables);
+        $("#deleteStation").prop('disabled', isDisables);
+        $("#updateStation").prop('disabled', isDisables);
     });
 
 
@@ -142,24 +150,41 @@
             dataType: 'jsonp',
             data: {name: $("#nameStation").val()},
             success: function (data) {
-                var parse = JSON.parse(data);
-                alert(parse.get(1).name);
-                $("#stationsDataList").empty();
-                for (var i in data) {
-                    $("<option/>").html(data[i].name).appendTo("#stationsDataList");
-                }
+                $("#nameStation").val('');
+                getStationsFromServer();
             },
             error: function (xhr) {
-                var text = xhr.code;
-                console.log("readyState: " + xhr.readyState);
-                console.log("responseText: " + xhr.responseText);
-                console.log("status: " + xhr.status);
-                console.log("text status: " + textStatus);
-                console.log("error: " + err);
+                errorLogging(xhr);
             }
         });
     });
 
+    function errorLogging(xhr) {
+        var text = xhr.code;
+        console.log("readyState: " + xhr.readyState);
+        console.log("responseText: " + xhr.responseText);
+        console.log("status: " + xhr.status);
+        console.log("text status: " + textStatus);
+        console.log("error: " + err);
+    }
+
+
+    $("#deleteStation").click(function () {
+        var url = "http://localhost:8080/deleteStation";
+        $.ajax({
+            url: url,
+            type: 'POST',
+            dataType: 'jsonp',
+            data: {name: $("#nameStation").val()},
+            success: function (data) {
+                $("#nameStation").val('');
+                getStationsFromServer();
+            },
+            error: function (xhr) {
+                errorLogging(xhr);
+            }
+        });
+    });
 
     function getStationsFromServer() {
         var url = "http://localhost:8080/getAllStations";
@@ -168,18 +193,13 @@
             type: 'POST',
             dataType: 'jsonp',
             success: function (data) {
-                for (var i = 0; i < data.length; i++) {
-                    var name = data[i].name;
-                    $("#stationsDataList").append("<option value='" + name + "'>");
+                $("#stationsDataList").empty();
+                for (var i in data) {
+                    $("<option/>").html(data[i].name).appendTo("#stationsDataList");
                 }
             },
             error: function (xhr) {
-                var text = xhr.code;
-                console.log("readyState: " + xhr.readyState);
-                console.log("responseText: " + xhr.responseText);
-                console.log("status: " + xhr.status);
-                console.log("text status: " + textStatus);
-                console.log("error: " + err);
+                errorLogging(xhr);
             }
         });
     }

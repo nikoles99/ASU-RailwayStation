@@ -4,6 +4,7 @@ import api.convertors.StationConverter;
 import api.dao.station.StationDao;
 import api.entity.StationEntity;
 import api.exception.StationException;
+import api.model.SimpleResponseBean;
 import api.model.StationBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,5 +34,17 @@ public class StationServiceImpl implements StationService {
         List<StationEntity> entities = stationDao.getAllStations();
         List<StationBean> beans = stationConverter.convertToBean(entities);
         return beans;
+    }
+
+    @Override
+    public void deleteStation(StationBean stationBean) {
+        StationEntity stationEntity = stationConverter.convertToEntity(stationBean);
+        stationDao.deleteStation(stationEntity);
+    }
+
+    @Override
+    public void updateStation(StationBean stationBean) {
+        StationEntity stationEntity = stationConverter.convertToEntity(stationBean);
+        stationDao.updateStation(stationEntity);
     }
 }

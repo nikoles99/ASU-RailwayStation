@@ -3,6 +3,7 @@ package api.dao.station;
 import api.dao.user.UserDaoImpl;
 import api.entity.StationEntity;
 import api.exception.StationException;
+import api.model.SimpleResponseBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -31,6 +32,9 @@ public class StationDaoImpl implements StationDao {
 
     @Override
     public void addStation(StationEntity stationEntity) throws StationException {
+        if (stationEntity == null || stationEntity.getName() == null || stationEntity.getName().isEmpty()) {
+            throw new StationException(stationEntity + " entity or name is null");
+        }
         List<StationEntity> stations = getStations(stationEntity.getName());
         if (stations.isEmpty()) {
             entityManager.persist(stationEntity);
@@ -55,16 +59,6 @@ public class StationDaoImpl implements StationDao {
     }
 
     @Override
-    public void updateStation(StationEntity stationEntity) {
-
-    }
-
-    @Override
-    public void removeStation(StationEntity stationEntity) {
-
-    }
-
-    @Override
     public List<StationEntity> getAllStations() {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<StationEntity> criteriaQuery = criteriaBuilder.createQuery(StationEntity.class);
@@ -72,5 +66,21 @@ public class StationDaoImpl implements StationDao {
         criteriaQuery.select(stationEntityRoot);
         List<StationEntity> students = entityManager.createQuery(criteriaQuery).getResultList();
         return students;
+    }
+
+    @Override
+    public void deleteStation(StationEntity stationEntity) {
+        List<StationEntity> stations = getStations(stationEntity.getName());
+        for (StationEntity station : stations) {
+            entityManager.remove(station);
+        }
+    }
+
+    @Override
+    public void updateStation(StationEntity stationEntity) {
+        List<StationEntity> stations = getStations(stationEntity.getName());
+        for (StationEntity station : stations) {
+            station.setName(stationEntity.getName());
+        }
     }
 }
