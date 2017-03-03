@@ -194,7 +194,7 @@
             return false;
         }
         var isRouteValidate = false;
-        stationsArray.clear();
+        stationsArray = [];
 
         $("#stations tr").each(function () {
             var isStationValidate = false;
@@ -205,7 +205,13 @@
                 alert("проверьте правильность ввода расстояния до следующей станции");
                 return false;
             } else {
-                var timeToNextStation = parseInt(distance) / trainSpeed;
+                var remainder = parseInt(distance) % trainSpeed;
+                if (remainder != 0) {
+
+                }
+                var hours = parseInt(distance) / trainSpeed;
+                var hours = parseInt(distance) / trainSpeed;
+                alert(timeToNextStation);
             }
 
             $("#stationsDataList option").each(function () {
