@@ -41,7 +41,7 @@
             <legend>Добавление поезда по маршруту</legend>
             <tr>
                 <td>Поезд</td>
-                <td><input type="text" id="trainRoute" maxlength="30" pattern=".{7,30}" required title="Expected 7 to 30 chars"></td>
+                <td><input type="text" id="trainRoute" disabled="true"></td>
                 <td>Дата отправления</td>
                 <td><input type="datetime-local" id="departureDate"></td>
                 <span/>
@@ -91,16 +91,12 @@
             <fieldset>
                 <table id="stations">
                     <legend>Построение маршрута</legend>
-                    <tr>
-                        <td>
-                            <input type="button" id="addStationToRoute" value="+">
-                        </td>
-                    </tr>
+                    <input type="button" id="addStationToRoute" value="+">
                     <tr>
                         <td>Станция</td>
-                        <td><input type="text" list="stationsDataList"/></td>
+                        <td><input type="text" class="station" list="stationsDataList"/></td>
                         <td>Расстояние до следующей станции(км)</td>
-                        <td><input type="text"></td>
+                        <td><input type="number" min="1" max="200" class="distance"></td>
                         <td><input class="removeStationFromRoute" type="button" value="-"></td>
                     </tr>
                 </table>
@@ -171,9 +167,9 @@
     $("#buildRoute").click(function () {
         var isRouteValidated = validateRoute();
         var isCarriagesValidate = validateCarriages();
-        var isCarriagesValidate = validateCarriages();
 
-        if (isRouteValidated) {
+        var isValidationComplete = isRouteValidated || isCarriagesValidate;
+        if (isValidationComplete) {
             train = {
                 carriages: [
                     {carriageType: "", number: "", places: reservedSeatPlacesCount}
@@ -184,22 +180,37 @@
             }
 
         }
-        $("#save").prop('disabled', !isValidated);
+        $("#save").prop('disabled', !isValidationComplete);
     });
 
     function validateRoute() {
-        var trainRouteLength = $("#trainRoute").val().length;
-        if (!(trainRouteLength > 4 && length < 20)) {
-            alert("Проверьте правильность ввода Поезда");
-            return false;
-        }
         var departureDate = $("#departureDate").val();
         if (departureDate == "" || new Date(departureDate) < new Date($.now())) {
             alert("проверьте правильность ввода даты отправления");
             return false;
         }
+
+        $("#stations tr").each(function () {
+            var station = this.getElementsByClassName("station")[0].value;
+            var distance = this.getElementsByClassName("distance")[0].value;
+
+            if (distance == "" || distance < 1 || countReservedSeat > 200) {
+                alert("проверьте правильность ввода расстояния до следующей станции");
+                return false;
+            }
+            var isStationValidate = false;
+            $("#stationsDataList option").each(function () {
+                if (this.value == station) {
+                    isStationValidate = true;
+                }
+
+            });
+            return isStationValidate;
+        });
+
         return true;
     }
+
 
     function validateCarriages() {
         var countCarriages = $("#countCarriages").val();
@@ -247,9 +258,9 @@
         } else {
             var newStation = "<tr>" +
                 "<td>Станция</td>" +
-                "<td><input type=\"text\" list=\"stationsDataList\"/></td>" +
+                "<td><input type=\"text\" class=\"station\" list=\"stationsDataList\"/></td>" +
                 "<td>Расстояние до следующей станции(км)</td>" +
-                "<td><input type=\"text\"></td>" +
+                "<td><input type=\"number\" class=\"distance\" min=\"1\" max =\"200\"></td>" +
                 "<td><input class=\"removeStationFromRoute\" type=\"button\" value=\"-\"></td></tr>";
             $("#stations tr:last").after(newStation);
         }
