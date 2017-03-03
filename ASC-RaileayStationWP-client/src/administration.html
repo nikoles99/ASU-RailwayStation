@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <title>Administration</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/jquery.validate.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.15.0/additional-methods.min.js"></script>
-
-
     <script src="script/internationalization.js"></script>
 </head>
+
 <body>
 
 <div>
@@ -47,6 +44,7 @@
                 <td><input type="text" id="trainRoute" maxlength="30" pattern=".{7,30}" required title="Expected 7 to 30 chars"></td>
                 <td>Дата отправления</td>
                 <td><input type="datetime-local" id="departureDate"></td>
+                <span/>
                 <td>Дата прибытия</td>
                 <td><input type="datetime-local" id="arrivalDate" disabled="true"></td>
             </tr>
@@ -58,31 +56,31 @@
                     <tr>
                         <td> Общее количесво вагонов</td>
                         <td>
-                            <input type="number" id="countCarriages" min="10" max="30">
+                            <input type="number" id="countCarriages" min="10" max="30"/><span/>
                         </td>
                     </tr>
                     <tr>
                         <td>Общий</td>
                         <td>
-                            <input type="number" id="commonCarriages" min="2" max="8"/>
+                            <input type="number" id="commonCarriages" min="2" max="10"/>
                         </td>
                     </tr>
                     <tr>
                         <td>Плацкарт</td>
                         <td>
-                            <input type="number" id="countReservedSeat" min="2" max="8"/>
+                            <input type="number" id="countReservedSeat" min="2" max="10"/>
                         </td>
                     </tr>
                     <tr>
                         <td>Купе</td>
                         <td>
-                            <input type="number" id="countCoups" min="2" max="8"/>
+                            <input type="number" id="countCoups" min="2" max="10"/>
                         </td>
                     </tr>
                     <tr>
                         <td>Сидячий</td>
                         <td>
-                            <input type="number" id="countSeatPlaces" min="2" max="8"/>
+                            <input type="number" id="countSeatPlaces" min="2" max="10"/>
                         </td>
                     </tr>
 
@@ -171,8 +169,11 @@
     });
 
     $("#buildRoute").click(function () {
-        var isValidated = routeValidate();
-        if (isValidated) {
+        var isRouteValidated = validateRoute();
+        var isCarriagesValidate = validateCarriages();
+        var isCarriagesValidate = validateCarriages();
+
+        if (isRouteValidated) {
             train = {
                 carriages: [
                     {carriageType: "", number: "", places: reservedSeatPlacesCount}
@@ -186,20 +187,56 @@
         $("#save").prop('disabled', !isValidated);
     });
 
-    function routeValidate() {
-        var errorMessage = "Проверьте правильность ввода";
+    function validateRoute() {
         var trainRouteLength = $("#trainRoute").val().length;
         if (!(trainRouteLength > 4 && length < 20)) {
-            alert(errorMessage);
+            alert("Проверьте правильность ввода Поезда");
             return false;
         }
         var departureDate = $("#departureDate").val();
-        alert(departureDate);
-        if (departureDate < new Date($.now())) {
+        if (departureDate == "" || new Date(departureDate) < new Date($.now())) {
+            alert("проверьте правильность ввода даты отправления");
             return false;
         }
-        var isDisables = trainRouteLength > 4 && length < 20 ? false : true;
-        var trainRouteLength = $("#trainRoute").val().length;
+        return true;
+    }
+
+    function validateCarriages() {
+        var countCarriages = $("#countCarriages").val();
+        if (countCarriages == "" || countCarriages < 10 || countCarriages > 30) {
+            alert("countCarriages число вагонов между 10 и 30");
+            return false;
+        }
+
+        var commonCarriages = $("#commonCarriages").val();
+        if (commonCarriages == "" || commonCarriages < 2 || countCarriages > 10) {
+            alert("commonCarriages число вагонов между 2 и 10");
+            return false;
+        }
+
+        var countReservedSeat = $("#countReservedSeat").val();
+        if (countReservedSeat == "" || countReservedSeat < 2 || countReservedSeat > 10) {
+            alert("countReservedSeat число вагонов между 10 и 30");
+            return false;
+        }
+
+        var countCoups = $("#countCoups").val();
+        if (countCoups == "" || countCoups < 2 || countCoups > 10) {
+            alert("countCoups число вагонов между 10 и 30");
+            return false;
+        }
+
+        var countSeatPlaces = $("#countSeatPlaces").val();
+        if (countSeatPlaces == "" || countSeatPlaces < 2 || countSeatPlaces > 10) {
+            alert("countSeatPlaces число вагонов между 10 и 30");
+            return false;
+        }
+
+        var countAllCarriages = parseInt(commonCarriages) + parseInt(countReservedSeat) + parseInt(countCoups) + parseInt(countSeatPlaces);
+        if (countCarriages != countAllCarriages) {
+            alert("сумма вагонов не равно общему числу вагонов");
+            return false;
+        }
         return true;
     }
 
