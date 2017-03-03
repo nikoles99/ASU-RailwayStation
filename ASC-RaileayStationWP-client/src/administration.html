@@ -134,6 +134,9 @@
     var coupPlacesCount = 36;
     var commonPlacesCount = 81;
     var seatPlacesCount = 42;
+    var stationsArray = [];
+
+    var trainSpeed = 60;
 
     $("#save").click(function () {
         if (train != null) {
@@ -184,31 +187,39 @@
     });
 
     function validateRoute() {
-        var departureDate = $("#departureDate").val();
-        if (departureDate == "" || new Date(departureDate) < new Date($.now())) {
+        var departureDateText = $("#departureDate").val();
+        var departureDate = new Date(departureDateText);
+        if (departureDateText == "" || departureDate < new Date($.now())) {
             alert("проверьте правильность ввода даты отправления");
             return false;
         }
+        var isRouteValidate = false;
+        stationsArray.clear();
 
         $("#stations tr").each(function () {
+            var isStationValidate = false;
             var station = this.getElementsByClassName("station")[0].value;
             var distance = this.getElementsByClassName("distance")[0].value;
 
             if (distance == "" || distance < 1 || countReservedSeat > 200) {
                 alert("проверьте правильность ввода расстояния до следующей станции");
                 return false;
+            } else {
+                var timeToNextStation = parseInt(distance) / trainSpeed;
             }
-            var isStationValidate = false;
+
             $("#stationsDataList option").each(function () {
                 if (this.value == station) {
                     isStationValidate = true;
                 }
-
             });
-            return isStationValidate;
+
+            if (isStationValidate) {
+                stationsArray.push({station: station, arrivalDate: "", departureDate: ""});
+            }
         });
 
-        return true;
+        return isRouteValidate;
     }
 
 
