@@ -98,7 +98,18 @@
                         <td><input type="text" class="station" list="stationsDataList"/></td>
                         <td>Расстояние до следующей станции(км)</td>
                         <td><input type="number" min="1" max="200" class="distance"></td>
-                        <td><input class="removeStationFromRoute" type="button" value="-"></td>
+                    </tr>
+                    <tr>
+                        <td>Станция</td>
+                        <td><input type="text" class="station" list="stationsDataList"/></td>
+                        <td>Расстояние до следующей станции(км)</td>
+                        <td><input type="number" min="1" max="200" class="distance"></td>
+                    </tr>
+                    <tr>
+                        <td>Станция</td>
+                        <td><input type="text" class="station" list="stationsDataList"/></td>
+                        <td>Расстояние до следующей станции(км)</td>
+                        <td><input type="number" min="1" max="200" class="distance"></td>
                     </tr>
                 </table>
             </fieldset>
@@ -139,9 +150,13 @@
 
     var carriageNumber = 0;
 
-    var train = {
-        carriages: [],
-        schedules: []
+    var train;
+
+    function refreshTrain() {
+        train = {
+            carriages: [],
+            schedules: []
+        }
     }
 
     $("#save").click(function () {
@@ -165,6 +180,11 @@
 
     $("document").ready(function () {
         getStationsFromServer();
+        var date = new Date($.now());
+        date.setDate(date.getDate() + 1);
+        var departureDate = dateToString(date);
+        $("#departureDate").val(departureDate);
+
     });
 
 
@@ -174,6 +194,7 @@
     });
 
     $("#buildRoute").click(function () {
+        refreshTrain();
         var isRouteValidated = validateRoute();
         var isCarriagesValidate = validateCarriages();
 
@@ -182,16 +203,27 @@
         if (isValidationComplete) {
             $("#trainRoute").val(route);
             var arrivalDate = train.schedules[0][train.schedules[0].length - 1].arrivalDate;
-            var day = arrivalDate.getDay();
-            var year = arrivalDate.getFullYear();
-            var month = arrivalDate.getMonth();
-            var hours = arrivalDate.getHours();
-            var minutes = arrivalDate.getMinutes();
-            var date = year + "-" + month + "-" + day + "T" + hours + ":" + minutes;
+            var date = dateToString(arrivalDate);
             $("#arrivalDate").val(date);
         }
         $("#save").prop('disabled', !isValidationComplete);
     });
+
+    function dateToString(date) {
+        var day = correctDate(date.getDate());
+        var year = date.getFullYear();
+        var month = correctDate(date.getMonth() + 1);
+        var hours = correctDate(date.getHours());
+        var minutes = correctDate(date.getMinutes());
+        return year + "-" + month + "-" + day + "T" + hours + ":" + minutes;
+    }
+
+    function correctDate(number) {
+        if (number < 10 && number >= 0) {
+            number = "0" + number;
+        }
+        return number;
+    }
 
     function validateRoute() {
         var departureDateText = $("#departureDate").val();
@@ -238,14 +270,14 @@
 
 
     function validateCarriages() {
-        var countCarriages = $("#countCarriages").val();
+        var countCarriages = parseInt($("#countCarriages").val());
         if (countCarriages == "" || countCarriages < 10 || countCarriages > 30) {
             alert("countCarriages число вагонов между 10 и 30");
             return false;
         }
 
         var commonCarriages = $("#commonCarriages").val();
-        if (commonCarriages == "" || commonCarriages < 2 || countCarriages > 10) {
+        if (commonCarriages == "" || commonCarriages < 2 || commonCarriages > countCarriages) {
             alert("commonCarriages число вагонов между 2 и 10");
             return false;
         }
@@ -253,7 +285,7 @@
         addCarriage("common", commonCarriages);
 
         var countReservedSeat = $("#countReservedSeat").val();
-        if (countReservedSeat == "" || countReservedSeat < 2 || countReservedSeat > 10) {
+        if (countReservedSeat == "" || countReservedSeat < 2 || countReservedSeat > countCarriages) {
             alert("countReservedSeat число вагонов между 10 и 30");
             return false;
         }
@@ -261,7 +293,7 @@
         addCarriage("reservedSeat", countReservedSeat);
 
         var countCoups = $("#countCoups").val();
-        if (countCoups == "" || countCoups < 2 || countCoups > 10) {
+        if (countCoups == "" || countCoups < 2 || countCoups > countCarriages) {
             alert("countCoups число вагонов между 10 и 30");
             return false;
         }
@@ -269,7 +301,7 @@
         addCarriage("coup", countCoups);
 
         var countSeatPlaces = $("#countSeatPlaces").val();
-        if (countSeatPlaces == "" || countSeatPlaces < 2 || countSeatPlaces > 10) {
+        if (countSeatPlaces == "" || countSeatPlaces < 2 || countSeatPlaces > countCarriages) {
             alert("countSeatPlaces число вагонов между 10 и 30");
             return false;
         }
