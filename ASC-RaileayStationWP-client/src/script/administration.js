@@ -21,7 +21,7 @@ function refreshTrain() {
 
 $("#save").click(function () {
     if (train != null) {
-        var url = "http://localhost:8080/addTrainSchedule";
+        var url = "http://localhost:8080/addNewRoute";
         $.ajax({
             url: url,
             type: 'POST',
@@ -59,10 +59,10 @@ $("#buildRoute").click(function () {
     var isCarriagesValidate = validateCarriages();
 
     var isValidationComplete = isRouteValidated || isCarriagesValidate;
-    var route = train.schedules[0][0].station + " - " + train.schedules[0][train.schedules[0].length - 1].station;
+    var route = train.schedules[0].station + " - " + train.schedules[train.schedules.length - 1].station;
     if (isValidationComplete) {
         $("#trainRoute").val(route);
-        var arrivalDate = train.schedules[0][train.schedules[0].length - 1].arrivalDate;
+        var arrivalDate = train.schedules[train.schedules.length - 1].arrivalDate;
         var date = dateToString(arrivalDate);
         $("#arrivalDate").val(date);
     }
@@ -124,7 +124,7 @@ function validateRoute() {
             departureDate.setHours(departureDate.getHours() + hours);
         }
     });
-    train.schedules.push(stationsArray);
+    train.schedules=stationsArray;
     return isRouteValidate;
 }
 
