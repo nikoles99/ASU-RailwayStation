@@ -14,7 +14,7 @@ public class CarriageBean extends AbstractBean {
 
     private Integer number;
 
-    private TrainEntity trainEntity;
+    private Integer trainId;
 
     private Set<PlaceEntity> places;
 
@@ -38,12 +38,12 @@ public class CarriageBean extends AbstractBean {
         this.number = number;
     }
 
-    public TrainEntity getTrainEntity() {
-        return trainEntity;
+    public Integer getTrainId() {
+        return trainId;
     }
 
-    public void setTrainEntity(TrainEntity trainEntity) {
-        this.trainEntity = trainEntity;
+    public void setTrainId(Integer trainId) {
+        this.trainId = trainId;
     }
 
     public Set<PlaceEntity> getPlaces() {
@@ -68,7 +68,7 @@ public class CarriageBean extends AbstractBean {
             return false;
         if (number != null ? !number.equals(that.number) : that.number != null)
             return false;
-        if (trainEntity != null ? !trainEntity.equals(that.trainEntity) : that.trainEntity != null)
+        if (trainId != null ? !trainId.equals(that.trainId) : that.trainId != null)
             return false;
         return places != null ? places.equals(that.places) : that.places == null;
     }
@@ -77,7 +77,7 @@ public class CarriageBean extends AbstractBean {
         int result = super.hashCode();
         result = 31 * result + (carriageType != null ? carriageType.hashCode() : 0);
         result = 31 * result + (number != null ? number.hashCode() : 0);
-        result = 31 * result + (trainEntity != null ? trainEntity.hashCode() : 0);
+        result = 31 * result + (trainId != null ? trainId.hashCode() : 0);
         result = 31 * result + (places != null ? places.hashCode() : 0);
         return result;
     }

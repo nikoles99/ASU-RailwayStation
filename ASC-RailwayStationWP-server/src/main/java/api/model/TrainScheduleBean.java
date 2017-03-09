@@ -13,6 +13,8 @@ public class TrainScheduleBean extends AbstractBean {
 
     private Date  departureDate;
 
+    private Date  arrivalDate;
+
     public TrainScheduleBean() {
     }
 
@@ -40,28 +42,36 @@ public class TrainScheduleBean extends AbstractBean {
         this.departureDate = departureDate;
     }
 
-    @Override public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        if (!super.equals(o))
-            return false;
+
+    public Date getArrivalDate() {
+        return arrivalDate;
+    }
+
+    public void setArrivalDate(Date arrivalDate) {
+        this.arrivalDate = arrivalDate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
         TrainScheduleBean that = (TrainScheduleBean) o;
 
-        if (trainId != null ? !trainId.equals(that.trainId) : that.trainId != null)
-            return false;
-        if (stationId != null ? !stationId.equals(that.stationId) : that.stationId != null)
-            return false;
-        return departureDate != null ? departureDate.equals(that.departureDate) : that.departureDate == null;
+        if (trainId != null ? !trainId.equals(that.trainId) : that.trainId != null) return false;
+        if (stationId != null ? !stationId.equals(that.stationId) : that.stationId != null) return false;
+        if (departureDate != null ? !departureDate.equals(that.departureDate) : that.departureDate != null) return false;
+        return arrivalDate != null ? arrivalDate.equals(that.arrivalDate) : that.arrivalDate == null;
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         int result = super.hashCode();
         result = 31 * result + (trainId != null ? trainId.hashCode() : 0);
         result = 31 * result + (stationId != null ? stationId.hashCode() : 0);
         result = 31 * result + (departureDate != null ? departureDate.hashCode() : 0);
+        result = 31 * result + (arrivalDate != null ? arrivalDate.hashCode() : 0);
         return result;
     }
 }

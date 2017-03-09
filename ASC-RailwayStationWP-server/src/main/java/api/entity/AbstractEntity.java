@@ -11,7 +11,7 @@ public class AbstractEntity {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Integer id;
 
     public AbstractEntity() {
     }
@@ -39,11 +39,11 @@ public class AbstractEntity {
         return id != null;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         if (this.id == null) {
             this.id = id;
         } else {

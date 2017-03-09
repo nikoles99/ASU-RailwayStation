@@ -16,6 +16,7 @@ public class StationConverter {
     public StationBean convertToBean(StationEntity stationEntity) {
         StationBean stationBean = new StationBean();
         stationBean.setName(stationEntity.getName());
+        stationBean.setId(stationEntity.getId());
         stationBean.setSchedules(stationEntity.getSchedules());
         return stationBean;
     }
@@ -23,6 +24,7 @@ public class StationConverter {
     public StationEntity convertToEntity(StationBean stationBean) {
         StationEntity stationEntity = new StationEntity();
         stationEntity.setName(stationBean.getName());
+        stationEntity.setId(stationBean.getId());
         stationEntity.setSchedules(stationBean.getSchedules());
         return stationEntity;
     }

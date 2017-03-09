@@ -25,7 +25,7 @@ $("#save").click(function () {
         console.log(JSON.stringify(train));
         $.ajax({
             url: url,
-            method : 'POST',
+            method: 'POST',
             dataType: 'json',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(train),
@@ -129,7 +129,8 @@ function validateRoute() {
         var arrivalDate = new Date(departureDate);
         arrivalDate.setMinutes(arrivalDate.getMinutes() - 10);
         if (isStationValidate) {
-            stationsArray.push({station: station, arrivalDate: arrivalDate, departureDate: departureDate});
+            var stationId = getStationId(station);
+            stationsArray.push({stationId: stationId, arrivalDate: arrivalDate, departureDate: departureDate});
         }
         else {
             return !isStationValidate;
@@ -198,7 +199,7 @@ function validateCarriages() {
     return true;
 }
 
-function addCarriage(type, countCarriages, countPlaces) {
+function addCarriage(type, countCarriages) {
     for (var i = 0; i < countCarriages; i++) {
         train.carriages.push({carriageType: type, number: ++carriageNumber});
     }
@@ -288,10 +289,23 @@ function getStationsFromServer() {
             $("#stationsDataList").empty();
             for (var i in data) {
                 $("<option/>").html(data[i].name).appendTo("#stationsDataList");
+                $("<span/>").html(data[i].id).appendTo("#stationsDataList");
             }
         },
         error: function (xhr) {
             errorLogging(xhr);
         }
     });
+
+}
+
+function getStationId(name) {
+    var stationId = 0;
+    $("#stationsDataList option").each(function () {
+        if (this.value == name) {
+            stationId = parseInt($(this).next("span").text());
+            return;
+        }
+    });
+    return stationId;
 }

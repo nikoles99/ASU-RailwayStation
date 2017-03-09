@@ -19,17 +19,6 @@ public class TrainController extends AbstractController {
     @RequestMapping(value = "/addNewRoute", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     @ResponseBody
     TrainBean home(@RequestBody TrainBean trainBean) {
-        TrainBean trainBean1 = new TrainBean();
-        trainBean1.setNumber(1);
-        trainBean1.setSchedules(new HashSet<TrainScheduleBean>() {{
-            add(new TrainScheduleBean());
-            add(new TrainScheduleBean());
-            add(new TrainScheduleBean());
-        }});
-        trainBean1.setCarriages(new HashSet<CarriageBean>() {{
-            add(new CarriageBean());
-            add(new CarriageBean());
-        }});
-        return trainBean1;
+        return trainBean;
     }
 }
