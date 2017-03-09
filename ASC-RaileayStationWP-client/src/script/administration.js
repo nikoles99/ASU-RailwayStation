@@ -53,12 +53,28 @@ $("#stations").on("click", ".removeStationFromRoute", function () {
     $("#addStationToRoute").prop('disabled', false);
 });
 
+$("#stations").on("change", ".station", function () {
+    var station = $(this).val();
+    var isFindDuplicate = false;
+
+    $("#stations .station").each(function () {
+        if (this.value == station) {
+            if (isFindDuplicate) {
+                $(this).val("");
+                alert("Станции в маршруте не должны совпадать");
+                return;
+            }
+            isFindDuplicate = true;
+        }
+    });
+});
+
 $("#buildRoute").click(function () {
     refreshTrain();
     var isRouteValidated = validateRoute();
     var isCarriagesValidate = validateCarriages();
 
-    var isValidationComplete = isRouteValidated || isCarriagesValidate;
+    var isValidationComplete = isRouteValidated && isCarriagesValidate;
     var route = train.schedules[0].station + " - " + train.schedules[train.schedules.length - 1].station;
     if (isValidationComplete) {
         $("#trainRoute").val(route);
@@ -92,7 +108,6 @@ function validateRoute() {
         alert("проверьте правильность ввода даты отправления");
         return false;
     }
-    var isRouteValidate = false;
     stationsArray = [];
     $("#stations tr").each(function () {
         var isStationValidate = false;
@@ -104,6 +119,11 @@ function validateRoute() {
                 isStationValidate = true;
             }
         });
+        if (station == "") {
+            alert("выберите станцию");
+            return false;
+        }
+
         var arrivalDate = new Date(departureDate);
         arrivalDate.setMinutes(arrivalDate.getMinutes() - 10);
         if (isStationValidate) {
@@ -124,8 +144,8 @@ function validateRoute() {
             departureDate.setHours(departureDate.getHours() + hours);
         }
     });
-    train.schedules=stationsArray;
-    return isRouteValidate;
+    train.schedules = stationsArray;
+    return true;
 }
 
 
