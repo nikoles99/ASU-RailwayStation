@@ -77,7 +77,8 @@ $("#buildRoute").click(function () {
     var isCarriagesValidate = validateCarriages();
 
     var isValidationComplete = isRouteValidated && isCarriagesValidate;
-    var route = train.schedules[0].station + " - " + train.schedules[train.schedules.length - 1].station;
+    var lastIndex = parseInt(train.schedules.length - 1);
+    var route = $("#stations tr:eq(0) td:eq(1)").find("input").val()+ " - "+ $("#stations tr:eq("+lastIndex+") td:eq(1)").find("input").val();
     if (isValidationComplete) {
         $("#trainRoute").val(route);
         var arrivalDate = train.schedules[train.schedules.length - 1].arrivalDate;
