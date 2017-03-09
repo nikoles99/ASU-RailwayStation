@@ -33,9 +33,10 @@
             var url = "http://localhost:8080/login";
             $.ajax({
                 url: url,
-                type: 'POST',
-                dataType: 'jsonp',
-                data: {login: $('#login').val(), password: $('#password').val()},
+                method : 'POST',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({login: $('#login').val(), password: $('#password').val()}),
                 success: function (data) {
                     alert(data.login + " " + data.password);
 
