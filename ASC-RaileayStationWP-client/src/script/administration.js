@@ -22,11 +22,13 @@ function refreshTrain() {
 $("#save").click(function () {
     if (train != null) {
         var url = "http://localhost:8080/addNewRoute";
+        console.log(JSON.stringify(train));
         $.ajax({
             url: url,
-            type: 'POST',
-            dataType: 'jsonp',
-            data: train,
+            method : 'POST',
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(train),
             success: function (data) {
                 $("#nameStation").val('');
                 getStationsFromServer();
@@ -198,7 +200,7 @@ function validateCarriages() {
 
 function addCarriage(type, countCarriages, countPlaces) {
     for (var i = 0; i < countCarriages; i++) {
-        train.carriages.push({carriageType: type, number: ++carriageNumber, places: countPlaces});
+        train.carriages.push({carriageType: type, number: ++carriageNumber});
     }
 }
 
