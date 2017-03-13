@@ -14,10 +14,10 @@ public class TrainEntity extends AbstractEntity {
     @Column(name = "number")
     Integer number;
 
-    @OneToMany(mappedBy = "trainEntity", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    @OneToMany(mappedBy = "trainEntity", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     Set<CarriageEntity> carriages;
 
-    @OneToMany(mappedBy = "trainEntity", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
+    @OneToMany(mappedBy = "trainEntity", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     Set<TrainScheduleEntity> scheduleEntities;
 
     public TrainEntity() {
@@ -45,5 +45,27 @@ public class TrainEntity extends AbstractEntity {
 
     public void setScheduleEntities(Set<TrainScheduleEntity> scheduleEntities) {
         this.scheduleEntities = scheduleEntities;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        TrainEntity that = (TrainEntity) o;
+
+        if (number != null ? !number.equals(that.number) : that.number != null) return false;
+        if (carriages != null ? !carriages.equals(that.carriages) : that.carriages != null) return false;
+        return scheduleEntities != null ? scheduleEntities.equals(that.scheduleEntities) : that.scheduleEntities == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (number != null ? number.hashCode() : 0);
+        result = 31 * result + (carriages != null ? carriages.hashCode() : 0);
+        result = 31 * result + (scheduleEntities != null ? scheduleEntities.hashCode() : 0);
+        return result;
     }
 }

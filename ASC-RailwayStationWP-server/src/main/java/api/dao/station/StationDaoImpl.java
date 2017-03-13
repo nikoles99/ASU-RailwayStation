@@ -77,6 +77,11 @@ public class StationDaoImpl implements StationDao {
     }
 
     @Override
+    public StationEntity getStationById(Integer stationId) {
+        return entityManager.find(StationEntity.class, stationId);
+    }
+
+    @Override
     public void updateStation(StationEntity stationEntity) {
         List<StationEntity> stations = getStations(stationEntity.getName());
         for (StationEntity station : stations) {

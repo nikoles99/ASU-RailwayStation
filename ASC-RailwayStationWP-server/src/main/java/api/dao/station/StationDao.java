@@ -22,4 +22,6 @@ public interface StationDao {
     List<StationEntity> getAllStations();
 
     void deleteStation(StationEntity stationEntity);
+
+    StationEntity getStationById(Integer stationId);
 }

@@ -59,4 +59,28 @@ public class CarriageEntity extends AbstractEntity {
     public void setPlaces(Set<PlaceEntity> places) {
         this.places = places;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        CarriageEntity that = (CarriageEntity) o;
+
+        if (carriageType != that.carriageType) return false;
+        if (number != null ? !number.equals(that.number) : that.number != null) return false;
+        if (trainEntity != null ? !trainEntity.equals(that.trainEntity) : that.trainEntity != null) return false;
+        return places != null ? places.equals(that.places) : that.places == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (carriageType != null ? carriageType.hashCode() : 0);
+        result = 31 * result + (number != null ? number.hashCode() : 0);
+        result = 31 * result + (trainEntity != null ? trainEntity.hashCode() : 0);
+        result = 31 * result + (places != null ? places.hashCode() : 0);
+        return result;
+    }
 }

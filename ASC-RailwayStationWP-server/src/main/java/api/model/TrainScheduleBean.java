@@ -11,9 +11,15 @@ public class TrainScheduleBean extends AbstractBean {
 
     private Integer stationId;
 
-    private Date  departureDate;
+    private Date departureDate;
 
-    private Date  arrivalDate;
+    private Date arrivalDate;
+
+    public Integer getOrderId() {
+        return orderId;
+    }
+
+    private Integer orderId;
 
     public TrainScheduleBean() {
     }
@@ -73,5 +79,9 @@ public class TrainScheduleBean extends AbstractBean {
         result = 31 * result + (departureDate != null ? departureDate.hashCode() : 0);
         result = 31 * result + (arrivalDate != null ? arrivalDate.hashCode() : 0);
         return result;
+    }
+
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 }

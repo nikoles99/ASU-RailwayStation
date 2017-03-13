@@ -1,7 +1,6 @@
 package api.model;
 
 import api.entity.PlaceEntity;
-import api.entity.TrainEntity;
 
 import java.util.Set;
 
@@ -16,9 +15,9 @@ public class CarriageBean extends AbstractBean {
 
     private Integer trainId;
 
-    private Set<PlaceEntity> places;
+    private Set<PlaceBean> places;
 
-    public CarriageBean(){
+    public CarriageBean() {
 
     }
 
@@ -46,15 +45,16 @@ public class CarriageBean extends AbstractBean {
         this.trainId = trainId;
     }
 
-    public Set<PlaceEntity> getPlaces() {
+    public Set<PlaceBean> getPlaces() {
         return places;
     }
 
-    public void setPlaces(Set<PlaceEntity> places) {
+    public void setPlaces(Set<PlaceBean> places) {
         this.places = places;
     }
 
-    @Override public boolean equals(Object o) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o)
             return true;
         if (o == null || getClass() != o.getClass())
@@ -73,7 +73,8 @@ public class CarriageBean extends AbstractBean {
         return places != null ? places.equals(that.places) : that.places == null;
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         int result = super.hashCode();
         result = 31 * result + (carriageType != null ? carriageType.hashCode() : 0);
         result = 31 * result + (number != null ? number.hashCode() : 0);
