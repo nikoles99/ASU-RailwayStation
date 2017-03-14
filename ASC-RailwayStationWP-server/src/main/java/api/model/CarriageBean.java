@@ -1,5 +1,6 @@
 package api.model;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,12 +9,15 @@ import java.util.List;
  */
 public class CarriageBean extends AbstractBean {
 
+    @NotNull
     private CarriageType carriageType;
 
+    @NotNull
     private Integer number;
 
     private Integer trainId;
 
+    @NotNull
     private List<PlaceBean> places = new ArrayList<PlaceBean>();
 
     public CarriageBean() {

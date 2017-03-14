@@ -1,12 +1,16 @@
 package api.model;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by nolesuk on 13-Mar-17.
  */
 public class PlaceBean extends AbstractBean {
 
+    @NotNull
     private Integer number;
 
+    @NotNull
     private Integer carriageId;
 
     private Integer trainId;

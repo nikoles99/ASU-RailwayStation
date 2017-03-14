@@ -3,6 +3,7 @@ package api.model;
 import api.entity.TrainScheduleEntity;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
 @Component
 public class StationBean extends AbstractBean {
 
+    @NotNull
     private String name;
 
     private List<TrainScheduleEntity> schedules = new ArrayList<TrainScheduleEntity>();
