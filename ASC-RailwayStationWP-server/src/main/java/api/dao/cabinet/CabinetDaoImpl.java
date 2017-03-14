@@ -7,6 +7,7 @@ import api.entity.CabinetEntity;
  * Created by nikita on 14.03.17.
  */
 public class CabinetDaoImpl extends AbstractDao<CabinetEntity> implements CabinetDao {
+
     @Override
     public void addCabinet(CabinetEntity cabinetEntity) {
 
