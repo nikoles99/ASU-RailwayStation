@@ -3,6 +3,7 @@ package api.entity;
 import api.model.CarriageType;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -23,7 +24,7 @@ public class CarriageEntity extends AbstractEntity {
     TrainEntity trainEntity;
 
     @OneToMany(mappedBy = "carriageEntity", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    Set<PlaceEntity> places;
+    List<PlaceEntity> places;
 
     public CarriageType getCarriageType() {
         return carriageType;
@@ -52,35 +53,15 @@ public class CarriageEntity extends AbstractEntity {
         this.trainEntity = trainEntity;
     }
 
-    public Set<PlaceEntity> getPlaces() {
+    public List<PlaceEntity> getPlaces() {
         return places;
     }
 
-    public void setPlaces(Set<PlaceEntity> places) {
+    public void setPlaces(List<PlaceEntity> places) {
+        for (PlaceEntity place : places) {
+            place.setCarriageEntity(this);
+        }
         this.places = places;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-
-        CarriageEntity that = (CarriageEntity) o;
-
-        if (carriageType != that.carriageType) return false;
-        if (number != null ? !number.equals(that.number) : that.number != null) return false;
-        if (trainEntity != null ? !trainEntity.equals(that.trainEntity) : that.trainEntity != null) return false;
-        return places != null ? places.equals(that.places) : that.places == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + (carriageType != null ? carriageType.hashCode() : 0);
-        result = 31 * result + (number != null ? number.hashCode() : 0);
-        result = 31 * result + (trainEntity != null ? trainEntity.hashCode() : 0);
-        result = 31 * result + (places != null ? places.hashCode() : 0);
-        return result;
-    }
 }

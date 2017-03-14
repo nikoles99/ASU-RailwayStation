@@ -44,6 +44,9 @@ public class OrderEntity extends AbstractEntity {
     }
 
     public void setSchedules(List<TrainScheduleEntity> schedules) {
+        for (TrainScheduleEntity schedule : schedules) {
+            schedule.setOrderEntity(this);
+        }
         this.schedules = schedules;
     }
 
@@ -52,6 +55,9 @@ public class OrderEntity extends AbstractEntity {
     }
 
     public void setPassangers(List<PassengerEntity> passengers) {
+        for (PassengerEntity passenger : passengers) {
+            passenger.setOrderEntity(this);
+        }
         this.passengers = passengers;
     }
 

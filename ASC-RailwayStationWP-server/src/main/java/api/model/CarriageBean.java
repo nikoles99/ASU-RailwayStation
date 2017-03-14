@@ -1,8 +1,7 @@
 package api.model;
 
-import api.entity.PlaceEntity;
-
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by nolesuk on 07-Mar-17.
@@ -15,7 +14,7 @@ public class CarriageBean extends AbstractBean {
 
     private Integer trainId;
 
-    private Set<PlaceBean> places;
+    private List<PlaceBean> places = new ArrayList<PlaceBean>();
 
     public CarriageBean() {
 
@@ -45,11 +44,11 @@ public class CarriageBean extends AbstractBean {
         this.trainId = trainId;
     }
 
-    public Set<PlaceBean> getPlaces() {
+    public List<PlaceBean> getPlaces() {
         return places;
     }
 
-    public void setPlaces(Set<PlaceBean> places) {
+    public void setPlaces(List<PlaceBean> places) {
         this.places = places;
     }
 

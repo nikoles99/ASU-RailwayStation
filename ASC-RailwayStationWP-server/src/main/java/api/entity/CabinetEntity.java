@@ -33,6 +33,9 @@ public class CabinetEntity extends AbstractEntity {
     }
 
     public void setOrders(List<OrderEntity> orders) {
+        for (OrderEntity order : orders) {
+            order.setCabinetEntity(this);
+        }
         this.orders = orders;
     }
 }

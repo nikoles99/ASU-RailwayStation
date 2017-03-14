@@ -33,6 +33,9 @@ public class StationEntity extends AbstractEntity {
     }
 
     public void setSchedules(List<TrainScheduleEntity> schedules) {
+        for (TrainScheduleEntity schedule : schedules) {
+            schedule.setStationEntity(this);
+        }
         this.schedules = schedules;
     }
 

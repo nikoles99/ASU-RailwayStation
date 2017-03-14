@@ -1,7 +1,7 @@
 package api.dao.train;
 
 import api.dao.user.UserDaoImpl;
-import api.entity.StationEntity;
+import api.entity.CarriageEntity;
 import api.entity.TrainEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 /**
  * Created by nolesuk on 13-Mar-17.
@@ -26,6 +27,7 @@ public class TrainDaoImpl implements TrainDao {
 
     @Override
     public void addTrain(TrainEntity trainEntity) {
+        List<CarriageEntity> carriages = trainEntity.getCarriages();
         entityManager.persist(trainEntity);
         logger.info("Station add successfully " + trainEntity);
     }

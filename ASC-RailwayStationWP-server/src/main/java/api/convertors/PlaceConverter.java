@@ -9,14 +9,11 @@ import api.model.PlaceBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * Created by nolesuk on 13-Mar-17.
  */
 @Component
-public class PlaceConverter {
+public class PlaceConverter extends AbstractConvertor<PlaceBean, PlaceEntity>  {
 
     @Autowired
     private TrainDao trainDao;
@@ -24,6 +21,7 @@ public class PlaceConverter {
     @Autowired
     private CarriageDao carriageDao;
 
+    @Override
     public PlaceBean convertToBean(PlaceEntity entity) {
         PlaceBean bean = new PlaceBean();
         bean.setId(entity.getId());
@@ -33,6 +31,7 @@ public class PlaceConverter {
         return bean;
     }
 
+    @Override
     public PlaceEntity convertToEntity(PlaceBean bean) {
         PlaceEntity entity = new PlaceEntity();
         entity.setId(bean.getId());
@@ -44,23 +43,4 @@ public class PlaceConverter {
         return entity;
     }
 
-    public Set<PlaceEntity> convertToEntity(Set<PlaceBean> beans) {
-        Set<PlaceEntity> entities = new HashSet<PlaceEntity>();
-        if (beans != null) {
-            for (PlaceBean bean : beans) {
-                PlaceEntity entity = convertToEntity(bean);
-                entities.add(entity);
-            }
-        }
-        return entities;
-    }
-
-    public Set<PlaceBean> convertToBean(Set<PlaceEntity> entities) {
-        Set<PlaceBean> beans = new HashSet<PlaceBean>();
-        for (PlaceEntity entity : entities) {
-            PlaceBean bean = convertToBean(entity);
-            beans.add(bean);
-        }
-        return beans;
-    }
 }

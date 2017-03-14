@@ -4,7 +4,6 @@ import api.convertors.StationConverter;
 import api.dao.station.StationDao;
 import api.entity.StationEntity;
 import api.exception.StationException;
-import api.model.SimpleResponseBean;
 import api.model.StationBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,7 +31,7 @@ public class StationServiceImpl implements StationService {
     @Override
     public List<StationBean> getAllStations() {
         List<StationEntity> entities = stationDao.getAllStations();
-        List<StationBean> beans = stationConverter.convertToBean(entities);
+        List<StationBean> beans = stationConverter.convertToBeanCollection(entities);
         return beans;
     }
 

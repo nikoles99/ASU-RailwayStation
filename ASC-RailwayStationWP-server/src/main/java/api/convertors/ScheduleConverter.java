@@ -11,15 +11,12 @@ import api.model.TrainScheduleBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.HashSet;
-import java.util.Set;
-
 /**
  * Created by nolesuk on 13-Mar-17.
  */
 
 @Component
-public class ScheduleConverter {
+public class ScheduleConverter extends AbstractConvertor<TrainScheduleBean, TrainScheduleEntity> {
 
     @Autowired
     private TrainDao trainDao;
@@ -30,6 +27,7 @@ public class ScheduleConverter {
     @Autowired
     private OrderDao orderDao;
 
+    @Override
     public TrainScheduleBean convertToBean(TrainScheduleEntity entity) {
         TrainScheduleBean bean = new TrainScheduleBean();
         bean.setArrivalDate(entity.getArrivalDate());
@@ -41,6 +39,7 @@ public class ScheduleConverter {
         return bean;
     }
 
+    @Override
     public TrainScheduleEntity convertToEntity(TrainScheduleBean bean) {
         TrainScheduleEntity entity = new TrainScheduleEntity();
         entity.setArrivalDate(bean.getArrivalDate());
@@ -53,23 +52,5 @@ public class ScheduleConverter {
         OrderEntity order = orderDao.getOrder(bean.getOrderId());
         entity.setOrderEntity(order);
         return entity;
-    }
-
-    public Set<TrainScheduleEntity> convertToEntity(Set<TrainScheduleBean> beans) {
-        Set<TrainScheduleEntity> entities = new HashSet<TrainScheduleEntity>();
-        for (TrainScheduleBean bean : beans) {
-            TrainScheduleEntity entity = convertToEntity(bean);
-            entities.add(entity);
-        }
-        return entities;
-    }
-
-    public Set<TrainScheduleBean> convertToBean(Set<TrainScheduleEntity> entities) {
-        Set<TrainScheduleBean> beans = new HashSet<TrainScheduleBean>();
-        for (TrainScheduleEntity entity : entities) {
-            TrainScheduleBean bean = convertToBean(entity);
-            beans.add(bean);
-        }
-        return beans;
     }
 }

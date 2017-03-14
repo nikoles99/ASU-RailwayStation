@@ -5,7 +5,7 @@ import api.entity.UserEntity;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserConverter {
+public class UserConverter extends AbstractConvertor<UserBean, UserEntity> {
 
     public UserBean convertToBean(UserEntity userEntity) {
         UserBean userBean = new UserBean();
