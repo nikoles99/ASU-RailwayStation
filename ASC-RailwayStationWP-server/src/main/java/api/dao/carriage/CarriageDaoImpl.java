@@ -1,5 +1,6 @@
 package api.dao.carriage;
 
+import api.dao.AbstractDao;
 import api.dao.place.PlaceDaoImpl;
 import api.entity.CarriageEntity;
 import org.slf4j.Logger;
@@ -16,12 +17,9 @@ import javax.persistence.PersistenceContext;
  */
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 @Repository
-public class CarriageDaoImpl implements CarriageDao {
+public class CarriageDaoImpl extends AbstractDao<CarriageEntity> implements CarriageDao {
 
     private static final Logger logger = LoggerFactory.getLogger(PlaceDaoImpl.class);
-
-    @PersistenceContext
-    private EntityManager entityManager;
 
     @Override
     public void addCarriage(CarriageEntity carriageEntity) {
@@ -30,7 +28,7 @@ public class CarriageDaoImpl implements CarriageDao {
 
     @Override
     public CarriageEntity getCarriage(Integer id) {
-        return entityManager.find(CarriageEntity.class, id);
+        return getById(CarriageEntity.class, id);
     }
 
     @Override

@@ -1,8 +1,7 @@
 package api.dao.order;
 
-import api.dao.user.UserDaoImpl;
+import api.dao.AbstractDao;
 import api.entity.OrderEntity;
-import api.entity.PlaceEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -17,12 +16,9 @@ import javax.persistence.PersistenceContext;
  */
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 @Repository
-public class OrderDaoImpl implements OrderDao {
+public class OrderDaoImpl extends AbstractDao<OrderEntity> implements OrderDao {
 
     private static final Logger logger = LoggerFactory.getLogger(OrderDaoImpl.class);
-
-    @PersistenceContext
-    private EntityManager entityManager;
 
     @Override
     public void addOrder(OrderEntity orderEntity) {
@@ -31,10 +27,7 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public OrderEntity getOrder(Integer id) {
-        if (id != null) {
-            return entityManager.find(OrderEntity.class, id);
-        }
-        return null;
+        return getById(OrderEntity.class, id);
     }
 
     @Override

@@ -1,9 +1,9 @@
 package api.dao.station;
 
+import api.dao.AbstractDao;
 import api.dao.user.UserDaoImpl;
 import api.entity.StationEntity;
 import api.exception.StationException;
-import api.model.SimpleResponseBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -22,7 +22,7 @@ import java.util.List;
  */
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 @Repository
-public class StationDaoImpl implements StationDao {
+public class StationDaoImpl extends AbstractDao<StationEntity> implements StationDao {
 
     private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 

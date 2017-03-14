@@ -1,5 +1,6 @@
 package api.dao.user;
 
+import api.dao.AbstractDao;
 import api.entity.UserEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,17 +13,13 @@ import javax.persistence.PersistenceContext;
 
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 @Repository
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl extends AbstractDao<UserEntity> implements UserDao {
 
     private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
     @Override
     public void addUser(UserEntity userEntity) {
-        entityManager.persist(userEntity);
-        logger.info("User add successfully " + userEntity);
+        persist(userEntity);
     }
 
     @Override
