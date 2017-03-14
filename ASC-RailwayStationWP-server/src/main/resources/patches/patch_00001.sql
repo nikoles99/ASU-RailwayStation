@@ -20,7 +20,7 @@ ALTER TABLE users OWNER TO postgres;
 CREATE TABLE trains
 (
   id bigint NOT NULL,
-  "number" integer,
+  "name" character varying(255),
   CONSTRAINT trains_pkey PRIMARY KEY (id)
 )
 WITH (

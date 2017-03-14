@@ -28,6 +28,7 @@ public class TrainConverter extends AbstractConvertor<TrainBean, TrainEntity> {
     public TrainBean convertToBean(TrainEntity trainEntity) {
         TrainBean trainBean = new TrainBean();
         trainBean.setId(trainEntity.getId());
+        trainBean.setName(trainEntity.getName());
         List<CarriageEntity> carriages = trainEntity.getCarriages();
         trainBean.setCarriages(carriageConverter.convertToBeanCollection(carriages));
         List<TrainScheduleEntity> scheduleEntities = trainEntity.getScheduleEntities();
@@ -39,6 +40,7 @@ public class TrainConverter extends AbstractConvertor<TrainBean, TrainEntity> {
     public TrainEntity convertToEntity(TrainBean trainBean) {
         TrainEntity trainEntity = new TrainEntity();
         trainEntity.setId(trainBean.getId());
+        trainEntity.setName(trainBean.getName());
         List<CarriageBean> carriages = trainBean.getCarriages();
         trainEntity.setCarriages(carriageConverter.convertToEntityCollection(carriages));
         List<TrainScheduleBean> schedules = trainBean.getSchedules();

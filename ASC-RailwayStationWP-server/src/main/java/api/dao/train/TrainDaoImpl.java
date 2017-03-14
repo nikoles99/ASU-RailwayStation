@@ -1,5 +1,6 @@
 package api.dao.train;
 
+import api.dao.AbstractDao;
 import api.dao.user.UserDaoImpl;
 import api.entity.CarriageEntity;
 import api.entity.TrainEntity;
@@ -18,26 +19,18 @@ import java.util.List;
  */
 @Transactional(propagation = Propagation.REQUIRES_NEW)
 @Repository
-public class TrainDaoImpl implements TrainDao {
+public class TrainDaoImpl extends AbstractDao<TrainEntity> implements TrainDao {
 
     private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
 
-    @PersistenceContext
-    private EntityManager entityManager;
-
     @Override
     public void addTrain(TrainEntity trainEntity) {
-        List<CarriageEntity> carriages = trainEntity.getCarriages();
-        entityManager.persist(trainEntity);
-        logger.info("Station add successfully " + trainEntity);
+        persist(trainEntity);
     }
 
     @Override
     public TrainEntity getTrain(Integer id) {
-        if (id != null) {
-            return entityManager.find(TrainEntity.class, id);
-        }
-        return null;
+        return getById(TrainEntity.class, id);
     }
 
     @Override

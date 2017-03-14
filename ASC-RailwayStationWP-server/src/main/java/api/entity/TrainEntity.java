@@ -10,6 +10,9 @@ import java.util.List;
 @Table(name = "trains")
 public class TrainEntity extends AbstractEntity {
 
+    @Column(name = "name")
+    private String name;
+
     @OneToMany(mappedBy = "trainEntity", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
     List<CarriageEntity> carriages;
 
@@ -28,6 +31,14 @@ public class TrainEntity extends AbstractEntity {
             carriage.setTrainEntity(this);
         }
         this.carriages = carriages;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public List<TrainScheduleEntity> getScheduleEntities() {

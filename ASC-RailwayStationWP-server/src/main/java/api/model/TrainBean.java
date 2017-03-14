@@ -8,6 +8,8 @@ import java.util.List;
  */
 public class TrainBean extends AbstractBean {
 
+    private String name;
+
     private List<CarriageBean> carriages = new ArrayList<CarriageBean>();
 
     private List<TrainScheduleBean> schedules = new ArrayList<TrainScheduleBean>();
@@ -49,5 +51,13 @@ public class TrainBean extends AbstractBean {
         result = 31 * result + (carriages != null ? carriages.hashCode() : 0);
         result = 31 * result + (schedules != null ? schedules.hashCode() : 0);
         return result;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
