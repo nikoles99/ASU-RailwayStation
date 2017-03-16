@@ -1,7 +1,5 @@
 package api.dao;
 
-import api.entity.StationEntity;
-import api.exception.StationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,6 +39,13 @@ public class AbstractDao<T> {
         criteriaQuery.select(root);
         List<T> list = entityManager.createQuery(criteriaQuery).getResultList();
         return list;
+    }
+
+
+    public CriteriaQuery<T> getCriteriaQuery(Class<T> type) {
+        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(type);
+        return criteriaQuery;
     }
 
     public void remove(T entity) {

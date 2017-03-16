@@ -1,9 +1,8 @@
 package api.service.train;
 
-import api.entity.StationEntity;
 import api.model.TrainBean;
 
-import java.util.Date;
+import java.util.List;
 
 /**
  * Created by nolesuk on 07-Mar-17.
@@ -14,14 +13,8 @@ public interface TrainService {
 
     void addTrainRoute(TrainBean trainBean);
 
-    void getTrainByRoute(String route);
+    List<TrainBean> getTrainsByRoute(String arrivalStation, String departureStation);
 
-    void getTrainByArrivalStation(StationEntity stationEntity);
-
-    void getTrainByDepartureStation(StationEntity stationEntity);
-
-    void getTrainByArrivalDate(Date arrivalDate);
-
-    void getTrainByDepartureDate(Date departureDate);
+    List<TrainBean> getTrainsByParams(String arrivalStation, String departureStation, String arrivalDate, String departureDate);
 
 }
