@@ -14,6 +14,8 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
 import javax.persistence.metamodel.EntityType;
 import javax.persistence.metamodel.Metamodel;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -56,14 +58,24 @@ public class TrainDaoImpl extends AbstractDao<TrainEntity> implements TrainDao {
         CriteriaQuery<TrainEntity> criteriaQuery = criteriaBuilder.createQuery(TrainEntity.class);
 
         Root<TrainEntity> trainEntityRoot = criteriaQuery.from(TrainEntity.class);
-        Root<TrainScheduleEntity> scheduleEntityRoot = criteriaQuery.from(TrainScheduleEntity.class);
-        Root<StationEntity> stationEntityRoot = criteriaQuery.from(StationEntity.class);
 
-        Predicate trainShedulePridicat = criteriaBuilder.equal(scheduleEntityRoot.get("trainEntity").get("id"), trainEntityRoot.get("id"));
+        Join<TrainEntity, TrainScheduleEntity> trainScheduleJoin = trainEntityRoot.join("scheduleEntities");
+        Join<TrainScheduleEntity, StationEntity> stationEntityJoin = trainScheduleJoin.join("stationEntity");
 
+        List<Predicate> conditions = new ArrayList();
 
-        TypedQuery query = getEntityManager().createQuery(criteriaQuery);
-        return query.getResultList();
+        conditions.add(criteriaBuilder.equal(stationEntityJoin.get("name"), "Минск - Гродно"));
+        //conditions.add(criteriaBuilder.equal(stationEntityJoin.get("name"), departureDate));
+        //conditions.add(criteriaBuilder.greaterThan(trainScheduleJoin.get("arrivalDate").as(Date.class), new Date()));
+        //conditions.add(criteriaBuilder.lessThan(trainScheduleJoin.get("departureDate").as(Date.class), new Date()));
+
+        TypedQuery<TrainEntity> typedQuery = getEntityManager().createQuery(criteriaQuery
+                .select(trainEntityRoot)
+                .where(conditions.toArray(new Predicate[] {}))
+                .orderBy(criteriaBuilder.asc(trainEntityRoot.get("name")))
+                .distinct(true)
+        );
+        return typedQuery.getResultList();
     }
 
 }

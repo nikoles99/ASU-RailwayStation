@@ -78,7 +78,7 @@ public class StationDaoImpl extends AbstractDao<StationEntity> implements Statio
 
     @Override
     public StationEntity getStationById(Integer stationId) {
-        return entityManager.find(StationEntity.class, stationId);
+        return getById(StationEntity.class, stationId);
     }
 
     @Override
