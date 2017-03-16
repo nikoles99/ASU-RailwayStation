@@ -35,7 +35,10 @@ public class ScheduleConverter extends AbstractConvertor<TrainScheduleBean, Trai
         bean.setDepartureDate(entity.getDepartureDate());
         bean.setStationId(entity.getStationEntity().getId());
         bean.setTrainId(entity.getTrainEntity().getId());
-        bean.setOrderId(entity.getOrderEntity().getId());
+        OrderEntity orderEntity = entity.getOrderEntity();
+        if (orderEntity != null) {
+            bean.setOrderId(orderEntity.getId());
+        }
         return bean;
     }
 

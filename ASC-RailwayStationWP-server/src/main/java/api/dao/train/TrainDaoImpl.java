@@ -1,20 +1,12 @@
 package api.dao.train;
 
 import api.dao.AbstractDao;
-import api.dao.user.UserDaoImpl;
-import api.entity.CarriageEntity;
-import api.entity.StationEntity;
 import api.entity.TrainEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.util.Date;
-import java.util.List;
 
 /**
  * Created by nolesuk on 13-Mar-17.
