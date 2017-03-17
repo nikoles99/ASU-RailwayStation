@@ -1,5 +1,6 @@
 package api.service.train;
 
+import api.exception.TrainException;
 import api.model.TrainBean;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface TrainService {
 
     void addTrain();
 
-    void addTrainRoute(TrainBean trainBean);
+    void addTrainRoute(TrainBean trainBean) throws TrainException;
 
     List<TrainBean> getTrainsByRoute(String arrivalStation, String departureStation);
 

@@ -1,5 +1,6 @@
 package api.controllers;
 
+import api.exception.TrainException;
 import api.model.SimpleResponseBean;
 import api.model.TrainBean;
 import api.service.train.TrainService;
@@ -23,7 +24,7 @@ public class TrainController extends AbstractController {
 
     @RequestMapping(value = "/addNewRoute", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     @ResponseBody
-    SimpleResponseBean addNewRoute(@RequestBody TrainBean trainBean) {
+    SimpleResponseBean addNewRoute(@RequestBody TrainBean trainBean) throws TrainException {
         trainService.addTrainRoute(trainBean);
         return new SimpleResponseBean(MessagesConstants.SUCCESS);
     }
