@@ -70,15 +70,18 @@ public class TrainDaoImpl extends AbstractDao<TrainEntity> implements TrainDao {
         Predicate departureDateEqualsPredicate = criteriaBuilder.equal(stationEntityJoin.get("name"), departureStation);
         conditions.add(departureDateEqualsPredicate);
         Date arrivalDate = DateUtils.format(arrivalDateStr);
-        Predicate arrivalDatePredicate = criteriaBuilder.greaterThan(trainScheduleJoin.get("arrivalDate").as(Date.class), arrivalDate);
+        Predicate arrivalDatePredicate = criteriaBuilder.equal(trainScheduleJoin.get("id"), 86);
         conditions.add(arrivalDatePredicate);
         Date departureDate = DateUtils.format(departureDateStr);
-        Predicate departureDatePredicate = criteriaBuilder.lessThan(trainScheduleJoin.get("departureDate").as(Date.class), departureDate);
+        Predicate departureDatePredicate = criteriaBuilder.equal(trainScheduleJoin.get("id"), 85);
         conditions.add(departureDatePredicate);
 
         TypedQuery<TrainEntity> typedQuery = getEntityManager().createQuery(criteriaQuery
                 .select(trainEntityRoot)
                 .where(conditions.get(0))
+                .where(conditions.get(1))
+                .where(conditions.get(2))
+                .where(conditions.get(3))
                 .orderBy(criteriaBuilder.asc(trainEntityRoot.get("name")))
                 .distinct(true)
         );

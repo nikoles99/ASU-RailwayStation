@@ -9,7 +9,7 @@ import java.util.Date;
  */
 public class DateUtils {
 
-    private static final String MASK = "dd-MM-yyyy HH:mm:ss";
+    private static final String MASK = "yyyy-MM-dd HH:mm:ss";
 
     public static Date format(String date) {
         try {
