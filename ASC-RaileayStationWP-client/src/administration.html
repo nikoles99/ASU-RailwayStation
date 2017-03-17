@@ -128,8 +128,8 @@
                     <p>Название</p>
                 </td>
                 <td>
-                    <input type="text" id="nameSearch" size="200"
-                           placeholder="Маршрут, Номер поезда, Станция отправления, Станция прибытия, Время отправления, Время прибытия"
+                    <input type="text" id="nameSearch" size="30"
+                           placeholder="Маршрут"
                            pattern=".{5,19}" required title="Either 0 OR (5 to 19 chars)"/>
                 </td>
                 <td>
@@ -137,10 +137,19 @@
                 </td>
             </tr>
         </table>
+        <table id="trains" cellspacing="1" border="1" cellpadding="5" width="600">
+            <tr>
+                <td>Номер поезда</td>
+                <td>Маршрут</td>
+                <td>Время отправления</td>
+                <td>Вермя прибытия</td>
+            </tr>
+        </table>
 
     </fieldset>
 </div>
 <datalist id="stationsDataList"/>
 <script src="script/administration.js"></script>
+<script src="script/train.js"></script>
 </body>
 </html>

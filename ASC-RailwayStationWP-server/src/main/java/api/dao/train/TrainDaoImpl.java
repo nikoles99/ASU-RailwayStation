@@ -4,7 +4,6 @@ import api.dao.AbstractDao;
 import api.entity.StationEntity;
 import api.entity.TrainEntity;
 import api.entity.TrainScheduleEntity;
-import api.utils.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -13,9 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.*;
-import javax.persistence.metamodel.EntityType;
-import javax.persistence.metamodel.Metamodel;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

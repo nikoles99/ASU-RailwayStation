@@ -55,6 +55,52 @@ $("#stations").on("click", ".removeStationFromRoute", function () {
     $(this).closest('tr').remove();
     $("#addStationToRoute").prop('disabled', false);
 });
+$("#nameSearch").on("change paste keyup", function () {
+    var length = $("#nameSearch").val().length;
+    var isDisables = length >= 0 ? false : true;
+    $("#search").prop('disabled', isDisables);
+});
+
+$("#search").click(function () {
+    var station = $("#nameSearch").val();
+    var split = station.split("-");
+    if (split.length != 2) {
+        alert("Не верно введен маршрут, Пример ввода: Минск-Гродно");
+        return;
+    }
+    getTrainsByStationName(split[0], split[1]);
+});
+
+function getTrainsByStationName(departureStation, arrivalStation) {
+    var url = "http://localhost:8080/getTrainsByRoute";
+    var ajax = $.ajax({
+        url: url,
+        method: 'POST',
+        dataType: 'json',
+        data: {departureStation: departureStation, arrivalStation: arrivalStation},
+        success: function (data) {
+            fillTrains(data);
+        },
+        error: function (xhr) {
+            errorLogging(xhr);
+        }
+    });
+    return ajax;
+}
+
+function fillTrains(data) {
+    $.each(data, (function (index, train) {
+        var arrivalDate = train.schedules[0].arrivalDate;
+        var departureDate = train.schedules[train.schedules.length - 1].arrivalDate;
+        var newStation = "<tr>" +
+            "<td>" + train.id + "</td>" +
+            "<td>" + train.name + "</td>" +
+            "<td>" + dateToString(new Date(departureDate)) + "</td>" +
+            "<td>" + new Date(arrivalDate) + "</td>"
+        "</tr>";
+        $("#trains tr:last").after(newStation);
+    }));
+}
 
 $("#stations").on("change", ".station", function () {
     var station = $(this).val();
