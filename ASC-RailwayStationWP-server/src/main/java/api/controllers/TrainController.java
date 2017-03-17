@@ -33,7 +33,7 @@ public class TrainController extends AbstractController {
         return trainService.getTrainsByRoute(arrivalStation, departureStation);
     }
 
-    @RequestMapping(value = "/getTrainsByParams", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @RequestMapping(value = "/getTrainsByParams", method = RequestMethod.POST)
     List<TrainBean> getTrainsByParams(@RequestParam("arrivalStation") String arrivalStation, @RequestParam("departureStation") String departureStation,
                                       @RequestParam("arrivalDate") String arrivalDate, @RequestParam("departureDate") String departureDate) {
         return trainService.getTrainsByParams(arrivalStation, departureStation, arrivalDate, departureDate);

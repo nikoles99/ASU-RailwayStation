@@ -54,7 +54,7 @@ public class TrainServiceImpl implements TrainService {
     @Override
     public List<TrainBean> getTrainsByParams(String arrivalStation, String departureStation, String arrivalDate, String departureDate) {
         if (ValidationUtils.isNotNull(arrivalStation, departureStation, arrivalDate, departureDate)) {
-            List<TrainEntity> trainsEntities = trainDao.getTrainsByParams(arrivalStation, departureDate, arrivalDate, departureDate);
+            List<TrainEntity> trainsEntities = trainDao.getTrainsByParams(arrivalStation, departureStation, arrivalDate, departureDate);
             return trainConverter.convertToBeanCollection(trainsEntities);
         }
         return null;

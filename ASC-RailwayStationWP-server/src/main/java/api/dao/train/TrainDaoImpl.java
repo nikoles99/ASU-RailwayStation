@@ -4,6 +4,7 @@ import api.dao.AbstractDao;
 import api.entity.StationEntity;
 import api.entity.TrainEntity;
 import api.entity.TrainScheduleEntity;
+import api.utils.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -53,7 +54,7 @@ public class TrainDaoImpl extends AbstractDao<TrainEntity> implements TrainDao {
     }
 
     @Override
-    public List<TrainEntity> getTrainsByParams(String arrivalStation, String departureDate, String arrivalDate, String departureDate1) {
+    public List<TrainEntity> getTrainsByParams(String arrivalStation, String departureStation, String arrivalDateStr, String departureDateStr) {
         CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
         CriteriaQuery<TrainEntity> criteriaQuery = criteriaBuilder.createQuery(TrainEntity.class);
 
@@ -62,16 +63,22 @@ public class TrainDaoImpl extends AbstractDao<TrainEntity> implements TrainDao {
         Join<TrainEntity, TrainScheduleEntity> trainScheduleJoin = trainEntityRoot.join("scheduleEntities");
         Join<TrainScheduleEntity, StationEntity> stationEntityJoin = trainScheduleJoin.join("stationEntity");
 
-        List<Predicate> conditions = new ArrayList();
+        List<Predicate> conditions = new ArrayList<Predicate>();
 
-        conditions.add(criteriaBuilder.equal(stationEntityJoin.get("name"), "Минск - Гродно"));
-        //conditions.add(criteriaBuilder.equal(stationEntityJoin.get("name"), departureDate));
-        //conditions.add(criteriaBuilder.greaterThan(trainScheduleJoin.get("arrivalDate").as(Date.class), new Date()));
-        //conditions.add(criteriaBuilder.lessThan(trainScheduleJoin.get("departureDate").as(Date.class), new Date()));
+        Predicate arrivalStationEqualsPredicate = criteriaBuilder.equal(stationEntityJoin.get("name"), arrivalStation);
+        conditions.add(arrivalStationEqualsPredicate);
+        Predicate departureDateEqualsPredicate = criteriaBuilder.equal(stationEntityJoin.get("name"), departureStation);
+        conditions.add(departureDateEqualsPredicate);
+        Date arrivalDate = DateUtils.format(arrivalDateStr);
+        Predicate arrivalDatePredicate = criteriaBuilder.greaterThan(trainScheduleJoin.get("arrivalDate").as(Date.class), arrivalDate);
+        conditions.add(arrivalDatePredicate);
+        Date departureDate = DateUtils.format(departureDateStr);
+        Predicate departureDatePredicate = criteriaBuilder.lessThan(trainScheduleJoin.get("departureDate").as(Date.class), departureDate);
+        conditions.add(departureDatePredicate);
 
         TypedQuery<TrainEntity> typedQuery = getEntityManager().createQuery(criteriaQuery
                 .select(trainEntityRoot)
-                .where(conditions.toArray(new Predicate[] {}))
+                .where(conditions.get(0))
                 .orderBy(criteriaBuilder.asc(trainEntityRoot.get("name")))
                 .distinct(true)
         );

@@ -6,4 +6,6 @@ package api.utils;
 public class MessagesConstants {
 
     public static final String SUCCESS = "success";
+
+    public static final String UTF_8 = "UTF-8";
 }
