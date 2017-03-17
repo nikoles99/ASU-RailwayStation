@@ -28,7 +28,7 @@ public class TrainController extends AbstractController {
         return new SimpleResponseBean(MessagesConstants.SUCCESS);
     }
 
-    @RequestMapping(value = "/getTrainsByRoute", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @RequestMapping(value = "/getTrainsByRoute", method = RequestMethod.POST)
     List<TrainBean> getTrainsByRoute(@RequestParam("arrivalStation") String arrivalStation, @RequestParam("departureStation") String departureStation) {
         return trainService.getTrainsByRoute(arrivalStation, departureStation);
     }

@@ -6,11 +6,13 @@ import api.dao.station.StationDao;
 import api.dao.train.TrainDao;
 import api.entity.TrainEntity;
 import api.model.TrainBean;
+import api.utils.DateUtils;
 import api.utils.ValidationUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,8 +54,10 @@ public class TrainServiceImpl implements TrainService {
     }
 
     @Override
-    public List<TrainBean> getTrainsByParams(String arrivalStation, String departureStation, String arrivalDate, String departureDate) {
-        if (ValidationUtils.isNotNull(arrivalStation, departureStation, arrivalDate, departureDate)) {
+    public List<TrainBean> getTrainsByParams(String arrivalStation, String departureStation, String arrivalDateStr, String departureDateStr) {
+        if (ValidationUtils.isNotNull(arrivalStation, departureStation, arrivalDateStr, departureDateStr)) {
+            Date arrivalDate = DateUtils.format(arrivalDateStr);
+            Date departureDate = DateUtils.format(departureDateStr);
             List<TrainEntity> trainsEntities = trainDao.getTrainsByParams(arrivalStation, departureStation, arrivalDate, departureDate);
             return trainConverter.convertToBeanCollection(trainsEntities);
         }

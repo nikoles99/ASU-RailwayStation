@@ -2,6 +2,7 @@ package api.dao.train;
 
 import api.entity.TrainEntity;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public interface TrainDao {
 
     List<TrainEntity> getTrainByRoute(String arrivalStation, String departureStation);
 
-    List<TrainEntity> getTrainsByParams(String arrivalStation, String departureDate, String arrivalDate, String departureDate1);
+    List<TrainEntity> getTrainsByParams(String arrivalStation, String departureDate, Date arrivalDate, Date departureDate1);
 
 }
 

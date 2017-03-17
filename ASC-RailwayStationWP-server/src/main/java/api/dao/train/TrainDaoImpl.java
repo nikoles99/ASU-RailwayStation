@@ -50,11 +50,6 @@ public class TrainDaoImpl extends AbstractDao<TrainEntity> implements TrainDao {
 
     @Override
     public List<TrainEntity> getTrainByRoute(String arrivalStation, String departureStation) {
-        return null;
-    }
-
-    @Override
-    public List<TrainEntity> getTrainsByParams(String arrivalStation, String departureStation, String arrivalDateStr, String departureDateStr) {
         CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
         CriteriaQuery<TrainEntity> criteriaQuery = criteriaBuilder.createQuery(TrainEntity.class);
 
@@ -63,8 +58,27 @@ public class TrainDaoImpl extends AbstractDao<TrainEntity> implements TrainDao {
         Join<TrainEntity, TrainScheduleEntity> trainScheduleJoin = trainEntityRoot.join("scheduleEntities");
         Join<TrainScheduleEntity, StationEntity> stationEntityJoin = trainScheduleJoin.join("stationEntity");
 
-        Date arrivalDate = DateUtils.format(arrivalDateStr);
-        Date departureDate = DateUtils.format(departureDateStr);
+        Predicate arrivalStationEquals = criteriaBuilder.equal(stationEntityJoin.get("name"), arrivalStation);
+        Predicate departureDateEqualsPredicate = criteriaBuilder.equal(stationEntityJoin.get("name"), departureStation);
+
+        Predicate result = criteriaBuilder.or(arrivalStationEquals, departureDateEqualsPredicate);
+        TypedQuery<TrainEntity> typedQuery = getEntityManager().createQuery(criteriaQuery
+                .select(trainEntityRoot)
+                .where(result)
+                .distinct(true)
+        );
+        return typedQuery.getResultList();
+    }
+
+    @Override
+    public List<TrainEntity> getTrainsByParams(String arrivalStation, String departureStation, Date arrivalDate, Date departureDate) {
+        CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<TrainEntity> criteriaQuery = criteriaBuilder.createQuery(TrainEntity.class);
+
+        Root<TrainEntity> trainEntityRoot = criteriaQuery.from(TrainEntity.class);
+
+        Join<TrainEntity, TrainScheduleEntity> trainScheduleJoin = trainEntityRoot.join("scheduleEntities");
+        Join<TrainScheduleEntity, StationEntity> stationEntityJoin = trainScheduleJoin.join("stationEntity");
 
         Predicate arrivalStationEquals = criteriaBuilder.equal(stationEntityJoin.get("name"), arrivalStation);
         Predicate departureDateEqualsPredicate = criteriaBuilder.equal(stationEntityJoin.get("name"), departureStation);
