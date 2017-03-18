@@ -82,6 +82,7 @@ $("#nameSearch").on("change paste keyup", function () {
     $("#search").prop('disabled', isDisables);
 });
 
+
 $("#search").click(function () {
     var station = $("#nameSearch").val();
     var split = station.split("-");
@@ -99,6 +100,7 @@ $("#save").click(function () {
     addNewTrain(train)
 });
 
+
 $("#nameStation").on("change paste keyup", function () {
     var length = $("#nameStation").val().length;
     var isDisables = length >= 4 && length < 20 ? false : true;
@@ -106,6 +108,7 @@ $("#nameStation").on("change paste keyup", function () {
     $("#deleteStation").prop('disabled', isDisables);
     $("#updateStation").prop('disabled', isDisables);
 });
+
 
 $("#addStationToRoute").click(function () {
     if ($('#stations tr').length > 10) {
