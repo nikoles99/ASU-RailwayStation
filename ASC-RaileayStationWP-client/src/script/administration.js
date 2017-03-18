@@ -21,24 +21,7 @@ function refreshTrain() {
 }
 
 $("#save").click(function () {
-    if (train != null) {
-        var url = "http://localhost:8080/addNewRoute";
-        console.log(JSON.stringify(train));
-        $.ajax({
-            url: url,
-            method: 'POST',
-            dataType: 'json',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(train),
-            success: function (data) {
-                $("#nameStation").val('');
-                getStationsFromServer();
-            },
-            error: function (xhr) {
-                errorLogging(xhr);
-            }
-        });
-    }
+    addNewTrain(train)
 });
 
 $("document").ready(function () {
@@ -68,28 +51,13 @@ $("#search").click(function () {
         alert("Не верно введен маршрут, Пример ввода: Минск-Гродно");
         return;
     }
-    getTrainsByStationName(split[0], split[1]);
+    getTrainsByStationName(split[0], split[1], function (data) {
+        fillTrains(data);
+    });
 });
 
-function getTrainsByStationName(departureStation, arrivalStation) {
-    var url = "http://localhost:8080/getTrainsByRoute";
-    var ajax = $.ajax({
-        url: url,
-        method: 'POST',
-        dataType: 'json',
-        data: {departureStation: departureStation, arrivalStation: arrivalStation},
-        success: function (data) {
-            fillTrains(data);
-        },
-        error: function (xhr) {
-            errorLogging(xhr);
-        }
-    });
-    return ajax;
-}
-
 function fillTrains(data) {
-   $("#trains tr").remove();
+    $("#trains tr").remove();
     var trainsHeader = "<tr>" +
         "<td>Номер поезда</td>" +
         "<td>Маршрут</td> " +
@@ -163,7 +131,7 @@ function correctDate(number) {
 
 function validateRoute() {
     var departureDateText = $("#departureDate").val();
-    var departureDate = new Date(departureDateText+"+03:00");
+    var departureDate = new Date(departureDateText + "+03:00");
     if (departureDateText == "" || departureDate < new Date($.now())) {
         alert("проверьте правильность ввода даты отправления");
         return false;
@@ -297,66 +265,27 @@ $("#nameStation").on("change paste keyup", function () {
 
 $("#addStation").click(function () {
     var url = "http://localhost:8080/addStation";
-    $.ajax({
-        url: url,
-        type: 'POST',
-        dataType: 'jsonp',
-        data: {name: $("#nameStation").val()},
-        success: function (data) {
-            $("#nameStation").val('');
-            getStationsFromServer();
-        },
-        error: function (xhr) {
-            errorLogging(xhr);
-        }
+    addStation($("#nameStation").val(), function (data) {
+        $("#nameStation").val('');
+        getStationsFromServer();
     });
 });
 
-function errorLogging(xhr) {
-    var text = xhr.code;
-    console.log("readyState: " + xhr.readyState);
-    console.log("responseText: " + xhr.responseText);
-    console.log("status: " + xhr.status);
-    console.log("text status: " + textStatus);
-    console.log("error: " + err);
-}
-
-
 $("#deleteStation").click(function () {
-    var url = "http://localhost:8080/deleteStation";
-    $.ajax({
-        url: url,
-        type: 'POST',
-        dataType: 'jsonp',
-        data: {name: $("#nameStation").val()},
-        success: function (data) {
-            $("#nameStation").val('');
-            getStationsFromServer();
-        },
-        error: function (xhr) {
-            errorLogging(xhr);
-        }
-    });
+    deleteStation($("#nameStation").val(), function () {
+        $("#nameStation").val('');
+        getStationsFromServer();
+    })
 });
 
 function getStationsFromServer() {
-    var url = "http://localhost:8080/getAllStations";
-    $.ajax({
-        url: url,
-        type: 'POST',
-        dataType: 'jsonp',
-        success: function (data) {
-            $("#stationsDataList").empty();
-            for (var i in data) {
-                $("<option/>").html(data[i].name).appendTo("#stationsDataList");
-                $("<span/>").html(data[i].id).appendTo("#stationsDataList");
-            }
-        },
-        error: function (xhr) {
-            errorLogging(xhr);
+    getStations(function (data) {
+        $("#stationsDataList").empty();
+        for (var i in data) {
+            $("<option/>").html(data[i].name).appendTo("#stationsDataList");
+            $("<span/>").html(data[i].id).appendTo("#stationsDataList");
         }
     });
-
 }
 
 function getStationId(name) {

@@ -4,6 +4,7 @@ import api.dao.AbstractDao;
 import api.entity.StationEntity;
 import api.entity.TrainEntity;
 import api.entity.TrainScheduleEntity;
+import api.utils.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -23,6 +24,7 @@ import java.util.List;
 public class TrainDaoImpl extends AbstractDao<TrainEntity> implements TrainDao {
 
     private static final Logger logger = LoggerFactory.getLogger(TrainDaoImpl.class);
+    private static final int TWO_WEEKS = 14;
 
     @Override
     public void addTrain(TrainEntity trainEntity) {
@@ -46,24 +48,9 @@ public class TrainDaoImpl extends AbstractDao<TrainEntity> implements TrainDao {
 
     @Override
     public List<TrainEntity> getTrainByRoute(String arrivalStation, String departureStation) {
-        CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
-        CriteriaQuery<TrainEntity> criteriaQuery = criteriaBuilder.createQuery(TrainEntity.class);
-
-        Root<TrainEntity> trainEntityRoot = criteriaQuery.from(TrainEntity.class);
-
-        Join<TrainEntity, TrainScheduleEntity> trainScheduleJoin = trainEntityRoot.join("scheduleEntities");
-        Join<TrainScheduleEntity, StationEntity> stationEntityJoin = trainScheduleJoin.join("stationEntity");
-
-        Predicate arrivalStationEquals = criteriaBuilder.equal(stationEntityJoin.get("name"), arrivalStation);
-        Predicate departureDateEqualsPredicate = criteriaBuilder.equal(stationEntityJoin.get("name"), departureStation);
-
-        Predicate result = criteriaBuilder.or(arrivalStationEquals, departureDateEqualsPredicate);
-        TypedQuery<TrainEntity> typedQuery = getEntityManager().createQuery(criteriaQuery
-                .select(trainEntityRoot)
-                .where(result)
-                .distinct(true)
-        );
-        return typedQuery.getResultList();
+        Date departureDate = new Date();
+        Date arrivalDate = DateUtils.addDays(departureDate, TWO_WEEKS);
+        return getTrainsByParams(arrivalStation, departureStation, arrivalDate, departureDate);
     }
 
     @Override
