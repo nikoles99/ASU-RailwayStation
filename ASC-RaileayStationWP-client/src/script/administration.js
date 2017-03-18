@@ -89,6 +89,14 @@ function getTrainsByStationName(departureStation, arrivalStation) {
 }
 
 function fillTrains(data) {
+   $("#trains tr").remove();
+    var trainsHeader = "<tr>" +
+        "<td>Номер поезда</td>" +
+        "<td>Маршрут</td> " +
+        "<td>Время отправления</td>" +
+        "<td>Вермя прибытия</td>" +
+        "</tr>"
+    $("#trains").append(trainsHeader);
     $.each(data, (function (index, train) {
         var arrivalDate = train.schedules[0].arrivalDate;
         var departureDate = train.schedules[train.schedules.length - 1].arrivalDate;
@@ -96,10 +104,11 @@ function fillTrains(data) {
             "<td>" + train.id + "</td>" +
             "<td>" + train.name + "</td>" +
             "<td>" + dateToString(new Date(departureDate)) + "</td>" +
-            "<td>" + new Date(arrivalDate) + "</td>"
+            "<td>" + dateToString(new Date(arrivalDate)) + "</td>"
         "</tr>";
         $("#trains tr:last").after(newStation);
     }));
+    $("#trains").css("visibility", "visible");
 }
 
 $("#stations").on("change", ".station", function () {
@@ -154,7 +163,7 @@ function correctDate(number) {
 
 function validateRoute() {
     var departureDateText = $("#departureDate").val();
-    var departureDate = new Date(departureDateText);
+    var departureDate = new Date(departureDateText+"+03:00");
     if (departureDateText == "" || departureDate < new Date($.now())) {
         alert("проверьте правильность ввода даты отправления");
         return false;
@@ -177,9 +186,10 @@ function validateRoute() {
 
         var arrivalDate = new Date(departureDate);
         arrivalDate.setMinutes(arrivalDate.getMinutes() - 10);
+
         if (isStationValidate) {
             var stationId = getStationId(station);
-            stationsArray.push({stationId: stationId, arrivalDate: arrivalDate, departureDate: departureDate});
+            stationsArray.push({stationId: stationId, arrivalDate: arrivalDate, departureDate: new Date(departureDate)});
         }
         else {
             return !isStationValidate;
@@ -195,6 +205,7 @@ function validateRoute() {
             departureDate.setMinutes(departureDate.getMinutes() + minutes);
             departureDate.setHours(departureDate.getHours() + hours);
         }
+
     });
     train.schedules = stationsArray;
     return true;
