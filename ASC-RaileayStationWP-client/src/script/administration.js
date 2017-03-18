@@ -12,35 +12,73 @@ var carriageNumber = 0;
 
 var train;
 
-function refreshTrain() {
-    train = {
-        name: "",
-        carriages: [],
-        schedules: []
-    }
-}
-
-$("#save").click(function () {
-    addNewTrain(train)
-});
 
 $("document").ready(function () {
     getStationsFromServer();
-    var date = new Date($.now());
-    date.setDate(date.getDate() + 1);
-    var departureDate = dateToString(date);
-    $("#departureDate").val(departureDate);
-
+    setDepartureDate();
 });
 
+
+$("#stations").on("change", ".station", function () {
+    var station = $(this).val();
+    var isFindDuplicate = false;
+
+    $("#stations .station").each(function () {
+        if (this.value == station) {
+            if (isFindDuplicate) {
+                $(this).val("");
+                alert("Станции в маршруте не должны совпадать");
+                return;
+            }
+            isFindDuplicate = true;
+        }
+    });
+});
+
+
+$("#addStation").click(function () {
+    addStation($("#nameStation").val(), function (data) {
+        $("#nameStation").val('');
+        getStationsFromServer();
+    });
+});
+
+
+$("#deleteStation").click(function () {
+    deleteStation($("#nameStation").val(), function () {
+        $("#nameStation").val('');
+        getStationsFromServer();
+    })
+});
+
+
+$("#buildRoute").click(function () {
+    refreshTrain();
+    var isRouteValidated = validateRoute();
+    var isCarriagesValidate = validateCarriages();
+
+    var isValidationComplete = isRouteValidated && isCarriagesValidate;
+    var lastIndex = parseInt(train.schedules.length - 1);
+    var route = $("#stations tr:eq(0) td:eq(1)").find("input").val() + " - " + $("#stations tr:eq(" + lastIndex + ") td:eq(1)").find("input").val();
+    if (isValidationComplete) {
+        train.name = route;
+        $("#trainRoute").val(route);
+        var arrivalDate = train.schedules[train.schedules.length - 1].arrivalDate;
+        var date = dateToString(arrivalDate);
+        $("#arrivalDate").val(date);
+    }
+    $("#save").prop('disabled', !isValidationComplete);
+});
 
 $("#stations").on("click", ".removeStationFromRoute", function () {
     $(this).closest('tr').remove();
     $("#addStationToRoute").prop('disabled', false);
 });
+
+
 $("#nameSearch").on("change paste keyup", function () {
     var length = $("#nameSearch").val().length;
-    var isDisables = length >= 0 ? false : true;
+    var isDisables = length < 0;
     $("#search").prop('disabled', isDisables);
 });
 
@@ -55,6 +93,34 @@ $("#search").click(function () {
         fillTrains(data);
     });
 });
+
+
+$("#save").click(function () {
+    addNewTrain(train)
+});
+
+$("#nameStation").on("change paste keyup", function () {
+    var length = $("#nameStation").val().length;
+    var isDisables = length >= 4 && length < 20 ? false : true;
+    $("#addStation").prop('disabled', isDisables);
+    $("#deleteStation").prop('disabled', isDisables);
+    $("#updateStation").prop('disabled', isDisables);
+});
+
+$("#addStationToRoute").click(function () {
+    if ($('#stations tr').length > 10) {
+        $("#addStationToRoute").prop('disabled', true);
+    } else {
+        var newStation = "<tr>" +
+            "<td>Станция</td>" +
+            "<td><input type=\"text\" class=\"station\" list=\"stationsDataList\"/></td>" +
+            "<td>Расстояние до следующей станции(км)</td>" +
+            "<td><input type=\"number\" class=\"distance\" min=\"1\" max =\"200\"></td>" +
+            "<td><input class=\"removeStationFromRoute\" type=\"button\" value=\"-\"></td></tr>";
+        $("#stations tr:last").after(newStation);
+    }
+});
+
 
 function fillTrains(data) {
     $("#trains tr").remove();
@@ -79,39 +145,6 @@ function fillTrains(data) {
     $("#trains").css("visibility", "visible");
 }
 
-$("#stations").on("change", ".station", function () {
-    var station = $(this).val();
-    var isFindDuplicate = false;
-
-    $("#stations .station").each(function () {
-        if (this.value == station) {
-            if (isFindDuplicate) {
-                $(this).val("");
-                alert("Станции в маршруте не должны совпадать");
-                return;
-            }
-            isFindDuplicate = true;
-        }
-    });
-});
-
-$("#buildRoute").click(function () {
-    refreshTrain();
-    var isRouteValidated = validateRoute();
-    var isCarriagesValidate = validateCarriages();
-
-    var isValidationComplete = isRouteValidated && isCarriagesValidate;
-    var lastIndex = parseInt(train.schedules.length - 1);
-    var route = $("#stations tr:eq(0) td:eq(1)").find("input").val() + " - " + $("#stations tr:eq(" + lastIndex + ") td:eq(1)").find("input").val();
-    if (isValidationComplete) {
-        train.name = route;
-        $("#trainRoute").val(route);
-        var arrivalDate = train.schedules[train.schedules.length - 1].arrivalDate;
-        var date = dateToString(arrivalDate);
-        $("#arrivalDate").val(date);
-    }
-    $("#save").prop('disabled', !isValidationComplete);
-});
 
 function dateToString(date) {
     var day = correctDate(date.getDate());
@@ -122,12 +155,14 @@ function dateToString(date) {
     return year + "-" + month + "-" + day + "T" + hours + ":" + minutes;
 }
 
+
 function correctDate(number) {
     if (number < 10 && number >= 0) {
         number = "0" + number;
     }
     return number;
 }
+
 
 function validateRoute() {
     var departureDateText = $("#departureDate").val();
@@ -234,50 +269,6 @@ function addCarriage(type, countCarriages) {
 }
 
 
-$("#addStationToRoute").click(function () {
-    if ($('#stations tr').length > 10) {
-        $("#addStationToRoute").prop('disabled', true);
-    } else {
-        var newStation = "<tr>" +
-            "<td>Станция</td>" +
-            "<td><input type=\"text\" class=\"station\" list=\"stationsDataList\"/></td>" +
-            "<td>Расстояние до следующей станции(км)</td>" +
-            "<td><input type=\"number\" class=\"distance\" min=\"1\" max =\"200\"></td>" +
-            "<td><input class=\"removeStationFromRoute\" type=\"button\" value=\"-\"></td></tr>";
-        $("#stations tr:last").after(newStation);
-    }
-});
-
-
-function setDisableRouteDiv(isDisable) {
-    $("#route:not(:last-child) :input").prop('disabled', isDisable);
-}
-
-
-$("#nameStation").on("change paste keyup", function () {
-    var length = $("#nameStation").val().length;
-    var isDisables = length >= 4 && length < 20 ? false : true;
-    $("#addStation").prop('disabled', isDisables);
-    $("#deleteStation").prop('disabled', isDisables);
-    $("#updateStation").prop('disabled', isDisables);
-});
-
-
-$("#addStation").click(function () {
-    var url = "http://localhost:8080/addStation";
-    addStation($("#nameStation").val(), function (data) {
-        $("#nameStation").val('');
-        getStationsFromServer();
-    });
-});
-
-$("#deleteStation").click(function () {
-    deleteStation($("#nameStation").val(), function () {
-        $("#nameStation").val('');
-        getStationsFromServer();
-    })
-});
-
 function getStationsFromServer() {
     getStations(function (data) {
         $("#stationsDataList").empty();
@@ -288,6 +279,7 @@ function getStationsFromServer() {
     });
 }
 
+
 function getStationId(name) {
     var stationId = 0;
     $("#stationsDataList option").each(function () {
@@ -297,4 +289,21 @@ function getStationId(name) {
         }
     });
     return stationId;
+}
+
+
+function refreshTrain() {
+    train = {
+        name: "",
+        carriages: [],
+        schedules: []
+    }
+}
+
+
+function setDepartureDate() {
+    var date = new Date($.now());
+    date.setDate(date.getDate() + 1);
+    var departureDate = dateToString(date);
+    $("#departureDate").val(departureDate);
 }
