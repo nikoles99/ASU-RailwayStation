@@ -1,6 +1,7 @@
 package api.entity;
 
 import javax.persistence.*;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -49,6 +50,7 @@ public class TrainEntity extends AbstractEntity {
         for (TrainScheduleEntity scheduleEntity : scheduleEntities) {
             scheduleEntity.setTrainEntity(this);
         }
+        Collections.sort(scheduleEntities);
         this.scheduleEntities = scheduleEntities;
     }
 }

@@ -1,6 +1,5 @@
 package api.model;
 
-import api.entity.TrainScheduleEntity;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;

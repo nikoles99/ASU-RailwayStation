@@ -2,6 +2,7 @@ package api.model;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -34,6 +35,7 @@ public class TrainBean extends AbstractBean {
     }
 
     public void setSchedules(List<TrainScheduleBean> schedules) {
+        Collections.sort(schedules);
         this.schedules = schedules;
     }
 

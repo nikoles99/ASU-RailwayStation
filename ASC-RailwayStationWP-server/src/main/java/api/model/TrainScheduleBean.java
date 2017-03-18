@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by nolesuk on 07-Mar-17.
  */
-public class TrainScheduleBean extends AbstractBean {
+public class TrainScheduleBean extends AbstractBean implements Comparable<TrainScheduleBean> {
 
     private Integer trainId;
 
@@ -83,5 +83,10 @@ public class TrainScheduleBean extends AbstractBean {
 
     public void setOrderId(Integer orderId) {
         this.orderId = orderId;
+    }
+
+    @Override
+    public int compareTo(TrainScheduleBean o) {
+        return o.getArrivalDate().compareTo(this.getArrivalDate());
     }
 }

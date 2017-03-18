@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "train_schedules")
-public class TrainScheduleEntity extends AbstractEntity {
+public class TrainScheduleEntity extends AbstractEntity implements Comparable<TrainScheduleEntity> {
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "train_id")
@@ -96,5 +96,10 @@ public class TrainScheduleEntity extends AbstractEntity {
         result = 31 * result + (departureDate != null ? departureDate.hashCode() : 0);
         result = 31 * result + (orderEntity != null ? orderEntity.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public int compareTo(TrainScheduleEntity o) {
+        return o.getArrivalDate().compareTo(this.getArrivalDate());
     }
 }
