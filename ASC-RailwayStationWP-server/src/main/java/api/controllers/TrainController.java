@@ -24,9 +24,8 @@ public class TrainController extends AbstractController {
 
     @RequestMapping(value = "/addNewRoute", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     @ResponseBody
-    SimpleResponseBean addNewRoute(@RequestBody TrainBean trainBean) throws TrainException {
+    void addNewRoute(@RequestBody TrainBean trainBean) throws TrainException {
         trainService.addTrainRoute(trainBean);
-        return new SimpleResponseBean(MessagesConstants.SUCCESS);
     }
 
     @RequestMapping(value = "/getTrainsByRoute", method = RequestMethod.POST)

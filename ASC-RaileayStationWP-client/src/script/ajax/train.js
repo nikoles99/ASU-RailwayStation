@@ -23,6 +23,7 @@ function addNewTrain(train) {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(train),
             error: function (xhr) {
+                alert(xhr.responseText);
                 errorLogging(xhr);
             }
         });

@@ -10,6 +10,8 @@ import api.exception.TrainException;
 import api.model.TrainBean;
 import api.utils.DateUtils;
 import api.utils.ValidationUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +23,8 @@ import java.util.List;
  */
 @Service
 public class TrainServiceImpl implements TrainService {
+
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private TrainDao trainDao;
@@ -71,7 +75,8 @@ public class TrainServiceImpl implements TrainService {
             for (TrainScheduleEntity schedule : schedules) {
                 Boolean isScheduleValidate = trainScheduleDao.isScheduleValidate(schedule);
                 if (!isScheduleValidate) {
-                    throw new TrainException("Schedule station arrival/departure time" + schedule.getStationEntity().toString() + "is invalid");
+                    LOGGER.error("Schedule station arrival/departure time" + schedule.getStationEntity().toString() + "is invalid");
+                    throw new TrainException("Такой маршрут уже существует");
                 }
             }
         }

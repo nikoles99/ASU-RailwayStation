@@ -22,23 +22,13 @@ import java.util.List;
 @EnableAutoConfiguration
 public class StationController extends AbstractController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(StationController.class);
-
     @Autowired
     private StationService stationService;
 
     @RequestMapping(value = "/addStation", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    SimpleResponseBean addStaion(StationBean stationBean) {
-        try {
-            stationService.addStation(stationBean);
-            return new SimpleResponseBean("success");
-        } catch (StationException e) {
-            e.printStackTrace();
-            String message = e.getMessage();
-            LOGGER.error(message);
-            return new SimpleResponseBean(message);
-        }
+    void addStaion(StationBean stationBean) throws StationException {
+        stationService.addStation(stationBean);
     }
 
     @RequestMapping(value = "/deleteStation", produces = MediaType.APPLICATION_JSON_VALUE)
