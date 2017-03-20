@@ -118,7 +118,7 @@ $("#addStationToRoute").click(function () {
             "<td>Станция</td>" +
             "<td><input type=\"text\" class=\"station\" list=\"stationsDataList\"/></td>" +
             "<td>Расстояние до следующей станции(км)</td>" +
-            "<td><input type=\"number\" class=\"distance\" min=\"1\" max =\"200\"></td>" +
+            "<td><input type=\"number\" class=\"distance\" min=\"20\" max =\"200\"></td>" +
             "<td><input class=\"removeStationFromRoute\" type=\"button\" value=\"-\"></td></tr>";
         $("#stations tr:last").after(newStation);
     }
@@ -201,7 +201,7 @@ function validateRoute() {
             return !isStationValidate;
         }
 
-        if (distance == "" || distance < 1 || countReservedSeat > 200) {
+        if (distance == "" || distance < 20 || countReservedSeat > 200) {
             alert("проверьте правильность ввода расстояния до следующей станции");
             return false;
         } else {
