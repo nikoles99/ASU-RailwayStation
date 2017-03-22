@@ -1,10 +1,8 @@
 package api.controllers;
 
 import api.exception.TrainException;
-import api.model.SimpleResponseBean;
 import api.model.TrainBean;
-import api.service.train.TrainService;
-import api.utils.MessagesConstants;
+import api.service.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.MediaType;

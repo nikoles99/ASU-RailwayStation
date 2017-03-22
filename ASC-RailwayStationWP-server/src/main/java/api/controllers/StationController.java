@@ -1,11 +1,8 @@
 package api.controllers;
 
 import api.exception.StationException;
-import api.model.SimpleResponseBean;
 import api.model.StationBean;
-import api.service.station.StationService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import api.service.StationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.MediaType;

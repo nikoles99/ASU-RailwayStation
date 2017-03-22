@@ -1,8 +1,8 @@
 package api.convertors;
 
-import api.dao.order.OrderDao;
-import api.dao.station.StationDao;
-import api.dao.train.TrainDao;
+import api.dao.OrderDao;
+import api.dao.StationDao;
+import api.dao.TrainDao;
 import api.entity.OrderEntity;
 import api.entity.StationEntity;
 import api.entity.TrainEntity;

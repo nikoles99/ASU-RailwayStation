@@ -1,6 +1,6 @@
 package api.convertors;
 
-import api.dao.train.TrainDao;
+import api.dao.TrainDao;
 import api.entity.CarriageEntity;
 import api.entity.PlaceEntity;
 import api.entity.TrainEntity;
