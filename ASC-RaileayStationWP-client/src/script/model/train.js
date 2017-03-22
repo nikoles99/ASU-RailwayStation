@@ -1,4 +1,8 @@
 function getTrainsByStationName(departureStation, arrivalStation, callback) {
+    if(departureStation=="" || arrivalStation==""){
+        alert('Маршрут введен не корректно');
+        return;
+    }
     var url = "http://localhost:8080/getTrainsByRoute";
     $.ajax({
         url: url,
@@ -23,7 +27,6 @@ function addNewTrain(train) {
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(train),
             error: function (xhr) {
-                alert(xhr.responseText);
                 errorLogging(xhr);
             }
         });

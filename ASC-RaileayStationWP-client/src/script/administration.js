@@ -135,8 +135,8 @@ function fillTrains(data) {
         "</tr>"
     $("#trains").append(trainsHeader);
     $.each(data, (function (index, train) {
-        var arrivalDate = train.schedules[0].departureDate;
-        var departureDate = train.schedules[train.schedules.length - 1].arrivalDate;
+        var arrivalDate = train.schedules[0].arrivalDate;
+        var departureDate = train.schedules[train.schedules.length - 1].departureDate;
         var newStation = "<tr>" +
             "<td>" + train.id + "</td>" +
             "<td>" + train.name + "</td>" +
