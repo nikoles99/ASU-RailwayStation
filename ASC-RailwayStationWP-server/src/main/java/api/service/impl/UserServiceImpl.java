@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private UserDao userDao;
@@ -27,6 +27,5 @@ public class UserServiceImpl implements UserService {
     public void add(UserBean user) {
         UserEntity userEntity = userConverter.toEntity(user);
         userDao.add(userEntity);
-        logger.info("success");
     }
 }
