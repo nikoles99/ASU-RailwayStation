@@ -12,15 +12,15 @@ import java.util.List;
  */
 public interface StationDao {
 
-    void addStation(StationEntity stationEntity) throws StationException;
+    void add(StationEntity station) throws StationException;
 
-    List<StationEntity> getStations(String name);
+    List<StationEntity> getByName(String name);
 
-    void updateStation(StationEntity stationEntity);
+    void update(StationEntity station);
 
     List<StationEntity> getAllStations();
 
-    void deleteStation(StationEntity stationEntity);
+    void delete(StationEntity station);
 
-    StationEntity getStationById(Integer stationId);
+    StationEntity getById(Integer id);
 }

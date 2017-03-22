@@ -11,10 +11,10 @@ import java.util.List;
 public class StationEntity extends AbstractEntity {
 
     @Column(name = "name", nullable = false)
-    String name;
+    private String name;
 
-    @OneToMany(mappedBy = "stationEntity", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    List<ScheduleEntity> schedules;
+    @OneToMany(mappedBy = "station", cascade = {CascadeType.ALL})
+    private List<ScheduleEntity> schedules;
 
     public StationEntity() {
     }
@@ -33,7 +33,7 @@ public class StationEntity extends AbstractEntity {
 
     public void setSchedules(List<ScheduleEntity> schedules) {
         for (ScheduleEntity schedule : schedules) {
-            schedule.setStationEntity(this);
+            schedule.setStation(this);
         }
         this.schedules = schedules;
     }

@@ -6,8 +6,6 @@ import api.entity.StationEntity;
 import api.entity.TrainEntity;
 import api.entity.ScheduleEntity;
 import api.utils.DateUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,47 +22,46 @@ import java.util.List;
 @Repository
 public class TrainDaoImpl extends AbstractDao<TrainEntity> implements TrainDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(TrainDaoImpl.class);
     private static final int TWO_WEEKS = 14;
 
     @Override
-    public void addTrain(TrainEntity trainEntity) {
-        persist(trainEntity);
+    public void add(TrainEntity train) {
+        persist(train);
     }
 
     @Override
-    public TrainEntity getTrain(Integer id) {
+    public TrainEntity get(Integer id) {
         return getById(TrainEntity.class, id);
     }
 
     @Override
-    public void updateTrain(TrainEntity trainEntity) {
+    public void update(TrainEntity train) {
 
     }
 
     @Override
-    public void removeTrain(TrainEntity trainEntity) {
+    public void remove(TrainEntity train) {
 
     }
 
     @Override
-    public List<TrainEntity> getTrainByRoute(String arrivalStation, String departureStation) {
+    public List<TrainEntity> getByStations(String arrivalStation, String departureStation) {
         Date departureDate = new Date();
         Date arrivalDate = DateUtils.addDays(departureDate, TWO_WEEKS);
-        return getTrainsByParams(arrivalStation, departureStation, arrivalDate, departureDate);
+        return getByParams(arrivalStation, departureStation, arrivalDate, departureDate);
     }
 
     @Override
-    public List<TrainEntity> getTrainsByParams(String arrivalStation, String departureStation, Date arrivalDate, Date departureDate) {
+    public List<TrainEntity> getByParams(String arrivalStation, String departureStation, Date arrivalDate, Date departureDate) {
         CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
 
         CriteriaQuery<TrainEntity> criteriaQuery = criteriaBuilder.createQuery(TrainEntity.class);
         Root<TrainEntity> trainEntityRoot = criteriaQuery.from(TrainEntity.class);
 
-        Join<TrainEntity, ScheduleEntity> trainScheduleJoin = trainEntityRoot.join("scheduleEntities");
-        Join<ScheduleEntity, StationEntity> stationEntityJoin = trainScheduleJoin.join("stationEntity");
+        Join<TrainEntity, ScheduleEntity> trainScheduleJoin = trainEntityRoot.join("schedules");
+        Join<ScheduleEntity, StationEntity> stationEntityJoin = trainScheduleJoin.join("station");
 
-        Subquery<Date> subQuery = getDateSubQuery(arrivalStation, criteriaBuilder, criteriaQuery, trainEntityRoot);
+        Subquery<Date> subQuery = getSubQuery(arrivalStation, criteriaBuilder, criteriaQuery, trainEntityRoot);
 
         Predicate departureDateLessThan = criteriaBuilder.lessThan(trainScheduleJoin.get("departureDate").as(Date.class), subQuery);
         Predicate departureStationPredicate = criteriaBuilder.equal(stationEntityJoin.get("name"), departureStation);
@@ -77,13 +74,13 @@ public class TrainDaoImpl extends AbstractDao<TrainEntity> implements TrainDao {
     }
 
 
-    private Subquery<Date> getDateSubQuery(String arrivalStation, CriteriaBuilder criteriaBuilder,
-                                           CriteriaQuery<TrainEntity> criteriaQuery, Root<TrainEntity> trainEntityRoot) {
+    private Subquery<Date> getSubQuery(String arrivalStation, CriteriaBuilder criteriaBuilder,
+                                       CriteriaQuery<TrainEntity> criteriaQuery, Root<TrainEntity> trainEntityRoot) {
         Subquery<Date> subQuery = criteriaQuery.subquery(Date.class);
 
         Root<TrainEntity> subQueryRoot = subQuery.from(TrainEntity.class);
-        Join<TrainEntity, ScheduleEntity> subQueryTrainScheduleJoin = subQueryRoot.join("scheduleEntities");
-        Join<ScheduleEntity, StationEntity> subQueryStationEntityJoin = subQueryTrainScheduleJoin.join("stationEntity");
+        Join<TrainEntity, ScheduleEntity> subQueryTrainScheduleJoin = subQueryRoot.join("schedules");
+        Join<ScheduleEntity, StationEntity> subQueryStationEntityJoin = subQueryTrainScheduleJoin.join("station");
 
 
         Predicate arrivalStationPredicate = criteriaBuilder.equal(subQueryStationEntityJoin.get("name"), arrivalStation);

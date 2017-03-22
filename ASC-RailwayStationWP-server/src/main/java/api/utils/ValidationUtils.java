@@ -11,7 +11,6 @@ public class ValidationUtils {
                 return false;
             }
         }
-
         return true;
     }
 }

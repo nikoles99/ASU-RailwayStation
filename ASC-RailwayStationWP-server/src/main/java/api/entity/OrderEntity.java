@@ -13,20 +13,20 @@ import java.util.List;
 public class OrderEntity extends AbstractEntity {
 
     @Column(name = "time")
-    Date time;
+    private Date time;
 
-    @OneToMany(mappedBy = "orderEntity", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-    List<ScheduleEntity> schedules;
+    @OneToMany(mappedBy = "order", cascade = { CascadeType.ALL })
+    private List<ScheduleEntity> schedules;
 
-    @OneToMany(mappedBy = "orderEntity", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-    List<PassengerEntity> passengers;
+    @OneToMany(mappedBy = "order", cascade = { CascadeType.ALL })
+    private List<PassengerEntity> passengers;
 
     @Column(name = "price")
-    Double price;
+    private Double price;
 
     @ManyToOne
     @JoinColumn(name = "cabinet_id")
-    CabinetEntity cabinetEntity;
+    private CabinetEntity cabinet;
 
     public OrderEntity() {
     }
@@ -45,7 +45,7 @@ public class OrderEntity extends AbstractEntity {
 
     public void setSchedules(List<ScheduleEntity> schedules) {
         for (ScheduleEntity schedule : schedules) {
-            schedule.setOrderEntity(this);
+            schedule.setOrder(this);
         }
         this.schedules = schedules;
     }
@@ -56,7 +56,7 @@ public class OrderEntity extends AbstractEntity {
 
     public void setPassangers(List<PassengerEntity> passengers) {
         for (PassengerEntity passenger : passengers) {
-            passenger.setOrderEntity(this);
+            passenger.setOrder(this);
         }
         this.passengers = passengers;
     }
@@ -69,11 +69,11 @@ public class OrderEntity extends AbstractEntity {
         this.price = price;
     }
 
-    public CabinetEntity getCabinetEntity() {
-        return cabinetEntity;
+    public CabinetEntity getCabinet() {
+        return cabinet;
     }
 
-    public void setCabinetEntity(CabinetEntity cabinetEntity) {
-        this.cabinetEntity = cabinetEntity;
+    public void setCabinet(CabinetEntity cabinet) {
+        this.cabinet = cabinet;
     }
 }

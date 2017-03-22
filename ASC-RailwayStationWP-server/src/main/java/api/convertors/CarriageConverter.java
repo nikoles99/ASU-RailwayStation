@@ -21,30 +21,30 @@ public class CarriageConverter extends AbstractConvertor<CarriageBean, CarriageE
     private TrainDao trainDao;
 
     @Autowired
-    private PlaceConverter placeConvertor;
+    private PlaceConverter placeConverter;
 
     @Override
-    public CarriageBean convertToBean(CarriageEntity carriageEntity) {
+    public CarriageBean toBean(CarriageEntity carriageEntity) {
         CarriageBean carriageBean = new CarriageBean();
         carriageBean.setNumber(carriageEntity.getNumber());
         carriageBean.setId(carriageEntity.getId());
-        carriageBean.setCarriageType(carriageEntity.getCarriageType());
-        List<PlaceBean> placeBeans = placeConvertor.convertToBeanCollection(carriageEntity.getPlaces());
+        carriageBean.setCarriageType(carriageEntity.getType());
+        List<PlaceBean> placeBeans = placeConverter.toBeanCollection(carriageEntity.getPlaces());
         carriageBean.setPlaces(placeBeans);
-        carriageBean.setTrainId(carriageEntity.getTrainEntity().getId());
+        carriageBean.setTrainId(carriageEntity.getTrain().getId());
         return carriageBean;
     }
 
     @Override
-    public CarriageEntity convertToEntity(CarriageBean carriageBean) {
+    public CarriageEntity toEntity(CarriageBean carriageBean) {
         CarriageEntity carriageEntity = new CarriageEntity();
         carriageEntity.setNumber(carriageBean.getNumber());
         carriageEntity.setId(carriageBean.getId());
-        carriageEntity.setCarriageType(carriageBean.getCarriageType());
-        List<PlaceEntity> placeEntities = placeConvertor.convertToEntityCollection(carriageBean.getPlaces());
+        carriageEntity.setType(carriageBean.getCarriageType());
+        List<PlaceEntity> placeEntities = placeConverter.toEntityCollection(carriageBean.getPlaces());
         carriageEntity.setPlaces(placeEntities);
-        TrainEntity train = trainDao.getTrain(carriageBean.getTrainId());
-        carriageEntity.setTrainEntity(train);
+        TrainEntity train = trainDao.get(carriageBean.getTrainId());
+        carriageEntity.setTrain(train);
         return carriageEntity;
     }
 }

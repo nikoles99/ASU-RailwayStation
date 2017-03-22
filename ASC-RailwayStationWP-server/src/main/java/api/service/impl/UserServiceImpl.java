@@ -24,9 +24,9 @@ public class UserServiceImpl implements UserService {
     private UserConverter userConverter;
 
     @Override
-    public void addUser(UserBean userBean) {
-        UserEntity userEntity = userConverter.convertToEntity(userBean);
-        userDao.addUser(userEntity);
+    public void add(UserBean user) {
+        UserEntity userEntity = userConverter.toEntity(user);
+        userDao.add(userEntity);
         logger.info("success");
     }
 }

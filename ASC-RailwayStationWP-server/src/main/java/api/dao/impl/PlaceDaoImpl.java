@@ -16,25 +16,23 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class PlaceDaoImpl extends AbstractDao<PlaceEntity> implements PlaceDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(PlaceDaoImpl.class);
-
     @Override
-    public void addPlace(PlaceEntity placeEntity) {
-
-    }
-
-    @Override
-    public PlaceEntity getPlace(Integer id) {
+    public PlaceEntity get(Integer id) {
         return getById(PlaceEntity.class, id);
     }
 
     @Override
-    public void updatePlace(PlaceEntity placeEntity) {
+    public void add(PlaceEntity place) {
 
     }
 
     @Override
-    public void removePlace(PlaceEntity placeEntity) {
+    public void update(PlaceEntity place) {
+
+    }
+
+    @Override
+    public void remove(PlaceEntity place) {
 
     }
 }

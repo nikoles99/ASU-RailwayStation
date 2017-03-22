@@ -18,8 +18,8 @@ public class UserController extends AbstractController {
 
     @RequestMapping(value = "/login")
     @ResponseBody
-    UserBean addUser(@RequestBody final UserBean userBean) {
-        userService.addUser(userBean);
-        return userBean;
+    UserBean addUser(@RequestBody final UserBean user) {
+        userService.add(user);
+        return user;
     }
 }

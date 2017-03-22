@@ -8,23 +8,23 @@ import java.util.List;
  */
 public abstract class AbstractConvertor<B, E> {
 
-    abstract public B convertToBean(E entity);
+    abstract public B toBean(E entity);
 
-    abstract public E convertToEntity(B bean);
+    abstract public E toEntity(B bean);
 
-    public List<E> convertToEntityCollection(List<B> beans) {
+    public List<E> toEntityCollection(List<B> beans) {
         List<E> entities = new ArrayList<E>();
         for (B bean : beans) {
-            E entity = convertToEntity(bean);
+            E entity = toEntity(bean);
             entities.add(entity);
         }
         return entities;
     }
 
-    public List<B> convertToBeanCollection(List<E> entities) {
+    public List<B> toBeanCollection(List<E> entities) {
         List<B> beans = new ArrayList<B>();
         for (E entity : entities) {
-            B trainBean = convertToBean(entity);
+            B trainBean = toBean(entity);
             beans.add(trainBean);
         }
         return beans;

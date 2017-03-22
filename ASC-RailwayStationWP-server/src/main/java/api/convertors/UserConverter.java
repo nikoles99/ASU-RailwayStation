@@ -7,17 +7,17 @@ import org.springframework.stereotype.Component;
 @Component
 public class UserConverter extends AbstractConvertor<UserBean, UserEntity> {
 
-    public UserBean convertToBean(UserEntity userEntity) {
+    public UserBean toBean(UserEntity entity) {
         UserBean userBean = new UserBean();
-        userBean.setLogin(userEntity.getLogin());
-        userBean.setPassword(userEntity.getPassword());
+        userBean.setLogin(entity.getLogin());
+        userBean.setPassword(entity.getPassword());
         return userBean;
     }
 
-    public UserEntity convertToEntity(UserBean userBean) {
+    public UserEntity toEntity(UserBean bean) {
         UserEntity userEntity = new UserEntity();
-        userEntity.setLogin(userBean.getLogin());
-        userEntity.setPassword(userBean.getPassword());
+        userEntity.setLogin(bean.getLogin());
+        userEntity.setPassword(bean.getPassword());
         return userEntity;
     }
 }

@@ -1,10 +1,7 @@
 package api.model;
 
-import org.springframework.stereotype.Component;
-
 import javax.validation.constraints.NotNull;
 
-@Component
 public class UserBean extends AbstractBean {
 
     @NotNull

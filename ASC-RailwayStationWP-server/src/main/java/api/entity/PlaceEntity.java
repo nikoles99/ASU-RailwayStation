@@ -10,15 +10,15 @@ import javax.persistence.*;
 public class PlaceEntity extends AbstractEntity {
 
     @Column(name = "number")
-    Integer number;
+    private Integer number;
 
     @ManyToOne
     @JoinColumn(name = "carriage_id")
-    CarriageEntity  carriageEntity;
+    private CarriageEntity carriage;
 
     @OneToOne
     @JoinColumn(name = "train_id")
-    TrainEntity  trainEntity;
+    private TrainEntity train;
 
     public PlaceEntity() {
     }
@@ -31,19 +31,19 @@ public class PlaceEntity extends AbstractEntity {
         this.number = number;
     }
 
-    public CarriageEntity getCarriageEntity() {
-        return carriageEntity;
+    public CarriageEntity getCarriage() {
+        return carriage;
     }
 
-    public void setCarriageEntity(CarriageEntity carriageEntity) {
-        this.carriageEntity = carriageEntity;
+    public void setCarriage(CarriageEntity carriage) {
+        this.carriage = carriage;
     }
 
-    public TrainEntity getTrainEntity() {
-        return trainEntity;
+    public TrainEntity getTrain() {
+        return train;
     }
 
-    public void setTrainEntity(TrainEntity trainEntity) {
-        this.trainEntity = trainEntity;
+    public void setTrain(TrainEntity train) {
+        this.train = train;
     }
 }

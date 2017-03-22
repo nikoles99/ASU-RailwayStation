@@ -15,22 +15,22 @@ import org.springframework.transaction.annotation.Transactional;
 public class CabinetDaoImpl extends AbstractDao<CabinetEntity> implements CabinetDao {
 
     @Override
-    public void addCabinet(CabinetEntity cabinetEntity) {
+    public void add(CabinetEntity cabinet) {
 
     }
 
     @Override
-    public CabinetEntity getCabinet(Integer id) {
+    public CabinetEntity get(Integer id) {
         return null;
     }
 
     @Override
-    public void updateCabinet(CabinetEntity cabinetEntity) {
+    public void update(CabinetEntity cabinet) {
 
     }
 
     @Override
-    public void removeCabinet(CabinetEntity cabinetEntity) {
+    public void remove(CabinetEntity cabinet) {
 
     }
 }

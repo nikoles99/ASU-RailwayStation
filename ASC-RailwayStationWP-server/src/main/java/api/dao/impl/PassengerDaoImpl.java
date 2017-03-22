@@ -14,22 +14,22 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class PassengerDaoImpl extends AbstractDao<PassengerEntity> implements PassengerDao {
     @Override
-    public void addPassenger(PassengerEntity passengerEntity) {
+    public void add(PassengerEntity passenger) {
 
     }
 
     @Override
-    public PassengerEntity getPassenger(Integer id) {
+    public PassengerEntity get(Integer id) {
         return null;
     }
 
     @Override
-    public void updatePassenger(PassengerEntity passengerEntity) {
+    public void update(PassengerEntity passenger) {
 
     }
 
     @Override
-    public void removePassenger(PassengerEntity passengerEntity) {
+    public void remove(PassengerEntity passenger) {
 
     }
 }

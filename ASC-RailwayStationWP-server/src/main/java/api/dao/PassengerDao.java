@@ -8,11 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public interface PassengerDao {
 
-    void addPassenger(PassengerEntity passengerEntity);
+    void add(PassengerEntity passenger);
 
-    PassengerEntity getPassenger(Integer id);
+    PassengerEntity get(Integer id);
 
-    void updatePassenger(PassengerEntity passengerEntity);
+    void update(PassengerEntity passenger);
 
-    void removePassenger(PassengerEntity passengerEntity);
+    void remove(PassengerEntity passenger);
 }

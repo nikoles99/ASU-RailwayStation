@@ -7,11 +7,11 @@ import api.entity.PlaceEntity;
  */
 public interface PlaceDao {
 
-    void addPlace(PlaceEntity placeEntity);
+    void add(PlaceEntity place);
 
-    PlaceEntity getPlace(Integer id);
+    PlaceEntity get(Integer id);
 
-    void updatePlace(PlaceEntity placeEntity);
+    void update(PlaceEntity place);
 
-    void removePlace(PlaceEntity placeEntity);
+    void remove(PlaceEntity place);
 }

@@ -8,11 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
  */
 public interface OrderDao {
 
-    void addOrder(OrderEntity orderEntity);
+    void add(OrderEntity order);
 
     OrderEntity getOrder(Integer id);
 
-    void updateOrder(OrderEntity orderEntity);
+    void update(OrderEntity order);
 
-    void removeOrder(OrderEntity orderEntity);
+    void remove(OrderEntity order);
 }

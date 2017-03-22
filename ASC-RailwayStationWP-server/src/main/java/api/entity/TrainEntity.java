@@ -14,11 +14,11 @@ public class TrainEntity extends AbstractEntity {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "trainEntity", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    List<CarriageEntity> carriages;
+    @OneToMany(mappedBy = "train", cascade = {CascadeType.ALL})
+    private List<CarriageEntity> carriages;
 
-    @OneToMany(mappedBy = "trainEntity", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    List<ScheduleEntity> scheduleEntities;
+    @OneToMany(mappedBy = "train", cascade = {CascadeType.ALL})
+    private List<ScheduleEntity> schedules;
 
     public TrainEntity() {
     }
@@ -29,7 +29,7 @@ public class TrainEntity extends AbstractEntity {
 
     public void setCarriages(List<CarriageEntity> carriages) {
         for (CarriageEntity carriage : carriages) {
-            carriage.setTrainEntity(this);
+            carriage.setTrain(this);
         }
         this.carriages = carriages;
     }
@@ -42,15 +42,15 @@ public class TrainEntity extends AbstractEntity {
         this.name = name;
     }
 
-    public List<ScheduleEntity> getScheduleEntities() {
-        return scheduleEntities;
+    public List<ScheduleEntity> getSchedules() {
+        return schedules;
     }
 
-    public void setScheduleEntities(List<ScheduleEntity> scheduleEntities) {
-        for (ScheduleEntity scheduleEntity : scheduleEntities) {
-            scheduleEntity.setTrainEntity(this);
+    public void setSchedules(List<ScheduleEntity> schedules) {
+        for (ScheduleEntity scheduleEntity : schedules) {
+            scheduleEntity.setTrain(this);
         }
-        Collections.sort(scheduleEntities);
-        this.scheduleEntities = scheduleEntities;
+        Collections.sort(schedules);
+        this.schedules = schedules;
     }
 }

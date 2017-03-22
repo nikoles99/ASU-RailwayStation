@@ -16,10 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class OrderDaoImpl extends AbstractDao<OrderEntity> implements OrderDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(OrderDaoImpl.class);
-
     @Override
-    public void addOrder(OrderEntity orderEntity) {
+    public void add(OrderEntity order) {
 
     }
 
@@ -29,12 +27,12 @@ public class OrderDaoImpl extends AbstractDao<OrderEntity> implements OrderDao {
     }
 
     @Override
-    public void updateOrder(OrderEntity orderEntity) {
+    public void update(OrderEntity order) {
 
     }
 
     @Override
-    public void removeOrder(OrderEntity orderEntity) {
+    public void remove(OrderEntity order) {
 
     }
 }

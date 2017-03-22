@@ -22,18 +22,18 @@ public class TrainController extends AbstractController {
 
     @RequestMapping(value = "/addNewRoute", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     @ResponseBody
-    void addNewRoute(@RequestBody TrainBean trainBean) throws TrainException {
-        trainService.addTrainRoute(trainBean);
+    void addNewRoute(@RequestBody TrainBean train) throws TrainException {
+        trainService.add(train);
     }
 
     @RequestMapping(value = "/getTrainsByRoute", method = RequestMethod.POST)
     List<TrainBean> getTrainsByRoute(@RequestParam("arrivalStation") String arrivalStation, @RequestParam("departureStation") String departureStation) {
-        return trainService.getTrainsByRoute(arrivalStation, departureStation);
+        return trainService.getByStations(arrivalStation, departureStation);
     }
 
-    @RequestMapping(value = "/getTrainsByParams", method = RequestMethod.POST)
+    @RequestMapping(value = "/getByParams", method = RequestMethod.POST)
     List<TrainBean> getTrainsByParams(@RequestParam("arrivalStation") String arrivalStation, @RequestParam("departureStation") String departureStation,
                                       @RequestParam("arrivalDate") String arrivalDate, @RequestParam("departureDate") String departureDate) {
-        return trainService.getTrainsByParams(arrivalStation, departureStation, arrivalDate, departureDate);
+        return trainService.getByParams(arrivalStation, departureStation, arrivalDate, departureDate);
     }
 }

@@ -22,22 +22,22 @@ public class StationController extends AbstractController {
     @Autowired
     private StationService stationService;
 
-    @RequestMapping(value = "/addStation", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    void addStaion(StationBean stationBean) throws StationException {
-        stationService.addStation(stationBean);
+    void addStaion(StationBean station) throws StationException {
+        stationService.add(station);
     }
 
-    @RequestMapping(value = "/deleteStation", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    void deleteStation(StationBean stationBean) {
-        stationService.deleteStation(stationBean);
+    void deleteStation(StationBean station) {
+        stationService.delete(station);
     }
 
-    @RequestMapping(value = "/updateStation", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    void updateStation(StationBean stationBean) {
-        stationService.updateStation(stationBean);
+    void updateStation(StationBean station) {
+        stationService.update(station);
     }
 
     @RequestMapping(value = "/getAllStations", produces = MediaType.APPLICATION_JSON_VALUE)

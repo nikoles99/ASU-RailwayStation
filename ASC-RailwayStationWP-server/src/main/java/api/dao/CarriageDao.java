@@ -10,11 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface CarriageDao {
 
-    void addCarriage(CarriageEntity carriageEntity);
+    void add(CarriageEntity carriage);
 
-    CarriageEntity getCarriage(Integer id);
+    CarriageEntity get(Integer id);
 
-    void updateCarriage(CarriageEntity carriageEntity);
+    void update(CarriageEntity carriage);
 
-    void removeCarriage(CarriageEntity carriageEntity);
+    void remove(CarriageEntity carriage);
 }

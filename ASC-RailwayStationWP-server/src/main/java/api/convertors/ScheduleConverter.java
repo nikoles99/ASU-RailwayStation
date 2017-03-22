@@ -28,14 +28,14 @@ public class ScheduleConverter extends AbstractConvertor<TrainScheduleBean, Sche
     private OrderDao orderDao;
 
     @Override
-    public TrainScheduleBean convertToBean(ScheduleEntity entity) {
+    public TrainScheduleBean toBean(ScheduleEntity entity) {
         TrainScheduleBean bean = new TrainScheduleBean();
         bean.setArrivalDate(entity.getArrivalDate());
         bean.setId(entity.getId());
         bean.setDepartureDate(entity.getDepartureDate());
-        bean.setStationId(entity.getStationEntity().getId());
-        bean.setTrainId(entity.getTrainEntity().getId());
-        OrderEntity orderEntity = entity.getOrderEntity();
+        bean.setStationId(entity.getStation().getId());
+        bean.setTrainId(entity.getTrain().getId());
+        OrderEntity orderEntity = entity.getOrder();
         if (orderEntity != null) {
             bean.setOrderId(orderEntity.getId());
         }
@@ -43,17 +43,17 @@ public class ScheduleConverter extends AbstractConvertor<TrainScheduleBean, Sche
     }
 
     @Override
-    public ScheduleEntity convertToEntity(TrainScheduleBean bean) {
+    public ScheduleEntity toEntity(TrainScheduleBean bean) {
         ScheduleEntity entity = new ScheduleEntity();
         entity.setArrivalDate(bean.getArrivalDate());
         entity.setId(bean.getId());
         entity.setDepartureDate(bean.getDepartureDate());
-        StationEntity stationEntity = stationDao.getStationById(bean.getStationId());
-        entity.setStationEntity(stationEntity);
-        TrainEntity train = trainDao.getTrain(bean.getTrainId());
-        entity.setTrainEntity(train);
+        StationEntity stationEntity = stationDao.getById(bean.getStationId());
+        entity.setStation(stationEntity);
+        TrainEntity train = trainDao.get(bean.getTrainId());
+        entity.setTrain(train);
         OrderEntity order = orderDao.getOrder(bean.getOrderId());
-        entity.setOrderEntity(order);
+        entity.setOrder(order);
         return entity;
     }
 }

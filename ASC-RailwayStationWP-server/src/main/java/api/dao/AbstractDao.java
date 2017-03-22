@@ -15,24 +15,24 @@ import java.util.List;
  */
 public class AbstractDao<T> {
 
-    private static final Logger logger = LoggerFactory.getLogger(AbstractDao.class);
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @PersistenceContext
     private EntityManager entityManager;
 
-    public void persist(T entity) {
+    protected void persist(T entity) {
         entityManager.persist(entity);
         logger.info("Persist was successfully " + entity);
     }
 
-    public T getById(Class<T> type, Integer id) {
+    protected T getById(Class<T> type, Integer id) {
         if (id != null) {
             return entityManager.find(type, id);
         }
         return null;
     }
 
-    public List<T> getAll(Class<T> type) {
+    protected List<T> getAll(Class<T> type) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(type);
         Root<T> root = criteriaQuery.from(type);
@@ -42,22 +42,27 @@ public class AbstractDao<T> {
     }
 
 
-    public CriteriaQuery<T> getCriteriaQuery(Class<T> type) {
+    protected CriteriaQuery<T> getCriteriaQuery(Class<T> type) {
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(type);
         return criteriaQuery;
     }
 
-    public void remove(T entity) {
+    protected void remove(T entity) {
         entityManager.remove(entity);
         logger.info("Remove was successfully " + entity);
     }
 
-    public T merge(T entity) {
+    protected T merge(T entity) {
         return entityManager.merge(entity);
     }
 
-    public EntityManager getEntityManager() {
+    protected EntityManager getEntityManager() {
         return entityManager;
     }
+
+    protected Logger getLogger() {
+        return logger;
+    }
+
 }

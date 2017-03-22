@@ -7,11 +7,11 @@ import api.entity.CabinetEntity;
  */
 public interface CabinetDao {
 
-    void addCabinet(CabinetEntity cabinetEntity);
+    void add(CabinetEntity cabinet);
 
-    CabinetEntity getCabinet(Integer id);
+    CabinetEntity get(Integer id);
 
-    void updateCabinet(CabinetEntity cabinetEntity);
+    void update(CabinetEntity cabinet);
 
-    void removeCabinet(CabinetEntity cabinetEntity);
+    void remove(CabinetEntity cabinet);
 }

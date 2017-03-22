@@ -28,45 +28,44 @@ public class ScheduleDaoImpl extends AbstractDao<ScheduleEntity> implements Sche
     @Autowired
     private Environment env;
 
-
     @Override
-    public void addTrainSchedule(ScheduleEntity scheduleEntity) {
+    public void add(ScheduleEntity schedule) {
 
     }
 
     @Override
-    public ScheduleEntity getTrainSchedule(Integer id) {
+    public ScheduleEntity get(Integer id) {
         return null;
     }
 
     @Override
-    public void updateTrainSchedule(ScheduleEntity scheduleEntity) {
+    public void update(ScheduleEntity schedule) {
 
     }
 
     @Override
-    public void removeTrainSchedule(ScheduleEntity scheduleEntity) {
+    public void remove(ScheduleEntity schedule) {
 
     }
 
     @Override
-    public Boolean isScheduleValidate(ScheduleEntity schedule) {
-        Integer stationId = schedule.getStationEntity().getId();
+    public Boolean isValidate(ScheduleEntity schedule) {
+        Integer stationId = schedule.getStation().getId();
         Date arrivalDate = schedule.getArrivalDate();
         Date departureDate = schedule.getDepartureDate();
-        List<ScheduleEntity> schedules = getScheduleByParams(departureDate, arrivalDate, stationId);
+        List<ScheduleEntity> schedules = getByParams(departureDate, arrivalDate, stationId);
         return schedules.isEmpty();
     }
 
     @Override
-    public List<ScheduleEntity> getScheduleByParams(Date departureDate, Date arrivalDate, Integer stationId) {
+    public List<ScheduleEntity> getByParams(Date departureDate, Date arrivalDate, Integer stationId) {
 
         CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
         CriteriaQuery<ScheduleEntity> criteriaQuery = criteriaBuilder.createQuery(ScheduleEntity.class);
 
         Root<ScheduleEntity> trainEntityRoot = criteriaQuery.from(ScheduleEntity.class);
 
-        Predicate stationIdPredicate = criteriaBuilder.equal(trainEntityRoot.get("stationEntity"), stationId);
+        Predicate stationIdPredicate = criteriaBuilder.equal(trainEntityRoot.get("station"), stationId);
 
         Integer intervalDeparture = Integer.parseInt(env.getProperty("train-interval-departure"));
         Date startArrivalInterval = DateUtils.takeAwayMinutes(arrivalDate, intervalDeparture);

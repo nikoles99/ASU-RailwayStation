@@ -10,18 +10,17 @@ import java.util.List;
  */
 public interface TrainDao {
 
-    void addTrain(TrainEntity trainEntity);
+    void add(TrainEntity train);
 
-    TrainEntity getTrain(Integer id);
+    TrainEntity get(Integer id);
 
-    void updateTrain(TrainEntity trainEntity);
+    void update(TrainEntity train);
 
-    void removeTrain(TrainEntity trainEntity);
+    void remove(TrainEntity train);
 
+    List<TrainEntity> getByStations(String arrivalStation, String departureStation);
 
-    List<TrainEntity> getTrainByRoute(String arrivalStation, String departureStation);
-
-    List<TrainEntity> getTrainsByParams(String arrivalStation, String departureDate, Date arrivalDate, Date departureDate1);
+    List<TrainEntity> getByParams(String arrivalStation, String departureDate, Date arrivalDate, Date departureDate1);
 
 }
 

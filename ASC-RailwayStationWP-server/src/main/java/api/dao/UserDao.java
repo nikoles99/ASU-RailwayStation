@@ -5,14 +5,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface UserDao {
 
-    void addUser(UserEntity userEntity);
+    void add(UserEntity user);
 
-    UserEntity getUser(Integer id);
+    UserEntity get(Integer id);
 
-    UserEntity getUserByLogin(String login);
+    UserEntity getByLogin(String login);
 
-    void updateUser(UserEntity userEntity);
+    void update(UserEntity user);
 
-    void removeUser(UserEntity userEntity);
+    void delete(UserEntity user);
 
 }

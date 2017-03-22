@@ -26,27 +26,27 @@ public class StationServiceImpl implements StationService {
     private StationConverter stationConverter;
 
     @Override
-    public void addStation(StationBean stationBean) throws StationException {
-        StationEntity stationEntity = stationConverter.convertToEntity(stationBean);
-        stationDao.addStation(stationEntity);
+    public void add(StationBean station) throws StationException {
+        StationEntity stationEntity = stationConverter.toEntity(station);
+        stationDao.add(stationEntity);
     }
 
     @Override
     public List<StationBean> getAllStations() {
         List<StationEntity> entities = stationDao.getAllStations();
-        List<StationBean> beans = stationConverter.convertToBeanCollection(entities);
+        List<StationBean> beans = stationConverter.toBeanCollection(entities);
         return beans;
     }
 
     @Override
-    public void deleteStation(StationBean stationBean) {
-        StationEntity stationEntity = stationConverter.convertToEntity(stationBean);
-        stationDao.deleteStation(stationEntity);
+    public void delete(StationBean station) {
+        StationEntity stationEntity = stationConverter.toEntity(station);
+        stationDao.delete(stationEntity);
     }
 
     @Override
-    public void updateStation(StationBean stationBean) {
-        StationEntity stationEntity = stationConverter.convertToEntity(stationBean);
-        stationDao.updateStation(stationEntity);
+    public void update(StationBean station) {
+        StationEntity stationEntity = stationConverter.toEntity(station);
+        stationDao.update(stationEntity);
     }
 }

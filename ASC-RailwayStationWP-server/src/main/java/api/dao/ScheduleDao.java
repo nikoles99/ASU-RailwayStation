@@ -10,15 +10,15 @@ import java.util.List;
  */
 public interface ScheduleDao {
 
-    void addTrainSchedule(ScheduleEntity scheduleEntity);
+    void add(ScheduleEntity schedule);
 
-    ScheduleEntity getTrainSchedule(Integer id);
+    ScheduleEntity get(Integer id);
 
-    void updateTrainSchedule(ScheduleEntity scheduleEntity);
+    void update(ScheduleEntity schedule);
 
-    void removeTrainSchedule(ScheduleEntity scheduleEntity);
+    void remove(ScheduleEntity schedule);
 
-    Boolean isScheduleValidate(ScheduleEntity schedule);
+    Boolean isValidate(ScheduleEntity schedule);
 
-    List<ScheduleEntity> getScheduleByParams(Date departureDate, Date arrivalDate, Integer stationId);
+    List<ScheduleEntity> getByParams(Date departureDate, Date arrivalDate, Integer stationId);
 }

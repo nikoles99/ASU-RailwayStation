@@ -13,39 +13,39 @@ public class ScheduleEntity extends AbstractEntity implements Comparable<Schedul
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "train_id")
-    TrainEntity trainEntity;
+    private TrainEntity train;
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "station_id")
-    StationEntity stationEntity;
+    private StationEntity station;
 
     @Column(name = "arrival_date")
-    Date arrivalDate;
+    private Date arrivalDate;
 
     @Column(name = "departure_date")
-    Date departureDate;
+    private Date departureDate;
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "order_id")
-    OrderEntity orderEntity;
+    private OrderEntity order;
 
     public ScheduleEntity() {
     }
 
-    public TrainEntity getTrainEntity() {
-        return trainEntity;
+    public TrainEntity getTrain() {
+        return train;
     }
 
-    public void setTrainEntity(TrainEntity trainEntity) {
-        this.trainEntity = trainEntity;
+    public void setTrain(TrainEntity train) {
+        this.train = train;
     }
 
-    public StationEntity getStationEntity() {
-        return stationEntity;
+    public StationEntity getStation() {
+        return station;
     }
 
-    public void setStationEntity(StationEntity stationEntity) {
-        this.stationEntity = stationEntity;
+    public void setStation(StationEntity station) {
+        this.station = station;
     }
 
     public Date getArrivalDate() {
@@ -64,12 +64,12 @@ public class ScheduleEntity extends AbstractEntity implements Comparable<Schedul
         this.departureDate = departureDate;
     }
 
-    public OrderEntity getOrderEntity() {
-        return orderEntity;
+    public OrderEntity getOrder() {
+        return order;
     }
 
-    public void setOrderEntity(OrderEntity orderEntity) {
-        this.orderEntity = orderEntity;
+    public void setOrder(OrderEntity order) {
+        this.order = order;
     }
 
     @Override
@@ -80,21 +80,21 @@ public class ScheduleEntity extends AbstractEntity implements Comparable<Schedul
 
         ScheduleEntity that = (ScheduleEntity) o;
 
-        if (trainEntity != null ? !trainEntity.equals(that.trainEntity) : that.trainEntity != null) return false;
-        if (stationEntity != null ? !stationEntity.equals(that.stationEntity) : that.stationEntity != null) return false;
+        if (train != null ? !train.equals(that.train) : that.train != null) return false;
+        if (station != null ? !station.equals(that.station) : that.station != null) return false;
         if (arrivalDate != null ? !arrivalDate.equals(that.arrivalDate) : that.arrivalDate != null) return false;
         if (departureDate != null ? !departureDate.equals(that.departureDate) : that.departureDate != null) return false;
-        return orderEntity != null ? orderEntity.equals(that.orderEntity) : that.orderEntity == null;
+        return order != null ? order.equals(that.order) : that.order == null;
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (trainEntity != null ? trainEntity.hashCode() : 0);
-        result = 31 * result + (stationEntity != null ? stationEntity.hashCode() : 0);
+        result = 31 * result + (train != null ? train.hashCode() : 0);
+        result = 31 * result + (station != null ? station.hashCode() : 0);
         result = 31 * result + (arrivalDate != null ? arrivalDate.hashCode() : 0);
         result = 31 * result + (departureDate != null ? departureDate.hashCode() : 0);
-        result = 31 * result + (orderEntity != null ? orderEntity.hashCode() : 0);
+        result = 31 * result + (order != null ? order.hashCode() : 0);
         return result;
     }
 

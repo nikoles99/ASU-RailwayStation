@@ -22,24 +22,24 @@ public class PlaceConverter extends AbstractConvertor<PlaceBean, PlaceEntity>  {
     private CarriageDao carriageDao;
 
     @Override
-    public PlaceBean convertToBean(PlaceEntity entity) {
+    public PlaceBean toBean(PlaceEntity entity) {
         PlaceBean bean = new PlaceBean();
         bean.setId(entity.getId());
         bean.setNumber(entity.getNumber());
-        bean.setCarriageId(entity.getCarriageEntity().getId());
-        bean.setTrainId(entity.getTrainEntity().getId());
+        bean.setCarriageId(entity.getCarriage().getId());
+        bean.setTrainId(entity.getTrain().getId());
         return bean;
     }
 
     @Override
-    public PlaceEntity convertToEntity(PlaceBean bean) {
+    public PlaceEntity toEntity(PlaceBean bean) {
         PlaceEntity entity = new PlaceEntity();
         entity.setId(bean.getId());
         entity.setNumber(bean.getNumber());
-        TrainEntity train = trainDao.getTrain(bean.getTrainId());
-        entity.setTrainEntity(train);
-        CarriageEntity carriage = carriageDao.getCarriage(bean.getCarriageId());
-        entity.setCarriageEntity(carriage);
+        TrainEntity train = trainDao.get(bean.getTrainId());
+        entity.setTrain(train);
+        CarriageEntity carriage = carriageDao.get(bean.getCarriageId());
+        entity.setCarriage(carriage);
         return entity;
     }
 

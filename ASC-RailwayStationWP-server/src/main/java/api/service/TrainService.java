@@ -10,12 +10,10 @@ import java.util.List;
  */
 public interface TrainService {
 
-    void addTrain();
+    void add(TrainBean train) throws TrainException;
 
-    void addTrainRoute(TrainBean trainBean) throws TrainException;
+    List<TrainBean> getByStations(String arrivalStation, String departureStation);
 
-    List<TrainBean> getTrainsByRoute(String arrivalStation, String departureStation);
-
-    List<TrainBean> getTrainsByParams(String arrivalStation, String departureStation, String arrivalDate, String departureDate);
+    List<TrainBean> getByParams(String arrivalStation, String departureStation, String arrivalDate, String departureDate);
 
 }

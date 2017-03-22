@@ -16,25 +16,23 @@ import org.springframework.transaction.annotation.Transactional;
 @Repository
 public class CarriageDaoImpl extends AbstractDao<CarriageEntity> implements CarriageDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(PlaceDaoImpl.class);
-
     @Override
-    public void addCarriage(CarriageEntity carriageEntity) {
+    public void add(CarriageEntity carriage) {
 
     }
 
     @Override
-    public CarriageEntity getCarriage(Integer id) {
+    public CarriageEntity get(Integer id) {
         return getById(CarriageEntity.class, id);
     }
 
     @Override
-    public void updateCarriage(CarriageEntity carriageEntity) {
+    public void update(CarriageEntity carriage) {
 
     }
 
     @Override
-    public void removeCarriage(CarriageEntity carriageEntity) {
+    public void remove(CarriageEntity carriage) {
 
     }
 }

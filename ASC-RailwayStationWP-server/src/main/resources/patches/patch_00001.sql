@@ -45,7 +45,7 @@ ALTER TABLE stations OWNER TO postgres;
 CREATE TABLE carriages
 (
   id bigint NOT NULL,
-  "carriageType" character varying(255),
+  "type" character varying(255),
   "number" integer,
   train_id bigint,
   CONSTRAINT carriages_pkey PRIMARY KEY (id),

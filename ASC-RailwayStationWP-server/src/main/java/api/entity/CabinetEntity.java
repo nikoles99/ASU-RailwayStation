@@ -12,20 +12,20 @@ public class CabinetEntity extends AbstractEntity {
 
     @OneToOne
     @JoinColumn(name = "user_id")
-    UserEntity userEntity;
+    private UserEntity user;
 
-    @OneToMany(mappedBy = "cabinetEntity", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-    List<OrderEntity> orders;
+    @OneToMany(mappedBy = "cabinet", cascade = {CascadeType.ALL})
+    private List<OrderEntity> orders;
 
     public CabinetEntity() {
     }
 
-    public UserEntity getUserEntity() {
-        return userEntity;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
     public List<OrderEntity> getOrders() {
@@ -34,7 +34,7 @@ public class CabinetEntity extends AbstractEntity {
 
     public void setOrders(List<OrderEntity> orders) {
         for (OrderEntity order : orders) {
-            order.setCabinetEntity(this);
+            order.setCabinet(this);
         }
         this.orders = orders;
     }

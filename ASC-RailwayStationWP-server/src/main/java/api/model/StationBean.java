@@ -1,7 +1,5 @@
 package api.model;
 
-import org.springframework.stereotype.Component;
-
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,7 +7,6 @@ import java.util.List;
 /**
  * Created by nolesuk on 01-Mar-17.
  */
-@Component
 public class StationBean extends AbstractBean {
 
     @NotNull

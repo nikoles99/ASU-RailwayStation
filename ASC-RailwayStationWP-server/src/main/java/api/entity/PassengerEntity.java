@@ -10,22 +10,22 @@ import javax.persistence.*;
 public class PassengerEntity extends AbstractEntity {
 
     @Column(name = "name")
-    String name;
+    private String name;
 
     @OneToOne
     @JoinColumn(name = "last_name")
-    ScheduleEntity scheduleEntity;
+    private ScheduleEntity schedule;
 
     @Column(name = "rate")
-    Double rate;
+    private Double rate;
 
     @OneToOne
     @JoinColumn(name = "place_id")
-    PlaceEntity placeEntity;
+    private PlaceEntity place;
 
     @ManyToOne(cascade = { CascadeType.ALL })
     @JoinColumn(name = "order_id")
-    OrderEntity orderEntity;
+    private OrderEntity order;
 
     public PassengerEntity() {
     }
@@ -38,12 +38,12 @@ public class PassengerEntity extends AbstractEntity {
         this.name = name;
     }
 
-    public ScheduleEntity getScheduleEntity() {
-        return scheduleEntity;
+    public ScheduleEntity getSchedule() {
+        return schedule;
     }
 
-    public void setScheduleEntity(ScheduleEntity scheduleEntity) {
-        this.scheduleEntity = scheduleEntity;
+    public void setSchedule(ScheduleEntity schedule) {
+        this.schedule = schedule;
     }
 
     public Double getRate() {
@@ -54,19 +54,19 @@ public class PassengerEntity extends AbstractEntity {
         this.rate = rate;
     }
 
-    public PlaceEntity getPlaceEntity() {
-        return placeEntity;
+    public PlaceEntity getPlace() {
+        return place;
     }
 
-    public void setPlaceEntity(PlaceEntity placeEntity) {
-        this.placeEntity = placeEntity;
+    public void setPlace(PlaceEntity place) {
+        this.place = place;
     }
 
-    public OrderEntity getOrderEntity() {
-        return orderEntity;
+    public OrderEntity getOrder() {
+        return order;
     }
 
-    public void setOrderEntity(OrderEntity orderEntity) {
-        this.orderEntity = orderEntity;
+    public void setOrder(OrderEntity order) {
+        this.order = order;
     }
 }

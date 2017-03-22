@@ -11,11 +11,11 @@ import java.util.List;
  */
 public interface StationService {
 
-    void addStation(StationBean stationBean) throws StationException;
+    void add(StationBean station) throws StationException;
 
     List<StationBean> getAllStations();
 
-    void deleteStation(StationBean stationBean);
+    void delete(StationBean station);
 
-    void updateStation(StationBean stationBean);
+    void update(StationBean station);
 }

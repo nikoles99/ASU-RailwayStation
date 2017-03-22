@@ -19,22 +19,22 @@ public class StationConverter extends AbstractConvertor<StationBean, StationEnti
     ScheduleConverter scheduleConverter;
 
     @Override
-    public StationBean convertToBean(StationEntity stationEntity) {
+    public StationBean toBean(StationEntity stationEntity) {
         StationBean stationBean = new StationBean();
         stationBean.setName(stationEntity.getName());
         stationBean.setId(stationEntity.getId());
         List<ScheduleEntity> schedules = stationEntity.getSchedules();
-        stationBean.setSchedules(scheduleConverter.convertToBeanCollection(schedules));
+        stationBean.setSchedules(scheduleConverter.toBeanCollection(schedules));
         return stationBean;
     }
 
     @Override
-    public StationEntity convertToEntity(StationBean stationBean) {
+    public StationEntity toEntity(StationBean stationBean) {
         StationEntity stationEntity = new StationEntity();
         stationEntity.setName(stationBean.getName());
         stationEntity.setId(stationBean.getId());
         List<TrainScheduleBean> schedules = stationBean.getSchedules();
-        stationEntity.setSchedules(scheduleConverter.convertToEntityCollection(schedules));
+        stationEntity.setSchedules(scheduleConverter.toEntityCollection(schedules));
         return stationEntity;
     }
 }

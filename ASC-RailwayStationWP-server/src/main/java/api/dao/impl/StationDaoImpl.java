@@ -24,68 +24,56 @@ import java.util.List;
 @Repository
 public class StationDaoImpl extends AbstractDao<StationEntity> implements StationDao {
 
-    private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
-
-    @PersistenceContext
-    private EntityManager entityManager;
-
-
     @Override
-    public void addStation(StationEntity stationEntity) throws StationException {
-        if (stationEntity == null || stationEntity.getName() == null || stationEntity.getName().isEmpty()) {
-            throw new StationException(stationEntity + " entity or name is null");
+    public void add(StationEntity station) throws StationException {
+        if (station == null || station.getName() == null || station.getName().isEmpty()) {
+            throw new StationException(station + " entity or name is null");
         }
-        List<StationEntity> stations = getStations(stationEntity.getName());
+        List<StationEntity> stations = getByName(station.getName());
         if (stations.isEmpty()) {
-            entityManager.persist(stationEntity);
-            logger.info("Station add successfully " + stationEntity);
+            getEntityManager().persist(station);
+            getLogger().info("Station add successfully " + station);
         } else {
-            String message = "Station already exist " + stationEntity;
-            logger.info(message);
+            String message = "Station already exist " + station;
+            getLogger().info(message);
             throw new StationException(message);
         }
 
     }
 
     @Override
-    public List<StationEntity> getStations(String name) {
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+    public List<StationEntity> getByName(String name) {
+        CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
         CriteriaQuery<StationEntity> criteriaQuery = criteriaBuilder.createQuery(StationEntity.class);
         Root<StationEntity> stationEntityRoot = criteriaQuery.from(StationEntity.class);
         criteriaQuery.select(stationEntityRoot);
         criteriaQuery.where(criteriaBuilder.equal(stationEntityRoot.get("name"), name));
-        List<StationEntity> students = entityManager.createQuery(criteriaQuery).getResultList();
+        List<StationEntity> students = getEntityManager().createQuery(criteriaQuery).getResultList();
         return students;
     }
 
     @Override
     public List<StationEntity> getAllStations() {
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+        CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
         CriteriaQuery<StationEntity> criteriaQuery = criteriaBuilder.createQuery(StationEntity.class);
         Root<StationEntity> stationEntityRoot = criteriaQuery.from(StationEntity.class);
         criteriaQuery.select(stationEntityRoot);
-        List<StationEntity> students = entityManager.createQuery(criteriaQuery).getResultList();
+        List<StationEntity> students = getEntityManager().createQuery(criteriaQuery).getResultList();
         return students;
     }
 
     @Override
-    public void deleteStation(StationEntity stationEntity) {
-        List<StationEntity> stations = getStations(stationEntity.getName());
-        for (StationEntity station : stations) {
-            entityManager.remove(station);
-        }
+    public void delete(StationEntity station) {
+        remove(station);
     }
 
     @Override
-    public StationEntity getStationById(Integer stationId) {
-        return getById(StationEntity.class, stationId);
+    public StationEntity getById(Integer id) {
+        return getById(StationEntity.class, id);
     }
 
     @Override
-    public void updateStation(StationEntity stationEntity) {
-        List<StationEntity> stations = getStations(stationEntity.getName());
-        for (StationEntity station : stations) {
-            station.setName(stationEntity.getName());
-        }
+    public void update(StationEntity station) {
+        update(station);
     }
 }

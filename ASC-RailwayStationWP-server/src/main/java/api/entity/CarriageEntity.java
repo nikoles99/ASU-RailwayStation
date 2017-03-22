@@ -4,7 +4,6 @@ import api.model.CarriageType;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by nolesuk on 21-Feb-17.
@@ -14,24 +13,24 @@ import java.util.Set;
 public class CarriageEntity extends AbstractEntity {
 
     @Enumerated(EnumType.STRING)
-    CarriageType carriageType;
+    private CarriageType type;
 
     @Column(name = "number")
-    Integer number;
+    private Integer number;
 
     @ManyToOne
     @JoinColumn(name = "train_id")
-    TrainEntity trainEntity;
+    private TrainEntity train;
 
-    @OneToMany(mappedBy = "carriageEntity", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    List<PlaceEntity> places;
+    @OneToMany(mappedBy = "carriage", cascade = {CascadeType.ALL})
+    private List<PlaceEntity> places;
 
-    public CarriageType getCarriageType() {
-        return carriageType;
+    public CarriageType getType() {
+        return type;
     }
 
-    public void setCarriageType(CarriageType carriageType) {
-        this.carriageType = carriageType;
+    public void setType(CarriageType type) {
+        this.type = type;
     }
 
     public Integer getNumber() {
@@ -45,12 +44,12 @@ public class CarriageEntity extends AbstractEntity {
     public CarriageEntity() {
     }
 
-    public TrainEntity getTrainEntity() {
-        return trainEntity;
+    public TrainEntity getTrain() {
+        return train;
     }
 
-    public void setTrainEntity(TrainEntity trainEntity) {
-        this.trainEntity = trainEntity;
+    public void setTrain(TrainEntity train) {
+        this.train = train;
     }
 
     public List<PlaceEntity> getPlaces() {
@@ -59,7 +58,7 @@ public class CarriageEntity extends AbstractEntity {
 
     public void setPlaces(List<PlaceEntity> places) {
         for (PlaceEntity place : places) {
-            place.setCarriageEntity(this);
+            place.setCarriage(this);
         }
         this.places = places;
     }
