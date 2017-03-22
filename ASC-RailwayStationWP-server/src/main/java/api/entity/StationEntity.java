@@ -1,7 +1,6 @@
 package api.entity;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -15,7 +14,7 @@ public class StationEntity extends AbstractEntity {
     String name;
 
     @OneToMany(mappedBy = "stationEntity", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    List<TrainScheduleEntity> schedules;
+    List<ScheduleEntity> schedules;
 
     public StationEntity() {
     }
@@ -28,12 +27,12 @@ public class StationEntity extends AbstractEntity {
         this.name = name;
     }
 
-    public List<TrainScheduleEntity> getSchedules() {
+    public List<ScheduleEntity> getSchedules() {
         return schedules;
     }
 
-    public void setSchedules(List<TrainScheduleEntity> schedules) {
-        for (TrainScheduleEntity schedule : schedules) {
+    public void setSchedules(List<ScheduleEntity> schedules) {
+        for (ScheduleEntity schedule : schedules) {
             schedule.setStationEntity(this);
         }
         this.schedules = schedules;

@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Created by nikita on 14.03.17.
  */
-@Transactional(propagation = Propagation.REQUIRES_NEW)
+@Transactional(propagation = Propagation.MANDATORY)
 @Repository
 public class PassengerDaoImpl extends AbstractDao<PassengerEntity> implements PassengerDao {
     @Override

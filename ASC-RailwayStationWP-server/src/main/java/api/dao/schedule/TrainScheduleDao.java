@@ -1,6 +1,6 @@
 package api.dao.schedule;
 
-import api.entity.TrainScheduleEntity;
+import api.entity.ScheduleEntity;
 
 import java.util.Date;
 import java.util.List;
@@ -10,15 +10,15 @@ import java.util.List;
  */
 public interface TrainScheduleDao {
 
-    void addTrainSchedule(TrainScheduleEntity trainScheduleEntity);
+    void addTrainSchedule(ScheduleEntity scheduleEntity);
 
-    TrainScheduleEntity getTrainSchedule(Integer id);
+    ScheduleEntity getTrainSchedule(Integer id);
 
-    void updateTrainSchedule(TrainScheduleEntity trainScheduleEntity);
+    void updateTrainSchedule(ScheduleEntity scheduleEntity);
 
-    void removeTrainSchedule(TrainScheduleEntity trainScheduleEntity);
+    void removeTrainSchedule(ScheduleEntity scheduleEntity);
 
-    Boolean isScheduleValidate(TrainScheduleEntity schedule);
+    Boolean isScheduleValidate(ScheduleEntity schedule);
 
-    List<TrainScheduleEntity> getScheduleByParams(Date departureDate, Date arrivalDate, Integer stationId);
+    List<ScheduleEntity> getScheduleByParams(Date departureDate, Date arrivalDate, Integer stationId);
 }

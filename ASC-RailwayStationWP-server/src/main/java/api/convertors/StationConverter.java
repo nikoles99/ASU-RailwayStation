@@ -1,7 +1,7 @@
 package api.convertors;
 
 import api.entity.StationEntity;
-import api.entity.TrainScheduleEntity;
+import api.entity.ScheduleEntity;
 import api.model.StationBean;
 import api.model.TrainScheduleBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class StationConverter extends AbstractConvertor<StationBean, StationEnti
         StationBean stationBean = new StationBean();
         stationBean.setName(stationEntity.getName());
         stationBean.setId(stationEntity.getId());
-        List<TrainScheduleEntity> schedules = stationEntity.getSchedules();
+        List<ScheduleEntity> schedules = stationEntity.getSchedules();
         stationBean.setSchedules(scheduleConverter.convertToBeanCollection(schedules));
         return stationBean;
     }

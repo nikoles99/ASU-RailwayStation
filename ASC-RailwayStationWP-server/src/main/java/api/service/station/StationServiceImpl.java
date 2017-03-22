@@ -7,6 +7,7 @@ import api.exception.StationException;
 import api.model.StationBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * Created by nikita on 27.02.17.
  */
 @Service
+@Transactional
 public class StationServiceImpl implements StationService {
 
     @Autowired

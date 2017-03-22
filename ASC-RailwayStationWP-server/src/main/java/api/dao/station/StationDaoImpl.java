@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * Created by nikita on 27.02.17.
  */
-@Transactional(propagation = Propagation.REQUIRES_NEW)
+@Transactional(propagation = Propagation.MANDATORY)
 @Repository
 public class StationDaoImpl extends AbstractDao<StationEntity> implements StationDao {
 

@@ -18,7 +18,7 @@ public class TrainEntity extends AbstractEntity {
     List<CarriageEntity> carriages;
 
     @OneToMany(mappedBy = "trainEntity", fetch = FetchType.LAZY, cascade = {CascadeType.ALL})
-    List<TrainScheduleEntity> scheduleEntities;
+    List<ScheduleEntity> scheduleEntities;
 
     public TrainEntity() {
     }
@@ -42,12 +42,12 @@ public class TrainEntity extends AbstractEntity {
         this.name = name;
     }
 
-    public List<TrainScheduleEntity> getScheduleEntities() {
+    public List<ScheduleEntity> getScheduleEntities() {
         return scheduleEntities;
     }
 
-    public void setScheduleEntities(List<TrainScheduleEntity> scheduleEntities) {
-        for (TrainScheduleEntity scheduleEntity : scheduleEntities) {
+    public void setScheduleEntities(List<ScheduleEntity> scheduleEntities) {
+        for (ScheduleEntity scheduleEntity : scheduleEntities) {
             scheduleEntity.setTrainEntity(this);
         }
         Collections.sort(scheduleEntities);

@@ -2,7 +2,7 @@ package api.convertors;
 
 import api.entity.CarriageEntity;
 import api.entity.TrainEntity;
-import api.entity.TrainScheduleEntity;
+import api.entity.ScheduleEntity;
 import api.model.CarriageBean;
 import api.model.TrainBean;
 import api.model.TrainScheduleBean;
@@ -31,7 +31,7 @@ public class TrainConverter extends AbstractConvertor<TrainBean, TrainEntity> {
         trainBean.setName(trainEntity.getName());
         List<CarriageEntity> carriages = trainEntity.getCarriages();
         trainBean.setCarriages(carriageConverter.convertToBeanCollection(carriages));
-        List<TrainScheduleEntity> scheduleEntities = trainEntity.getScheduleEntities();
+        List<ScheduleEntity> scheduleEntities = trainEntity.getScheduleEntities();
         trainBean.setSchedules(scheduleConverter.convertToBeanCollection(scheduleEntities));
         return trainBean;
     }

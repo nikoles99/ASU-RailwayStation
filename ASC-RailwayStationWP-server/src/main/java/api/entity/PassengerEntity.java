@@ -14,7 +14,7 @@ public class PassengerEntity extends AbstractEntity {
 
     @OneToOne
     @JoinColumn(name = "last_name")
-    TrainScheduleEntity trainScheduleEntity;
+    ScheduleEntity scheduleEntity;
 
     @Column(name = "rate")
     Double rate;
@@ -38,12 +38,12 @@ public class PassengerEntity extends AbstractEntity {
         this.name = name;
     }
 
-    public TrainScheduleEntity getTrainScheduleEntity() {
-        return trainScheduleEntity;
+    public ScheduleEntity getScheduleEntity() {
+        return scheduleEntity;
     }
 
-    public void setTrainScheduleEntity(TrainScheduleEntity trainScheduleEntity) {
-        this.trainScheduleEntity = trainScheduleEntity;
+    public void setScheduleEntity(ScheduleEntity scheduleEntity) {
+        this.scheduleEntity = scheduleEntity;
     }
 
     public Double getRate() {

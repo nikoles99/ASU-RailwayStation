@@ -9,7 +9,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "train_schedules")
-public class TrainScheduleEntity extends AbstractEntity implements Comparable<TrainScheduleEntity> {
+public class ScheduleEntity extends AbstractEntity implements Comparable<ScheduleEntity> {
 
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "train_id")
@@ -29,7 +29,7 @@ public class TrainScheduleEntity extends AbstractEntity implements Comparable<Tr
     @JoinColumn(name = "order_id")
     OrderEntity orderEntity;
 
-    public TrainScheduleEntity() {
+    public ScheduleEntity() {
     }
 
     public TrainEntity getTrainEntity() {
@@ -78,7 +78,7 @@ public class TrainScheduleEntity extends AbstractEntity implements Comparable<Tr
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
 
-        TrainScheduleEntity that = (TrainScheduleEntity) o;
+        ScheduleEntity that = (ScheduleEntity) o;
 
         if (trainEntity != null ? !trainEntity.equals(that.trainEntity) : that.trainEntity != null) return false;
         if (stationEntity != null ? !stationEntity.equals(that.stationEntity) : that.stationEntity != null) return false;
@@ -99,7 +99,7 @@ public class TrainScheduleEntity extends AbstractEntity implements Comparable<Tr
     }
 
     @Override
-    public int compareTo(TrainScheduleEntity o) {
+    public int compareTo(ScheduleEntity o) {
         return o.getArrivalDate().compareTo(this.getArrivalDate());
     }
 }

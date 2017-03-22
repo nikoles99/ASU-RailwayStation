@@ -16,7 +16,7 @@ public class OrderEntity extends AbstractEntity {
     Date time;
 
     @OneToMany(mappedBy = "orderEntity", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
-    List<TrainScheduleEntity> schedules;
+    List<ScheduleEntity> schedules;
 
     @OneToMany(mappedBy = "orderEntity", fetch = FetchType.LAZY, cascade = { CascadeType.ALL })
     List<PassengerEntity> passengers;
@@ -39,12 +39,12 @@ public class OrderEntity extends AbstractEntity {
         this.time = time;
     }
 
-    public List<TrainScheduleEntity> getSchedules() {
+    public List<ScheduleEntity> getSchedules() {
         return schedules;
     }
 
-    public void setSchedules(List<TrainScheduleEntity> schedules) {
-        for (TrainScheduleEntity schedule : schedules) {
+    public void setSchedules(List<ScheduleEntity> schedules) {
+        for (ScheduleEntity schedule : schedules) {
             schedule.setOrderEntity(this);
         }
         this.schedules = schedules;

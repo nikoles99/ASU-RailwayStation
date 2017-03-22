@@ -10,7 +10,6 @@ import java.util.List;
 /**
  * Created by nolesuk on 22-Feb-17.
  */
-@Transactional
 public interface StationDao {
 
     void addStation(StationEntity stationEntity) throws StationException;

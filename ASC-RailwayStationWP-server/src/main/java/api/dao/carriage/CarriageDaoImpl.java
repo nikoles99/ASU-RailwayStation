@@ -15,7 +15,7 @@ import javax.persistence.PersistenceContext;
 /**
  * Created by nolesuk on 13-Mar-17.
  */
-@Transactional(propagation = Propagation.REQUIRES_NEW)
+@Transactional(propagation = Propagation.MANDATORY)
 @Repository
 public class CarriageDaoImpl extends AbstractDao<CarriageEntity> implements CarriageDao {
 

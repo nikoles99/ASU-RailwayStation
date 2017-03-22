@@ -8,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
  * Created by nolesuk on 22-Feb-17.
  */
 
-@Transactional
 public interface CarriageDao {
 
     void addCarriage(CarriageEntity carriageEntity);

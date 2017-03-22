@@ -1,7 +1,7 @@
 package api.dao.schedule;
 
 import api.dao.AbstractDao;
-import api.entity.TrainScheduleEntity;
+import api.entity.ScheduleEntity;
 import api.utils.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -14,57 +14,56 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 /**
  * Created by nikita on 14.03.17.
  */
-@Transactional(propagation = Propagation.REQUIRES_NEW)
+@Transactional(propagation = Propagation.MANDATORY)
 @Repository
-public class TrainScheduleDaoImpl extends AbstractDao<TrainScheduleEntity> implements TrainScheduleDao {
+public class TrainScheduleDaoImpl extends AbstractDao<ScheduleEntity> implements TrainScheduleDao {
 
     @Autowired
     private Environment env;
 
 
     @Override
-    public void addTrainSchedule(TrainScheduleEntity trainScheduleEntity) {
+    public void addTrainSchedule(ScheduleEntity scheduleEntity) {
 
     }
 
     @Override
-    public TrainScheduleEntity getTrainSchedule(Integer id) {
+    public ScheduleEntity getTrainSchedule(Integer id) {
         return null;
     }
 
     @Override
-    public void updateTrainSchedule(TrainScheduleEntity trainScheduleEntity) {
+    public void updateTrainSchedule(ScheduleEntity scheduleEntity) {
 
     }
 
     @Override
-    public void removeTrainSchedule(TrainScheduleEntity trainScheduleEntity) {
+    public void removeTrainSchedule(ScheduleEntity scheduleEntity) {
 
     }
 
     @Override
-    public Boolean isScheduleValidate(TrainScheduleEntity schedule) {
+    public Boolean isScheduleValidate(ScheduleEntity schedule) {
         Integer stationId = schedule.getStationEntity().getId();
         Date arrivalDate = schedule.getArrivalDate();
         Date departureDate = schedule.getDepartureDate();
-        List<TrainScheduleEntity> schedules = getScheduleByParams(departureDate, arrivalDate, stationId);
+        List<ScheduleEntity> schedules = getScheduleByParams(departureDate, arrivalDate, stationId);
         return schedules.isEmpty();
     }
 
     @Override
-    public List<TrainScheduleEntity> getScheduleByParams(Date departureDate, Date arrivalDate, Integer stationId) {
+    public List<ScheduleEntity> getScheduleByParams(Date departureDate, Date arrivalDate, Integer stationId) {
 
         CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
-        CriteriaQuery<TrainScheduleEntity> criteriaQuery = criteriaBuilder.createQuery(TrainScheduleEntity.class);
+        CriteriaQuery<ScheduleEntity> criteriaQuery = criteriaBuilder.createQuery(ScheduleEntity.class);
 
-        Root<TrainScheduleEntity> trainEntityRoot = criteriaQuery.from(TrainScheduleEntity.class);
+        Root<ScheduleEntity> trainEntityRoot = criteriaQuery.from(ScheduleEntity.class);
 
         Predicate stationIdPredicate = criteriaBuilder.equal(trainEntityRoot.get("stationEntity"), stationId);
 
@@ -78,7 +77,7 @@ public class TrainScheduleDaoImpl extends AbstractDao<TrainScheduleEntity> imple
         Predicate departureDatePredicate = criteriaBuilder.between(trainEntityRoot.get("departureDate").as(Date.class), startDepartureInterval, endDepartureInterval);
 
         Predicate result = criteriaBuilder.and(stationIdPredicate, arrivalDatePredicate, departureDatePredicate);
-        TypedQuery<TrainScheduleEntity> typedQuery = getEntityManager().createQuery(criteriaQuery
+        TypedQuery<ScheduleEntity> typedQuery = getEntityManager().createQuery(criteriaQuery
                 .select(trainEntityRoot)
                 .where(result)
         );

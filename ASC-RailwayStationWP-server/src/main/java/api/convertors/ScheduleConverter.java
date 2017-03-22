@@ -6,7 +6,7 @@ import api.dao.train.TrainDao;
 import api.entity.OrderEntity;
 import api.entity.StationEntity;
 import api.entity.TrainEntity;
-import api.entity.TrainScheduleEntity;
+import api.entity.ScheduleEntity;
 import api.model.TrainScheduleBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class ScheduleConverter extends AbstractConvertor<TrainScheduleBean, TrainScheduleEntity> {
+public class ScheduleConverter extends AbstractConvertor<TrainScheduleBean, ScheduleEntity> {
 
     @Autowired
     private TrainDao trainDao;
@@ -28,7 +28,7 @@ public class ScheduleConverter extends AbstractConvertor<TrainScheduleBean, Trai
     private OrderDao orderDao;
 
     @Override
-    public TrainScheduleBean convertToBean(TrainScheduleEntity entity) {
+    public TrainScheduleBean convertToBean(ScheduleEntity entity) {
         TrainScheduleBean bean = new TrainScheduleBean();
         bean.setArrivalDate(entity.getArrivalDate());
         bean.setId(entity.getId());
@@ -43,8 +43,8 @@ public class ScheduleConverter extends AbstractConvertor<TrainScheduleBean, Trai
     }
 
     @Override
-    public TrainScheduleEntity convertToEntity(TrainScheduleBean bean) {
-        TrainScheduleEntity entity = new TrainScheduleEntity();
+    public ScheduleEntity convertToEntity(TrainScheduleBean bean) {
+        ScheduleEntity entity = new ScheduleEntity();
         entity.setArrivalDate(bean.getArrivalDate());
         entity.setId(bean.getId());
         entity.setDepartureDate(bean.getDepartureDate());
