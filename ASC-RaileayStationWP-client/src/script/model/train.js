@@ -1,4 +1,4 @@
-function getTrainsByStationName(departureStation, arrivalStation, callback) {
+function getTrainsByStations(departureStation, arrivalStation, callback) {
     if(departureStation=="" || arrivalStation==""){
         alert('Маршрут введен не корректно');
         return;
@@ -16,7 +16,7 @@ function getTrainsByStationName(departureStation, arrivalStation, callback) {
     });
 }
 
-function addNewTrain(train) {
+function saveTrain(train) {
     if (train != null) {
         var url = "http://localhost:8080/addNewRoute";
         console.log(JSON.stringify(train));
@@ -31,4 +31,8 @@ function addNewTrain(train) {
             }
         });
     }
+}
+
+function validate(train) {
+
 }

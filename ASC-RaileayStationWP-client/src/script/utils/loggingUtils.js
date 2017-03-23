@@ -3,7 +3,7 @@
  */
 function errorLogging(xhr) {
     alert(xhr.responseText);
-    var text = xhr.code;
+    console.log("code: " + xhr.code);
     console.log("readyState: " + xhr.readyState);
     console.log("responseText: " + xhr.responseText);
     console.log("status: " + xhr.status);

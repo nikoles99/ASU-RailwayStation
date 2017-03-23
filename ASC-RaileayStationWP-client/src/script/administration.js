@@ -1,17 +1,7 @@
 /**
  * Created by nolesuk on 07-Mar-17.
  */
-var reservedSeatPlacesCount = 54;
-var coupPlacesCount = 36;
-var commonPlacesCount = 81;
-var seatPlacesCount = 42;
-var stationsArray = [];
-var trainSpeed = 60;
-
-var carriageNumber = 0;
-
 var train;
-
 
 $("document").ready(function () {
     getStationsFromServer();
@@ -53,22 +43,21 @@ $("#deleteStation").click(function () {
 
 
 $("#buildRoute").click(function () {
-    refreshTrain();
-    var isRouteValidated = validateRoute();
     var isCarriagesValidate = validateCarriages();
-
+    var isRouteValidated = validateRoute();
     var isValidationComplete = isRouteValidated && isCarriagesValidate;
-    var lastIndex = parseInt(train.schedules.length - 1);
-    var route = $("#stations tr:eq(0) td:eq(1)").find("input").val() + " - " + $("#stations tr:eq(" + lastIndex + ") td:eq(1)").find("input").val();
     if (isValidationComplete) {
-        train.name = route;
+        train = getTrain();
+        var lastScheduleIndex = parseInt(train.schedules.length - 1);
+        var route = $("#stations tr:eq(0) td:eq(1)").find("input").val() + "-" + $("#stations tr:eq(" + lastScheduleIndex + ") td:eq(1)").find("input").val();
         $("#trainRoute").val(route);
         var arrivalDate = train.schedules[train.schedules.length - 1].arrivalDate;
-        var date = dateToString(arrivalDate);
-        $("#arrivalDate").val(date);
+        var arrivalDateStr = dateToString(arrivalDate);
+        $("#arrivalDate").val(arrivalDateStr);
     }
     $("#save").prop('disabled', !isValidationComplete);
 });
+
 
 $("#stations").on("click", ".removeStationFromRoute", function () {
     $(this).closest('tr').remove();
@@ -90,14 +79,16 @@ $("#search").click(function () {
         alert("Не верно введен маршрут, Пример ввода: Минск-Гродно");
         return;
     }
-    getTrainsByStationName(split[0], split[1], function (data) {
+    getTrainsByStations(split[0], split[1], function (data) {
         fillTrains(data);
     });
 });
 
 
 $("#save").click(function () {
-    addNewTrain(train)
+    var train = getTrain();
+    saveTrain(train);
+    $(this).prop('disabled', true);
 });
 
 
@@ -132,7 +123,7 @@ function fillTrains(data) {
         "<td>Маршрут</td> " +
         "<td>Время отправления</td>" +
         "<td>Вермя прибытия</td>" +
-        "</tr>"
+        "</tr>";
     $("#trains").append(trainsHeader);
     $.each(data, (function (index, train) {
         var arrivalDate = train.schedules[0].arrivalDate;
@@ -141,7 +132,7 @@ function fillTrains(data) {
             "<td>" + train.id + "</td>" +
             "<td>" + train.name + "</td>" +
             "<td>" + dateToString(new Date(departureDate)) + "</td>" +
-            "<td>" + dateToString(new Date(arrivalDate)) + "</td>"
+            "<td>" + dateToString(new Date(arrivalDate)) + "</td>";
         "</tr>";
         $("#trains tr:last").after(newStation);
     }));
@@ -149,72 +140,70 @@ function fillTrains(data) {
 }
 
 
-function dateToString(date) {
-    var day = correctDate(date.getDate());
-    var year = date.getFullYear();
-    var month = correctDate(date.getMonth() + 1);
-    var hours = correctDate(date.getHours());
-    var minutes = correctDate(date.getMinutes());
-    return year + "-" + month + "-" + day + "T" + hours + ":" + minutes;
-}
-
-
-function correctDate(number) {
-    if (number < 10 && number >= 0) {
-        number = "0" + number;
-    }
-    return number;
-}
-
-
-function validateRoute() {
+function validateDepartureDate() {
     var departureDateText = $("#departureDate").val();
-    var departureDate = new Date(departureDateText + "+03:00");
+    var departureDate = getDepartureDate();
+
     if (departureDateText == "" || departureDate < new Date($.now())) {
         alert("проверьте правильность ввода даты отправления");
         return false;
     }
-    stationsArray = [];
+    return true;
+}
+
+
+function getDepartureDate() {
+    var departureDateText = $("#departureDate").val();
+    var departureDate = new Date(departureDateText + "+03:00");
+    return departureDate;
+}
+
+
+function getTrain() {
+    var train = {name: "", carriages: [], schedules: []};
+    var schedules = [];
+    var trainSpeed = 60;
+    var departureDate = getDepartureDate();
+
     $("#stations tr").each(function () {
-        var isStationValidate = false;
         var station = this.getElementsByClassName("station")[0].value;
         var distance = this.getElementsByClassName("distance")[0].value;
 
-        $("#stationsDataList option").each(function () {
-            if (this.value == station) {
-                isStationValidate = true;
-            }
-        });
-        if (station == "") {
-            alert("выберите станцию");
-            return false;
-        }
-
         var arrivalDate = new Date(departureDate);
         arrivalDate.setMinutes(arrivalDate.getMinutes() - 10);
+        var stationId = getStationId(station);
+        schedules.push({stationId: stationId, arrivalDate: arrivalDate, departureDate: new Date(departureDate)});
 
-        if (isStationValidate) {
-            var stationId = getStationId(station);
-            stationsArray.push({stationId: stationId, arrivalDate: arrivalDate, departureDate: new Date(departureDate)});
-        }
-        else {
-            return !isStationValidate;
-        }
-
-        if (distance == "" || distance < 20 || countReservedSeat > 200) {
-            alert("проверьте правильность ввода расстояния до следующей станции");
-            return false;
-        } else {
-            var allMinutes = parseInt(distance) / trainSpeed * 60;
-            var hours = parseInt(allMinutes / 60);
-            var minutes = allMinutes - hours * 60;
-            departureDate.setMinutes(departureDate.getMinutes() + minutes);
-            departureDate.setHours(departureDate.getHours() + hours);
-        }
-
+        var allMinutes = parseInt(distance) / trainSpeed * 60;
+        var hours = parseInt(allMinutes / 60);
+        var minutes = allMinutes - hours * 60;
+        departureDate.setMinutes(departureDate.getMinutes() + minutes);
+        departureDate.setHours(departureDate.getHours() + hours);
     });
-    train.schedules = stationsArray;
-    return true;
+    train.schedules = schedules;
+    setCarriages(train);
+    train.name = $("#trainRoute").val();
+    return train;
+}
+
+function setCarriages(train) {
+    var number = 0;
+
+    var commonPlacesCount = 81;
+    var commonCarriagesCount = $("#countCommon").val();
+    addCarriage(train, "common", commonCarriagesCount, number, commonPlacesCount);
+
+    var reservedSeatPlacesCount = 54;
+    var reservedSeatCount = $("#countReservedSeat").val();
+    addCarriage(train, "reservedSeat", reservedSeatCount, number, reservedSeatPlacesCount);
+
+    var coupPlacesCount = 36;
+    var coupsCount = $("#countCoups").val();
+    addCarriage(train, "coup", coupsCount, number, coupPlacesCount);
+
+    var seatPlacesCount = 42;
+    var seatCarriageCount = $("#countSeatPlaces").val();
+    addCarriage(train, "seatPlaces", seatCarriageCount, number, seatPlacesCount);
 }
 
 
@@ -224,40 +213,27 @@ function validateCarriages() {
         alert("countCarriages число вагонов между 10 и 30");
         return false;
     }
-
-    var commonCarriages = $("#commonCarriages").val();
-    if (commonCarriages == "" || commonCarriages < 2 || commonCarriages > countCarriages) {
-        alert("commonCarriages число вагонов между 2 и 10");
+    var countCommon = $("#countCommon").val();
+    if (countCommon == "" || countCommon < 2 || countCommon > countCarriages) {
+        alert("countCommon число вагонов между 2 и 10");
         return false;
     }
-
-    addCarriage("common", commonCarriages, commonPlacesCount);
-
     var countReservedSeat = $("#countReservedSeat").val();
     if (countReservedSeat == "" || countReservedSeat < 2 || countReservedSeat > countCarriages) {
         alert("countReservedSeat число вагонов между 10 и 30");
         return false;
     }
-
-    addCarriage("reservedSeat", countReservedSeat, reservedSeatPlacesCount);
-
     var countCoups = $("#countCoups").val();
     if (countCoups == "" || countCoups < 2 || countCoups > countCarriages) {
         alert("countCoups число вагонов между 10 и 30");
         return false;
     }
-
-    addCarriage("coup", countCoups, coupPlacesCount);
-
     var countSeatPlaces = $("#countSeatPlaces").val();
     if (countSeatPlaces == "" || countSeatPlaces < 2 || countSeatPlaces > countCarriages) {
         alert("countSeatPlaces число вагонов между 10 и 30");
         return false;
     }
-
-    addCarriage("seatPlaces", countSeatPlaces, seatPlacesCount);
-
-    var countAllCarriages = parseInt(commonCarriages) + parseInt(countReservedSeat) + parseInt(countCoups) + parseInt(countSeatPlaces);
+    var countAllCarriages = parseInt(countCommon) + parseInt(countReservedSeat) + parseInt(countCoups) + parseInt(countSeatPlaces);
     if (countCarriages != countAllCarriages) {
         alert("сумма вагонов не равно общему числу вагонов");
         return false;
@@ -265,9 +241,49 @@ function validateCarriages() {
     return true;
 }
 
-function addCarriage(type, countCarriages) {
+function validateRoute() {
+    var isValidated = true;
+    if (!validateDepartureDate()) {
+        isValidated = false;
+    }
+    $("#stations tr").each(function () {
+        var station = this.getElementsByClassName("station")[0].value;
+
+        if (station == "") {
+            alert("выберите станцию");
+            isValidated = false;
+            return isValidated;
+        }
+        var distance = this.getElementsByClassName("distance")[0].value;
+        if (distance == "" || distance < 20 || distance > 200) {
+            alert("проверьте правильность ввода расстояния до следующей станции");
+            isValidated = false;
+            return isValidated;
+        }
+
+        $("#stationsDataList option").each(function () {
+            if (this.value == station) {
+                isValidated = true;
+                return isValidated;
+            }
+        });
+    });
+    return isValidated;
+}
+
+
+function addCarriage(train, type, countCarriages, number, countPlaces) {
+    var carriage = {carriageType: type, number: number, places: []};
+    addPlaces(carriage, countPlaces);
     for (var i = 0; i < countCarriages; i++) {
-        train.carriages.push({carriageType: type, number: ++carriageNumber});
+        carriage.number = ++number;
+        train.carriages.push(carriage);
+    }
+}
+
+function addPlaces(carriage, countPlaces) {
+    for (var i = 1; i <= countPlaces; i++) {
+        carriage.places.push({number: i});
     }
 }
 
@@ -288,19 +304,9 @@ function getStationId(name) {
     $("#stationsDataList option").each(function () {
         if (this.value == name) {
             stationId = parseInt($(this).next("span").text());
-            return;
         }
     });
     return stationId;
-}
-
-
-function refreshTrain() {
-    train = {
-        name: "",
-        carriages: [],
-        schedules: []
-    }
 }
 
 
