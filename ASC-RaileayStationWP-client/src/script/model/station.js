@@ -15,6 +15,18 @@ function deleteStation(stationName, callback) {
     });
 }
 
+function getStationByName(name, callback) {
+    var url = "http://localhost:8080/getAllStations";
+    $.ajax({
+        url: url,
+        type: 'POST',
+        dataType: 'jsonp',
+        success: callback,
+        error: function (xhr) {
+            errorLogging(xhr);
+        }
+    });
+}
 
 function getStations(callback) {
     var url = "http://localhost:8080/getAllStations";
