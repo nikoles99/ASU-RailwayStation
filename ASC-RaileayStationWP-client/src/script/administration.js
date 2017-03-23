@@ -142,7 +142,7 @@ function fillTrains(data) {
 
 function validateDepartureDate() {
     var departureDateText = $("#departureDate").val();
-    var departureDate = getDepartureDate();
+    var departureDate = strToDate(departureDateText);
 
     if (departureDateText == "" || departureDate < new Date($.now())) {
         alert("проверьте правильность ввода даты отправления");
@@ -151,19 +151,12 @@ function validateDepartureDate() {
     return true;
 }
 
-
-function getDepartureDate() {
-    var departureDateText = $("#departureDate").val();
-    var departureDate = new Date(departureDateText + "+03:00");
-    return departureDate;
-}
-
-
 function getTrain() {
     var train = {name: "", carriages: [], schedules: []};
     var schedules = [];
     var trainSpeed = 60;
-    var departureDate = getDepartureDate();
+    var departureDateText = $("#departureDate").val();
+    var departureDate = strToDate(departureDateText);
 
     $("#stations tr").each(function () {
         var station = this.getElementsByClassName("station")[0].value;
