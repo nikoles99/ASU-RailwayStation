@@ -42,3 +42,14 @@ function addStation(nameStation, callback) {
         }
     });
 }
+
+
+function addStationsInDataList(dataList) {
+    getStations(function (data) {
+        dataList.empty();
+        for (var i in data) {
+            $("<option/>").html(data[i].name).appendTo(dataList);
+            $("<span/>").html(data[i].id).appendTo(dataList);
+        }
+    });
+}

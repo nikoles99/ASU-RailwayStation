@@ -3,6 +3,7 @@ package api.service;
 import api.exception.TrainException;
 import api.model.TrainBean;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -14,6 +15,6 @@ public interface TrainService {
 
     List<TrainBean> getByStations(String arrivalStation, String departureStation);
 
-    List<TrainBean> getByParams(String arrivalStation, String departureStation, String arrivalDate, String departureDate);
+    List<TrainBean> getByParams(String arrivalStation, String departureStation, Date arrivalDate, Date departureDate);
 
 }

@@ -4,8 +4,8 @@
 var train;
 
 $("document").ready(function () {
-    getStationsFromServer();
-    setDepartureDate();
+    addStationsInDataList($("#stationsDataList"));
+    setTodayDate($("#departureDate"));
 });
 
 
@@ -29,7 +29,7 @@ $("#stations").on("change", ".station", function () {
 $("#addStation").click(function () {
     addStation($("#nameStation").val(), function (data) {
         $("#nameStation").val('');
-        getStationsFromServer();
+        addStationsInDataList($("#stationsDataList"));
     });
 });
 
@@ -37,7 +37,7 @@ $("#addStation").click(function () {
 $("#deleteStation").click(function () {
     deleteStation($("#nameStation").val(), function () {
         $("#nameStation").val('');
-        getStationsFromServer();
+        addStationsInDataList($("#stationsDataList"));
     })
 });
 
@@ -181,12 +181,12 @@ function getTrain() {
         departureDate.setHours(departureDate.getHours() + hours);
     });
     train.schedules = schedules;
-    setCarriages(train);
+    addCarriages(train);
     train.name = $("#trainRoute").val();
     return train;
 }
 
-function setCarriages(train) {
+function addCarriages(train) {
     var number = 0;
 
     var commonPlacesCount = 81;
@@ -288,17 +288,6 @@ function addPlaces(carriage, countPlaces) {
 }
 
 
-function getStationsFromServer() {
-    getStations(function (data) {
-        $("#stationsDataList").empty();
-        for (var i in data) {
-            $("<option/>").html(data[i].name).appendTo("#stationsDataList");
-            $("<span/>").html(data[i].id).appendTo("#stationsDataList");
-        }
-    });
-}
-
-
 function getStationId(name) {
     var stationId = 0;
     $("#stationsDataList option").each(function () {
@@ -310,9 +299,4 @@ function getStationId(name) {
 }
 
 
-function setDepartureDate() {
-    var date = new Date($.now());
-    date.setDate(date.getDate() + 1);
-    var departureDate = dateToString(date);
-    $("#departureDate").val(departureDate);
-}
+
