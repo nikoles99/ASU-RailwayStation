@@ -41,13 +41,6 @@ public class AbstractDao<T> {
         return list;
     }
 
-
-    protected CriteriaQuery<T> getCriteriaQuery(Class<T> type) {
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(type);
-        return criteriaQuery;
-    }
-
     protected void remove(T entity) {
         entityManager.remove(entity);
         logger.info("Remove was successfully " + entity);
