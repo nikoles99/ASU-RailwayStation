@@ -29,6 +29,9 @@ public class TrainEntity extends AbstractEntity {
 
     public void setCarriages(List<CarriageEntity> carriages) {
         for (CarriageEntity carriage : carriages) {
+            for (PlaceEntity place : carriage.getPlaces()) {
+                place.setTrain(this);
+            }
             carriage.setTrain(this);
         }
         this.carriages = carriages;
