@@ -53,4 +53,16 @@ public class StationServiceImpl implements StationService {
         StationEntity stationEntity = stationConverter.toEntity(station);
         stationDao.update(stationEntity);
     }
+
+    @Override
+    public StationBean getById(Integer id) {
+        StationEntity stationEntity = stationDao.getById(id);
+        return stationConverter.toBean(stationEntity);
+    }
+
+    @Override
+    public StationBean getByName(String name) {
+        StationEntity stationEntity = stationDao.getByName(name);
+        return stationConverter.toBean(stationEntity);
+    }
 }

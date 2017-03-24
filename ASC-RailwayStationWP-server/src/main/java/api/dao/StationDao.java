@@ -14,7 +14,7 @@ public interface StationDao {
 
     void add(StationEntity station) throws StationException;
 
-    List<StationEntity> getByName(String name);
+    StationEntity getByName(String name);
 
     void update(StationEntity station);
 

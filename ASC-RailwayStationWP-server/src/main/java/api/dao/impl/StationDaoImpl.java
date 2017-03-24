@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -29,8 +30,8 @@ public class StationDaoImpl extends AbstractDao<StationEntity> implements Statio
         if (station == null || station.getName() == null || station.getName().isEmpty()) {
             throw new StationException(station + " entity or name is null");
         }
-        List<StationEntity> stations = getByName(station.getName());
-        if (stations.isEmpty()) {
+        StationEntity stationEntity = getByName(station.getName());
+        if (stationEntity != null) {
             getEntityManager().persist(station);
             getLogger().info("Station add successfully " + station);
         } else {
@@ -42,14 +43,14 @@ public class StationDaoImpl extends AbstractDao<StationEntity> implements Statio
     }
 
     @Override
-    public List<StationEntity> getByName(String name) {
+    public StationEntity getByName(String name) {
         CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
         CriteriaQuery<StationEntity> criteriaQuery = criteriaBuilder.createQuery(StationEntity.class);
         Root<StationEntity> stationEntityRoot = criteriaQuery.from(StationEntity.class);
         criteriaQuery.select(stationEntityRoot);
         criteriaQuery.where(criteriaBuilder.equal(stationEntityRoot.get("name"), name));
-        List<StationEntity> students = getEntityManager().createQuery(criteriaQuery).getResultList();
-        return students;
+        TypedQuery<StationEntity> query = getEntityManager().createQuery(criteriaQuery);
+        return query.getSingleResult();
     }
 
     @Override

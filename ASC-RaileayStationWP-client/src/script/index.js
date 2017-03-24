@@ -47,8 +47,7 @@ $("#searchTrains").click(function () {
 });
 
 
-function fillTrains(departureStation, arrivalStation, trains) {
-    $("#trains tr").remove();
+function appendTrainsTableHeader() {
     var trainsHeader = "<tr>" +
         "<td>Номер поезда</td>" +
         "<td>Маршрут</td> " +
@@ -59,23 +58,44 @@ function fillTrains(departureStation, arrivalStation, trains) {
         "<td>Вагоны</td>" +
         "</tr>";
     $("#trains").append(trainsHeader);
+}
+function fillTrains(departureStation, arrivalStation, trains) {
+    $("#trains tr").remove();
+    appendTrainsTableHeader();
+    $("#trains").css("visibility", "visible");
+
     $.each(trains, (function (index, train) {
         var arrivalStation = $("#station_to").val();
         var departureStation = $("#station_from").val();
-        var newStation = "<tr>" +
-            "<td>" + train.id + "</td>" +
-            "<td>" + train.name + "</td>" +
-            "<td>" + departureStation + "</td>" +
-            "<td>" + arrivalStation + "</td>" +
-            "<td>" + dateToString(new Date(departureDate)) + "</td>" +
-            "<td>" + dateToString(new Date(arrivalDate)) + "</td>";
-        "</tr>";
-        $("#trains tr:last").after(newStation);
+        $.when(
+            getSchedule(train.schedules, departureStation),
+            getSchedule(train.schedules, arrivalStation))
+            .then(function (departureSchedule, arrivalSchedule) {
+                var newStation = "<tr>" +
+                    "<td>" + train.id + "</td>" +
+                    "<td>" + train.name + "</td>" +
+                    "<td>" + departureStation + "</td>" +
+                    "<td>" + arrivalStation + "</td>" +
+                    "<td>" + dateToString(new Date(departureSchedule.departureDate)) + "</td>" +
+                    "<td>" + dateToString(new Date(arrivalSchedule.arrivalDate)) + "</td>";
+                "</tr>";
+                $("#trains tr:last").after(newStation);
+            });
     }));
-    $("#trains").css("visibility", "visible");
 }
 
 
-function getStationIdByName(name){
-
+function getSchedule(schedules, stationName) {
+    var stationPromise = getStationByName(stationName);
+    return stationPromise.then(function (station) {
+        for (var i = 0; i < schedules.length; i++) {
+            var stationId = schedules[i].stationId;
+            if (stationId == station.id) {
+                return schedules[i];
+            }
+        }
+        throw new Error('Illegal State: schedule not found');
+    });
 }
+
+

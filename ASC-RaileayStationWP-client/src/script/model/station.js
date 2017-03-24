@@ -9,21 +9,22 @@ function deleteStation(stationName, callback) {
         dataType: 'jsonp',
         data: {name: stationName},
         success: callback,
-        error: function (xhr) {
-            errorLogging(xhr);
+        error: function (error) {
+            errorLogging(error);
         }
     });
 }
 
 function getStationByName(name, callback) {
-    var url = "http://localhost:8080/getAllStations";
-    $.ajax({
+    var url = "http://localhost:8080/getStationByName";
+    return $.ajax({
         url: url,
         type: 'POST',
-        dataType: 'jsonp',
+        dataType: 'json',
+        data: {name: name},
         success: callback,
-        error: function (xhr) {
-            errorLogging(xhr);
+        error: function (error) {
+            errorLogging(error);
         }
     });
 }
@@ -35,8 +36,8 @@ function getStations(callback) {
         type: 'POST',
         dataType: 'jsonp',
         success: callback,
-        error: function (xhr) {
-            errorLogging(xhr);
+        error: function (error) {
+            errorLogging(error);
         }
     });
 }
@@ -49,8 +50,8 @@ function addStation(nameStation, callback) {
         dataType: 'jsonp',
         data: {name: nameStation},
         success: callback,
-        error: function (xhr) {
-            errorLogging(xhr);
+        error: function (error) {
+            errorLogging(error);
         }
     });
 }
@@ -62,6 +63,20 @@ function addStationsInDataList(dataList) {
         for (var i in data) {
             $("<option/>").html(data[i].name).appendTo(dataList);
             $("<span/>").html(data[i].id).appendTo(dataList);
+        }
+    });
+}
+
+function getStationById(id, callback) {
+    var url = "http://localhost:8080/getStationById";
+    return $.ajax({
+        url: url,
+        type: 'POST',
+        dataType: 'json',
+        data: {id: id},
+        success: callback,
+        error: function (error) {
+            errorLogging(error);
         }
     });
 }

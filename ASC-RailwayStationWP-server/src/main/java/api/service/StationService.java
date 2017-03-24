@@ -18,4 +18,8 @@ public interface StationService {
     void delete(StationBean station);
 
     void update(StationBean station);
+
+    StationBean getById(Integer id);
+
+    StationBean getByName(String name);
 }

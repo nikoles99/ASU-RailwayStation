@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,5 +45,15 @@ public class StationController extends AbstractController {
     @ResponseBody
     List<StationBean> getAllStations() {
         return stationService.getAllStations();
+    }
+
+    @RequestMapping(value = "/getStationById", produces = MediaType.APPLICATION_JSON_VALUE)
+    StationBean getStationById(@RequestParam("id") Integer id) {
+        return stationService.getById(id);
+    }
+
+    @RequestMapping(value = "/getStationByName", produces = MediaType.APPLICATION_JSON_VALUE)
+    StationBean getStationByName(@RequestParam("name") String name) {
+        return stationService.getByName(name);
     }
 }
