@@ -12,7 +12,7 @@ public class PlaceEntity extends AbstractEntity {
     @Column(name = "number")
     private Integer number;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "carriage_id")
     private CarriageEntity carriage;
 

@@ -13,6 +13,7 @@ import java.util.List;
 public class CarriageEntity extends AbstractEntity {
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "carriageType")
     private CarriageType type;
 
     @Column(name = "number")

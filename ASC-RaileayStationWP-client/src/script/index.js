@@ -59,18 +59,18 @@ function appendTrainsTableHeader() {
         "</tr>";
     $("#trains").append(trainsHeader);
 }
+
 function fillTrains(departureStation, arrivalStation, trains) {
     $("#trains tr").remove();
     appendTrainsTableHeader();
     $("#trains").css("visibility", "visible");
 
     $.each(trains, (function (index, train) {
-        var arrivalStation = $("#station_to").val();
-        var departureStation = $("#station_from").val();
         $.when(
             getSchedule(train.schedules, departureStation),
-            getSchedule(train.schedules, arrivalStation))
-            .then(function (departureSchedule, arrivalSchedule) {
+            getSchedule(train.schedules, arrivalStation),
+            getFreePlaces(train, departureStation, arrivalStation))
+            .then(function (departureSchedule, arrivalSchedule, carriages) {
                 var newStation = "<tr>" +
                     "<td>" + train.id + "</td>" +
                     "<td>" + train.name + "</td>" +
@@ -84,6 +84,9 @@ function fillTrains(departureStation, arrivalStation, trains) {
     }));
 }
 
+function getFreePlaces(train, departureStation, arrivalStation) {
+
+}
 
 function getSchedule(schedules, stationName) {
     var stationPromise = getStationByName(stationName);
