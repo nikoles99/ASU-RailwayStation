@@ -1,0 +1,105 @@
+package api.entity;
+
+import javax.persistence.*;
+import java.util.Date;
+
+/**
+ * Created by nolesuk on 21-Feb-17.
+ */
+
+@Entity
+@Table(name = "tickets")
+public class TicketEntity extends AbstractEntity {
+
+    @Column(name = "train_id")
+    private Integer trainId;
+
+    @Column(name = "carriage_id")
+    private Integer carriageId;
+
+    @Column(name = "place_id")
+    private Integer placeId;
+
+    @Column(name = "arrival_date")
+    private Date arrivalDate;
+
+    @Column(name = "departure_date")
+    private Date departureDate;
+
+    @Column(name = "departure_station")
+    private String departureStation;
+
+    @Column(name = "arrival_station")
+    private String arrivalStation;
+
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
+
+    public TicketEntity() {
+    }
+
+    public Integer getTrainId() {
+        return trainId;
+    }
+
+    public void setTrainId(Integer trainId) {
+        this.trainId = trainId;
+    }
+
+    public Integer getCarriageId() {
+        return carriageId;
+    }
+
+    public void setCarriageId(Integer carriageId) {
+        this.carriageId = carriageId;
+    }
+
+    public Integer getPlaceId() {
+        return placeId;
+    }
+
+    public void setPlaceId(Integer placeId) {
+        this.placeId = placeId;
+    }
+
+    public Date getArrivalDate() {
+        return arrivalDate;
+    }
+
+    public void setArrivalDate(Date arrivalDate) {
+        this.arrivalDate = arrivalDate;
+    }
+
+    public Date getDepartureDate() {
+        return departureDate;
+    }
+
+    public void setDepartureDate(Date departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public String getDepartureStation() {
+        return departureStation;
+    }
+
+    public void setDepartureStation(String departureStation) {
+        this.departureStation = departureStation;
+    }
+
+    public String getArrivalStation() {
+        return arrivalStation;
+    }
+
+    public void setArrivalStation(String arrivalStation) {
+        this.arrivalStation = arrivalStation;
+    }
+
+    public UserEntity getUser() {
+        return user;
+    }
+
+    public void setUser(UserEntity user) {
+        this.user = user;
+    }
+}

@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by nolesuk on 07-Mar-17.
  */
-public class TrainScheduleBean extends AbstractBean implements Comparable<TrainScheduleBean> {
+public class ScheduleBean extends AbstractBean implements Comparable<ScheduleBean> {
 
     private Integer trainId;
 
@@ -15,13 +15,7 @@ public class TrainScheduleBean extends AbstractBean implements Comparable<TrainS
 
     private Date arrivalDate;
 
-    public Integer getOrderId() {
-        return orderId;
-    }
-
-    private Integer orderId;
-
-    public TrainScheduleBean() {
+    public ScheduleBean() {
     }
 
     public Integer getTrainId() {
@@ -63,7 +57,7 @@ public class TrainScheduleBean extends AbstractBean implements Comparable<TrainS
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
 
-        TrainScheduleBean that = (TrainScheduleBean) o;
+        ScheduleBean that = (ScheduleBean) o;
 
         if (trainId != null ? !trainId.equals(that.trainId) : that.trainId != null) return false;
         if (stationId != null ? !stationId.equals(that.stationId) : that.stationId != null) return false;
@@ -81,12 +75,8 @@ public class TrainScheduleBean extends AbstractBean implements Comparable<TrainS
         return result;
     }
 
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
-    }
-
     @Override
-    public int compareTo(TrainScheduleBean o) {
+    public int compareTo(ScheduleBean o) {
         return o.getArrivalDate().compareTo(this.getArrivalDate());
     }
 }

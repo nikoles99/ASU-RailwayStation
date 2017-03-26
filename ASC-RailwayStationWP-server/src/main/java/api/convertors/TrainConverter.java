@@ -5,7 +5,7 @@ import api.entity.TrainEntity;
 import api.entity.ScheduleEntity;
 import api.model.CarriageBean;
 import api.model.TrainBean;
-import api.model.TrainScheduleBean;
+import api.model.ScheduleBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -43,7 +43,7 @@ public class TrainConverter extends AbstractConvertor<TrainBean, TrainEntity> {
         trainEntity.setName(trainBean.getName());
         List<CarriageBean> carriages = trainBean.getCarriages();
         trainEntity.setCarriages(carriageConverter.toEntityCollection(carriages));
-        List<TrainScheduleBean> schedules = trainBean.getSchedules();
+        List<ScheduleBean> schedules = trainBean.getSchedules();
         trainEntity.setSchedules(scheduleConverter.toEntityCollection(schedules));
         return trainEntity;
     }

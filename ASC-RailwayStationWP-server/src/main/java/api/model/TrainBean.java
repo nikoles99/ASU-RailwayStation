@@ -17,7 +17,7 @@ public class TrainBean extends AbstractBean {
     private List<CarriageBean> carriages = new ArrayList<CarriageBean>();
 
     @NotNull
-    private List<TrainScheduleBean> schedules = new ArrayList<TrainScheduleBean>();
+    private List<ScheduleBean> schedules = new ArrayList<ScheduleBean>();
 
     public TrainBean() {
     }
@@ -30,11 +30,11 @@ public class TrainBean extends AbstractBean {
         this.carriages = carriages;
     }
 
-    public List<TrainScheduleBean> getSchedules() {
+    public List<ScheduleBean> getSchedules() {
         return schedules;
     }
 
-    public void setSchedules(List<TrainScheduleBean> schedules) {
+    public void setSchedules(List<ScheduleBean> schedules) {
         Collections.sort(schedules);
         this.schedules = schedules;
     }

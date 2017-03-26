@@ -1,6 +1,7 @@
 package api.entity;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -29,6 +30,9 @@ public class UserEntity extends AbstractEntity {
 
     @Column(name = "address")
     private String address;
+
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL})
+    private List<TicketEntity> tickets;
 
     public UserEntity() {
 

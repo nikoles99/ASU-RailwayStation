@@ -12,7 +12,7 @@ public class StationBean extends AbstractBean {
     @NotNull
     private String name;
 
-    private List<TrainScheduleBean> schedules = new ArrayList<TrainScheduleBean>();
+    private List<ScheduleBean> schedules = new ArrayList<ScheduleBean>();
 
     public StationBean() {
     }
@@ -25,11 +25,11 @@ public class StationBean extends AbstractBean {
         this.name = name;
     }
 
-    public List<TrainScheduleBean> getSchedules() {
+    public List<ScheduleBean> getSchedules() {
         return schedules;
     }
 
-    public void setSchedules(List<TrainScheduleBean> schedules) {
+    public void setSchedules(List<ScheduleBean> schedules) {
         this.schedules = schedules;
     }
 

@@ -1,13 +1,13 @@
 package api.convertors;
 
-import api.dao.OrderDao;
+import api.dao.TicketDao;
 import api.dao.StationDao;
 import api.dao.TrainDao;
-import api.entity.OrderEntity;
+import api.entity.TicketEntity;
 import api.entity.StationEntity;
 import api.entity.TrainEntity;
 import api.entity.ScheduleEntity;
-import api.model.TrainScheduleBean;
+import api.model.ScheduleBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
  */
 
 @Component
-public class ScheduleConverter extends AbstractConvertor<TrainScheduleBean, ScheduleEntity> {
+public class ScheduleConverter extends AbstractConvertor<ScheduleBean, ScheduleEntity> {
 
     @Autowired
     private TrainDao trainDao;
@@ -25,25 +25,21 @@ public class ScheduleConverter extends AbstractConvertor<TrainScheduleBean, Sche
     private StationDao stationDao;
 
     @Autowired
-    private OrderDao orderDao;
+    private TicketDao ticketDao;
 
     @Override
-    public TrainScheduleBean toBean(ScheduleEntity entity) {
-        TrainScheduleBean bean = new TrainScheduleBean();
+    public ScheduleBean toBean(ScheduleEntity entity) {
+        ScheduleBean bean = new ScheduleBean();
         bean.setArrivalDate(entity.getArrivalDate());
         bean.setId(entity.getId());
         bean.setDepartureDate(entity.getDepartureDate());
         bean.setStationId(entity.getStation().getId());
         bean.setTrainId(entity.getTrain().getId());
-        OrderEntity orderEntity = entity.getOrder();
-        if (orderEntity != null) {
-            bean.setOrderId(orderEntity.getId());
-        }
         return bean;
     }
 
     @Override
-    public ScheduleEntity toEntity(TrainScheduleBean bean) {
+    public ScheduleEntity toEntity(ScheduleBean bean) {
         ScheduleEntity entity = new ScheduleEntity();
         entity.setArrivalDate(bean.getArrivalDate());
         entity.setId(bean.getId());
@@ -52,8 +48,6 @@ public class ScheduleConverter extends AbstractConvertor<TrainScheduleBean, Sche
         entity.setStation(stationEntity);
         TrainEntity train = trainDao.get(bean.getTrainId());
         entity.setTrain(train);
-        OrderEntity order = orderDao.getOrder(bean.getOrderId());
-        entity.setOrder(order);
         return entity;
     }
 }

@@ -1,10 +1,8 @@
 package api.dao.impl;
 
 import api.dao.AbstractDao;
-import api.dao.OrderDao;
-import api.entity.OrderEntity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import api.dao.TicketDao;
+import api.entity.TicketEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,25 +12,25 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Transactional(propagation = Propagation.MANDATORY)
 @Repository
-public class OrderDaoImpl extends AbstractDao<OrderEntity> implements OrderDao {
+public class TicketDaoImpl extends AbstractDao<TicketEntity> implements TicketDao {
 
     @Override
-    public void add(OrderEntity order) {
+    public void add(TicketEntity order) {
 
     }
 
     @Override
-    public OrderEntity getOrder(Integer id) {
-        return getById(OrderEntity.class, id);
+    public TicketEntity getOrder(Integer id) {
+        return getById(TicketEntity.class, id);
     }
 
     @Override
-    public void update(OrderEntity order) {
+    public void update(TicketEntity order) {
 
     }
 
     @Override
-    public void remove(OrderEntity order) {
+    public void remove(TicketEntity order) {
 
     }
 }

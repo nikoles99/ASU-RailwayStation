@@ -3,7 +3,7 @@ package api.convertors;
 import api.entity.StationEntity;
 import api.entity.ScheduleEntity;
 import api.model.StationBean;
-import api.model.TrainScheduleBean;
+import api.model.ScheduleBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -33,7 +33,7 @@ public class StationConverter extends AbstractConvertor<StationBean, StationEnti
         StationEntity stationEntity = new StationEntity();
         stationEntity.setName(stationBean.getName());
         stationEntity.setId(stationBean.getId());
-        List<TrainScheduleBean> schedules = stationBean.getSchedules();
+        List<ScheduleBean> schedules = stationBean.getSchedules();
         stationEntity.setSchedules(scheduleConverter.toEntityCollection(schedules));
         return stationEntity;
     }
