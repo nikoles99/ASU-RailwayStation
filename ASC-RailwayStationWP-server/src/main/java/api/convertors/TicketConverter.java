@@ -1,6 +1,8 @@
 package api.convertors;
 
+import api.dao.CarriageDao;
 import api.dao.UserDao;
+import api.entity.CarriageEntity;
 import api.entity.TicketEntity;
 import api.entity.UserEntity;
 import api.model.TicketBean;
@@ -16,12 +18,15 @@ public class TicketConverter extends AbstractConvertor<TicketBean, TicketEntity>
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    private CarriageDao carriageDao;
+
     @Override
     public TicketBean toBean(TicketEntity entity) {
         TicketBean bean = new TicketBean();
         bean.setId(entity.getId());
         bean.setTrainId(entity.getId());
-        bean.setCarriageId(entity.getCarriageId());
+        bean.setCarriageId(entity.getCarriage().getId());
         bean.setPlaceId(entity.getPlaceId());
         bean.setUserId(entity.getUser().getId());
         bean.setArrivalDate(entity.getArrivalDate());
@@ -36,7 +41,8 @@ public class TicketConverter extends AbstractConvertor<TicketBean, TicketEntity>
         TicketEntity entity = new TicketEntity();
         entity.setId(bean.getId());
         entity.setTrainId(bean.getId());
-        entity.setCarriageId(bean.getCarriageId());
+        CarriageEntity carriageEntity = carriageDao.get(bean.getCarriageId());
+        entity.setCarriage(carriageEntity);
         entity.setPlaceId(bean.getPlaceId());
         UserEntity userEntity = userDao.get(bean.getUserId());
         entity.setUser(userEntity);

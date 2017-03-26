@@ -1,7 +1,6 @@
 package api.service.impl;
 
 import api.convertors.PlaceConverter;
-import api.convertors.TicketConverter;
 import api.dao.TicketDao;
 import api.dao.TrainDao;
 import api.entity.CarriageEntity;
@@ -17,7 +16,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -64,7 +62,7 @@ public class PlaceServiceImpl implements PlaceService {
 
     private void removeBookedPlaces(List<TicketEntity> bookedTickets, CarriageEntity carriage) {
         for (TicketEntity ticket : bookedTickets) {
-            Integer carriageId = ticket.getCarriageId();
+            Integer carriageId = ticket.getCarriage().getId();
             if (carriageId.equals(carriage.getId())) {
                 PlaceEntity placeEntity = new PlaceEntity();
                 Integer placeId = ticket.getPlaceId();
