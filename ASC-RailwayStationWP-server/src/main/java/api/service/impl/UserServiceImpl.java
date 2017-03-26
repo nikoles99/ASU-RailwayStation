@@ -1,9 +1,9 @@
 package api.service.impl;
 
-import api.model.UserBean;
 import api.convertors.UserConverter;
 import api.dao.UserDao;
 import api.entity.UserEntity;
+import api.model.UserBean;
 import api.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,5 +27,14 @@ public class UserServiceImpl implements UserService {
     public void add(UserBean user) {
         UserEntity userEntity = userConverter.toEntity(user);
         userDao.add(userEntity);
+    }
+
+    @Override
+    public void bookTicket(UserBean user) {
+        UserEntity userEntity = userConverter.toEntity(user);
+        if (user.getTickets().isEmpty()) {
+            throw new IllegalStateException("Tickets must be exist");
+        }
+        userDao.update(userEntity);
     }
 }

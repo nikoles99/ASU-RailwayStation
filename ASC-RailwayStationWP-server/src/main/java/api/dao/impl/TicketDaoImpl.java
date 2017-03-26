@@ -2,10 +2,16 @@ package api.dao.impl;
 
 import api.dao.AbstractDao;
 import api.dao.TicketDao;
-import api.entity.TicketEntity;
+import api.entity.*;
+import api.model.CarriageType;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by nolesuk on 13-Mar-17.
@@ -15,22 +21,43 @@ import org.springframework.transaction.annotation.Transactional;
 public class TicketDaoImpl extends AbstractDao<TicketEntity> implements TicketDao {
 
     @Override
-    public void add(TicketEntity order) {
-
+    public List<TicketEntity> getBookedTickets(Integer trainId, CarriageType carriageType) {
+        return null;
     }
 
     @Override
-    public TicketEntity getOrder(Integer id) {
-        return getById(TicketEntity.class, id);
+    public List<TicketEntity> getBookedTickets(Integer trainId, CarriageType carriageType, Date departureDate, Date arrivalDate) {
+        CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
+
+        CriteriaQuery<TicketEntity> criteriaQuery = criteriaBuilder.createQuery(TicketEntity.class);
+        Root<TicketEntity> root = criteriaQuery.from(TicketEntity.class);
+
+        Join<CarriageEntity, TicketEntity> ticketCarriageJoin = root.join("carriageId");
+
+        Predicate carriageTypePr = criteriaBuilder.equal(ticketCarriageJoin.get("carriageType"), carriageType);
+        Predicate trainPr = criteriaBuilder.equal(root.get("trainId"), trainId);
+        Predicate departureDateBetweenPr = criteriaBuilder.between(ticketCarriageJoin.get("departureDate").as(Date.class), departureDate, arrivalDate);
+        Predicate arrivalDateBetweenPr = criteriaBuilder.between(ticketCarriageJoin.get("arrivalDate").as(Date.class), departureDate, arrivalDate);
+        Predicate departureDatePr = criteriaBuilder.lessThan(ticketCarriageJoin.get("departureDate").as(Date.class), departureDate);
+        Predicate arrivalDatePr = criteriaBuilder.greaterThan(ticketCarriageJoin.get("arrivalDate").as(Date.class), arrivalDate);
+
+        Predicate trainAndCarriageTypePr = criteriaBuilder.and(carriageTypePr, trainPr);
+        Predicate departureAndArrivalPr = criteriaBuilder.and(arrivalDatePr, departureDatePr);
+        Predicate result = criteriaBuilder.or(trainAndCarriageTypePr, departureAndArrivalPr, departureDateBetweenPr, arrivalDateBetweenPr);
+
+        criteriaQuery.select(root).where(result);
+        TypedQuery<TicketEntity> resultQuery = getEntityManager().createQuery(criteriaQuery);
+        return resultQuery.getResultList();
+    }
+
+
+    @Override
+    public void addTicket(TicketEntity ticket) {
+        persist(ticket);
     }
 
     @Override
-    public void update(TicketEntity order) {
-
-    }
-
-    @Override
-    public void remove(TicketEntity order) {
-
+    public void removeTicket(TicketEntity ticket) {
+        remove(ticket);
     }
 }

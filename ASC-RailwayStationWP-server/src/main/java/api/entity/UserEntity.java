@@ -38,6 +38,22 @@ public class UserEntity extends AbstractEntity {
 
     }
 
+    public List<TicketEntity> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<TicketEntity> tickets) {
+        for (TicketEntity ticket : tickets) {
+            ticket.setUser(this);
+        }
+        this.tickets = tickets;
+    }
+
+    public void addTicket(TicketEntity ticket) {
+        ticket.setUser(this);
+        this.tickets.add(ticket);
+    }
+
     public String getName() {
         return name;
     }

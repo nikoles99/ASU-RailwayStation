@@ -3,6 +3,7 @@ package api.service.impl;
 import api.convertors.TrainConverter;
 import api.dao.ScheduleDao;
 import api.dao.StationDao;
+import api.dao.TicketDao;
 import api.dao.TrainDao;
 import api.entity.ScheduleEntity;
 import api.entity.TrainEntity;
@@ -40,6 +41,9 @@ public class TrainServiceImpl implements TrainService {
 
     @Autowired
     private ScheduleDao scheduleDao;
+
+    @Autowired
+    private TicketDao ticketDao;
 
     @Override
     public void add(TrainBean train) throws TrainException {
