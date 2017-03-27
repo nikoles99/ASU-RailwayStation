@@ -2,7 +2,7 @@
  * Created by nikita on 18.03.17.
  */
 function deleteStation(stationName, callback) {
-    var url = "http://localhost:8080/deleteStation";
+    var url = "http://localhost:8080/delete";
     $.ajax({
         url: url,
         type: 'POST',
@@ -43,7 +43,7 @@ function getStations(callback) {
 }
 
 function addStation(nameStation, callback) {
-    var url = "http://localhost:8080/addStation";
+    var url = "http://localhost:8080/add";
     $.ajax({
         url: url,
         type: 'POST',
