@@ -50,14 +50,14 @@ $("#searchTrains").click(function () {
 function appendTrainsTableHeader() {
     var trainsHeader = "<tr>" +
         "<td>Номер поезда</td>" +
-        "<td>Маршрут</td> " +
-        "<td>Станция отправления</td> " +
-        "<td>Станция прибытия</td> " +
-        "<td>Время отправления</td>" +
-        "<td>Вермя прибытия</td>" +
-        "<td>Вагоны</td>" +
+        "<th>Маршрут</th> " +
+        "<th>Станция отправления</th> " +
+        "<th>Станция прибытия</th> " +
+        "<th>Время отправления</th>" +
+        "<th>Вермя прибытия</th>" +
+        "<th>Вагоны</th>" +
         "</tr>";
-    $("#trains").append(trainsHeader);
+    $("#trains tbody:last-child").append(trainsHeader);
 }
 
 function fillTrains(departureStation, arrivalStation, trains) {
@@ -82,14 +82,15 @@ function fillTrains(departureStation, arrivalStation, trains) {
                     "<td>" + dateToString(new Date(departureSchedule.departureDate)) + "</td>" +
                     "<td>" + dateToString(new Date(arrivalSchedule.arrivalDate)) + "</td>" +
                     "<td>" +
-                    "<table>" +
+                    "<table><tbody>" +
                     "<tr><td>Купе:</td><td><a href=\"authorization.html\">" + coups + "</a></td></tr>" +
                     "<tr><td>Плацкарт:</td><td><a href=\"authorization.html\">" + reservedSeats + "</a></td></tr>" +
                     "<tr><td>Сидячие:</td><td><a href=\"authorization.html\">" + seatPlaces + "</a></td></tr>" +
                     "<tr><td>Общий:</td><td><a href=\"authorization.html\">" + common + "</a></td></tr>" +
-                    "</table>" +
-                    "</td></tr>";
-                $("#trains tr:last").after(newStation);
+                    "</tbody></table>" +
+                    "</td>"+
+                    "</tr>";
+                $("#trains").append(newStation);
             });
     }));
 }
