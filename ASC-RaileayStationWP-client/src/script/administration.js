@@ -184,19 +184,19 @@ function addCarriages(train) {
 
     var commonPlacesCount = 81;
     var commonCarriagesCount = $("#countCommon").val();
-    addCarriage(train, "common", commonCarriagesCount, number, commonPlacesCount);
+    addCarriage(train, COMMON_CARRIAGE, commonCarriagesCount, number, commonPlacesCount);
 
     var reservedSeatPlacesCount = 54;
     var reservedSeatCount = $("#countReservedSeat").val();
-    addCarriage(train, "reservedSeat", reservedSeatCount, number, reservedSeatPlacesCount);
+    addCarriage(train, RESERVED_SEATS_CARRIAGE, reservedSeatCount, number, reservedSeatPlacesCount);
 
     var coupPlacesCount = 36;
     var coupsCount = $("#countCoups").val();
-    addCarriage(train, "coup", coupsCount, number, coupPlacesCount);
+    addCarriage(train, COUP_CARRIAGE, coupsCount, number, coupPlacesCount);
 
     var seatPlacesCount = 42;
     var seatCarriageCount = $("#countSeatPlaces").val();
-    addCarriage(train, "seatPlaces", seatCarriageCount, number, seatPlacesCount);
+    addCarriage(train, SEAT_PLACES_CARRIAGE, seatCarriageCount, number, seatPlacesCount);
 }
 
 

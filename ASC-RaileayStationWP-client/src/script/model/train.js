@@ -1,3 +1,8 @@
+var COMMON_CARRIAGE = "common";
+var RESERVED_SEATS_CARRIAGE = "reservedSeat";
+var COUP_CARRIAGE = "coup";
+var SEAT_PLACES_CARRIAGE = "seatPlaces";
+
 function getTrainsByStations(departureStation, arrivalStation, callback) {
     if (departureStation == "" || arrivalStation == "") {
         alert('Маршрут введен не корректно');

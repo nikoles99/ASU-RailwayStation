@@ -69,23 +69,38 @@ function fillTrains(departureStation, arrivalStation, trains) {
         $.when(
             getSchedule(train.schedules, departureStation),
             getSchedule(train.schedules, arrivalStation),
-            getFreePlaces(train, departureStation, arrivalStation))
-            .then(function (departureSchedule, arrivalSchedule, carriages) {
+            getFreePlaces(train.id, "COUP"),
+            getFreePlaces(train.id, "RESERVED_SEAT"),
+            getFreePlaces(train.id, "SEAT_PLACE"),
+            getFreePlaces(train.id, "COMMON"))
+            .then(function (departureSchedule, arrivalSchedule, coups, reservedSeats, seatPlaces, common) {
                 var newStation = "<tr>" +
                     "<td>" + train.id + "</td>" +
                     "<td>" + train.name + "</td>" +
                     "<td>" + departureStation + "</td>" +
                     "<td>" + arrivalStation + "</td>" +
                     "<td>" + dateToString(new Date(departureSchedule.departureDate)) + "</td>" +
-                    "<td>" + dateToString(new Date(arrivalSchedule.arrivalDate)) + "</td>";
-                "</tr>";
+                    "<td>" + dateToString(new Date(arrivalSchedule.arrivalDate)) + "</td>" +
+                    "<td>" +
+                    "<table>" +
+                    "<tr><td>Купе:</td><td><a href=\"authorization.html\">" + coups + "</a></td></tr>" +
+                    "<tr><td>Плацкарт:</td><td><a href=\"authorization.html\">" + reservedSeats + "</a></td></tr>" +
+                    "<tr><td>Сидячие:</td><td><a href=\"authorization.html\">" + seatPlaces + "</a></td></tr>" +
+                    "<tr><td>Общий:</td><td><a href=\"authorization.html\">" + common + "</a></td></tr>" +
+                    "</table>" +
+                    "</td></tr>";
                 $("#trains tr:last").after(newStation);
             });
     }));
 }
 
-function getFreePlaces(train, departureStation, arrivalStation) {
-
+function getFreePlaces(trainId, carriageType) {
+    var departureDate = strToDate($("#date_departure").val());
+    var arrivalDate = strToDate($("#date_arrival").val());
+    var freePlacesPromise = getFreePlacesByType(trainId, carriageType, departureDate, arrivalDate);
+    return freePlacesPromise.then(function (places) {
+        return places.length;
+    })
 }
 
 function getSchedule(schedules, stationName) {
