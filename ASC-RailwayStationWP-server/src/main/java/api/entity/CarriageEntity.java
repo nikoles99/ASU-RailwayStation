@@ -13,7 +13,7 @@ import java.util.List;
 public class CarriageEntity extends AbstractEntity {
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "carriageType")
+    @Column(name = "type")
     private CarriageType type;
 
     @Column(name = "number")
@@ -26,7 +26,7 @@ public class CarriageEntity extends AbstractEntity {
     @OneToMany(mappedBy = "carriage", cascade = {CascadeType.ALL})
     private List<PlaceEntity> places;
 
-    @OneToMany(mappedBy = "carriageId", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "carriage", cascade = {CascadeType.ALL})
     private List<TicketEntity> tickets;
 
 

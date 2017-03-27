@@ -16,7 +16,7 @@ public class TicketEntity extends AbstractEntity {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "carriage_id")
-    private CarriageEntity carriageId;
+    private CarriageEntity carriage;
 
     @Column(name = "place_id")
     private Integer placeId;
@@ -49,11 +49,11 @@ public class TicketEntity extends AbstractEntity {
     }
 
     public CarriageEntity getCarriage() {
-        return carriageId;
+        return carriage;
     }
 
     public void setCarriage(CarriageEntity carriageId) {
-        this.carriageId = carriageId;
+        this.carriage = carriageId;
     }
 
     public Integer getPlaceId() {

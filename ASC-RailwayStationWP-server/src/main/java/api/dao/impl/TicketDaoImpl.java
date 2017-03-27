@@ -32,18 +32,18 @@ public class TicketDaoImpl extends AbstractDao<TicketEntity> implements TicketDa
         CriteriaQuery<TicketEntity> criteriaQuery = criteriaBuilder.createQuery(TicketEntity.class);
         Root<TicketEntity> root = criteriaQuery.from(TicketEntity.class);
 
-        Join<TicketEntity, CarriageEntity> ticketCarriageJoin = root.join("carriageId");
+        Join<TicketEntity, CarriageEntity> ticketCarriageJoin = root.join("carriage");
 
-       // Predicate carriageTypePr = criteriaBuilder.equal(ticketCarriageJoin.get("carriageType"), "COMMON");
+        Predicate carriageTypePr = criteriaBuilder.equal(ticketCarriageJoin.get("type").as(CarriageType.class), carriageType);
         Predicate trainPr = criteriaBuilder.equal(root.get("trainId"), trainId);
         Predicate departureDateBetweenPr = criteriaBuilder.between(root.get("departureDate").as(Date.class), departureDate, arrivalDate);
         Predicate arrivalDateBetweenPr = criteriaBuilder.between(root.get("arrivalDate").as(Date.class), departureDate, arrivalDate);
         Predicate departureDatePr = criteriaBuilder.lessThan(root.get("departureDate").as(Date.class), departureDate);
         Predicate arrivalDatePr = criteriaBuilder.greaterThan(root.get("arrivalDate").as(Date.class), arrivalDate);
 
-        //Predicate trainAndCarriageTypePr = criteriaBuilder.and(carriageTypePr, trainPr);
+        Predicate trainAndCarriageTypePr = criteriaBuilder.and(carriageTypePr, trainPr);
         Predicate departureAndArrivalPr = criteriaBuilder.and(arrivalDatePr, departureDatePr);
-        Predicate result = criteriaBuilder.or(departureAndArrivalPr, departureDateBetweenPr, arrivalDateBetweenPr);
+        Predicate result = criteriaBuilder.or(trainAndCarriageTypePr, departureAndArrivalPr, departureDateBetweenPr, arrivalDateBetweenPr);
 
         criteriaQuery.select(root).where(result);
         TypedQuery<TicketEntity> resultQuery = getEntityManager().createQuery(criteriaQuery);
