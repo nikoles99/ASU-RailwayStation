@@ -109,7 +109,7 @@ function getSchedule(schedules, stationName) {
     return stationPromise.then(function (station) {
         for (var i = 0; i < schedules.length; i++) {
             var stationId = schedules[i].stationId;
-            if (stationId == station.id) {
+            if (stationId == station[0].id) {
                 return schedules[i];
             }
         }

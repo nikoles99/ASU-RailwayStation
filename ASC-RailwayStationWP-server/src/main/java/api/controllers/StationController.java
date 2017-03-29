@@ -27,30 +27,32 @@ public class StationController extends AbstractController {
         stationService.add(station);
     }
 
-    @RequestMapping(value = "/deleteStation", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/deleteStation", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     @ResponseBody
     void deleteStation(StationBean station) {
         stationService.delete(station);
     }
 
-    @RequestMapping(value = "/updateStation", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/updateStation", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     @ResponseBody
     void updateStation(StationBean station) {
         stationService.update(station);
     }
 
-    @RequestMapping(value = "/getAllStations", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/getAllStations", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     @ResponseBody
     List<StationBean> getAllStations() {
         return stationService.getAllStations();
     }
 
-    @RequestMapping(value = "/getStationById", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/getStationById", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @ResponseBody
     StationBean getStationById(@RequestParam("id") Integer id) {
         return stationService.getById(id);
     }
 
-    @RequestMapping(value = "/getStationByName", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/getStationByName", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @ResponseBody
     List<StationBean> getStationByName(@RequestParam("name") String name) {
         return stationService.getByName(name);
     }
