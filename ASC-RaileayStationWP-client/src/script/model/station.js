@@ -2,11 +2,11 @@
  * Created by nikita on 18.03.17.
  */
 function deleteStation(stationName, callback) {
-    var url = "http://localhost:8080/delete";
+    var url = "http://localhost:8080/deleteStation";
     $.ajax({
         url: url,
         type: 'POST',
-        dataType: 'jsonp',
+        dataType: 'json',
         data: {name: stationName},
         success: callback,
         error: function (error) {
@@ -34,7 +34,7 @@ function getStations(callback) {
     $.ajax({
         url: url,
         type: 'POST',
-        dataType: 'jsonp',
+        dataType: 'json',
         success: callback,
         error: function (error) {
             errorLogging(error);
@@ -43,11 +43,11 @@ function getStations(callback) {
 }
 
 function addStation(nameStation, callback) {
-    var url = "http://localhost:8080/add";
+    var url = "http://localhost:8080/addStation";
     $.ajax({
         url: url,
         type: 'POST',
-        dataType: 'jsonp',
+        dataType: 'json',
         data: {name: nameStation},
         success: callback,
         error: function (error) {

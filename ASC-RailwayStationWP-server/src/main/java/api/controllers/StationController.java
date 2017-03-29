@@ -1,15 +1,13 @@
 package api.controllers;
 
+import api.entity.StationEntity;
 import api.exception.StationException;
 import api.model.StationBean;
 import api.service.StationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,19 +21,19 @@ public class StationController extends AbstractController {
     @Autowired
     private StationService stationService;
 
-    @RequestMapping(value = "/add", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/addStation", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     @ResponseBody
-    void addStaion(StationBean station) throws StationException {
+    void addStaion(StationBean station) throws Exception {
         stationService.add(station);
     }
 
-    @RequestMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/deleteStation", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     void deleteStation(StationBean station) {
         stationService.delete(station);
     }
 
-    @RequestMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/updateStation", produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     void updateStation(StationBean station) {
         stationService.update(station);
@@ -53,7 +51,7 @@ public class StationController extends AbstractController {
     }
 
     @RequestMapping(value = "/getStationByName", produces = MediaType.APPLICATION_JSON_VALUE)
-    StationBean getStationByName(@RequestParam("name") String name) {
+    List<StationBean> getStationByName(@RequestParam("name") String name) {
         return stationService.getByName(name);
     }
 }

@@ -61,8 +61,8 @@ public class StationServiceImpl implements StationService {
     }
 
     @Override
-    public StationBean getByName(String name) {
-        StationEntity stationEntity = stationDao.getByName(name);
-        return stationConverter.toBean(stationEntity);
+    public List<StationBean> getByName(String name) {
+        List<StationEntity> stationEntity = stationDao.getByName(name);
+        return stationConverter.toBeanCollection(stationEntity);
     }
 }

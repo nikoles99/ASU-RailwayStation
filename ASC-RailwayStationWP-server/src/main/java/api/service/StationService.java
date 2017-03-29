@@ -21,5 +21,5 @@ public interface StationService {
 
     StationBean getById(Integer id);
 
-    StationBean getByName(String name);
+    List<StationBean> getByName(String name);
 }

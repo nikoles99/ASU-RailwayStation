@@ -41,7 +41,7 @@ function getTrainsByParams(departureStation, departureDate, arrivalStation, arri
 
 function saveTrain(train) {
     if (train != null) {
-        var url = "http://localhost:8080/add";
+        var url = "http://localhost:8080/addTrain";
         console.log(JSON.stringify(train));
         $.ajax({
             url: url,

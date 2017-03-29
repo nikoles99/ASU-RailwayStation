@@ -30,8 +30,8 @@ public class StationDaoImpl extends AbstractDao<StationEntity> implements Statio
         if (station == null || station.getName() == null || station.getName().isEmpty()) {
             throw new StationException(station + " entity or name is null");
         }
-        StationEntity stationEntity = getByName(station.getName());
-        if (stationEntity != null) {
+        List<StationEntity> stationEntity = getByName(station.getName());
+        if (stationEntity.isEmpty()) {
             getEntityManager().persist(station);
             getLogger().info("Station add successfully " + station);
         } else {
@@ -43,14 +43,14 @@ public class StationDaoImpl extends AbstractDao<StationEntity> implements Statio
     }
 
     @Override
-    public StationEntity getByName(String name) {
+    public List<StationEntity> getByName(String name) {
         CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
         CriteriaQuery<StationEntity> criteriaQuery = criteriaBuilder.createQuery(StationEntity.class);
         Root<StationEntity> stationEntityRoot = criteriaQuery.from(StationEntity.class);
         criteriaQuery.select(stationEntityRoot);
         criteriaQuery.where(criteriaBuilder.equal(stationEntityRoot.get("name"), name));
         TypedQuery<StationEntity> query = getEntityManager().createQuery(criteriaQuery);
-        return query.getSingleResult();
+        return query.getResultList();
     }
 
     @Override
@@ -65,7 +65,10 @@ public class StationDaoImpl extends AbstractDao<StationEntity> implements Statio
 
     @Override
     public void delete(StationEntity station) {
-        remove(station);
+        List<StationEntity> stations = getByName(station.getName());
+        if (!stations.isEmpty() && stations.size() == 1) {
+            remove(stations.get(0));
+        }
     }
 
     @Override
