@@ -2,7 +2,7 @@
  * Created by nikita on 18.03.17.
  */
 function errorLogging(xhr) {
-    alert(xhr.responseText);
+    alert(xhr.responseJSON.message);
     console.log("code: " + xhr.code);
     console.log("readyState: " + xhr.readyState);
     console.log("responseText: " + xhr.responseText);
