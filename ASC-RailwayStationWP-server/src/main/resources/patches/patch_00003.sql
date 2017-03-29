@@ -1,0 +1,1 @@
+ALTER table carriages DROP COLUMN "carriageType"
