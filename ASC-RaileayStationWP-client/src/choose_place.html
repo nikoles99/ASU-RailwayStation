@@ -17,13 +17,12 @@
             <legend id="route_block"/>
             <tr>
                 <td><p id="route_label"></td>
-                <td><p id="route"/></td>
+                <td id="route"/>
             </tr>
-        </table>
-        <tr>
-            <td><p id="train_label"></td>
-            <td><p id="trainId"/></td>
-        </tr>
+            <tr>
+                <td><p id="train_label"></td>
+                <td id="trainName"/>
+            </tr>
         </table>
     </fieldset>
 </div>
@@ -99,57 +98,9 @@
         </table>
     </fieldset>
 </div>
-<script>
-    const ADULTS = "adults";
-    const CHILDREN_WITH_NO_SEATS = "children_with_no_seats";
-    const CHILDREN_WITH_SEATS = "children_with_seats";
-    var countPassenger = 3;
-    function fillPassengerCount(select) {
-        select.children().remove();
-        for (var i = 0; i <= countPassenger; i++) {
-            select.append($("<option/>", {
-                value: i,
-                text: i,
-            }));
-
-        }
-    }
-
-    $('#adults_checkbox').change(function () {
-        setPassengersBlockVisibility();
-        setPlacesBlockVisibility();
-    });
-    $('#children_checkbox').change(function () {
-        setPassengersBlockVisibility();
-        setPlacesBlockVisibility();
-    });
-
-    $("document ").ready(function () {
-        $('#passengers').hide();
-        $('#places').hide();
-    });
-
-    function setPassengersBlockVisibility() {
-        var isAdultsChecked = $('#adults_checkbox').is(':checked');
-        var isChildrenChecked = $('#children_checkbox').is(':checked');
-        if (isAdultsChecked || isChildrenChecked) {
-            $('#passengers').slideDown();
-        }
-        else {
-            $('#passengers').slideUp();
-        }
-    }
-
-    function setPlacesBlockVisibility() {
-        var isAdultsChecked = $('#adults_checkbox').is(':checked');
-        var isChildrenChecked = $('#children_checkbox').is(':checked');
-        if (isAdultsChecked || isChildrenChecked) {
-            $('#places').slideDown();
-        }
-        else {
-            $('#places').slideUp();
-        }
-    }
-</script>
+<script src="script/choose_place.js"></script>
+<script src="script/utils/urlParser.js"></script>
 </body>
 </html>
+
+

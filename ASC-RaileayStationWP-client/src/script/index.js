@@ -83,18 +83,26 @@ function fillTrains(departureStation, arrivalStation, trains) {
                     "<td>" + dateToString(new Date(arrivalSchedule.arrivalDate)) + "</td>" +
                     "<td>" +
                     "<table><tbody>" +
-                    "<tr><td>Купе:</td><td><a href=\"authorization.html\">" + coups + "</a></td></tr>" +
-                    "<tr><td>Плацкарт:</td><td><a href=\"authorization.html\">" + reservedSeats + "</a></td></tr>" +
-                    "<tr><td>Сидячие:</td><td><a href=\"authorization.html\">" + seatPlaces + "</a></td></tr>" +
-                    "<tr><td>Общий:</td><td><a href=\"authorization.html\">" + common + "</a></td></tr>" +
+                    "<tr><td>Купе:</td><td><a href=" + getChoosePlaceUrl(train.id, train.name, departureStation, arrivalStation, COUP_CARRIAGE) + ">" + coups + "</a></td></tr>" +
+                    "<tr><td>Плацкарт:</td><td><a href=" + getChoosePlaceUrl(train.id, train.name, departureStation, arrivalStation, RESERVED_SEATS_CARRIAGE) + ">" + reservedSeats + "</a></td></tr>" +
+                    "<tr><td>Сидячие:</td><td><a href=" + getChoosePlaceUrl(train.id, train.name, departureStation, arrivalStation, SEAT_PLACES_CARRIAGE) + ">" + seatPlaces + "</a></td></tr>" +
+                    "<tr><td>Общий:</td><td><a href=" + getChoosePlaceUrl(train.id, train.name, departureStation, arrivalStation, COMMON_CARRIAGE) + ">" + common + "</a></td></tr>" +
                     "</tbody></table>" +
-                    "</td>"+
+                    "</td>" +
                     "</tr>";
                 $("#trains").append(newStation);
             });
     }));
 }
 
+function getChoosePlaceUrl(trainId, trainName, departureStation, arrivalStation, carriageType) {
+    return "javascript:window.location.href='choose_place.html?" +
+        "trainId=" + trainId +
+        "&trainName=" + trainName +
+        "&departureStation=" + departureStation +
+        "&arrivalStation=" + arrivalStation +
+        "&carriageType=" + carriageType + "'";
+}
 function getFreePlaces(trainId, carriageType) {
     var departureDate = strToDate($("#date_departure").val());
     var arrivalDate = strToDate($("#date_arrival").val());
