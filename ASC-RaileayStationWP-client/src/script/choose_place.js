@@ -1,7 +1,14 @@
 /**
  * Created by nikita on 03.04.17.
  */
+const ADULTS = "adults";
+const CHILDREN_WITH_NO_SEATS = "children_with_no_seats";
+const CHILDREN_WITH_SEATS = "children_with_seats";
+var countPassenger = 3;
+
 $(document).ready(function () {
+    $('#passengers').hide();
+    $('#places').hide();
     var trainName = getUrlParameter("trainName");
     $("#trainName").text(trainName);
     var departureStation = getUrlParameter("departureStation");
@@ -9,13 +16,8 @@ $(document).ready(function () {
     $("#route").text(departureStation + " - " + arrivalStation);
     var carriageType = getUrlParameter("carriageType");
     $("#carriage_type").text(carriageType);
+    var trainId = getUrlParameter("trainId");
 });
-
-
-const ADULTS = "adults";
-const CHILDREN_WITH_NO_SEATS = "children_with_no_seats";
-const CHILDREN_WITH_SEATS = "children_with_seats";
-var countPassenger = 3;
 function fillPassengerCount(select) {
     select.children().remove();
     for (var i = 0; i <= countPassenger; i++) {
@@ -23,7 +25,6 @@ function fillPassengerCount(select) {
             value: i,
             text: i,
         }));
-
     }
 }
 
@@ -34,11 +35,6 @@ $('#adults_checkbox').change(function () {
 $('#children_checkbox').change(function () {
     setPassengersBlockVisibility();
     setPlacesBlockVisibility();
-});
-
-$("document ").ready(function () {
-    $('#passengers').hide();
-    $('#places').hide();
 });
 
 function setPassengersBlockVisibility() {
@@ -62,3 +58,4 @@ function setPlacesBlockVisibility() {
         $('#places').slideUp();
     }
 }
+
