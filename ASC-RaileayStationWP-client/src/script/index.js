@@ -83,10 +83,18 @@ function fillTrains(departureStation, arrivalStation, trains) {
                     "<td>" + dateToString(new Date(arrivalSchedule.arrivalDate)) + "</td>" +
                     "<td>" +
                     "<table><tbody>" +
-                    "<tr><td>Купе:</td><td><a href=" + getChoosePlaceUrl(train.id, train.name, departureStation, arrivalStation, COUP_CARRIAGE) + ">" + coups + "</a></td></tr>" +
-                    "<tr><td>Плацкарт:</td><td><a href=" + getChoosePlaceUrl(train.id, train.name, departureStation, arrivalStation, RESERVED_SEATS_CARRIAGE) + ">" + reservedSeats + "</a></td></tr>" +
-                    "<tr><td>Сидячие:</td><td><a href=" + getChoosePlaceUrl(train.id, train.name, departureStation, arrivalStation, SEAT_PLACES_CARRIAGE) + ">" + seatPlaces + "</a></td></tr>" +
-                    "<tr><td>Общий:</td><td><a href=" + getChoosePlaceUrl(train.id, train.name, departureStation, arrivalStation, COMMON_CARRIAGE) + ">" + common + "</a></td></tr>" +
+                    "<tr><td>Купе:</td><td>" +
+                    "<a href=" + getChoosePlaceUrl(train.id, train.name, departureStation, arrivalStation, COUP_CARRIAGE, coups) + ">" + coups.length + "</a>" +
+                    "</td></tr>" +
+                    "<tr><td>Плацкарт:</td><td>" +
+                    "<a href=" + getChoosePlaceUrl(train.id, train.name, departureStation, arrivalStation, RESERVED_SEATS_CARRIAGE, reservedSeats) + ">" + reservedSeats.length + "</a>" +
+                    "</td></tr>" +
+                    "<tr><td>Сидячие:</td><td>" +
+                    "<a href=" + getChoosePlaceUrl(train.id, train.name, departureStation, arrivalStation, SEAT_PLACES_CARRIAGE, seatPlaces) + ">" + seatPlaces.length + "</a>" +
+                    "</td></tr>" +
+                    "<tr><td>Общий:</td><td>" +
+                    "<a href=" + getChoosePlaceUrl(train.id, train.name, departureStation, arrivalStation, COMMON_CARRIAGE, common) + ">" + common.length + "</a>" +
+                    "</td></tr>" +
                     "</tbody></table>" +
                     "</td>" +
                     "</tr>";
@@ -95,12 +103,13 @@ function fillTrains(departureStation, arrivalStation, trains) {
     }));
 }
 
-function getChoosePlaceUrl(trainId, trainName, departureStation, arrivalStation, carriageType) {
+function getChoosePlaceUrl(trainId, trainName, departureStation, arrivalStation, carriageType, places) {
     return "javascript:window.location.href='choose_place.html?" +
         "trainId=" + trainId +
         "&trainName=" + trainName +
         "&departureStation=" + departureStation +
         "&arrivalStation=" + arrivalStation +
+        "&places=" + JSON.stringify(places) +
         "&carriageType=" + carriageType + "'";
 }
 function getFreePlaces(trainId, carriageType) {
@@ -108,7 +117,7 @@ function getFreePlaces(trainId, carriageType) {
     var arrivalDate = strToDate($("#date_arrival").val());
     var freePlacesPromise = getFreePlacesByType(trainId, carriageType, departureDate, arrivalDate);
     return freePlacesPromise.then(function (places) {
-        return places.length;
+        return places;
     })
 }
 

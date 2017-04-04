@@ -27,6 +27,11 @@ public class TrainController extends AbstractController {
         trainService.add(train);
     }
 
+    @RequestMapping(value = "/a", method = RequestMethod.GET)
+    void add() throws TrainException {
+        trainService.add(null);
+    }
+
     @RequestMapping(value = "/getTrainsByStations", method = RequestMethod.POST)
     List<TrainBean> getTrainsByRoute(@RequestParam("arrivalStation") String arrivalStation, @RequestParam("departureStation") String departureStation) {
         return trainService.getByStations(arrivalStation, departureStation);

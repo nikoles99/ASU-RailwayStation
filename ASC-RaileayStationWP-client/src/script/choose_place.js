@@ -8,7 +8,6 @@ var countPassenger = 3;
 
 $(document).ready(function () {
     $('#passengers').hide();
-    $('#places').hide();
     var trainName = getUrlParameter("trainName");
     $("#trainName").text(trainName);
     var departureStation = getUrlParameter("departureStation");
@@ -17,6 +16,8 @@ $(document).ready(function () {
     var carriageType = getUrlParameter("carriageType");
     $("#carriage_type").text(carriageType);
     var trainId = getUrlParameter("trainId");
+    setPlaces();
+
 });
 function fillPassengerCount(select) {
     select.children().remove();
@@ -30,11 +31,9 @@ function fillPassengerCount(select) {
 
 $('#adults_checkbox').change(function () {
     setPassengersBlockVisibility();
-    setPlacesBlockVisibility();
 });
 $('#children_checkbox').change(function () {
     setPassengersBlockVisibility();
-    setPlacesBlockVisibility();
 });
 
 function setPassengersBlockVisibility() {
@@ -48,14 +47,32 @@ function setPassengersBlockVisibility() {
     }
 }
 
-function setPlacesBlockVisibility() {
-    var isAdultsChecked = $('#adults_checkbox').is(':checked');
-    var isChildrenChecked = $('#children_checkbox').is(':checked');
-    if (isAdultsChecked || isChildrenChecked) {
-        $('#places').slideDown();
+function getPlacesByCarriageId(places, carriageId) {
+    var str1 = "";
+    for (var i = 0; i < places.length; i++) {
+        var place = places[i];
+        if (carriageId === place.carriageId) {
+            var placeUI = "<input type='button' value='" + place.number + "' data='" + carriageId + "'/>";
+            str1 = str1.concat(placeUI);
+        }
     }
-    else {
-        $('#places').slideUp();
-    }
+    return str1;
 }
 
+function setPlaces() {
+    var places = JSON.parse(getUrlParameter("places"));
+    var carriageId = "";
+    for (var i = 0; i < places.length; i++) {
+        var place = places[i];
+        if (carriageId != "" && carriageId === place.carriageId) {
+            continue;
+        }
+        var placesColumn = getPlacesByCarriageId(places, place.carriageId);
+        var tr = "<tr>" +
+            "<td>" + place.carriageId + "</td>" +
+            "<td>" + placesColumn + "</td>" +
+            "</tr>";
+        carriageId = place.carriageId;
+        $("#free_places").append(tr);
+    }
+}
