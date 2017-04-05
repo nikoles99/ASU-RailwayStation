@@ -3,93 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script src="script/utils/internationalization.js"></script>
     <title>Order</title>
 </head>
 <body>
-<div>
-    <p id="rus" onclick="setLanguage('rus')">Русский</p>
-    <p id="eng" onclick="setLanguage('eng')">English</p>
-</div>
-<div>
-    <fieldset>
-        <table>
-            <legend id="route_block"/>
-            <tr>
-                <td><p id="train_label"></td>
-                <td id="trainName"/>
-            </tr>
-            <tr>
-                <td><p id="route_label"></td>
-                <td id="route"/>
-            </tr>
-            <tr>
-                <td>Время отправления:</td>
-                <td id="departureDate"/>
-            </tr>
-            <tr>
-                <td>Время прибытия:</td>
-                <td id="arrivalDate"/>
-            </tr>
+<div class="container">
+    <div class="panel panel-default" style="width: 700px">
+        <div class="panel-heading">
+            <h3 class="panel-title">Информация о поезде</h3>
+        </div>
+        <div class="panel-body">
+            <table>
+                <tr>
+                    <td><p id="train_label"></td>
+                    <td id="trainName"/>
+                </tr>
+                <tr>
+                    <td><p id="route_label"></td>
+                    <td id="route"/>
+                </tr>
+                    <td><p id="carriage_type_label"></td>
+                    <td id="carriage_type"/>
+                </tr>
+                <tr>
+                    <td>Время отправления:</td>
+                    <td id="departureDate"/>
+                </tr>
+                <tr>
+                    <td>Время прибытия:</td>
+                    <td id="arrivalDate"/>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="panel panel-default" style="width: 700px">
+        <div class="panel-heading">
+            <h3 class="panel-title">Информация о пассажирах</h3>
+        </div>
+        <div class="panel-body">
+            <table>
+                <tr>
+                    <td>Взрослые</td>
+                    <td><input class="form-control" type="number" min="1" max="2"></td>
+                </tr>
+                <tr>
+                    <td>Дети с местом</td>
+                    <td><input class="form-control" type="number" min="0" max="3"></td>
+                </tr>
+                <tr>
+                    <td><p id="last_name_label"></td>
+                    <td><input class="form-control" type="text" id="last_name"/></td>
+                </tr>
+                <tr>
+                    <td><p id="name_label"></td>
+                    <td><input class="form-control" type="text" id="name"/></td>
+                </tr>
+                <tr>
+                    <td><p id="middle_name_label"></td>
+                    <td><input class="form-control" type="text" id="middle_name"/></td>
+                </tr>
+                <tr>
+                    <td><p id="passport_number_label"></td>
+                    <td><input class="form-control" type="text" id="passport_number"/></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="places">
+        <table class="table table-striped" id="free_places">
+            <tbody>
+            <th>Номер вагона</th>
+            <th>Номера свободных мест</th>
+            </tbody>
         </table>
-    </fieldset>
+    </div>
+    <input class="btn btn-sm btn-success" type="button" id="continue" value="Продолжить">
 </div>
-<div>
-    <fieldset>
-        <table>
-            <legend id="passengers_block"/>
-            <tr>
-                <td>Взрослые</td>
-                <td><input type="number" min="1" max="2"></td>
-            </tr>
-            <tr>
-                <td>Дети с местом</td>
-                <td><input type="number" min="0" max="3"></td>
-            </tr>
-            <tr>
-                <td><p id="last_name_label"></td>
-                <td><input type="text" id="last_name"/></td>
-            </tr>
-            <tr>
-                <td><p id="name_label"></td>
-                <td><input type="text" id="name"/></td>
-            </tr>
-            <tr>
-                <td><p id="middle_name_label"></td>
-                <td><input type="text" id="middle_name"/></td>
-            </tr>
-            <tr>
-                <td><p id="passport_number_label"></td>
-                <td><input type="text" id="passport_number"/></td>
-            </tr>
-        </table>
-    </fieldset>
-</div>
-<div id="places">
-    <fieldset>
-        <table>
-            <legend id="places_select_block"/>
-            <tr>
-                <td><p id="carriage_type_label"></td>
-                <td>
-                    <p id="carriage_type"/>
-                </td>
-            </tr>
-            <tr>
-                <td><p id="free_places_number_label"></td>
-                <td>
-                    <table id="free_places">
-                        <tbody>
-                        <th>Номер вагона</th>
-                        <th>Номера свободных мест</th>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-        </table>
-    </fieldset>
-</div>
-<input type="button" id="continue" value="Продолжить">
 <script src="script/choose_place.js"></script>
 <script src="script/utils/urlParser.js"></script>
 <script src="script/model/place.js"></script>
