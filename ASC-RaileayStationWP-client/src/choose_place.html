@@ -16,12 +16,20 @@
         <table>
             <legend id="route_block"/>
             <tr>
+                <td><p id="train_label"></td>
+                <td id="trainName"/>
+            </tr>
+            <tr>
                 <td><p id="route_label"></td>
                 <td id="route"/>
             </tr>
             <tr>
-                <td><p id="train_label"></td>
-                <td id="trainName"/>
+                <td>Время отправления:</td>
+                <td id="departureDate"/>
+            </tr>
+            <tr>
+                <td>Время прибытия:</td>
+                <td id="arrivalDate"/>
             </tr>
         </table>
     </fieldset>
@@ -29,33 +37,14 @@
 <div>
     <fieldset>
         <table>
-            <legend id="passengers_info_block"/>
-            <tr>
-                <td><p id="adults_label"></td>
-                <td>
-                    <input type="checkbox" id="adults_checkbox"/>
-                </td>
-            </tr>
-            <tr>
-                <td><p id="children_with_seats_label"></td>
-                <td>
-                    <input type="checkbox" id="children_checkbox"/>
-                </td>
-            </tr>
-        </table>
-    </fieldset>
-</div>
-<div id="passengers">
-    <fieldset>
-        <table>
             <legend id="passengers_block"/>
             <tr>
-                <td><p id="passenger_type_label"></td>
-                <td><p id="adult"/></td>
+                <td>Взрослые</td>
+                <td><input type="number" min="1" max="2"></td>
             </tr>
             <tr>
-                <td><p id="rate_label"></td>
-                <td><p id="rate_adult"/></td>
+                <td>Дети с местом</td>
+                <td><input type="number" min="0" max="3"></td>
             </tr>
             <tr>
                 <td><p id="last_name_label"></td>
@@ -74,11 +63,8 @@
                 <td><input type="text" id="passport_number"/></td>
             </tr>
         </table>
-
-
     </fieldset>
 </div>
-
 <div id="places">
     <fieldset>
         <table>
@@ -103,9 +89,11 @@
         </table>
     </fieldset>
 </div>
+<input type="button" id="continue" value="Продолжить">
 <script src="script/choose_place.js"></script>
 <script src="script/utils/urlParser.js"></script>
 <script src="script/model/place.js"></script>
+<script src="script/model/carriage.js"></script>
 </body>
 </html>
 

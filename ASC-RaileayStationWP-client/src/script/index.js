@@ -84,16 +84,16 @@ function fillTrains(departureStation, arrivalStation, trains) {
                     "<td>" +
                     "<table><tbody>" +
                     "<tr><td>Купе:</td><td>" +
-                    "<a href=" + getChoosePlaceUrl(train.id, train.name, departureStation, arrivalStation, COUP_CARRIAGE, coups) + ">" + coups.length + "</a>" +
+                    "<a href=" + getChoosePlaceUrl(train.id, train.name, COUP_CARRIAGE, coups) + ">" + coups.length + "</a>" +
                     "</td></tr>" +
                     "<tr><td>Плацкарт:</td><td>" +
-                    "<a href=" + getChoosePlaceUrl(train.id, train.name, departureStation, arrivalStation, RESERVED_SEATS_CARRIAGE, reservedSeats) + ">" + reservedSeats.length + "</a>" +
+                    "<a href=" + getChoosePlaceUrl(train.id, train.name, RESERVED_SEATS_CARRIAGE, coups) + ">" + reservedSeats.length + "</a>" +
                     "</td></tr>" +
                     "<tr><td>Сидячие:</td><td>" +
-                    "<a href=" + getChoosePlaceUrl(train.id, train.name, departureStation, arrivalStation, SEAT_PLACES_CARRIAGE, seatPlaces) + ">" + seatPlaces.length + "</a>" +
+                    "<a href=" + getChoosePlaceUrl(train.id, train.name, SEAT_PLACES_CARRIAGE, seatPlaces) + ">" + seatPlaces.length + "</a>" +
                     "</td></tr>" +
                     "<tr><td>Общий:</td><td>" +
-                    "<a href=" + getChoosePlaceUrl(train.id, train.name, departureStation, arrivalStation, COMMON_CARRIAGE, common) + ">" + common.length + "</a>" +
+                    "<a href=" + getChoosePlaceUrl(train.id, train.name,COMMON_CARRIAGE, common) + ">" + common.length + "</a>" +
                     "</td></tr>" +
                     "</tbody></table>" +
                     "</td>" +
@@ -103,12 +103,18 @@ function fillTrains(departureStation, arrivalStation, trains) {
     }));
 }
 
-function getChoosePlaceUrl(trainId, trainName, departureStation, arrivalStation, carriageType, places) {
+function getChoosePlaceUrl(trainId, trainName, carriageType, places) {
+    var arrivalStation = $("#station_to").val();
+    var departureStation = $("#station_from").val();
+    var arrivalDate = $("#date_arrival").val();
+    var departureDate = $("#date_departure").val();
     return "javascript:window.location.href='choose_place.html?" +
         "trainId=" + trainId +
         "&trainName=" + trainName +
         "&departureStation=" + departureStation +
         "&arrivalStation=" + arrivalStation +
+        "&arrivalDate=" + arrivalDate +
+        "&departureDate=" + departureDate +
         "&places=" + JSON.stringify(places) +
         "&carriageType=" + carriageType + "'";
 }
