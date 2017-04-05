@@ -2,43 +2,73 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
+    <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script src="script/utils/internationalization.js"></script>
     <title>ExpressNikTrainLine</title>
 </head>
 <body>
 
-<div>
-    <p id="rus" onclick="setLanguage('rus')">Русский</p>
-    <p id="eng" onclick="setLanguage('eng')">English</p>
+<div class="container theme-showcase">
+    <div class="jumbotron">
+        <h1>ExpressNikTrainLine</h1>
+        <p>This is a template showcasing the optional theme stylesheet included in Bootstrap. Use it as a starting point to create something more unique by
+            building
+            on or modifying it.</p>
+    </div>
+
+    <div class="container">
+        <!--  <div>
+              <p id="rus" onclick="setLanguage('rus')">Русский</p>
+              <p id="eng" onclick="setLanguage('eng')">English</p>
+          </div>-->
+        <div class="panel panel-default" style="width: 700px">
+            <div class="panel-heading">
+                <h3 class="panel-title">Поиск рейсов</h3>
+            </div>
+            <div class="panel-body">
+                <table id="from_to_stations">
+                    <tr>
+                        <td><p class="col-lg-6" id="station_from_label"/></td>
+                        <td><input class="span1 col-md-1 form-control" id="station_from" type="text" list="stationsDataList" name="station_from"></td>
+                        <td><p class="col-lg-6" id="station_to_label"/></td>
+                        <td><input class="form-control" id="station_to" type="text" list="stationsDataList" name="station_to"></td>
+                    </tr>
+                    <tr>
+                        <td><p class="col-lg-6" id="date_departure_label"></td>
+                        <td><input class="form-control" id="date_departure" type="datetime-local" name="date_departure"></td>
+                        <td><p class="col-lg-6" id="date_arrival_label"></td>
+                        <td><input class="form-control" id="date_arrival" type="datetime-local" name="date_arrival"></td>
+                    </tr>
+                </table>
+                <input class="btn btn-sm btn-success" type="button" id="searchTrains" value="Найти"/>
+            </div>
+        </div>
+        <div>
+            <table class="table table-striped" id="trains">
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class='col-sm-6'>
+                <div class="form-group">
+                    <div class='input-group date' id='datetimepicker1'>
+                        <input type='text' class="form-control" />
+                        <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div id="login_form">
-    <fieldset>
-        <legend>ExpressNikTrainLine</legend>
-        <table id="from_to_stations" style="horizontal-align: middle;" width="800">
-            <tr>
-                <td><p id="station_from_label"/></td>
-                <td><input id="station_from" type="text" list="stationsDataList" name="station_from"></td>
-                <td><p id="station_to_label"/></td>
-                <td><input id="station_to" type="text" list="stationsDataList" name="station_to"></td>
-            </tr>
-            <tr>
-                <td><p id="date_departure_label"></td>
-                <td><input id="date_departure" type="datetime-local" name="date_departure"></td>
-                <td><p id="date_arrival_label"></td>
-                <td><input id="date_arrival" type="datetime-local" name="date_arrival"></td>
-            </tr>
-
-        </table>
-        <input type="button" id="searchTrains" value="Найти"/>
-    </fieldset>
-</div>
-<div>
-    <table id="trains" cellspacing="1" border="1" cellpadding="5" style="visibility: hidden" width="1300">
-        <tbody></tbody>
-    </table>
-</div>
 <datalist id="stationsDataList"/>
 <script src="script/model/train.js"></script>
 <script src="script/model/station.js"></script>
