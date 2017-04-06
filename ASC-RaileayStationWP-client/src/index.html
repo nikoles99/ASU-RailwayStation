@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+    <link href="style/index.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script src="script/utils/internationalization.js"></script>
@@ -12,47 +13,86 @@
 </head>
 <body>
 
-<div class="container theme-showcase">
-    <div class="jumbotron">
-        <h1>ExpressNikTrainLine</h1>
-        <p>This is a template showcasing the optional theme stylesheet included in Bootstrap. Use it as a starting point to create something more unique by
-            building
-            on or modifying it.</p>
+<div class="jumbotron">
+    <div class="container">
+        <h1 style="color: white">ExpressNikTrainLine</h1>
+        <p style="color: white">The ability to do anything quickly is always highly valued by its owner, often regardless of the quality of the performance.</p>
     </div>
+</div>
+<div class="container theme-showcase">
 
     <div class="container">
-        <!--  <div>
-              <p id="rus" onclick="setLanguage('rus')">Русский</p>
-              <p id="eng" onclick="setLanguage('eng')">English</p>
-          </div>-->
-        <div class="panel panel-default" style="width: 700px">
-            <div class="panel-heading">
-                <h3 class="panel-title">Поиск рейсов</h3>
-            </div>
-            <div class="panel-body">
-                <table id="from_to_stations">
-                    <tr>
-                        <td><p class="col-lg-6" id="station_from_label"/></td>
-                        <td><input class="span1 col-md-1 form-control" id="station_from" type="text" list="stationsDataList" name="station_from"></td>
-                        <td><p class="col-lg-6" id="station_to_label"/></td>
-                        <td><input class="form-control" id="station_to" type="text" list="stationsDataList" name="station_to"></td>
-                    </tr>
-                    <tr>
-                        <td><p class="col-lg-6" id="date_departure_label"></td>
-                        <td><input class="form-control" id="date_departure" type="datetime-local" name="date_departure"></td>
-                        <td><p class="col-lg-6" id="date_arrival_label"></td>
-                        <td><input class="form-control" id="date_arrival" type="datetime-local" name="date_arrival"></td>
-                    </tr>
-                </table>
-                <input class="btn btn-sm btn-success" type="button" id="searchTrains" value="Найти"/>
-            </div>
-        </div>
-        <div>
-            <table class="table table-striped" id="trains">
-                <tbody></tbody>
+        <div class="col-xs-12">
+            <!--  <div>
+                  <p id="rus" onclick="setLanguage('rus')">Русский</p>
+                  <p id="eng" onclick="setLanguage('eng')">English</p>
+              </div>-->
+            <table>
+                <tr>
+                    <td>
+                        <div class="panel panel-default" style="width: 700px">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Поиск рейсов</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table id="from_to_stations">
+                                    <tr>
+                                        <td><p class="col-lg-6" id="station_from_label"/></td>
+                                        <td><input class="span1 col-md-1 form-control" id="station_from" type="text" list="stationsDataList"
+                                                   name="station_from">
+                                        </td>
+                                        <td><p class="col-lg-6" id="station_to_label"/></td>
+                                        <td><input class="form-control" id="station_to" type="text" list="stationsDataList" name="station_to"></td>
+                                    </tr>
+                                    <tr>
+                                        <td><p class="col-lg-6" id="date_departure_label"></td>
+                                        <td><input class="form-control" id="date_departure" type="datetime-local" name="date_departure"></td>
+                                        <td><p class="col-lg-6" id="date_arrival_label"></td>
+                                        <td><input class="form-control" id="date_arrival" type="datetime-local" name="date_arrival"></td>
+                                    </tr>
+                                </table>
+                                <button style="position: relative; left: 600px" type="button" class="btn btn-sm btn-success" id="searchTrains">
+                                    <span class="glyphicon glyphicon-search"></span> Найти
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="panel panel-default" style="margin-left: 80px">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Авторизация</h3>
+                            </div>
+                            <div class="panel-body">
+                                <form>
+                                    <p><span class="fontawesome-user"></span><input class="form-control" type="text" id="login" value="Логин"
+                                                                                    onBlur="if(this.value == '') this.value = 'Логин'"
+                                                                                    onFocus="if(this.value == 'Логин') this.value = ''" required></p>
+                                    <p><span class="fontawesome-lock"></span><input class="form-control" type="password" id="password" value="Пароль"
+                                                                                    onBlur="if(this.value == '') this.value = 'Пароль'"
+                                                                                    onFocus="if(this.value == 'Пароль') this.value = ''" required></p>
+                                    <table>
+                                        <tr>
+                                            <td><a href="#">Регистрация</a><span class="fontawesome-arrow-right"></span></td>
+                                            <td><input class="btn btn-sm btn-success" style="margin-left: 20px" type="button" id="enter" value="ВОЙТИ"></td>
+                                        </tr>
+                                    </table>
+
+                                </form>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
             </table>
+            <div>
+                <table style="text-align: justify  " class="table table-info table-striped-own" id="trains">
+                    <tbody></tbody>
+                </table>
+            </div>
         </div>
     </div>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <script src="moment.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
     <div class="container">
         <div class="row">
             <div class='col-sm-6'>
@@ -67,7 +107,21 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function () {
+            $('#datetimepicker1').datepicker({
+                format: 'mm/dd/yyyy hh:ii'
+            });
+        })
+    </script>
 </div>
+<!--<hr class="featurette-divider">-->
+<!--<footer>
+    <div class="container">
+        <p>© 2017 ExpressNikTrain, Inc.  по всем вопросам пишите по адресу nikaliasiuk@gmail.com <a href="#">Privacy</a> · <a href="#">Terms</a></p>
+    </div>
+</footer>-->
+
 
 <datalist id="stationsDataList"/>
 <script src="script/model/train.js"></script>

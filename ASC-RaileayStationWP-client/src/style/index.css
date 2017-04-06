@@ -5,3 +5,23 @@
 #search_schedule_button{
     text-align: center;
 }
+
+.table-striped-own > tbody > tr:nth-of-type(odd) {
+    background-color: #FFE6E5;
+}
+
+.jumbotron {
+    background-image: url('../images/train.jpg');
+    background-repeat: no-repeat;
+    background-position: 40% -140px;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+footer{
+    background-color: rgba(13,39,51,0.65)
+}
+

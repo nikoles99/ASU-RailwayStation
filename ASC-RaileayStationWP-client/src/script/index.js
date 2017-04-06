@@ -6,11 +6,8 @@ $("document").ready(function () {
     addStationsInDataList($("#stationsDataList"));
     setTodayDate($("#date_departure"));
     setTodayDate($("#date_arrival"));
-    $('#datetimepicker1').datetimepicker();
 });
 
-$(function () {
-});
 
 function validate(departureStation, departureDate, arrivalStation, arrivalDate) {
     if (departureStation == "" || arrivalStation == "") {
