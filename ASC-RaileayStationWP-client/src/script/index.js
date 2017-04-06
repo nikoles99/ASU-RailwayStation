@@ -6,8 +6,12 @@ $("document").ready(function () {
     addStationsInDataList($("#stationsDataList"));
     setTodayDate($("#date_departure"));
     setTodayDate($("#date_arrival"));
-});
 
+
+});
+$('#as').click(function(){
+    $('#modalChoosePlaces').modal();
+});
 
 function validate(departureStation, departureDate, arrivalStation, arrivalDate) {
     if (departureStation == "" || arrivalStation == "") {
@@ -95,7 +99,7 @@ function fillTrains(departureStation, arrivalStation, trains) {
                     "<a href=" + getChoosePlaceUrl(train.id, train.name, SEAT_PLACES_CARRIAGE, seatPlaces) + ">" + seatPlaces.length + "</a>" +
                     "</td></tr>" +
                     "<tr><td>Общий:</td><td>" +
-                    "<a href=" + getChoosePlaceUrl(train.id, train.name,COMMON_CARRIAGE, common) + ">" + common.length + "</a>" +
+                    "<a href=" + getChoosePlaceUrl(train.id, train.name, COMMON_CARRIAGE, common) + ">" + common.length + "</a>" +
                     "</td></tr>" +
                     "</tbody></table>" +
                     "</td>" +
