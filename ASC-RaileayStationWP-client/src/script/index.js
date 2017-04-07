@@ -6,8 +6,7 @@ $("document").ready(function () {
     addStationsInDataList($("#stationsDataList"));
     setTodayDate($("#date_departure"));
     setTodayDate($("#date_arrival"));
-
-
+    $( "#modalChoosePlaces" ).load( "choose_place.html #choosePlaces" );
 });
 
 function validate(departureStation, departureDate, arrivalStation, arrivalDate) {

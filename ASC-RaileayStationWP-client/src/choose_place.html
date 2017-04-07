@@ -9,82 +9,85 @@
     <title>Order</title>
 </head>
 <body>
-<div class="container" id="choosePlaces">
-    <div class="panel panel-default" style="width: 700px">
-        <div class="panel-heading">
-            <h3 class="panel-title">Информация о поезде</h3>
+<div class="modal-dialog" role="document" id="choosePlaces">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h2>Выбор посадочных мест</h2>
         </div>
-        <div class="panel-body">
-            <table>
-                <tr>
-                    <td><p id="train_label"></td>
-                    <td id="trainName"/>
-                </tr>
-                <tr>
-                    <td><p id="route_label"></td>
-                    <td id="route"/>
-                </tr>
-                    <td><p id="carriage_type_label"></td>
-                    <td id="carriage_type"/>
-                </tr>
-                <tr>
-                    <td>Время отправления:</td>
-                    <td id="departureDate"/>
-                </tr>
-                <tr>
-                    <td>Время прибытия:</td>
-                    <td id="arrivalDate"/>
-                </tr>
-            </table>
+        <div class="modal-body">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Информация о поезде</h3>
+                </div>
+                <div class="panel-body">
+                    <table>
+                        <tr>
+                            <td><p id="train_label">Поезд:</td>
+                            <td><p id="trainName"/></td>
+                        </tr>
+                        <tr>
+                            <td><p id="route_label">Маршрут:</td>
+                            <td><p id="route"/></td>
+                        </tr>
+                        <tr>
+                            <td><p id="carriage_type_label"></td>
+                            <td><p id="carriage_type"/></td>
+                        </tr>
+                        <tr>
+                            <td><p>Время отправления:</p></td>
+                            <td><p id="departureDate"/></td>
+                        </tr>
+                        <tr>
+                            <td><p>Время прибытия:</p></td>
+                            <td><p id="arrivalDate"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Информация о пассажирах</h3>
+                </div>
+                <div class="panel-body">
+                    <table>
+                        <tr>
+                            <td>Взрослые</td>
+                            <td><input style="margin: 2px;" class="form-control input-sm" type="number" min="1" max="2"></td>
+                        </tr>
+                        <tr>
+                            <td>Дети с местом</td>
+                            <td><input style="margin: 2px;" class="form-control input-sm" type="number" min="0" max="3"></td>
+                        </tr>
+                        <tr>
+                            <td><p id="last_name_label">Фамилия</td>
+                            <td><input style="margin: 2px;" class="form-control input-sm" type="text" id="last_name"/></td>
+                        </tr>
+                        <tr>
+                            <td><p id="name_label">Имя</td>
+                            <td><input style="margin: 2px;" class="form-control input-sm" type="text" id="name"/></td>
+                        </tr>
+                        <tr>
+                            <td><p id="middle_name_label">Отчество</td>
+                            <td><input style="margin: 2px;" class="form-control input-sm" type="text" id="middle_name"/></td>
+                        </tr>
+                        <tr>
+                            <td><p id="passport_number_label">Номер паспорта</td>
+                            <td><input style="margin: 2px;" class="form-control input-sm" type="text" id="passport_number"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div id="places">
+                <table class="table table-striped" id="free_places">
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+            <input class="btn btn-sm btn-success" type="button" id="continue" value="Продолжить">
         </div>
     </div>
-    <div class="panel panel-default" style="width: 700px">
-        <div class="panel-heading">
-            <h3 class="panel-title">Информация о пассажирах</h3>
-        </div>
-        <div class="panel-body">
-            <table>
-                <tr>
-                    <td>Взрослые</td>
-                    <td><input class="form-control" type="number" min="1" max="2"></td>
-                </tr>
-                <tr>
-                    <td>Дети с местом</td>
-                    <td><input class="form-control" type="number" min="0" max="3"></td>
-                </tr>
-                <tr>
-                    <td><p id="last_name_label"></td>
-                    <td><input class="form-control" type="text" id="last_name"/></td>
-                </tr>
-                <tr>
-                    <td><p id="name_label"></td>
-                    <td><input class="form-control" type="text" id="name"/></td>
-                </tr>
-                <tr>
-                    <td><p id="middle_name_label"></td>
-                    <td><input class="form-control" type="text" id="middle_name"/></td>
-                </tr>
-                <tr>
-                    <td><p id="passport_number_label"></td>
-                    <td><input class="form-control" type="text" id="passport_number"/></td>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <div id="places">
-        <table class="table table-striped" id="free_places">
-            <tbody>
-            <th>Номер вагона</th>
-            <th>Номера свободных мест</th>
-            </tbody>
-        </table>
-    </div>
-    <input class="btn btn-sm btn-success" type="button" id="continue" value="Продолжить">
 </div>
-<script src="script/choose_place.js"></script>
-<script src="script/utils/urlParser.js"></script>
-<script src="script/model/place.js"></script>
-<script src="script/model/carriage.js"></script>
 </body>
 </html>
 

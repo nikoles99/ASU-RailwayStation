@@ -7,7 +7,6 @@ const CHILDREN_WITH_SEATS = "children_with_seats";
 var countPassenger = 3;
 
 $("#trains").on("click", ".freePlaces", function () {
-    $('#passengers').hide();
     var freePlaces = $(this).closest('a');
     var trainName = freePlaces.data("trainName");
     var trainId = freePlaces.data("trainId");
