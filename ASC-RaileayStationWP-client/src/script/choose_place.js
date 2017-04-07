@@ -63,6 +63,9 @@ function getPlacesByCarriageId(places, carriageId) {
 }
 
 function setPlaces(places) {
+    $("#free_places tr").remove();
+    var header = "<tr><td>Номер вагона</td><td>Номера свободных мест</tr>";
+    $("#free_places").append(header);
     var carriageId = "";
     for (var i = 0; i < places.length; i++) {
         var place = places[i];
