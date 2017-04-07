@@ -9,46 +9,64 @@
     <title>Registration</title>
 </head>
 <body>
-<div id="registration">
-    <table>
-        <tr>
-            <td><p id="last_name_label"/></td>
-            <td><input class="form-control input-sm" type="text" name="last_name" id="last_name"/></td>
-        </tr>
-        <tr>
-            <td><p id="name_label"/></td>
-            <td><input class="form-control input-sm" type="text" name="name" id="name"/></td>
-        </tr>
-        <tr>
-            <td><p id="middle_name_label"/></td>
-            <td><input class="form-control input-sm" type="text" name="middle_name" id="middle_name"/></td>
-        </tr>
-        <tr>
-            <td><p id="phone_label"/></td>
-            <td><input class="form-control input-sm" type="number" name="phone" id="phone"/></td>
-        </tr>
-        <tr>
-            <td><p id="address_label"/></td>
-            <td><input class="form-control input-sm" type="text" name="address" id="address"/></td>
-        </tr>
-        <tr>
-            <td><p id="email_label"/></td>
-            <td><input class="form-control input-sm" type="email" name="email" id="email"/></td>
-        </tr>
-        <tr>
-            <td><p id="login_label"/></td>
-            <td><input class="form-control input-sm" type="text" name="login" id="login"/></td>
-        </tr>
-        <tr>
-            <td><p id="password_label"/></td>
-            <td><input class="form-control input-sm" type="password" name="password" id="password"/></td>
-        </tr>
-        <tr>
-            <td><p id="confirm_password_label"/></td>
-            <td><input class="form-control input-sm" type="password" name="confirm_password" id="confirm_password"/></td>
-        </tr>
-    </table>
-</div>
+<div class="modal-dialog" role="article" id="registration">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 class="panel-title">Please sign up
+                <small>It's free!</small>
+            </h3>
+        </div>
+        <div class="modal-body">
+            <form role="form">
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <input type="text" name="first_name" id="phone" class="form-control input-sm" placeholder="Phone: +375(123456789)">
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+                        </div>
+                    </div>
+                </div>
 
+                <div class="form-group">
+                    <input type="email" name="email" id="login" class="form-control input-sm" placeholder="Login">
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="col-xs-6 col-sm-6 col-md-6">
+                        <div class="form-group">
+                            <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm"
+                                   placeholder="Confirm Password">
+                        </div>
+                    </div>
+                </div>
+
+                <input type="submit" value="Register" class="btn btn-info btn-block">
+
+            </form>
+        </div>
+    </div>
+</div>
 </body>
 </html>

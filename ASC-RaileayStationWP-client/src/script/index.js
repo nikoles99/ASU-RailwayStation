@@ -6,7 +6,8 @@ $("document").ready(function () {
     addStationsInDataList($("#stationsDataList"));
     setTodayDate($("#date_departure"));
     setTodayDate($("#date_arrival"));
-    $( "#modalChoosePlaces" ).load( "choose_place.html #choosePlaces" );
+    $( "#choosePlaces" ).load( "choose_place.html #choosePlaces" );
+    $( "#registration" ).load( "registration.html #registration" );
 });
 
 function validate(departureStation, departureDate, arrivalStation, arrivalDate) {
@@ -25,6 +26,10 @@ function validate(departureStation, departureDate, arrivalStation, arrivalDate) 
     return true;
 }
 
+
+$("#showRegistrationDialog").click(function () {
+    $('#registration').modal();
+});
 
 $("#station_to").click(function () {
     $(this).val('');
