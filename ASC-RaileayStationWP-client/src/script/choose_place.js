@@ -6,24 +6,29 @@ const CHILDREN_WITH_NO_SEATS = "children_with_no_seats";
 const CHILDREN_WITH_SEATS = "children_with_seats";
 var countPassenger = 3;
 
-$(document).ready(function () {
+$("#trains").on("click", ".freePlaces", function () {
     $('#passengers').hide();
-    var trainName = getUrlParameter("trainName");
-    var trainId = getUrlParameter("trainId");
+    var freePlaces = $(this).closest('a');
+    var trainName = freePlaces.data("trainName");
+    var trainId = freePlaces.data("trainId");
     $("#trainName").text(trainId + " " + trainName);
-    var departureStation = getUrlParameter("departureStation");
-    var arrivalStation = getUrlParameter("arrivalStation");
+
+    var arrivalStation = $("#station_to").val();
+    var departureStation = $("#station_from").val();
     $("#route").text(departureStation + " - " + arrivalStation);
-    var carriageType = getUrlParameter("carriageType");
+
+    var carriageType = freePlaces.data("carriageType");
     $("#carriage_type").text(carriageType);
 
-    var arrivalDate = getUrlParameter("arrivalDate");
+    var arrivalDate = freePlaces.data("arrivaldate");
     $("#arrivalDate").text(arrivalDate);
-    var departureDate = getUrlParameter("departureDate");
+    var departureDate = freePlaces.data("departuredate");
     $("#departureDate").text(departureDate);
-    setPlaces();
-
+    var freePlacesArray = freePlaces.data("freePlaces");
+    setPlaces(freePlacesArray);
+    $('#modalChoosePlaces').modal();
 });
+
 function fillPassengerCount(select) {
     select.children().remove();
     for (var i = 0; i <= countPassenger; i++) {
@@ -57,8 +62,7 @@ function getPlacesByCarriageId(places, carriageId) {
     return str1;
 }
 
-function setPlaces() {
-    var places = JSON.parse(getUrlParameter("places"));
+function setPlaces(places) {
     var carriageId = "";
     for (var i = 0; i < places.length; i++) {
         var place = places[i];

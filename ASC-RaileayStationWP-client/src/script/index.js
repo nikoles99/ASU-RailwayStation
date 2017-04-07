@@ -9,9 +9,6 @@ $("document").ready(function () {
 
 
 });
-$('table').click(function () {
-    $('#modalChoosePlaces').modal();
-});
 
 function validate(departureStation, departureDate, arrivalStation, arrivalDate) {
     if (departureStation == "" || arrivalStation == "") {
@@ -80,26 +77,28 @@ function fillTrains(departureStation, arrivalStation, trains) {
             getFreePlaces(train.id, "SEAT_PLACE"),
             getFreePlaces(train.id, "COMMON"))
             .then(function (departureSchedule, arrivalSchedule, coups, reservedSeats, seatPlaces, common) {
+                var departureDate = dateToString(new Date(departureSchedule.departureDate));
+                var arrivalDate = dateToString(new Date(arrivalSchedule.arrivalDate));
                 var newStation = "<tr>" +
                     "<td>" + train.id + "</td>" +
                     "<td>" + train.name + "</td>" +
                     "<td>" + departureStation + "</td>" +
                     "<td>" + arrivalStation + "</td>" +
-                    "<td>" + dateToString(new Date(departureSchedule.departureDate)) + "</td>" +
-                    "<td>" + dateToString(new Date(arrivalSchedule.arrivalDate)) + "</td>" +
+                    "<td>" + departureDate + "</td>" +
+                    "<td>" + arrivalDate + "</td>" +
                     "<td>" +
                     "<table><tbody>" +
                     "<tr><td>Купе:</td><td>" +
-                    "<a " + setHrefData(train.id, train.name, COUP_CARRIAGE, coups) + ">" + coups.length + "</a>" +
+                    "<a " + setHrefData(train.id, train.name, COUP_CARRIAGE, coups, arrivalDate, departureDate) + ">" + coups.length + "</a>" +
                     "</td></tr>" +
                     "<tr><td>Плацкарт:</td><td>" +
-                    "<a " + setHrefData(train.id, train.name, RESERVED_SEATS_CARRIAGE, reservedSeats) + ">" + reservedSeats.length + "</a>" +
+                    "<a " + setHrefData(train.id, train.name, RESERVED_SEATS_CARRIAGE, reservedSeats, arrivalDate, departureDate) + ">" + reservedSeats.length + "</a>" +
                     "</td></tr>" +
                     "<tr><td>Сидячие:</td><td>" +
-                    "<a " + setHrefData(train.id, train.name, SEAT_PLACES_CARRIAGE, seatPlaces) + ">" + seatPlaces.length + "</a>" +
+                    "<a " + setHrefData(train.id, train.name, SEAT_PLACES_CARRIAGE, seatPlaces, arrivalDate, departureDate) + ">" + seatPlaces.length + "</a>" +
                     "</td></tr>" +
                     "<tr><td>Общий:</td><td>" +
-                    "<a " + setHrefData(train.id, train.name, COMMON_CARRIAGE, common) + ">" + common.length + "</a>" +
+                    "<a " + setHrefData(train.id, train.name, COMMON_CARRIAGE, common, arrivalDate, departureDate) + ">" + common.length + "</a>" +
                     "</td></tr>" +
                     "</tbody></table>" +
                     "</td>" +
@@ -109,11 +108,13 @@ function fillTrains(departureStation, arrivalStation, trains) {
     }));
 }
 
-function setHrefData(trainId, trainName, carriageType, places) {
+function setHrefData(trainId, trainName, carriageType, places, arrivalDate, departureDate) {
     return "class=\"freePlaces\" data-train-id=\"" + trainId + "\" " +
         "data-train-name=\"" + trainName + "\" " +
         "data-carriage-type=\"" + carriageType + "\" " +
-        "data-carriages=\"" + JSON.stringify(places) + "\"";
+        "data-arrivalDate=\"" + arrivalDate + "\" " +
+        "data-departureDate=\"" + departureDate + "\" " +
+        "data-free-places='" + JSON.stringify(places) + "'";
 }
 function getFreePlaces(trainId, carriageType) {
     var departureDate = strToDate($("#date_departure").val());
