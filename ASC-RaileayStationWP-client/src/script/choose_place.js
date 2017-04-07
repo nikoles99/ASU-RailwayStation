@@ -25,7 +25,7 @@ $("#trains").on("click", ".freePlaces", function () {
     $("#departureDate").text(departureDate);
     var freePlacesArray = freePlaces.data("freePlaces");
     setPlaces(freePlacesArray);
-    $('#modalChoosePlaces').modal();
+    $('#choosePlaces').modal();
 });
 
 function fillPassengerCount(select) {
