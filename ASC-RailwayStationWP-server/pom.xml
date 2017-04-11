@@ -10,36 +10,49 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>server-ascrswp</artifactId>
+    <properties>
+        <hibernate.version>4.2.5.Final</hibernate.version>
+        <hibernate-jpa.version>1.0.1.Final</hibernate-jpa.version>
+        <commons-dbcp.version>1.4</commons-dbcp.version>
+        <postgresql.version>9.2-1002-jdbc4</postgresql.version>
+    </properties>
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>9.2-1002-jdbc4</version>
+            <version>${postgresql.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
-            <version>1.4</version>
+            <version>${commons-dbcp.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-orm</artifactId>
-            <version>3.2.4.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.0-api</artifactId>
-            <version>1.0.1.Final</version>
+            <version>${hibernate-jpa.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.2.5.Final</version>
+            <version>${hibernate.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>4.2.5.Final</version>
+            <version>${hibernate.version}</version>
         </dependency>
     </dependencies>
 </project>

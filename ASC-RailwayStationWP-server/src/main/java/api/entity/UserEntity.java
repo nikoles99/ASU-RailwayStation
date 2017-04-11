@@ -31,6 +31,10 @@ public class UserEntity extends AbstractEntity {
     @Column(name = "address")
     private String address;
 
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "role")
+    private RoleEntity role;
+
     @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL})
     private List<TicketEntity> tickets;
 
@@ -118,4 +122,11 @@ public class UserEntity extends AbstractEntity {
         this.password = password;
     }
 
+    public RoleEntity getRole() {
+        return role;
+    }
+
+    public void setRole(RoleEntity role) {
+        this.role = role;
+    }
 }

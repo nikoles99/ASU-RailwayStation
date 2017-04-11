@@ -21,6 +21,8 @@ public class UserBean extends AbstractBean {
 
     private String address;
 
+    private Integer roleId;
+
     private List<TicketBean> tickets = new ArrayList<TicketBean>();
 
     public UserBean() {
@@ -96,5 +98,13 @@ public class UserBean extends AbstractBean {
 
     public void setTickets(List<TicketBean> tickets) {
         this.tickets = tickets;
+    }
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 }

@@ -1,5 +1,7 @@
 package api.convertors;
 
+import api.dao.RoleDao;
+import api.entity.RoleEntity;
 import api.entity.TicketEntity;
 import api.model.TicketBean;
 import api.model.UserBean;
@@ -15,6 +17,9 @@ public class UserConverter extends AbstractConvertor<UserBean, UserEntity> {
     @Autowired
     private TicketConverter ticketConverter;
 
+    @Autowired
+    private RoleDao roleDao;
+
     public UserBean toBean(UserEntity entity) {
         UserBean userBean = new UserBean();
         userBean.setLogin(entity.getLogin());
@@ -28,6 +33,7 @@ public class UserConverter extends AbstractConvertor<UserBean, UserEntity> {
         userBean.setLastName(entity.getLastName());
         userBean.setMiddleName(entity.getMiddleName());
         userBean.setId(entity.getId());
+        userBean.setRoleId(entity.getRole().getId());
         return userBean;
     }
 
@@ -44,6 +50,9 @@ public class UserConverter extends AbstractConvertor<UserBean, UserEntity> {
         userEntity.setLastName(bean.getLastName());
         userEntity.setMiddleName(bean.getMiddleName());
         userEntity.setId(bean.getId());
+        Integer roleId = bean.getRoleId();
+        RoleEntity role = roleDao.getById(roleId);
+        userEntity.setRole(role);
         return userEntity;
     }
 }
