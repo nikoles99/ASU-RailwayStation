@@ -8,7 +8,6 @@ import org.springframework.web.servlet.mvc.method.annotation.AbstractJsonpRespon
  * Created by nikita on 28.02.17.
  */
 
-@CrossOrigin
 public class AbstractController {
 
     @ControllerAdvice

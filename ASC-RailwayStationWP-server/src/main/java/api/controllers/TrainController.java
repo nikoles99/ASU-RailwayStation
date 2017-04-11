@@ -17,7 +17,6 @@ import java.util.List;
  * Created by nolesuk on 07-Mar-17.
  */
 @RestController
-@EnableAutoConfiguration
 public class TrainController extends AbstractController {
 
     @Autowired

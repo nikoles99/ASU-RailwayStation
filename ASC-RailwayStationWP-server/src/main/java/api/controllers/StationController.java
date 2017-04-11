@@ -15,11 +15,15 @@ import java.util.List;
  * Created by nikita on 27.02.17.
  */
 @RestController
-@EnableAutoConfiguration
 public class StationController extends AbstractController {
 
     @Autowired
     private StationService stationService;
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    String test(StationBean station) throws Exception {
+        return "index";
+    }
 
     @RequestMapping(value = "/addStation", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     @ResponseBody

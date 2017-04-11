@@ -8,7 +8,6 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@EnableAutoConfiguration
 public class UserController extends AbstractController {
 
     @Autowired

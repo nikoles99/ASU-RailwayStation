@@ -17,7 +17,6 @@ import java.util.List;
  * Created by nikita on 26.03.17.
  */
 @RestController
-@EnableAutoConfiguration
 public class PlaceController extends AbstractController {
 
     @Autowired
