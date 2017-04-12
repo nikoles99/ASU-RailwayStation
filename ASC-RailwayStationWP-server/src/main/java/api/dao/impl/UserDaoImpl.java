@@ -12,6 +12,13 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.List;
+
 @Transactional(propagation = Propagation.MANDATORY)
 @Repository
 public class UserDaoImpl extends AbstractDao<UserEntity> implements UserDao {
@@ -31,7 +38,13 @@ public class UserDaoImpl extends AbstractDao<UserEntity> implements UserDao {
 
     @Override
     public UserEntity getByLogin(String login) {
-        return null;
+        CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<UserEntity> criteriaQuery = criteriaBuilder.createQuery(UserEntity.class);
+        Root<UserEntity> root = criteriaQuery.from(UserEntity.class);
+        Predicate loginPredicate = criteriaBuilder.equal(root.get("login"), login);
+        criteriaQuery.select(root).where(loginPredicate);
+        TypedQuery<UserEntity> resultQuery = getEntityManager().createQuery(criteriaQuery);
+        return resultQuery.getSingleResult();
     }
 
     @Override

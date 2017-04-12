@@ -14,9 +14,15 @@ public class UserController extends AbstractController {
 
     @RequestMapping(value = "/login")
     @ResponseBody
-    UserBean addUser(@RequestBody final UserBean user) {
-        userService.add(user);
-        return user;
+    void addUser() {
+        UserBean user = new UserBean();
+        user.setName("Nikita");
+        user.setLastName("Olesiuk");
+        user.setPasportNumber("KH123455");
+        user.setEmail("nikido@tut.by");
+        user.setLogin("admin");
+        user.setPassword("admin");
+        userService.registration(user);
     }
 
     @RequestMapping(value = "/authentication", method = RequestMethod.POST)
