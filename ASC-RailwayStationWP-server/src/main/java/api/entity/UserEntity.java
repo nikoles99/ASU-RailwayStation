@@ -31,7 +31,7 @@ public class UserEntity extends AbstractEntity implements UserDetails {
     @Column(name = "email")
     private String email;
 
-    @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private List<RoleEntity> roles;
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL})

@@ -20,11 +20,6 @@ public class StationController extends AbstractController {
     @Autowired
     private StationService stationService;
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    String test(StationBean station) throws Exception {
-        return "index";
-    }
-
     @RequestMapping(value = "/addStation", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     @ResponseBody
     void addStaion(StationBean station) throws Exception {

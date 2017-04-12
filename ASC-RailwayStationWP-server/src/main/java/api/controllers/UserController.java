@@ -25,6 +25,12 @@ public class UserController extends AbstractController {
         userService.registration(user);
     }
 
+    @RequestMapping(value = "/bookTicket", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @ResponseBody
+    void bookTicket(@RequestBody UserBean user) {
+        userService.bookTicket(user);
+    }
+
     @RequestMapping(value = "/authentication", method = RequestMethod.POST)
     void getCarriageById(@RequestParam("login") String login, @RequestParam("password") String password) {
         userService.authentication(login, password);

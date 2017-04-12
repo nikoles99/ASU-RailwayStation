@@ -26,12 +26,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/authentication").permitAll()
+                .antMatchers("/addTrain").hasAuthority("admin")
+                .antMatchers("/deleteStation").hasAuthority("admin")
+                .antMatchers("/addStation").hasAuthority("admin")
+                .antMatchers("/bookTicket").hasAuthority("user")
+                .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .logout()
                 .permitAll()
-                .and();
+                .and().csrf().disable();
     }
 
     @Bean

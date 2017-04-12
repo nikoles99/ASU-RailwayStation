@@ -8,8 +8,8 @@ import java.io.Serializable;
 public enum RoleType implements Serializable {
     USER("user"), SUPER_USER("superuser"), ADMIN("admin");
 
-    RoleType(String user) {
-
+    RoleType(String name) {
+        this.name = name;
     }
 
     private String name;
