@@ -1,37 +1,47 @@
 package api.entity;
 
+import api.model.RoleType;
+import org.springframework.security.core.GrantedAuthority;
+
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * Created by nolesuk on 11-Apr-17.
  */
 @Entity
 @Table(name = "role")
-public class RoleEntity extends AbstractEntity {
+public class RoleEntity extends AbstractEntity implements GrantedAuthority {
 
-    @OneToMany(mappedBy = "role", cascade = {CascadeType.ALL})
-    private List<UserEntity> users;
+    @ManyToOne(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "name")
-    private String name;
+    private RoleType type;
 
     public RoleEntity() {
+        type = RoleType.USER;
     }
 
-    public String getName() {
-        return name;
+    @Override
+    public String getAuthority() {
+        return type.getName();
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public UserEntity getUser() {
+        return user;
     }
 
-    public List<UserEntity> getUsers() {
-        return users;
+    public void setUser(UserEntity user) {
+        this.user = user;
     }
 
-    public void setUsers(List<UserEntity> users) {
-        this.users = users;
+    public RoleType getType() {
+        return type;
+    }
+
+    public void setType(RoleType type) {
+        this.type = type;
     }
 }

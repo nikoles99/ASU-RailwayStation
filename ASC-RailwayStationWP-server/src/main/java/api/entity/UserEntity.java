@@ -1,11 +1,17 @@
 package api.entity;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
 @Table(name = "users")
-public class UserEntity extends AbstractEntity {
+public class UserEntity extends AbstractEntity implements UserDetails {
 
     @Column(name = "login")
     private String login;
@@ -19,27 +25,67 @@ public class UserEntity extends AbstractEntity {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column(name = "middle_name")
-    private String middleName;
+    @Column(name = "passport_number")
+    private String passportNumber;
 
     @Column(name = "email")
     private String email;
 
-    @Column(name = "country")
-    private String country;
-
-    @Column(name = "address")
-    private String address;
-
-    @ManyToOne(cascade = {CascadeType.ALL})
-    @JoinColumn(name = "role")
-    private RoleEntity role;
+    @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL})
+    private List<RoleEntity> roles;
 
     @OneToMany(mappedBy = "user", cascade = {CascadeType.ALL})
     private List<TicketEntity> tickets;
 
+    @Column(name = "is_account_non_expired")
+    private Boolean isAccountNonExpired = false;
+
+    @Column(name = "is_account_non_locked")
+    private Boolean isAccountNonLocked = false;
+
+    @Column(name = "is_credentials_non_expired")
+    private Boolean isCredentialsNonExpired = false;
+
+    @Column(name = "is_enabled")
+    private Boolean isEnabled = false;
+
     public UserEntity() {
 
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles;
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return login;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return isAccountNonExpired;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return isAccountNonLocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return isCredentialsNonExpired;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return isEnabled;
     }
 
     public List<TicketEntity> getTickets() {
@@ -58,6 +104,18 @@ public class UserEntity extends AbstractEntity {
         this.tickets.add(ticket);
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public void setPassword(String password) {
+        this.password = new BCryptPasswordEncoder().encode(password);
+    }
+
     public String getName() {
         return name;
     }
@@ -74,12 +132,12 @@ public class UserEntity extends AbstractEntity {
         this.lastName = lastName;
     }
 
-    public String getMiddleName() {
-        return middleName;
+    public String getPassportNumber() {
+        return passportNumber;
     }
 
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
+    public void setPassportNumber(String passportNumber) {
+        this.passportNumber = passportNumber;
     }
 
     public String getEmail() {
@@ -90,43 +148,14 @@ public class UserEntity extends AbstractEntity {
         this.email = email;
     }
 
-    public String getCountry() {
-        return country;
+    public List<RoleEntity> getRoles() {
+        return roles;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public RoleEntity getRole() {
-        return role;
-    }
-
-    public void setRole(RoleEntity role) {
-        this.role = role;
+    public void setRoles(List<RoleEntity> roles) {
+        for (RoleEntity role : roles) {
+            role.setUser(this);
+        }
+        this.roles = roles;
     }
 }

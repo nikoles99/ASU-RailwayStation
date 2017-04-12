@@ -13,15 +13,9 @@ public class UserBean extends AbstractBean {
 
     private String lastName;
 
-    private String middleName;
+    private String pasportNumber;
 
     private String email;
-
-    private String country;
-
-    private String address;
-
-    private Integer roleId;
 
     private List<TicketBean> tickets = new ArrayList<TicketBean>();
 
@@ -34,6 +28,14 @@ public class UserBean extends AbstractBean {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public List<TicketBean> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<TicketBean> tickets) {
+        this.tickets = tickets;
     }
 
     public String getPassword() {
@@ -60,12 +62,12 @@ public class UserBean extends AbstractBean {
         this.lastName = lastName;
     }
 
-    public String getMiddleName() {
-        return middleName;
+    public String getPasportNumber() {
+        return pasportNumber;
     }
 
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
+    public void setPasportNumber(String pasportNumber) {
+        this.pasportNumber = pasportNumber;
     }
 
     public String getEmail() {
@@ -74,37 +76,5 @@ public class UserBean extends AbstractBean {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public List<TicketBean> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(List<TicketBean> tickets) {
-        this.tickets = tickets;
-    }
-
-    public Integer getRoleId() {
-        return roleId;
-    }
-
-    public void setRoleId(Integer roleId) {
-        this.roleId = roleId;
     }
 }
