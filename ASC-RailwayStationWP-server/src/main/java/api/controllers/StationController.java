@@ -1,11 +1,8 @@
 package api.controllers;
 
-import api.entity.StationEntity;
-import api.exception.StationException;
 import api.model.StationBean;
 import api.service.StationService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 

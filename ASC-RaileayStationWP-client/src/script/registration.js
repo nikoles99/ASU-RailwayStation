@@ -13,10 +13,6 @@ function validateRegistrationForm() {
     return true;
 }
 
-
-/*$("#login").click(function () {
- setEnterBtnEnable();
- });*/
 $(document).on("change paste keyup", "#first_name_registration", function () {
     setRegisterBtnEnable();
 });
@@ -40,13 +36,13 @@ $(document).on("change paste keyup", "#password_confirmation_registration", func
 });
 
 function setRegisterBtnEnable() {
-    var firstName = $('#first_name').val().length;
-    var lastName = $('#last_name').val().length;
-    var phone = $('#phone').val().length;
-    var email = $('#email').val().length;
-    var login = $('#login').val().length;
-    var password = $('#password').val().length;
-    var confirmPassword = $('#password_confirmation').val().length;
+    var firstName = $('#first_name_registration').val().length;
+    var lastName = $('#last_name_registration').val().length;
+    var phone = $('#phone_registration').val().length;
+    var email = $('#email_registration').val().length;
+    var login = $('#login_registration').val().length;
+    var password = $('#password_registration').val().length;
+    var confirmPassword = $('#password_confirmation_registration').val().length;
     var isValidate = firstName >= 4 && lastName >= 4 && phone == 13 && email >= 4 && login >= 4 && password >= 4 && confirmPassword >= 4;
     $("#register").prop('disabled', !isValidate);
 }
@@ -55,11 +51,11 @@ $(document).on("click", "#register", function () {
     var isValidate = validateRegistrationForm();
     if (isValidate) {
         var user = {
-            login: $('#login').val(),
-            password: $('#password').val(),
-            name: firstName = $('#first_name').val(),
-            lastName: $('#last_name').val(),
-            email: $('#email').val()
+            login: $('#login_registration').val(),
+            password: $('#password_registration').val(),
+            name:  $('#first_name_registration').val(),
+            lastName: $('#last_name_registration').val(),
+            email: $('#email_registration').val()
         };
         registration(user);
     }

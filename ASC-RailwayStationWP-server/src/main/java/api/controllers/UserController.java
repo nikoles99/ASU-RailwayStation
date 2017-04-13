@@ -41,8 +41,9 @@ public class UserController extends AbstractController {
         }
     }
 
-    @RequestMapping(value = "/registration", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    void registration(@RequestBody UserBean user) {
+    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    @ResponseBody
+    void registration(UserBean user) {
         userService.registration(user);
     }
 }

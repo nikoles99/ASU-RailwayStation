@@ -1,12 +1,10 @@
 package api.controllers;
 
-import api.exception.TrainException;
 import api.model.CarriageBean;
 import api.model.TrainBean;
 import api.service.CarriageService;
 import api.service.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 

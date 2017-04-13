@@ -22,15 +22,19 @@ function authentication(login, password) {
     });
 }
 
-function registration(user, success, error) {
+function registration(user) {
     var url = "http://localhost:8080/registration";
     return $.ajax({
         url: url,
         type: 'POST',
         dataType: 'json',
         data: user,
-        success: success,
-        error: error
+        success: function () {
+            alert("d");
+        },
+        error: function (data) {
+            alert("dd");
+        }
     });
 }
 

@@ -21,7 +21,7 @@ public class RoleEntity extends AbstractEntity implements GrantedAuthority {
     private RoleType type;
 
     public RoleEntity() {
-        type = RoleType.ADMIN;
+        type = RoleType.USER;
     }
 
     @Override

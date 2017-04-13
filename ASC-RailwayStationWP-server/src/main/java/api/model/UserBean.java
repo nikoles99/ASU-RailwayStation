@@ -13,8 +13,6 @@ public class UserBean extends AbstractBean {
 
     private String lastName;
 
-    private String pasportNumber;
-
     private String email;
 
     private List<TicketBean> tickets = new ArrayList<TicketBean>();
@@ -28,14 +26,6 @@ public class UserBean extends AbstractBean {
 
     public void setLogin(String login) {
         this.login = login;
-    }
-
-    public List<TicketBean> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(List<TicketBean> tickets) {
-        this.tickets = tickets;
     }
 
     public String getPassword() {
@@ -62,19 +52,19 @@ public class UserBean extends AbstractBean {
         this.lastName = lastName;
     }
 
-    public String getPasportNumber() {
-        return pasportNumber;
-    }
-
-    public void setPasportNumber(String pasportNumber) {
-        this.pasportNumber = pasportNumber;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public List<TicketBean> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<TicketBean> tickets) {
+        this.tickets = tickets;
     }
 }

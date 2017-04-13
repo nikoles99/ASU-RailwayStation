@@ -24,7 +24,6 @@ public class UserConverter extends AbstractConvertor<UserBean, UserEntity> {
         userEntity.setPassword(bean.getPassword());
         userEntity.setName(bean.getName());
         userEntity.setLastName(bean.getLastName());
-        userEntity.setPassportNumber(bean.getPasportNumber());
         userEntity.setEmail(bean.getEmail());
         List<TicketEntity> tickets = ticketConverter.toEntityCollection(bean.getTickets());
         userEntity.setTickets(tickets);
