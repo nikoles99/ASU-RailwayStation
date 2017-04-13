@@ -1,12 +1,11 @@
 function validateRegistrationForm() {
-    var email = $('#email').val();
+    var email = $('#email_registration').val();
     if (email.indexOf('@') == -1) {
-        alert("Email введен не верно")
-        ж
+        alert("Email введен не верно");
         return false;
     }
-    var password = $('#password').val();
-    var confirmPassword = $('#password_confirmation').val();
+    var password = $('#password_registration').val();
+    var confirmPassword = $('#password_confirmation_registration').val();
     if (password != confirmPassword) {
         alert("Пароли не совпадают");
         return false;
@@ -18,30 +17,25 @@ function validateRegistrationForm() {
 /*$("#login").click(function () {
  setEnterBtnEnable();
  });*/
-
-$("#firstName").on("change paste keyup", function () {
+$(document).on("change paste keyup", "#first_name_registration", function () {
     setRegisterBtnEnable();
 });
-
-$("#lastName").on("change paste keyup", function () {
-    f
+$(document).on("change paste keyup", "#last_name_registration", function () {
     setRegisterBtnEnable();
 });
-
-$("#phone").on("change paste keyup", function () {
+$(document).on("change paste keyup", "#phone_registration", function () {
     setRegisterBtnEnable();
 });
-
-$("#email").on("change paste keyup", function () {
+$(document).on("change paste keyup", "#email_registration", function () {
     setRegisterBtnEnable();
 });
-$("#login").on("change paste keyup", function () {
+$(document).on("change paste keyup", "#login_registration", function () {
     setRegisterBtnEnable();
 });
-$("#password").on("change paste keyup", function () {
+$(document).on("change paste keyup", "#password_registration", function () {
     setRegisterBtnEnable();
 });
-$("#confirmPassword").on("change paste keyup", function () {
+$(document).on("change paste keyup", "#password_confirmation_registration", function () {
     setRegisterBtnEnable();
 });
 
@@ -57,8 +51,7 @@ function setRegisterBtnEnable() {
     $("#register").prop('disabled', !isValidate);
 }
 
-$("#register").click(function () {
-    alert("sd");
+$(document).on("click", "#register", function () {
     var isValidate = validateRegistrationForm();
     if (isValidate) {
         var user = {

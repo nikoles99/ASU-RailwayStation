@@ -84,3 +84,7 @@ function setPlaces(places) {
         carriageId = id;
     }
 }
+
+$("#carriage_type").click(function(){
+    alert("sd");
+})
