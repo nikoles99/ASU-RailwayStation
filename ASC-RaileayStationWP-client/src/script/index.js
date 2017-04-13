@@ -6,8 +6,8 @@ $("document").ready(function () {
     addStationsInDataList($("#stationsDataList"));
     setTodayDate($("#date_departure"));
     setTodayDate($("#date_arrival"));
-    $( "#choosePlaces" ).load( "choose_place.html #choosePlaces" );
-    $( "#registration" ).load( "registration.html #registration" );
+    $("#choosePlaces").load("choose_place.html #choosePlaces");
+    $("#registration").load("registration.html #registration");
 });
 
 function validate(departureStation, departureDate, arrivalStation, arrivalDate) {
@@ -25,6 +25,18 @@ function validate(departureStation, departureDate, arrivalStation, arrivalDate) 
     }
     return true;
 }
+
+$("#login").on("change paste keyup", function () {
+    setEnterBtnEnable();
+});
+
+$("#password").on("change paste keyup", function () {
+    setEnterBtnEnable();
+});
+
+$("#enter").click(function () {
+    authentication($("#login").val(), $("#password").val())
+});
 
 
 $("#showRegistrationDialog").click(function () {
@@ -141,5 +153,14 @@ function getSchedule(schedules, stationName) {
         throw new Error('Illegal State: schedule not found');
     });
 }
+
+function setEnterBtnEnable() {
+    var loginLength = $("#login").val().length;
+    var passwordLength = $("#password").val().length;
+    var isValidate = passwordLength > 4 && loginLength > 4;
+    $("#enter").prop('disabled', !isValidate);
+}
+
+
 
 

@@ -32,9 +32,13 @@ public class UserController extends AbstractController {
 
     @RequestMapping(value = "/authentication", method = RequestMethod.POST)
     void authentication(@RequestParam("login") String login, @RequestParam("password") String password) throws Exception {
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(login, password);
-        Authentication auth = authenticationManager.authenticate(token);
-        SecurityContextHolder.getContext().setAuthentication(auth);
+        try {
+            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(login, password);
+            Authentication auth = authenticationManager.authenticate(token);
+            SecurityContextHolder.getContext().setAuthentication(auth);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
     @RequestMapping(value = "/registration", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)

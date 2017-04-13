@@ -65,16 +65,17 @@
                                 </div>
                                 <div class="panel-body">
                                     <form>
-                                        <p><span class="fontawesome-user"></span><input class="form-control" type="text" id="login" value="Логин"
-                                                                                        onBlur="if(this.value == '') this.value = 'Логин'"
-                                                                                        onFocus="if(this.value == 'Логин') this.value = ''" required></p>
-                                        <p><span class="fontawesome-lock"></span><input class="form-control" type="password" id="password" value="Пароль"
-                                                                                        onBlur="if(this.value == '') this.value = 'Пароль'"
-                                                                                        onFocus="if(this.value == 'Пароль') this.value = ''" required></p>
+                                        <p><span class="fontawesome-user"></span><input class="form-control" type="text" id="login" placeholder="Логин"></p>
+                                        <p><span class="fontawesome-lock"></span><input class="form-control" type="password" id="password" placeholder="Пароль"></p>
                                         <table>
                                             <tr>
                                                 <td><a id="showRegistrationDialog">Регистрация</a><span class="fontawesome-arrow-right"></span></td>
-                                                <td><input class="btn btn-sm btn-success" style="margin-left: 20px" type="button" id="enter" value="ВОЙТИ"></td>
+                                                <td><input disabled="true" class="btn btn-sm btn-success" style="margin-left: 20px" type="button" id="enter"
+                                                           value="ВОЙТИ"></td>
+                                            </tr>
+                                            <tr style="display: none">
+                                                <td><a id="cabinet">cabinet</a><span class="fontawesome-arrow-right"></span></td>
+                                                <td><a id="logout">logout</a><span class="fontawesome-arrow-right"></span></td>
                                             </tr>
                                         </table>
 
@@ -141,5 +142,7 @@
 <script src="script/index.js"></script>
 <script src="script/choose_place.js"></script>
 <script src="script/model/carriage.js"></script>
+<script src="script/authentication.js"></script>
+<script src="script/registration.js"></script>
 </body>
 </html>

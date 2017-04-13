@@ -18,55 +18,57 @@
             </h3>
         </div>
         <div class="modal-body">
+            <h id="errorMessage" style="color: #a94442"/>
             <form role="form">
                 <div class="row">
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name">
+                            <input type="text" name="first_name" id="first_name" class="form-control input-sm" placeholder="First Name"  maxlength="30">
                         </div>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name">
+                            <input type="text" name="last_name" id="last_name" class="form-control input-sm" placeholder="Last Name"  maxlength="30">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <input type="text" name="first_name" id="phone" class="form-control input-sm" placeholder="Phone: +375(123456789)">
+                            <input type="text" name="first_name" id="phone" class="form-control input-sm" placeholder="Phone: +375123456789"  maxlength="13">
                         </div>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+                            <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address" maxlength="30">
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <input type="email" name="email" id="login" class="form-control input-sm" placeholder="Login">
+                    <input type="text" name="email" id="login" class="form-control input-sm" placeholder="Login" maxlength="30">
                 </div>
 
                 <div class="row">
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         <div class="form-group">
-                            <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+                            <input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password" maxlength="30">
                         </div>
                     </div>
                     <div class="col-xs-6 col-sm-6 col-md-6">
                         <div class="form-group">
                             <input type="password" name="password_confirmation" id="password_confirmation" class="form-control input-sm"
-                                   placeholder="Confirm Password">
+                                   placeholder="Confirm Password" maxlength="30">
                         </div>
                     </div>
                 </div>
 
-                <input type="submit" value="Register" class="btn btn-info btn-block">
+                <input type="button" id="register" value="Register" class="btn btn-info btn-block">
 
             </form>
         </div>
     </div>
 </div>
+<script src="script/registration.js"></script>
 </body>
 </html>
