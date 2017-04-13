@@ -1,5 +1,6 @@
 package api.controllers;
 
+import api.model.SimpleResponseBean;
 import api.model.UserBean;
 import api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,13 @@ public class UserController extends AbstractController {
     @ResponseBody
     void registration(UserBean user) {
         userService.registration(user);
+    }
+
+    @RequestMapping(value = "/isAuthenticated", method = RequestMethod.POST)
+    @ResponseBody
+    SimpleResponseBean isAuthenticated() {
+        Boolean authenticated = SecurityContextHolder.getContext().getAuthentication().isAuthenticated();
+        SimpleResponseBean simpleResponseBean = new SimpleResponseBean(authenticated.toString());
+        return simpleResponseBean;
     }
 }

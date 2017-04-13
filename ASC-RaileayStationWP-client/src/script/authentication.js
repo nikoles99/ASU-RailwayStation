@@ -38,11 +38,37 @@ function registration(user) {
     });
 }
 
-function logout(success) {
+function logout() {
     var url = "http://localhost:8080/logout";
     return $.ajax({
         url: url,
+        type: 'POST'
+    });
+}
+
+function isAuthorize() {
+    var url = "http://localhost:8080/isAuthenticated";
+    return $.ajax({
+        url: url,
         type: 'POST',
-        success: success
+        success: function (data) {
+            alert(data);
+        },
+        error: function (data) {
+            alert(data);
+        }
+    });
+}
+
+function updateAuthorizationForm() {
+    var isAuthorize = isAuthorize();
+    isAuthorize.then(function () {
+        if (isAuthorize) {
+            $("#authorization_form").prop('display', none);
+            $("#logout_form").prop('display', inline);
+        } else {
+            $("#authorization_form").prop('display', inline);
+            $("#logout_form").prop('display', none);
+        }
     });
 }

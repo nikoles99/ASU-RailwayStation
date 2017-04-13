@@ -7,8 +7,10 @@
     <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
     <link href="style/index.css" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.js"></script>
+    <script src="jquery.cookie.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script src="script/utils/internationalization.js"></script>
+
     <title>ExpressNikTrainLine</title>
 </head>
 <div>
@@ -64,7 +66,7 @@
                                     <h3 class="panel-title">Авторизация</h3>
                                 </div>
                                 <div class="panel-body">
-                                    <form>
+                                    <form id="authorization_form">
                                         <p><span class="fontawesome-user"></span><input class="form-control" type="text" id="login" placeholder="Логин"></p>
                                         <p><span class="fontawesome-lock"></span><input class="form-control" type="password" id="password" placeholder="Пароль">
                                         </p>
@@ -74,12 +76,19 @@
                                                 <td><input disabled="true" class="btn btn-sm btn-success" style="margin-left: 20px" type="button" id="enter"
                                                            value="ВОЙТИ"></td>
                                             </tr>
-                                            <tr style="display: none">
-                                                <td><a id="cabinet">cabinet</a><span class="fontawesome-arrow-right"></span></td>
-                                                <td><a id="logout">logout</a><span class="fontawesome-arrow-right"></span></td>
+                                        </table>
+                                    </form>
+                                    <form id="logout_form">
+                                        <table>
+                                            <tr>
+                                                <td><p>Вы вошли под логином: </p></td>
+                                                <td><p id="user"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a id="cabinet">Личный кабинет</a><span class="fontawesome-arrow-right"></span></td>
+                                                <td><a id="logout">Logout</a><span class="fontawesome-arrow-right"></span></td>
                                             </tr>
                                         </table>
-
                                     </form>
                                 </div>
                             </div>

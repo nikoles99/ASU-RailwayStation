@@ -8,6 +8,7 @@ $("document").ready(function () {
     setTodayDate($("#date_arrival"));
     $("#choosePlaces").load("choose_place.html #choosePlaces");
     $("#registration").load("registration.html #registration");
+    updateAuthorizationForm();
 });
 
 function validate(departureStation, departureDate, arrivalStation, arrivalDate) {
@@ -41,6 +42,10 @@ $("#enter").click(function () {
 
 $("#showRegistrationDialog").click(function () {
     $('#registration').modal();
+});
+
+$("#logout").click(function () {
+    logout();
 });
 
 $("#station_to").click(function () {
