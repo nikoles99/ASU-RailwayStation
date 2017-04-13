@@ -30,10 +30,10 @@ function registration(user) {
         dataType: 'json',
         data: user,
         success: function () {
-            alert("d");
+            alert("Регистрация пройдена успешно");
         },
         error: function (data) {
-            alert("dd");
+            errorLogging(data);
         }
     });
 }

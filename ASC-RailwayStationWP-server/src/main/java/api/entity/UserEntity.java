@@ -38,16 +38,16 @@ public class UserEntity extends AbstractEntity implements UserDetails {
     private List<TicketEntity> tickets;
 
     @Column(name = "is_account_non_expired")
-    private Boolean isAccountNonExpired = false;
+    private Boolean isAccountNonExpired = true;
 
     @Column(name = "is_account_non_locked")
-    private Boolean isAccountNonLocked = false;
+    private Boolean isAccountNonLocked = true;
 
     @Column(name = "is_credentials_non_expired")
-    private Boolean isCredentialsNonExpired = false;
+    private Boolean isCredentialsNonExpired = true;
 
     @Column(name = "is_enabled")
-    private Boolean isEnabled = false;
+    private Boolean isEnabled = true;
 
     public UserEntity() {
 
