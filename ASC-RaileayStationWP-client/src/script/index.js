@@ -36,7 +36,10 @@ $("#password").on("change paste keyup", function () {
 });
 
 $("#enter").click(function () {
-    authentication($("#login").val(), $("#password").val())
+    var authenticationPromise = authentication($("#login").val(), $("#password").val());
+    authenticationPromise.then(function () {
+        updateAuthorizationForm();
+    })
 });
 
 
@@ -45,7 +48,10 @@ $("#showRegistrationDialog").click(function () {
 });
 
 $("#logout").click(function () {
-    logout();
+    var logoutPromise = logout();
+    logoutPromise.then(function () {
+        updateAuthorizationForm();
+    })
 });
 
 $("#station_to").click(function () {

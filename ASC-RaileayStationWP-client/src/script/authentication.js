@@ -9,9 +9,6 @@ function authentication(login, password) {
         type: 'POST',
         dataType: 'json',
         data: {login: login, password: password},
-        success: function () {
-
-        },
         error: function (error) {
             var message = error.responseJSON.message;
             if (NOT_FOUND_USER === message) {
@@ -29,6 +26,9 @@ function registration(user) {
         type: 'POST',
         dataType: 'json',
         data: user,
+        xhrFields: {
+            withCredentials: true
+        },
         success: function () {
             alert("Регистрация пройдена успешно");
         },
@@ -51,24 +51,24 @@ function isAuthorize() {
     return $.ajax({
         url: url,
         type: 'POST',
-        success: function (data) {
-            alert(data);
+        xhrFields: {
+            withCredentials: true
         },
-        error: function (data) {
-            alert(data);
+        xhrFields: {
+            withCredentials: true
         }
     });
 }
 
 function updateAuthorizationForm() {
-    var isAuthorize = isAuthorize();
-    isAuthorize.then(function () {
-        if (isAuthorize) {
-            $("#authorization_form").prop('display', none);
-            $("#logout_form").prop('display', inline);
+    var authorize = isAuthorize();
+    authorize.then(function (data) {
+        if (data) {
+            $("#authorization_form").hide();
+            $("#logout_form").show();
         } else {
-            $("#authorization_form").prop('display', inline);
-            $("#logout_form").prop('display', none);
+            $("#authorization_form").show();
+            $("#logout_form").hide();
         }
     });
 }
