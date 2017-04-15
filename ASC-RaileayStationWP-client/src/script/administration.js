@@ -2,6 +2,7 @@
  * Created by nolesuk on 07-Mar-17.
  */
 var train;
+var carriageNumber = 0;
 
 $("document").ready(function () {
     addStationsInDataList($("#stationsDataList"));
@@ -180,23 +181,23 @@ function getTrain() {
 }
 
 function addCarriages(train) {
-    var number = 0;
+    carriageNumber = 0;
 
     var commonPlacesCount = 81;
     var commonCarriagesCount = $("#countCommon").val();
-    addCarriage(train, COMMON_CARRIAGE, commonCarriagesCount, number, commonPlacesCount);
+    addCarriage(train, COMMON_CARRIAGE, commonCarriagesCount, commonPlacesCount);
 
     var reservedSeatPlacesCount = 54;
     var reservedSeatCount = $("#countReservedSeat").val();
-    addCarriage(train, RESERVED_SEATS_CARRIAGE, reservedSeatCount, number, reservedSeatPlacesCount);
+    addCarriage(train, RESERVED_SEATS_CARRIAGE, reservedSeatCount, reservedSeatPlacesCount);
 
     var coupPlacesCount = 36;
     var coupsCount = $("#countCoups").val();
-    addCarriage(train, COUP_CARRIAGE, coupsCount, number, coupPlacesCount);
+    addCarriage(train, COUP_CARRIAGE, coupsCount, coupPlacesCount);
 
     var seatPlacesCount = 42;
     var seatCarriageCount = $("#countSeatPlaces").val();
-    addCarriage(train, SEAT_PLACES_CARRIAGE, seatCarriageCount, number, seatPlacesCount);
+    addCarriage(train, SEAT_PLACES_CARRIAGE, seatCarriageCount, seatPlacesCount);
 }
 
 
@@ -265,11 +266,11 @@ function validateRoute() {
 }
 
 
-function addCarriage(train, type, countCarriages, number, countPlaces) {
-    var carriage = {carriageType: type, number: number, places: []};
-    addPlaces(carriage, countPlaces);
+function addCarriage(train, type, countCarriages, countPlaces) {
     for (var i = 0; i < countCarriages; i++) {
-        carriage.number = ++number;
+        var carriage = {carriageType: type, number: "", places: []};
+        addPlaces(carriage, countPlaces);
+        carriage.number = ++carriageNumber;
         train.carriages.push(carriage);
     }
 }

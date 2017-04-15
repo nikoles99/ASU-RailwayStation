@@ -47,6 +47,7 @@ function saveTrain(train) {
             url: url,
             method: 'POST',
             dataType: 'json',
+            contentType: "application/json; charset=utf-8",
             xhrFields: {withCredentials: true},
             data: JSON.stringify(train),
             error: function (xhr) {
