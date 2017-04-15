@@ -36,9 +36,10 @@ $("#password").on("change paste keyup", function () {
 });
 
 $("#enter").click(function () {
-    var authenticationPromise = authentication($("#login").val(), $("#password").val());
+    var login = $("#login").val();
+    var authenticationPromise = authentication(login, $("#password").val());
     authenticationPromise.then(function () {
-        updateAuthorizationForm();
+        updateAuthorizationForm(login);
     })
 });
 
@@ -48,10 +49,8 @@ $("#showRegistrationDialog").click(function () {
 });
 
 $("#logout").click(function () {
-    var logoutPromise = logout();
-    logoutPromise.then(function () {
-        updateAuthorizationForm();
-    })
+    logout();
+    updateAuthorizationForm();
 });
 
 $("#station_to").click(function () {
@@ -89,6 +88,21 @@ function appendTrainsTableHeader() {
         "</tr>";
     $("#trains tbody:last-child").append(trainsHeader);
 }
+
+function updateAuthorizationForm(login) {
+    var authorize = isAuthorize();
+    authorize.then(function (data) {
+        if (data) {
+            $("#authorization_form").hide();
+            $("#login_message").text("Вы вошли под логином: " + login);
+            $("#logout_form").show();
+        } else {
+            $("#authorization_form").show();
+            $("#logout_form").hide();
+        }
+    });
+}
+
 
 function fillTrains(departureStation, arrivalStation, trains) {
     $("#trains tr").remove();
@@ -168,7 +182,7 @@ function getSchedule(schedules, stationName) {
 function setEnterBtnEnable() {
     var loginLength = $("#login").val().length;
     var passwordLength = $("#password").val().length;
-    var isValidate = passwordLength > 4 && loginLength > 4;
+    var isValidate = passwordLength >= 4 && loginLength >= 4;
     $("#enter").prop('disabled', !isValidate);
 }
 

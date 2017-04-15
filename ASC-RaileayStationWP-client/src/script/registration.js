@@ -35,6 +35,16 @@ $(document).on("change paste keyup", "#password_confirmation_registration", func
     setRegisterBtnEnable();
 });
 
+function clearForm() {
+    $('#first_name_registration').val("");
+    $('#last_name_registration').val("");
+    $('#phone_registration').val("");
+    $('#email_registration').val("");
+    $('#login_registration').val("");
+    $('#password_registration').val("");
+    $('#password_confirmation_registration').val("");
+}
+
 function setRegisterBtnEnable() {
     var firstName = $('#first_name_registration').val().length;
     var lastName = $('#last_name_registration').val().length;

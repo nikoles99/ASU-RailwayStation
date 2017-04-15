@@ -9,6 +9,7 @@ function authentication(login, password) {
         type: 'POST',
         dataType: 'json',
         data: {login: login, password: password},
+        xhrFields: {withCredentials: true},
         error: function (error) {
             var message = error.responseJSON.message;
             if (NOT_FOUND_USER === message) {
@@ -30,10 +31,15 @@ function registration(user) {
             withCredentials: true
         },
         success: function () {
-            alert("Регистрация пройдена успешно");
+            alert("Регистрация пройдена успешно, зайдите под своим логином и паролем");
+            $('#registration').modal('toggle');
+            clearForm();
         },
         error: function (data) {
-            errorLogging(data);
+            var message = data.responseJSON.message;
+            if(message.indexOf("unique_constrain_login")!=-1){
+                alert("пользователь под таким логином уже зарегистрирован");
+            }
         }
     });
 }
@@ -42,7 +48,13 @@ function logout() {
     var url = "http://localhost:8080/logout";
     return $.ajax({
         url: url,
-        type: 'POST'
+        xhrFields: {withCredentials: true},
+        success: function () {
+            alert("Р");
+        },
+        error: function (data) {
+            errorLogging(data);
+        }
     });
 }
 
@@ -51,24 +63,6 @@ function isAuthorize() {
     return $.ajax({
         url: url,
         type: 'POST',
-        xhrFields: {
-            withCredentials: true
-        },
-        xhrFields: {
-            withCredentials: true
-        }
-    });
-}
-
-function updateAuthorizationForm() {
-    var authorize = isAuthorize();
-    authorize.then(function (data) {
-        if (data) {
-            $("#authorization_form").hide();
-            $("#logout_form").show();
-        } else {
-            $("#authorization_form").show();
-            $("#logout_form").hide();
-        }
+        xhrFields: {withCredentials: true}
     });
 }
