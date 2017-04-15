@@ -8,6 +8,7 @@ function deleteStation(stationName, callback) {
         type: 'POST',
         dataType: 'json',
         data: {name: stationName},
+        xhrFields: {withCredentials: true},
         success: callback,
         error: function (error) {
             errorLogging(error);
@@ -49,6 +50,7 @@ function addStation(nameStation, callback) {
         type: 'POST',
         dataType: 'json',
         data: {name: nameStation},
+        xhrFields: {withCredentials: true},
         success: callback,
         error: function (error) {
             errorLogging(error);
