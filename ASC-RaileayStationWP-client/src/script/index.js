@@ -94,7 +94,13 @@ function updateAuthorizationForm() {
         if (data) {
             $("#authorization_form").hide();
             $("#login_message").text("Вы вошли под логином: " + data.login);
-            $("#cabinet").attr('href','administration.html');
+            var href;
+            if (data.login == "admin") {
+                href = 'administration.html';
+            } else {
+                href = 'cabinet.html';
+            }
+            $("#cabinet").attr('href', href);
             $("#logout_form").show();
         } else {
             $("#authorization_form").show();

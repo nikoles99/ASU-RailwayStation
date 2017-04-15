@@ -53,12 +53,6 @@ function logout() {
     return $.ajax({
         url: url,
         xhrFields: {withCredentials: true},
-        success: function () {
-            alert("Р");
-        },
-        error: function (data) {
-            errorLogging(data);
-        }
     });
 }
 
