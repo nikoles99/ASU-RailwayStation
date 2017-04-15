@@ -36,10 +36,9 @@ $("#password").on("change paste keyup", function () {
 });
 
 $("#enter").click(function () {
-    var login = $("#login").val();
-    var authenticationPromise = authentication(login, $("#password").val());
+    var authenticationPromise = authentication($("#login").val(), $("#password").val());
     authenticationPromise.then(function () {
-        updateAuthorizationForm(login);
+        updateAuthorizationForm();
     })
 });
 
@@ -89,12 +88,13 @@ function appendTrainsTableHeader() {
     $("#trains tbody:last-child").append(trainsHeader);
 }
 
-function updateAuthorizationForm(login) {
+function updateAuthorizationForm() {
     var authorize = isAuthorize();
     authorize.then(function (data) {
         if (data) {
             $("#authorization_form").hide();
-            $("#login_message").text("Вы вошли под логином: " + login);
+            $("#login_message").text("Вы вошли под логином: " + data.login);
+            $("#cabinet").attr('href','administration.html');
             $("#logout_form").show();
         } else {
             $("#authorization_form").show();

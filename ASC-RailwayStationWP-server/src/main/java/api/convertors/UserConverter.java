@@ -2,6 +2,7 @@ package api.convertors;
 
 import api.entity.TicketEntity;
 import api.entity.UserEntity;
+import api.model.TicketBean;
 import api.model.UserBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,7 +16,14 @@ public class UserConverter extends AbstractConvertor<UserBean, UserEntity> {
     private TicketConverter ticketConverter;
 
     public UserBean toBean(UserEntity entity) {
-        return null;
+        UserBean bean = new UserBean();
+        bean.setLogin(entity.getLogin());
+        bean.setPassword(entity.getPassword());
+        bean.setEmail(entity.getEmail());
+        bean.setName(entity.getName());
+        bean.setLastName(entity.getLastName());
+        bean.setId(entity.getId());
+        return bean;
     }
 
     public UserEntity toEntity(UserBean bean) {

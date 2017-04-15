@@ -13,9 +13,6 @@ public class UserController extends AbstractController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserUtils userUtils;
-
     @RequestMapping(value = "/bookTicket", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     void bookTicket(@RequestBody UserBean user) {
         userService.bookTicket(user);
@@ -23,11 +20,7 @@ public class UserController extends AbstractController {
 
     @RequestMapping(value = "/authentication", method = RequestMethod.POST)
     void authentication(@RequestParam("login") String login, @RequestParam("password") String password) throws Exception {
-        try {
-            userUtils.authenticate(login, password);
-        } catch (Exception e) {
-            throw new Exception(e.getMessage());
-        }
+        userService.authenticate(login, password);
     }
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
@@ -38,7 +31,7 @@ public class UserController extends AbstractController {
 
     @RequestMapping(value = "/isAuthenticated", method = RequestMethod.POST)
     @ResponseBody
-    Boolean isAuthenticated() {
-        return userUtils.isAuthenticated();
+    UserBean isAuthenticated() {
+        return userService.getAuthorizeUser();
     }
 }

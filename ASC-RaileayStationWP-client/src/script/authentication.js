@@ -37,7 +37,7 @@ function registration(user) {
         },
         error: function (data) {
             var message = data.responseJSON.message;
-            if(message.indexOf("unique_constrain_login")!=-1){
+            if (message.indexOf("unique_constrain_login") != -1) {
                 alert("пользователь под таким логином уже зарегистрирован");
             }
         }
