@@ -18,7 +18,6 @@ public class UserConverter extends AbstractConvertor<UserBean, UserEntity> {
     public UserBean toBean(UserEntity entity) {
         UserBean bean = new UserBean();
         bean.setLogin(entity.getLogin());
-        bean.setPassword(entity.getPassword());
         bean.setEmail(entity.getEmail());
         bean.setName(entity.getName());
         bean.setLastName(entity.getLastName());

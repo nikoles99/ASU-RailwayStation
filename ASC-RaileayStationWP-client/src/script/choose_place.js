@@ -6,7 +6,7 @@ const CHILDREN_WITH_NO_SEATS = "children_with_no_seats";
 const CHILDREN_WITH_SEATS = "children_with_seats";
 var countPassenger = 3;
 
-$("#trains").on("click", ".freePlaces", function () {
+function fillForm() {
     var freePlaces = $(this).closest('a');
     var trainName = freePlaces.data("trainName");
     var trainId = freePlaces.data("trainId");
@@ -25,7 +25,18 @@ $("#trains").on("click", ".freePlaces", function () {
     $("#departureDate").text(departureDate);
     var freePlacesArray = freePlaces.data("freePlaces");
     setPlaces(freePlacesArray);
-    $('#choosePlaces').modal();
+}
+$("#trains").on("click", ".freePlaces", function () {
+    var authorize = isAuthorize();
+    fillForm.call(this);
+    authorize.then(function (data) {
+        if (data) {
+            $('#choosePlaces').modal();
+        } else {
+            alert("Для того, чтобы продолжить необходимо пройти регистрацию или войти в в систему")
+        }
+    })
+
 });
 
 function fillPassengerCount(select) {
@@ -85,6 +96,6 @@ function setPlaces(places) {
     }
 }
 
-$("#carriage_type").click(function(){
+$("#carriage_type").click(function () {
     alert("sd");
 })
