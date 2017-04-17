@@ -106,4 +106,10 @@ public class PlaceServiceImpl implements PlaceService {
         List<TicketEntity> bookedTickets = ticketDao.getBookedTickets();
         return ticketConverter.toBeanCollection(bookedTickets);
     }
+
+    @Override
+    public void remove(TicketBean ticket) {
+        TicketEntity ticketEntity = ticketConverter.toEntity(ticket);
+        ticketDao.removeTicket(ticketEntity);
+    }
 }

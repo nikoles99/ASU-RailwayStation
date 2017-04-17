@@ -19,4 +19,6 @@ public interface PlaceService {
     Integer bookPlace(TicketBean ticket);
 
     List<TicketBean> getBookedTickets();
+
+    void remove(TicketBean ticket);
 }
