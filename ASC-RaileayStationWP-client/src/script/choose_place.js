@@ -5,8 +5,10 @@ const ADULTS = "adults";
 const CHILDREN_WITH_NO_SEATS = "children_with_no_seats";
 const CHILDREN_WITH_SEATS = "children_with_seats";
 var countPassenger = 3;
+var chosenPlaces = [];
 
 function fillForm() {
+    chosenPlaces = [];
     var freePlaces = $(this).closest('a');
     var trainName = freePlaces.data("trainName");
     var trainId = freePlaces.data("trainId");
@@ -31,6 +33,8 @@ $("#trains").on("click", ".freePlaces", function () {
     fillForm.call(this);
     authorize.then(function (data) {
         if (data) {
+            $("#last_name").val(data.lastName);
+            $("#name").val(data.name);
             $('#choosePlaces').modal();
         } else {
             alert("Для того, чтобы продолжить необходимо пройти регистрацию или войти в в систему")
@@ -39,33 +43,52 @@ $("#trains").on("click", ".freePlaces", function () {
 
 });
 
-function fillPassengerCount(select) {
-    select.children().remove();
-    for (var i = 0; i <= countPassenger; i++) {
-        select.append($("<option/>", {
-            value: i,
-            text: i,
-        }));
+$(document).on("click", "#continue", function () {
+    $("#last_name").val(data.lastName);
+});
+
+function isPlaceContains(place) {
+    for (var i = 0; i <= chosenPlaces.length; i++) {
+        var chosenPlace = chosenPlaces[i];
+        if (place == chosenPlace) {
+            return true;
+        }
     }
+    return false;
 }
 
-function setPassengersBlockVisibility() {
-    var isAdultsChecked = $('#adults_checkbox').is(':checked');
-    var isChildrenChecked = $('#children_checkbox').is(':checked');
-    if (isAdultsChecked || isChildrenChecked) {
-        $('#passengers').slideDown();
+function remove(place) {
+    for (var i = 0; i <= chosenPlaces.length; i++) {
+        var chosenPlace = chosenPlaces[i];
+        if (place == chosenPlace) {
+            chosenPlaces.splice(i, 1);
+        }
     }
-    else {
-        $('#passengers').slideUp();
-    }
+
 }
+
+$(document).on("click", ".btn.btn-default.btn-xs.place", function () {
+    var place = $(this).val();
+    var placeContain = isPlaceContains(place);
+    if (placeContain) {
+        $(this).css("background-color", "");
+        remove(place);
+    } else {
+        if (chosenPlaces.length >= countPassenger) {
+            alert("максимальное количесто выбранных мест (3)")
+            return;
+        }
+        $(this).css("background-color", "#5cb85c");
+        chosenPlaces.push(place);
+    }
+});
 
 function getPlacesByCarriageId(places, carriageId) {
     var str1 = "";
     for (var i = 0; i < places.length; i++) {
         var place = places[i];
         if (carriageId === place.carriageId) {
-            var placeUI = "<input type='button' value='" + place.number + "' data='" + carriageId + "'/>";
+            var placeUI = "<input class=\"btn btn-default btn-xs place\" type='button' value='" + place.number + "' data='" + carriageId + "'/>";
             str1 = str1.concat(placeUI);
         }
     }
@@ -96,6 +119,3 @@ function setPlaces(places) {
     }
 }
 
-$("#carriage_type").click(function () {
-    alert("sd");
-})
