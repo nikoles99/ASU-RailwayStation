@@ -65,11 +65,11 @@
                                 </tr>
                                 <tr>
                                     <td style="vertical-align:middle"><p>Взрослые</p></td>
-                                    <td><input style="height: 22px" class="form-control input-sm" type="number" min="1" max="2"></td>
+                                    <td><input style="height: 22px" class="form-control input-sm" type="number" id="adultsCount" min="1" max="2"></td>
                                 </tr>
                                 <tr>
                                     <td style="vertical-align:middle"><p>Дети с местом</p></td>
-                                    <td><input style="height: 22px" class="form-control input-sm" type="number" min="0" max="3"></td>
+                                    <td><input style="height: 22px" class="form-control input-sm" id="childCount" type="number" min="0" max="3"></td>
                                 </tr>
                             </table>
                         </div>
@@ -78,13 +78,14 @@
             </tr>
         </table>
         <div class="modal-body">
-            <div id="places">
+            <div id="places" disabled="true">
                 <table class="table table-striped" id="free_places">
                     <tbody>
                     </tbody>
                 </table>
             </div>
-            <input class="btn btn-sm btn-success" type="button" id="continue" value="Продолжить">
+            <input class="btn btn-sm btn-success" style="margin-left: 85%" type="button" id="continue" value="Продолжить">
+            <input class="btn btn-sm btn-success" style="margin-left: 75%" type="button" id="calculate_price" value="Продолжить">
         </div>
     </div>
 </div>
