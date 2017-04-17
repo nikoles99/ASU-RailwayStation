@@ -33,6 +33,7 @@ public class TicketConverter extends AbstractConvertor<TicketBean, TicketEntity>
         bean.setArrivalStation(entity.getArrivalStation());
         bean.setDepartureDate(entity.getDepartureDate());
         bean.setDepartureStation(entity.getDepartureStation());
+        bean.setPrice(entity.getPrice());
         return bean;
     }
 
@@ -50,6 +51,7 @@ public class TicketConverter extends AbstractConvertor<TicketBean, TicketEntity>
         entity.setArrivalStation(bean.getArrivalStation());
         entity.setDepartureDate(bean.getDepartureDate());
         entity.setDepartureStation(bean.getDepartureStation());
+        entity.setPrice(bean.getPrice());
         return entity;
     }
 }

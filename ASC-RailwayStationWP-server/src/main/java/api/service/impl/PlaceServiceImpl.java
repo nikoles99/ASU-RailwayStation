@@ -1,15 +1,15 @@
 package api.service.impl;
 
 import api.convertors.PlaceConverter;
+import api.convertors.TicketConverter;
 import api.dao.TicketDao;
 import api.dao.TrainDao;
-import api.entity.CarriageEntity;
-import api.entity.PlaceEntity;
-import api.entity.TicketEntity;
-import api.entity.TrainEntity;
+import api.entity.*;
 import api.model.CarriageType;
 import api.model.PlaceBean;
+import api.model.TicketBean;
 import api.service.PlaceService;
+import api.utils.UserUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,6 +30,9 @@ public class PlaceServiceImpl implements PlaceService {
 
     @Autowired
     private PlaceConverter placeConverter;
+
+    @Autowired
+    private TicketConverter ticketConverter;
 
     @Autowired
     private TicketDao ticketDao;
@@ -86,5 +89,21 @@ public class PlaceServiceImpl implements PlaceService {
     @Override
     public List<PlaceBean> getFreePlaces(Integer trainId) {
         return null;
+    }
+
+    @Override
+    public Integer bookPlace(TicketBean ticket) {
+        TicketEntity ticketEntity = ticketConverter.toEntity(ticket);
+        UserEntity user = UserUtils.getUser();
+        ticketEntity.setUser(user);
+        TicketEntity result = ticketDao.addTicket(ticketEntity);
+        return ticketConverter.toBean(result).getId();
+    }
+
+
+    @Override
+    public List<TicketBean> getBookedTickets() {
+        List<TicketEntity> bookedTickets = ticketDao.getBookedTickets();
+        return ticketConverter.toBeanCollection(bookedTickets);
     }
 }

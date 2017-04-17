@@ -4,6 +4,7 @@ import api.dao.AbstractDao;
 import api.dao.TicketDao;
 import api.entity.*;
 import api.model.CarriageType;
+import api.utils.UserUtils;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,9 +21,19 @@ import java.util.List;
 @Repository
 public class TicketDaoImpl extends AbstractDao<TicketEntity> implements TicketDao {
 
+
     @Override
-    public List<TicketEntity> getBookedTickets(Integer trainId, CarriageType carriageType) {
-        return null;
+    public List<TicketEntity> getBookedTickets() {
+        CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
+
+        CriteriaQuery<TicketEntity> criteriaQuery = criteriaBuilder.createQuery(TicketEntity.class);
+        Root<TicketEntity> root = criteriaQuery.from(TicketEntity.class);
+
+        Predicate userPredicate = criteriaBuilder.equal(root.get("userId"), UserUtils.getUser().getId());
+
+        criteriaQuery.select(root).where(userPredicate);
+        TypedQuery<TicketEntity> resultQuery = getEntityManager().createQuery(criteriaQuery);
+        return resultQuery.getResultList();
     }
 
     @Override
@@ -52,8 +63,8 @@ public class TicketDaoImpl extends AbstractDao<TicketEntity> implements TicketDa
 
 
     @Override
-    public void addTicket(TicketEntity ticket) {
-        persist(ticket);
+    public TicketEntity addTicket(TicketEntity ticket) {
+        return merge(ticket);
     }
 
     @Override

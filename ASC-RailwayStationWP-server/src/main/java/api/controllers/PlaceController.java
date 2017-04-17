@@ -2,12 +2,12 @@ package api.controllers;
 
 import api.model.CarriageType;
 import api.model.PlaceBean;
+import api.model.TicketBean;
+import api.model.UserBean;
 import api.service.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -25,5 +25,17 @@ public class PlaceController extends AbstractController {
     List<PlaceBean> getFreePlacesByType(@RequestParam("trainId") Integer trainId, @RequestParam("carriageType") CarriageType type,
                                         @RequestParam("departureDate") Date departureDate, @RequestParam("arrivalDate") Date arrivalDate) {
         return placeService.getFreePlaces(trainId, type, departureDate, arrivalDate);
+    }
+
+    @RequestMapping(value = "/bookPlace", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @ResponseBody
+    Integer bookPlace(@RequestBody TicketBean ticket) {
+        return placeService.bookPlace(ticket);
+    }
+
+    @RequestMapping(value = "/getBookedTickets", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @ResponseBody
+    List<TicketBean> getBookedTickets() {
+        return placeService.getBookedTickets();
     }
 }

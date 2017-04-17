@@ -23,7 +23,17 @@ public class TicketBean extends AbstractBean {
 
     private Integer userId;
 
+    private Double price;
+
     public TicketBean() {
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public Integer getTrainId() {

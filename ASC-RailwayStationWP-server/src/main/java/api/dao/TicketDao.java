@@ -11,11 +11,11 @@ import java.util.List;
  */
 public interface TicketDao {
 
-    List<TicketEntity> getBookedTickets(Integer trainId, CarriageType carriageType);
+    List<TicketEntity> getBookedTickets();
 
     List<TicketEntity> getBookedTickets(Integer trainId, CarriageType carriageType, Date departureDate, Date arrivalDate);
 
-    void addTicket(TicketEntity ticket);
+    TicketEntity addTicket(TicketEntity ticket);
 
     void removeTicket(TicketEntity ticket);
 }

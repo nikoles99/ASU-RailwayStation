@@ -33,11 +33,22 @@ public class TicketEntity extends AbstractEntity {
     @Column(name = "arrival_station")
     private String arrivalStation;
 
+    @Column(name = "price")
+    private Double price;
+
     @ManyToOne(cascade = {CascadeType.ALL})
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
     public TicketEntity() {
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
     }
 
     public Integer getTrainId() {
