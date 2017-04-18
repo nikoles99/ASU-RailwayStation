@@ -62,10 +62,24 @@ public class TicketDaoImpl extends AbstractDao<TicketEntity> implements TicketDa
         return resultQuery.getResultList();
     }
 
+    private List<TicketEntity> getTicketsByPlaceId(Integer placeId) {
+        CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<TicketEntity> criteriaQuery = criteriaBuilder.createQuery(TicketEntity.class);
+        Root<TicketEntity> root = criteriaQuery.from(TicketEntity.class);
+        Predicate placePredicate = criteriaBuilder.equal(root.get("place"), placeId);
+        criteriaQuery.select(root).where(placePredicate);
+        TypedQuery<TicketEntity> resultQuery = getEntityManager().createQuery(criteriaQuery);
+        return resultQuery.getResultList();
+    }
+
 
     @Override
     public TicketEntity addTicket(TicketEntity ticket) {
-        return merge(ticket);
+        List<TicketEntity> tickets = getTicketsByPlaceId(ticket.getPlace().getId());
+        if (tickets.isEmpty()) {
+            return merge(ticket);
+        }
+        throw new IllegalStateException("Место не доступно");
     }
 
     @Override
