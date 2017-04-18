@@ -7,10 +7,6 @@ import java.util.Date;
  */
 public class TicketBean extends AbstractBean {
 
-    private Integer trainId;
-
-    private Integer carriageId;
-
     private Integer placeId;
 
     private Date arrivalDate;
@@ -20,8 +16,6 @@ public class TicketBean extends AbstractBean {
     private String departureStation;
 
     private String arrivalStation;
-
-    private Integer userId;
 
     private Double price;
 
@@ -34,22 +28,6 @@ public class TicketBean extends AbstractBean {
 
     public void setPrice(Double price) {
         this.price = price;
-    }
-
-    public Integer getTrainId() {
-        return trainId;
-    }
-
-    public void setTrainId(Integer trainId) {
-        this.trainId = trainId;
-    }
-
-    public Integer getCarriageId() {
-        return carriageId;
-    }
-
-    public void setCarriageId(Integer carriageId) {
-        this.carriageId = carriageId;
     }
 
     public Integer getPlaceId() {
@@ -92,11 +70,4 @@ public class TicketBean extends AbstractBean {
         this.arrivalStation = arrivalStation;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
 }

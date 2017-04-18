@@ -25,10 +25,7 @@ public class TicketConverter extends AbstractConvertor<TicketBean, TicketEntity>
     public TicketBean toBean(TicketEntity entity) {
         TicketBean bean = new TicketBean();
         bean.setId(entity.getId());
-        bean.setTrainId(entity.getId());
-        bean.setCarriageId(entity.getCarriage().getId());
         bean.setPlaceId(entity.getPlaceId());
-        bean.setUserId(entity.getUser().getId());
         bean.setArrivalDate(entity.getArrivalDate());
         bean.setArrivalStation(entity.getArrivalStation());
         bean.setDepartureDate(entity.getDepartureDate());
@@ -42,11 +39,7 @@ public class TicketConverter extends AbstractConvertor<TicketBean, TicketEntity>
         TicketEntity entity = new TicketEntity();
         entity.setId(bean.getId());
         entity.setTrainId(bean.getId());
-        CarriageEntity carriageEntity = carriageDao.get(bean.getCarriageId());
-        entity.setCarriage(carriageEntity);
         entity.setPlaceId(bean.getPlaceId());
-        UserEntity userEntity = userDao.get(bean.getUserId());
-        entity.setUser(userEntity);
         entity.setArrivalDate(bean.getArrivalDate());
         entity.setArrivalStation(bean.getArrivalStation());
         entity.setDepartureDate(bean.getDepartureDate());

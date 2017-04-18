@@ -22,7 +22,11 @@ function bookTickets(tickets) {
         method: 'POST',
         dataType: 'json',
         contentType: "application/json; charset=utf-8",
+        xhrFields: {withCredentials: true},
         data: JSON.stringify(tickets),
+        success: function () {
+            alert("Места успешно забронированы, подробную информацию вы можете просмотреть в личном кабинете");
+        },
         error: function (xhr) {
             errorLogging(xhr);
         }
