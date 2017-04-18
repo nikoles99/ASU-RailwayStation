@@ -57,8 +57,4 @@ public class UserDaoImpl extends AbstractDao<UserEntity> implements UserDao {
         super.remove(user);
     }
 
-    @Override
-    public void bookTicket(TicketEntity ticket) {
-        ticketDao.addTicket(ticket);
-    }
 }

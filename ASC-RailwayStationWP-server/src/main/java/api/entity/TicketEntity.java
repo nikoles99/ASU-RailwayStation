@@ -11,9 +11,6 @@ import java.util.Date;
 @Table(name = "tickets")
 public class TicketEntity extends AbstractEntity {
 
-    @Column(name = "train_id")
-    private Integer trainId;
-
     @OneToOne
     @JoinColumn(name = "place_id")
     private PlaceEntity place;
@@ -54,14 +51,6 @@ public class TicketEntity extends AbstractEntity {
 
     public void setPrice(Double price) {
         this.price = price;
-    }
-
-    public Integer getTrainId() {
-        return trainId;
-    }
-
-    public void setTrainId(Integer trainId) {
-        this.trainId = trainId;
     }
 
     public Date getArrivalDate() {

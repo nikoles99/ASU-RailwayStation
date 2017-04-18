@@ -1,8 +1,6 @@
 package api.dao;
 
-import api.entity.TicketEntity;
 import api.entity.UserEntity;
-import org.springframework.transaction.annotation.Transactional;
 
 public interface UserDao {
 
@@ -15,7 +13,5 @@ public interface UserDao {
     void update(UserEntity user);
 
     void delete(UserEntity user);
-
-    void bookTicket(TicketEntity ticket);
 
 }
