@@ -33,3 +33,31 @@ function bookTickets(tickets) {
     });
 }
 
+function getTickets() {
+    var url = "http://localhost:8080/getBookedTickets";
+    return $.ajax({
+        url: url,
+        method: 'POST',
+        dataType: 'json',
+        xhrFields: {withCredentials: true},
+        error: function (xhr) {
+            errorLogging(xhr);
+        }
+    });
+}
+
+
+function cancelBookPlace(ticket, success) {
+    var url = "http://localhost:8080/removeTicket";
+    $.ajax({
+        url: url,
+        type: 'POST',
+        dataType: 'json',
+        data: ticket,
+        xhrFields: {withCredentials: true},
+        success: success,
+        error: function (error) {
+            errorLogging(error);
+        }
+    });
+}
