@@ -20,7 +20,18 @@ public class PlaceEntity extends AbstractEntity {
     @JoinColumn(name = "train_id")
     private TrainEntity train;
 
+    @OneToOne(mappedBy = "place")
+    private TicketEntity ticket;
+
     public PlaceEntity() {
+    }
+
+    public TicketEntity getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(TicketEntity ticket) {
+        this.ticket = ticket;
     }
 
     public Integer getNumber() {

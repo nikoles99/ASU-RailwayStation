@@ -43,10 +43,11 @@ public class TicketDaoImpl extends AbstractDao<TicketEntity> implements TicketDa
         CriteriaQuery<TicketEntity> criteriaQuery = criteriaBuilder.createQuery(TicketEntity.class);
         Root<TicketEntity> root = criteriaQuery.from(TicketEntity.class);
 
-        Join<TicketEntity, CarriageEntity> ticketCarriageJoin = root.join("carriage");
+        Join<TicketEntity, PlaceEntity> ticketPlaceJoin = root.join("placeId");
+        Join<PlaceEntity, CarriageEntity> placeCarriageJoin = root.join("carriage");
 
-        Predicate carriageTypePr = criteriaBuilder.equal(ticketCarriageJoin.get("type").as(CarriageType.class), carriageType);
-        Predicate trainPr = criteriaBuilder.equal(root.get("trainId"), trainId);
+        Predicate carriageTypePr = criteriaBuilder.equal(placeCarriageJoin.get("type").as(CarriageType.class), carriageType);
+        Predicate trainPr = criteriaBuilder.equal(ticketPlaceJoin.get("train"), trainId);
         Predicate departureDateBetweenPr = criteriaBuilder.between(root.get("departureDate").as(Date.class), departureDate, arrivalDate);
         Predicate arrivalDateBetweenPr = criteriaBuilder.between(root.get("arrivalDate").as(Date.class), departureDate, arrivalDate);
         Predicate departureDatePr = criteriaBuilder.lessThan(root.get("departureDate").as(Date.class), departureDate);

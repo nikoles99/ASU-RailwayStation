@@ -65,10 +65,10 @@ public class PlaceServiceImpl implements PlaceService {
 
     private void removeBookedPlaces(List<TicketEntity> bookedTickets, CarriageEntity carriage) {
         for (TicketEntity ticket : bookedTickets) {
-            Integer carriageId = ticket.getCarriage().getId();
+            Integer carriageId = ticket.getPlace().getCarriage().getId();
             if (carriageId.equals(carriage.getId())) {
                 PlaceEntity placeEntity = new PlaceEntity();
-                Integer placeId = ticket.getPlaceId();
+                Integer placeId = ticket.getPlace().getId();
                 placeEntity.setId(placeId);
                 carriage.getPlaces().remove(placeEntity);
             }

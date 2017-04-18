@@ -1,8 +1,10 @@
 package api.convertors;
 
 import api.dao.CarriageDao;
+import api.dao.PlaceDao;
 import api.dao.UserDao;
 import api.entity.CarriageEntity;
+import api.entity.PlaceEntity;
 import api.entity.TicketEntity;
 import api.entity.UserEntity;
 import api.model.TicketBean;
@@ -16,16 +18,13 @@ import org.springframework.stereotype.Component;
 public class TicketConverter extends AbstractConvertor<TicketBean, TicketEntity> {
 
     @Autowired
-    private UserDao userDao;
-
-    @Autowired
-    private CarriageDao carriageDao;
+    private PlaceDao placeDao;
 
     @Override
     public TicketBean toBean(TicketEntity entity) {
         TicketBean bean = new TicketBean();
         bean.setId(entity.getId());
-        bean.setPlaceId(entity.getPlaceId());
+        bean.setPlaceId(entity.getPlace().getId());
         bean.setArrivalDate(entity.getArrivalDate());
         bean.setArrivalStation(entity.getArrivalStation());
         bean.setDepartureDate(entity.getDepartureDate());
@@ -38,8 +37,8 @@ public class TicketConverter extends AbstractConvertor<TicketBean, TicketEntity>
     public TicketEntity toEntity(TicketBean bean) {
         TicketEntity entity = new TicketEntity();
         entity.setId(bean.getId());
-        entity.setTrainId(bean.getId());
-        entity.setPlaceId(bean.getPlaceId());
+        PlaceEntity place = placeDao.get(bean.getPlaceId());
+        entity.setPlace(place);
         entity.setArrivalDate(bean.getArrivalDate());
         entity.setArrivalStation(bean.getArrivalStation());
         entity.setDepartureDate(bean.getDepartureDate());

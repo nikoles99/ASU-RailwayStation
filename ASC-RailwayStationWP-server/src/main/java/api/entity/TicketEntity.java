@@ -14,12 +14,9 @@ public class TicketEntity extends AbstractEntity {
     @Column(name = "train_id")
     private Integer trainId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "carriage_id")
-    private CarriageEntity carriage;
-
-    @Column(name = "place_id")
-    private Integer placeId;
+    @OneToOne
+    @JoinColumn(name = "place_id")
+    private PlaceEntity place;
 
     @Column(name = "arrival_date")
     private Date arrivalDate;
@@ -43,6 +40,14 @@ public class TicketEntity extends AbstractEntity {
     public TicketEntity() {
     }
 
+    public PlaceEntity getPlace() {
+        return place;
+    }
+
+    public void setPlace(PlaceEntity place) {
+        this.place = place;
+    }
+
     public Double getPrice() {
         return price;
     }
@@ -57,22 +62,6 @@ public class TicketEntity extends AbstractEntity {
 
     public void setTrainId(Integer trainId) {
         this.trainId = trainId;
-    }
-
-    public CarriageEntity getCarriage() {
-        return carriage;
-    }
-
-    public void setCarriage(CarriageEntity carriageId) {
-        this.carriage = carriageId;
-    }
-
-    public Integer getPlaceId() {
-        return placeId;
-    }
-
-    public void setPlaceId(Integer placeId) {
-        this.placeId = placeId;
     }
 
     public Date getArrivalDate() {

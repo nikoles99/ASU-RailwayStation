@@ -26,18 +26,6 @@ public class CarriageEntity extends AbstractEntity {
     @OneToMany(mappedBy = "carriage", cascade = {CascadeType.ALL})
     private List<PlaceEntity> places;
 
-    @OneToMany(mappedBy = "carriage", cascade = {CascadeType.ALL})
-    private List<TicketEntity> tickets;
-
-
-    public List<TicketEntity> getTickets() {
-        return tickets;
-    }
-
-    public void setTickets(List<TicketEntity> tickets) {
-        this.tickets = tickets;
-    }
-
     public CarriageType getType() {
         return type;
     }

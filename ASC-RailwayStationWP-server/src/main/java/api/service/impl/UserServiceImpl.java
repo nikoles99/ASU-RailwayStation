@@ -39,15 +39,6 @@ public class UserServiceImpl implements UserService {
     private AuthenticationManager authenticationManager;
 
     @Override
-    public void bookTicket(UserBean user) {
-        UserEntity userEntity = userConverter.toEntity(user);
-        if (user.getTickets().isEmpty()) {
-            throw new IllegalStateException("Tickets must be exist");
-        }
-        userDao.update(userEntity);
-    }
-
-    @Override
     public void authenticate(String login, String password) throws Exception {
         try {
             UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(login, password);
