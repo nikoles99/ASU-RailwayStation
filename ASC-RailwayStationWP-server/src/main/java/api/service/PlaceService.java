@@ -20,5 +20,5 @@ public interface PlaceService {
 
     List<TicketBean> getBookedTickets();
 
-    void remove(TicketBean ticket);
+    void remove(Integer ticketId);
 }

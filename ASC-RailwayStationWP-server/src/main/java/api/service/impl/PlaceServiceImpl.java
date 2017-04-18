@@ -110,8 +110,8 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
-    public void remove(TicketBean ticket) {
-        TicketEntity ticketEntity = ticketConverter.toEntity(ticket);
+    public void remove(Integer ticketId) {
+        TicketEntity ticketEntity = ticketDao.getById(ticketId);
         ticketDao.removeTicket(ticketEntity);
     }
 }

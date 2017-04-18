@@ -18,4 +18,6 @@ public interface TicketDao {
     TicketEntity addTicket(TicketEntity ticket);
 
     void removeTicket(TicketEntity ticket);
+
+    TicketEntity getById(Integer ticketId);
 }

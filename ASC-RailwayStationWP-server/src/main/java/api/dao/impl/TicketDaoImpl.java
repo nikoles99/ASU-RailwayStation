@@ -29,7 +29,7 @@ public class TicketDaoImpl extends AbstractDao<TicketEntity> implements TicketDa
         CriteriaQuery<TicketEntity> criteriaQuery = criteriaBuilder.createQuery(TicketEntity.class);
         Root<TicketEntity> root = criteriaQuery.from(TicketEntity.class);
 
-        Predicate userPredicate = criteriaBuilder.equal(root.get("userId"), UserUtils.getUser().getId());
+        Predicate userPredicate = criteriaBuilder.equal(root.get("user"), UserUtils.getUser().getId());
 
         criteriaQuery.select(root).where(userPredicate);
         TypedQuery<TicketEntity> resultQuery = getEntityManager().createQuery(criteriaQuery);
@@ -84,6 +84,11 @@ public class TicketDaoImpl extends AbstractDao<TicketEntity> implements TicketDa
 
     @Override
     public void removeTicket(TicketEntity ticket) {
-        remove(ticket);
+        super.remove(ticket);
+    }
+
+    @Override
+    public TicketEntity getById(Integer ticketId) {
+        return super.getById(TicketEntity.class, ticketId);
     }
 }

@@ -17,6 +17,12 @@ public class TicketBean extends AbstractBean {
 
     private String arrivalStation;
 
+    private Integer placeNumber;
+
+    private Integer carriageNumber;
+
+    private CarriageType carriageType;
+
     private Double price;
 
     public TicketBean() {
@@ -70,4 +76,27 @@ public class TicketBean extends AbstractBean {
         this.arrivalStation = arrivalStation;
     }
 
+    public Integer getPlaceNumber() {
+        return placeNumber;
+    }
+
+    public void setPlaceNumber(Integer placeNumber) {
+        this.placeNumber = placeNumber;
+    }
+
+    public Integer getCarriageNumber() {
+        return carriageNumber;
+    }
+
+    public void setCarriageNumber(Integer carriageNumber) {
+        this.carriageNumber = carriageNumber;
+    }
+
+    public CarriageType getCarriageType() {
+        return carriageType;
+    }
+
+    public void setCarriageType(CarriageType carriageType) {
+        this.carriageType = carriageType;
+    }
 }

@@ -24,7 +24,11 @@ public class TicketConverter extends AbstractConvertor<TicketBean, TicketEntity>
     public TicketBean toBean(TicketEntity entity) {
         TicketBean bean = new TicketBean();
         bean.setId(entity.getId());
-        bean.setPlaceId(entity.getPlace().getId());
+        PlaceEntity place = entity.getPlace();
+        bean.setPlaceId(place.getId());
+        bean.setPlaceNumber(place.getNumber());
+        bean.setCarriageNumber(place.getCarriage().getNumber());
+        bean.setCarriageType(place.getCarriage().getType());
         bean.setArrivalDate(entity.getArrivalDate());
         bean.setArrivalStation(entity.getArrivalStation());
         bean.setDepartureDate(entity.getDepartureDate());

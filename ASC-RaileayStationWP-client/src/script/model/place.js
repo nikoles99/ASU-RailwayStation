@@ -40,22 +40,21 @@ function getTickets() {
         method: 'POST',
         dataType: 'json',
         xhrFields: {withCredentials: true},
-        error: function (xhr) {
-            errorLogging(xhr);
-        }
     });
 }
 
 
-function cancelBookPlace(ticket, success) {
+function cancelBookPlace(ticketId) {
     var url = "http://localhost:8080/removeTicket";
     $.ajax({
         url: url,
         type: 'POST',
         dataType: 'json',
-        data: ticket,
+        data: {ticketId: ticketId},
         xhrFields: {withCredentials: true},
-        success: success,
+        success: function () {
+            setTickets();
+        },
         error: function (error) {
             errorLogging(error);
         }

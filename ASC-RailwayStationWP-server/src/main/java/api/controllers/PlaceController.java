@@ -38,9 +38,8 @@ public class PlaceController extends AbstractController {
         return placeService.getBookedTickets();
     }
 
-    @RequestMapping(value = "/removeTicket", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    @ResponseBody
-    void getBookedTickets(@RequestBody TicketBean ticket) {
-        placeService.remove(ticket);
+    @RequestMapping(value = "/removeTicket", method = RequestMethod.POST)
+    void getBookedTickets(@RequestParam("ticketId")  Integer ticketId) {
+        placeService.remove(ticketId);
     }
 }
