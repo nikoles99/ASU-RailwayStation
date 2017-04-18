@@ -30,13 +30,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/addTrain").hasAuthority("admin")
                 .antMatchers("/deleteStation").hasAuthority("admin")
                 .antMatchers("/addStation").hasAuthority("admin")
-                .antMatchers("/bookTickets").hasAuthority("user")
                 .antMatchers("/getBookedTickets").hasAuthority("user")
                 .antMatchers("/removeTicket").hasAuthority("user")
                 .antMatchers("/**").permitAll()
+                .antMatchers("/bookTickets").hasAuthority("user")
+                .antMatchers("/addTrain").hasAuthority("admin")
                 .anyRequest().authenticated()
                 .and()
                 .logout()
