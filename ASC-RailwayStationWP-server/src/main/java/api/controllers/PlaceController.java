@@ -3,7 +3,6 @@ package api.controllers;
 import api.model.CarriageType;
 import api.model.PlaceBean;
 import api.model.TicketBean;
-import api.model.UserBean;
 import api.service.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -27,10 +26,10 @@ public class PlaceController extends AbstractController {
         return placeService.getFreePlaces(trainId, type, departureDate, arrivalDate);
     }
 
-    @RequestMapping(value = "/bookPlace", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+    @RequestMapping(value = "/bookTickets", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     @ResponseBody
-    Integer bookPlace(@RequestBody TicketBean ticket) {
-        return placeService.bookPlace(ticket);
+    Integer bookTickets(@RequestBody List<TicketBean> tickets) throws Exception {
+        return placeService.bookTickets(tickets);
     }
 
     @RequestMapping(value = "/getBookedTickets", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)

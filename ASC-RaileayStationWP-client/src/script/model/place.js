@@ -14,3 +14,18 @@ function getFreePlacesByType(trainId, carriageType, departureDate, arrivalDate, 
         }
     });
 }
+
+function bookTickets(tickets) {
+    var url = "http://localhost:8080/bookTickets";
+    return $.ajax({
+        url: url,
+        method: 'POST',
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(tickets),
+        error: function (xhr) {
+            errorLogging(xhr);
+        }
+    });
+}
+

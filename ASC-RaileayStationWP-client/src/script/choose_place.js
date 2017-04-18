@@ -2,14 +2,15 @@
  * Created by nikita on 03.04.17.
  */
 const ADULTS = "adults";
-const CHILDREN_WITH_NO_SEATS = "children_with_no_seats";
 const CHILDREN_WITH_SEATS = "children_with_seats";
 var countPassenger;
+var ticketTemplate = {departureStation: "", departureDate: "", arrivalStation: "", arrivalDate: "", placeId: "", price: ""};
 var chosenPlaces = [];
 
 function fillForm() {
     chosenPlaces = [];
-    $('#places').prop('disabled',true);
+    countPassenger = 0;
+    $('#places').prop('disabled', true);
     var freePlaces = $(this).closest('a');
     var trainName = freePlaces.data("trainName");
     var trainId = freePlaces.data("trainId");
@@ -27,6 +28,12 @@ function fillForm() {
     var departureDate = freePlaces.data("departuredate");
     $("#departureDate").text(departureDate);
     var freePlacesArray = freePlaces.data("freePlaces");
+
+    ticketTemplate.trainId = trainId;
+    ticketTemplate.arrivalStation = arrivalStation;
+    ticketTemplate.departureStation = departureStation;
+    ticketTemplate.arrivalDate =  new Date(strToDate(arrivalDate));
+    ticketTemplate.departureDate = new Date(strToDate(departureDate));
     setPlaces(freePlacesArray);
 }
 $("#trains").on("click", ".freePlaces", function () {
@@ -44,19 +51,43 @@ $("#trains").on("click", ".freePlaces", function () {
 
 });
 
+function book() {
+    var tickets = [];
+    for (var i = 0; i < chosenPlaces.length; i++) {
+        var ticket = $.extend({}, ticketTemplate);
+        var place = chosenPlaces[i];
+        ticket.placeId = place.id;
+        ticket.price = place.price;
+        tickets.push(ticket);
+    }
+    bookTickets(tickets)
+}
+
+
 $(document).on("click", "#continue", function () {
     var isValidate = validateBookForm();
     if (isValidate) {
-        bookPlaces();
+        book();
     }
 });
 
-$(document).on("click", "#childCount", function () {
-    countPassenger = $("#adultsCount").val() + $("#childCount").val();
+$(document).on("change", "#childCount", function () {
+    setPassengerCount();
 });
 
-$(document).on("click", "#adultsCount", function () {
-    countPassenger = $("#adultsCount").val() + $("#childCount").val();
+function setPassengerCount() {
+    var adultCount = $("#adultsCount").val();
+    var childCount = $("#childCount").val();
+    if (adultCount == "") {
+        adultCount = 0;
+    }
+    if (childCount == "") {
+        childCount = 0;
+    }
+    countPassenger = parseInt(adultCount) + parseInt(childCount);
+}
+$(document).on("change", "#adultsCount", function () {
+    setPassengerCount();
 });
 
 function validateBookForm() {
@@ -71,7 +102,7 @@ function validateBookForm() {
         return false;
     }
     if (chosenPlaces.length != countPassenger) {
-        alert('Число быбранных билетов не соответствует количеству пассажиров');
+        alert('Число выбранных билетов не соответствует количеству пассажиров');
         return false;
     }
     return true;
@@ -80,7 +111,7 @@ function validateBookForm() {
 function isPlaceContains(place) {
     for (var i = 0; i <= chosenPlaces.length; i++) {
         var chosenPlace = chosenPlaces[i];
-        if (place == chosenPlace) {
+        if (chosenPlace != null && place.id == chosenPlace.id) {
             return true;
         }
     }
@@ -90,7 +121,7 @@ function isPlaceContains(place) {
 function remove(place) {
     for (var i = 0; i <= chosenPlaces.length; i++) {
         var chosenPlace = chosenPlaces[i];
-        if (place == chosenPlace) {
+        if (chosenPlace != null && place.id == chosenPlace.id) {
             chosenPlaces.splice(i, 1);
         }
     }
@@ -98,14 +129,20 @@ function remove(place) {
 }
 
 $(document).on("click", ".btn.btn-default.btn-xs.place", function () {
-    var place = $(this).val();
+    if (countPassenger == 0) {
+        alert("Выберите количество пассажиров");
+        return;
+    }
+    var place = {id: "", price: ""};
+    place.id = $(this).data("placeid");
+    place.price = 100;
     var placeContain = isPlaceContains(place);
     if (placeContain) {
         $(this).css("background-color", "");
         remove(place);
     } else {
-        if (chosenPlaces.length >= countPassenger) {
-            alert("максимальное количесто выбранных мест (3)")
+        if (chosenPlaces.length >= 5) {
+            alert("максимальное количесто выбранных мест - (5)")
             return;
         }
         $(this).css("background-color", "#5cb85c");
@@ -118,7 +155,7 @@ function getPlacesByCarriageId(places, carriageId) {
     for (var i = 0; i < places.length; i++) {
         var place = places[i];
         if (carriageId === place.carriageId) {
-            var placeUI = "<input class=\"btn btn-default btn-xs place\" type='button' value='" + place.number + "' data='" + carriageId + "'/>";
+            var placeUI = "<input class=\"btn btn-default btn-xs place\" type='button' value='" + place.number + "' data-placeId='" + place.id + "'/>";
             str1 = str1.concat(placeUI);
         }
     }
