@@ -65,7 +65,9 @@ public class TrainDaoImpl extends AbstractDao<TrainEntity> implements TrainDao {
 
         Predicate departureDateLessThan = criteriaBuilder.lessThan(trainScheduleJoin.get("departureDate").as(Date.class), subQuery);
         Predicate departureStationPredicate = criteriaBuilder.equal(stationEntityJoin.get("name"), departureStation);
-        Predicate result = criteriaBuilder.and(departureDateLessThan, departureStationPredicate);
+        Predicate departureDateGreaterThan = criteriaBuilder.greaterThan(trainScheduleJoin.get("departureDate").as(Date.class), departureDate);
+        Predicate arrivalDateLessThan = criteriaBuilder.lessThan(trainScheduleJoin.get("arrivalDate").as(Date.class), arrivalDate);
+        Predicate result = criteriaBuilder.and(departureDateLessThan, departureStationPredicate, departureDateGreaterThan, arrivalDateLessThan);
 
 
         criteriaQuery.select(trainEntityRoot).where(result);
