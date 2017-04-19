@@ -23,13 +23,6 @@ function bookTicket(ticket) {
         dataType: 'json',
         xhrFields: {withCredentials: true},
         data: ticket,
-        success: function () {
-            alert("Места успешно забронированы, подробную информацию вы можете просмотреть в личном кабинете");
-            $('#choosePlaces').modal('toggle');
-            searchTrains();
-            $("#adultsCount").val('');
-            $("#childCount").val('');
-        },
         error: function (xhr) {
             errorLogging(xhr);
         }

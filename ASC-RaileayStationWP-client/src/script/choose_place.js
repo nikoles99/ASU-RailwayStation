@@ -57,6 +57,16 @@ function book() {
         var place = chosenPlaces[i];
         ticket.placeId = place.id;
         ticket.price = place.price;
+        if (i == chosenPlaces.length - 1) {
+            var promiseBook = bookTicket(ticket);
+            promiseBook.then(function () {
+                alert("Места успешно забронированы, подробную информацию вы можете просмотреть в личном кабинете");
+                $('#choosePlaces').modal('toggle');
+                searchTrains();
+                $("#adultsCount").val('');
+                $("#childCount").val('');
+            });
+        }
         bookTicket(ticket);
     }
 }
