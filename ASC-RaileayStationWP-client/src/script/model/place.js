@@ -15,15 +15,14 @@ function getFreePlacesByType(trainId, carriageType, departureDate, arrivalDate, 
     });
 }
 
-function bookTickets(tickets) {
-    var url = "http://localhost:8080/bookTickets";
+function bookTicket(ticket) {
+    var url = "http://localhost:8080/bookTicket";
     return $.ajax({
         url: url,
         method: 'POST',
         dataType: 'json',
-        contentType: "application/json; charset=utf-8",
         xhrFields: {withCredentials: true},
-        data: JSON.stringify(tickets),
+        data: ticket,
         success: function () {
             alert("Места успешно забронированы, подробную информацию вы можете просмотреть в личном кабинете");
             $('#choosePlaces').modal('toggle');

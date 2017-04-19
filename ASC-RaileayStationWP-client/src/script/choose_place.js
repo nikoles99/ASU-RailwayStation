@@ -52,15 +52,13 @@ $("#trains").on("click", ".freePlaces", function () {
 });
 
 function book() {
-    var tickets = [];
     for (var i = 0; i < chosenPlaces.length; i++) {
         var ticket = $.extend({}, ticketTemplate);
         var place = chosenPlaces[i];
         ticket.placeId = place.id;
         ticket.price = place.price;
-        tickets.push(ticket);
+        bookTicket(ticket);
     }
-    bookTickets(tickets)
 }
 
 

@@ -16,7 +16,7 @@ public interface PlaceService {
 
     List<PlaceBean> getFreePlaces(Integer trainId);
 
-    Integer bookTickets(List<TicketBean> tickets);
+    Integer bookTicket(TicketBean tickets);
 
     List<TicketBean> getBookedTickets();
 

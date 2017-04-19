@@ -92,13 +92,11 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
-    public Integer bookTickets(List<TicketBean> tickets) {
-        List<TicketEntity> ticketEntities = ticketConverter.toEntityCollection(tickets);
+    public Integer bookTicket(TicketBean ticket) {
+        TicketEntity ticketEntity = ticketConverter.toEntity(ticket);
         UserEntity user = UserUtils.getUser();
-        for (TicketEntity ticketEntity : ticketEntities) {
-            ticketEntity.setUser(user);
-            ticketDao.addTicket(ticketEntity);
-        }
+        ticketEntity.setUser(user);
+        ticketDao.addTicket(ticketEntity);
         return user.getId();
     }
 
