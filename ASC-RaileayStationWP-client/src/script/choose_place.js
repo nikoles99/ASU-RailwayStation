@@ -32,7 +32,7 @@ function fillForm() {
     ticketTemplate.trainId = trainId;
     ticketTemplate.arrivalStation = arrivalStation;
     ticketTemplate.departureStation = departureStation;
-    ticketTemplate.arrivalDate =  new Date(strToDate(arrivalDate));
+    ticketTemplate.arrivalDate = new Date(strToDate(arrivalDate));
     ticketTemplate.departureDate = new Date(strToDate(departureDate));
     setPlaces(freePlacesArray);
 }
@@ -168,14 +168,13 @@ function setPlaces(places) {
     $("#free_places").append(header);
     var carriageId = "";
     for (var i = 0; i < places.length; i++) {
-        var place = places[i];
-        var id = place.carriageId;
+        var id = places[i].carriageId;
         if (carriageId != "" && carriageId === id) {
             continue;
         }
-        var placesColumn = getPlacesByCarriageId(places, id);
         var carriagePromise = getCarriageById(id);
         carriagePromise.then(function (carriage) {
+            var placesColumn = getPlacesByCarriageId(places, carriage.id);
             var tr = "<tr>" +
                 "<td>" + carriage.number + "</td>" +
                 "<td>" + placesColumn + "</td>" +
