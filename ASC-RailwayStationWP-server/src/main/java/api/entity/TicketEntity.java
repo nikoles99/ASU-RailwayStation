@@ -30,7 +30,7 @@ public class TicketEntity extends AbstractEntity {
     @Column(name = "price")
     private Double price;
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     @JoinColumn(name = "user_id")
     private UserEntity user;
 

@@ -61,7 +61,7 @@ $("#station_from").click(function () {
 });
 
 
-$("#searchTrains").click(function () {
+function searchTrains() {
     var arrivalStation = $("#station_to").val();
     var departureStation = $("#station_from").val();
     var arrivalDate = strToDate($("#date_arrival").val());
@@ -72,6 +72,10 @@ $("#searchTrains").click(function () {
             fillTrains(departureStation, arrivalStation, trains);
         });
     }
+}
+
+$("#searchTrains").click(function () {
+    searchTrains();
 });
 
 
