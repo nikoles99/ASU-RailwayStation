@@ -113,10 +113,6 @@ function updateAuthorizationForm() {
     });
 }
 
-$("#cabinet").click(function () {
-    //setTickets();
-});
-
 function fillTrains(departureStation, arrivalStation, trains) {
     $("#trains tr").remove();
     appendTrainsTableHeader();

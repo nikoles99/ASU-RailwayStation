@@ -6,6 +6,7 @@ import api.service.CarriageService;
 import api.service.TrainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -23,7 +24,8 @@ public class TrainController extends AbstractController {
     @Autowired
     private CarriageService carriageService;
 
-    @RequestMapping(value = "/addTrain", method = RequestMethod.POST)
+    @PreAuthorize("hasAuthority('admin')")
+    @RequestMapping(value = "/addTrains", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     void add(@RequestBody TrainBean train) throws Exception {
         trainService.add(train);
     }
