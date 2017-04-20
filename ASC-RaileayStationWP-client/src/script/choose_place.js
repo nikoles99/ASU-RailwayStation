@@ -66,6 +66,8 @@ function book() {
                 $("#adultsCount").val('');
                 $("#childCount").val('');
             });
+        } else {
+            bookTicket(ticket);
         }
     }
 }
