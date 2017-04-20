@@ -10,8 +10,4 @@ function errorLogging(xhr) {
     }
     alert(error);
     console.log("code: " + xhr.code);
-    console.log("readyState: " + xhr.readyState);
-    console.log("responseText: " + xhr.responseText);
-    console.log("status: " + xhr.status);
-    console.log("text status: " + xhr.textStatus);
 }

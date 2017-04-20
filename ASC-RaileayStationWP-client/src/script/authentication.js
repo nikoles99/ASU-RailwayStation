@@ -12,13 +12,15 @@ function authentication(login, password) {
         data: {login: login, password: password},
         xhrFields: {withCredentials: true},
         error: function (error) {
-            var message = error.responseJSON.message;
-            if (NOT_FOUND_USER === message) {
-                $('#errorMessage').text("Пользователь c логином \"" + login + "\" не найден");
-                $('#registration').modal();
-            }
-            if (BAD_CREDENTIALS === message) {
-                alert("Неверный логин или пароль");
+            if (error.responseJSON != null) {
+                var message = error.responseJSON.message;
+                if (NOT_FOUND_USER === message) {
+                    $('#errorMessage').text("Пользователь c логином \"" + login + "\" не найден");
+                    $('#registration').modal();
+                }
+                if (BAD_CREDENTIALS === message) {
+                    alert("Неверный логин или пароль");
+                }
             }
         }
     });

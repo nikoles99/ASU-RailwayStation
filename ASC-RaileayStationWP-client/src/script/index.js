@@ -114,7 +114,7 @@ function updateAuthorizationForm() {
 }
 
 $("#cabinet").click(function () {
-    setTickets();
+    //setTickets();
 });
 
 function fillTrains(departureStation, arrivalStation, trains) {

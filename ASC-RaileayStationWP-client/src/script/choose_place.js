@@ -67,7 +67,6 @@ function book() {
                 $("#childCount").val('');
             });
         }
-        bookTicket(ticket);
     }
 }
 
