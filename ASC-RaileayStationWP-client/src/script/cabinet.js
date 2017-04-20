@@ -1,10 +1,6 @@
 /**
  * Created by nikita on 18.04.17.
  */
-$("document").ready(function () {
-    setTickets();
-});
-
 function setTickets() {
     $("#tickets tr").remove();
     var header = " <tr>" +
