@@ -23,8 +23,8 @@ public class TrainController extends AbstractController {
     @Autowired
     private CarriageService carriageService;
 
-    @RequestMapping(value = "/addTrain", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    void add(TrainBean train) throws Exception {
+    @RequestMapping(value = "/addTrain", method = RequestMethod.POST)
+    void add(@RequestBody TrainBean train) throws Exception {
         trainService.add(train);
     }
 

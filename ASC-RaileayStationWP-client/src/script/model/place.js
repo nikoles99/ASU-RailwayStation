@@ -36,6 +36,12 @@ function getTickets() {
         method: 'POST',
         dataType: 'json',
         xhrFields: {withCredentials: true},
+        success: function (data) {
+            showTickets(data)
+        },
+        error:function (e) {
+            alert(e);
+        }
     });
 }
 
