@@ -1,0 +1,31 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Авторизация</h3>
+  </div>
+  <div class="panel-body">
+    <form id="authorization_form">
+      <p><span class="fontawesome-user"></span><input class="form-control" type="text" id="login" placeholder="Логин"></p>
+      <p><span class="fontawesome-lock"></span><input class="form-control" type="password" id="password" placeholder="Пароль">
+      </p>
+      <table>
+        <tr>
+          <td><a id="showRegistrationDialog">Регистрация</a><span class="fontawesome-arrow-right"></span></td>
+          <td><input disabled="true" class="btn btn-sm btn-success" style="margin-left: 20px" type="button" id="enter"
+                     value="ВОЙТИ"></td>
+        </tr>
+      </table>
+    </form>
+    <form id="logout_form">
+      <table>
+        <tr>
+          <td><p id="login_message"></td>
+          <td><p id="user"></td>
+        </tr>
+        <tr>
+          <td><a id="cabinet">Личный кабинет</a><span class="fontawesome-arrow-right"></span></td>
+          <td><a id="logout">Logout</a><span class="fontawesome-arrow-right"></span></td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>

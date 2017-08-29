@@ -1,0 +1,10 @@
+.panel-default {
+  width: 700px;
+  float: left;
+  margin-left: 80px;
+}
+
+#searchTrainsBtn {
+  float: right;
+}
+
