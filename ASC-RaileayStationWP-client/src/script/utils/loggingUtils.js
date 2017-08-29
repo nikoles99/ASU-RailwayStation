@@ -8,6 +8,6 @@ function errorLogging(xhr) {
     } else {
         error = xhr.statusText;
     }
-    alert(error);
+   // alert(error);
     console.log("code: " + xhr.code);
 }
