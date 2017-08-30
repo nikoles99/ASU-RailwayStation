@@ -5,16 +5,18 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RouteSearchComponent } from './route-search/route-search.component';
 import { FormsModule }   from '@angular/forms';
+import { HttpModule }    from '@angular/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RouteSearchComponent
+    RouteSearchComponent,
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

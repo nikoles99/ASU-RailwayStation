@@ -19,7 +19,8 @@ export class LoginComponent implements OnInit {
   }
 
   login(user: User) {
-    this.authorizedUser = this.loginService.login(user);
+    this.loginService.login(user);
+    this.authorizedUser = this.loginService.isAuthenticated();
     this.user = null;
   }
 
