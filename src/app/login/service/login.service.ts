@@ -8,6 +8,9 @@ export class LoginService {
     return user;
   }
 
+  logout(): void {
+  }
+
   isAuthenticated():User{
     return new User();
   }

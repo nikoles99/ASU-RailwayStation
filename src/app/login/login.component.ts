@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
   }
 
   logout() {
+    this.loginService.logout();
     this.authorizedUser = null;
     this.user = new User();
   }
