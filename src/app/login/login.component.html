@@ -2,15 +2,15 @@
   <div class="panel-heading">
     <h3 class="panel-title">Авторизация</h3>
   </div>
-  <div class="panel-body" >
-    <div id="authorization_form" *ngIf="user">
-      <p><span class="fontawesome-user"></span><input [(ngModel)]="user.login" class="form-control"  placeholder="Логин"/></p>
-      <p><span class="fontawesome-lock"></span><input [(ngModel)]="user.password" class="form-control" placeholder="Пароль"/></p>
+  <div class="panel-body">
+    <div id="authorization_form" *ngIf="login || login==''">
+      <p><span class="fontawesome-user"></span><input [(ngModel)]="login" class="form-control" placeholder="Логин"/></p>
+      <p><span class="fontawesome-lock"></span><input [(ngModel)]="password" class="form-control" placeholder="Пароль"/></p>
       <table>
         <tr>
           <td><a id="showRegistrationDialog">Регистрация</a><span class="fontawesome-arrow-right"></span></td>
           <td>
-            <button (click)="login(user)" class="btn btn-sm btn-success" style="margin-left: 20px" id="enter">ВОЙТИ</button>
+            <button (click)="authenticate(login, password)" class="btn btn-sm btn-success" style="margin-left: 20px" id="enter">ВОЙТИ</button>
           </td>
         </tr>
       </table>

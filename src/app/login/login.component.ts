@@ -9,24 +9,28 @@ import {User} from "./model/users";
   providers: [LoginService]
 })
 export class LoginComponent implements OnInit {
-  user: User = new User;
+  login: string = '';
+  password: string = '';
   authorizedUser: User;
 
   constructor(private loginService: LoginService) {
   }
 
-  ngOnInit() {
+  public ngOnInit() {
+    console.log(this.login=="");
   }
 
-  login(user: User) {
-    this.loginService.login(user);
+  public authenticate(login: string, password: string) {
+    this.loginService.login(login, password);
+    this.login = null;
+    this.password = null;
     this.authorizedUser = this.loginService.isAuthenticated();
-    this.user = null;
   }
 
-  logout() {
+  public logout() {
     this.loginService.logout();
+    this.login = '';
+    this.password = '';
     this.authorizedUser = null;
-    this.user = new User();
   }
 }
