@@ -27,8 +27,11 @@ export class LoginService {
     return promise.then(() => this.isAuthenticated());
   }
 
-  public logout(): void {
-    this.http.post(this.logoutUrl, {}, {})
+  public logout(): Promise<any> {
+    const options = new RequestOptions({
+      withCredentials: true,
+    });
+    return this.http.get(this.logoutUrl, options)
       .toPromise()
       .catch(this.handleError);
   }
@@ -44,7 +47,7 @@ export class LoginService {
   }
 
   private handleError(error: any): Promise<any> {
-    // console.error('An error occurred', error);
+    console.error('An error occurred', error);
     return Promise.reject(error.message || error);
   }
 }
