@@ -13,28 +13,38 @@ export class LoginService {
   constructor(private http: Http) {
   }
 
-  public login(login: string, password: string): void {
+  public login(login: string, password: string): Promise<User> {
     const params = new URLSearchParams();
     params.set('login', login);
     params.set('password', password);
     const options = new RequestOptions({
       params: params,
+      withCredentials: true,
     });
-    this.http.post(this.authorizeUrl, {}, options)
+    var promise = this.http.post(this.authorizeUrl, {}, options)
       .toPromise()
-      .then(response => response.json().data as string)
       .catch(this.handleError);
+    return promise.then(() => this.isAuthenticated());
   }
 
   public logout(): void {
+    this.http.post(this.logoutUrl, {}, {})
+      .toPromise()
+      .catch(this.handleError);
   }
 
-  public isAuthenticated(): User {
-    return new User();
+  public isAuthenticated(): Promise<User> {
+    const options = new RequestOptions({
+      withCredentials: true,
+    });
+    return this.http.post(this.isAuthorizedUrl, {}, options)
+      .toPromise()
+      .then(response => response.json() as User)
+      .catch(this.handleError);
   }
 
   private handleError(error: any): Promise<any> {
-    console.error('An error occurred', error);
+    // console.error('An error occurred', error);
     return Promise.reject(error.message || error);
   }
 }

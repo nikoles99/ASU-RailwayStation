@@ -5,7 +5,7 @@
   <div class="panel-body">
     <div id="authorization_form" *ngIf="login || login==''">
       <p><span class="fontawesome-user"></span><input [(ngModel)]="login" class="form-control" placeholder="Логин"/></p>
-      <p><span class="fontawesome-lock"></span><input [(ngModel)]="password" class="form-control" placeholder="Пароль"/></p>
+      <p><span class="fontawesome-lock"></span><input [(ngModel)]="password" type="password" class="form-control" placeholder="Пароль"/></p>
       <table>
         <tr>
           <td><a id="showRegistrationDialog">Регистрация</a><span class="fontawesome-arrow-right"></span></td>

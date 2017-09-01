@@ -17,14 +17,13 @@ export class LoginComponent implements OnInit {
   }
 
   public ngOnInit() {
-    console.log(this.login=="");
+    this.loginService.isAuthenticated()
+      .then(authorizedUser => this.setAuthorizedUser(authorizedUser));
   }
 
   public authenticate(login: string, password: string) {
-    this.loginService.login(login, password);
-    this.login = null;
-    this.password = null;
-    this.authorizedUser = this.loginService.isAuthenticated();
+    this.loginService.login(login, password)
+      .then(authorizedUser => this.setAuthorizedUser(authorizedUser));
   }
 
   public logout() {
@@ -32,5 +31,13 @@ export class LoginComponent implements OnInit {
     this.login = '';
     this.password = '';
     this.authorizedUser = null;
+  }
+
+  private setAuthorizedUser(user: User) {
+    if (user) {
+      this.authorizedUser = user;
+      this.password = null;
+      this.login = null
+    }
   }
 }
