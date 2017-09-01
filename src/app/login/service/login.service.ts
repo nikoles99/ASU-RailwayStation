@@ -27,11 +27,11 @@ export class LoginService {
     return promise.then(() => this.isAuthenticated());
   }
 
-  public logout(): Promise<any> {
+  public logout(): void {
     const options = new RequestOptions({
       withCredentials: true,
     });
-    return this.http.get(this.logoutUrl, options)
+    this.http.get(this.logoutUrl, options)
       .toPromise()
       .catch(this.handleError);
   }
