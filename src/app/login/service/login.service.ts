@@ -1,17 +1,13 @@
-import {Injectable} from "@angular/core";
 import {User} from "../model/users";
-import {Http, URLSearchParams, RequestOptions} from "@angular/http";
+import {URLSearchParams, RequestOptions} from "@angular/http";
 import "rxjs/add/operator/toPromise";
+import {AbstractHttpService} from "../../abstract-http.service";
 
-@Injectable()
-export class LoginService {
+export class LoginService extends AbstractHttpService{
 
   private authorizeUrl = 'http://localhost:8080/authentication';
   private logoutUrl = 'http://localhost:8080/logout';
   private isAuthorizedUrl = 'http://localhost:8080/isAuthenticated';
-
-  constructor(private http: Http) {
-  }
 
   public login(login: string, password: string): Promise<User> {
     const params = new URLSearchParams();
@@ -46,7 +42,4 @@ export class LoginService {
       .catch(this.handleError);
   }
 
-  private handleError(error: any): Promise<any> {
-    return Promise.reject(error.message || error);
-  }
 }
