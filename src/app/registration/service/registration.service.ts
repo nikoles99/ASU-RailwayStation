@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {User} from "../../login/model/users";
-import {Http, RequestOptions} from '@angular/http';
+import {Headers, Http, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
@@ -11,11 +11,12 @@ export class RegistrationService {
   constructor(private http: Http) {
   }
 
-  public registration(user: User): void{
+  public registration(user: User): Promise<any> {
+    let headers = new Headers({'Content-Type': 'application/json'});
     const options = new RequestOptions({
-      withCredentials: true,
+      headers: headers,
     });
-    this.http.post(this.registrationUrl, user, options)
+    return this.http.post(this.registrationUrl, user, options)
       .toPromise()
       .catch(this.handleError);
   }

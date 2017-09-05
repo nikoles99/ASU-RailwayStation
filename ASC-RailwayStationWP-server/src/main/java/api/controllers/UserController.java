@@ -18,9 +18,9 @@ public class UserController extends AbstractController {
         userService.authenticate(login, password);
     }
 
-    @RequestMapping(value = "/registration", method = RequestMethod.POST)
+    @RequestMapping(value = "/registration", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
     @ResponseBody
-    void registration(UserBean user) {
+    void registration(@RequestBody UserBean user) {
         userService.registration(user);
     }
 
