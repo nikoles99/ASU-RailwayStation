@@ -1,25 +1,10 @@
-import {Injectable} from "@angular/core";
-import {User} from "../../login/model/users";
-import {Headers, Http, RequestOptions} from '@angular/http';
-import 'rxjs/add/operator/toPromise';
+import "rxjs/add/operator/toPromise";
+import {AbstractHttpService} from "../../common/service/abstract-http.service";
 
-export class RouteSearchService {
-  private registrationUrl = 'http://localhost:8080/registration';
+export class RouteSearchService extends AbstractHttpService{
+  private getStationsUrl = 'http://localhost:8080/getAllStations';
 
-  constructor(private http: Http) {
-  }
-
-  public registration(user: User): Promise<any> {
-    let headers = new Headers({'Content-Type': 'application/json'});
-    const options = new RequestOptions({
-      headers: headers,
-    });
-    return this.http.post(this.registrationUrl, user, options)
-      .toPromise()
-      .catch(this.handleError);
-  }
-
-  private handleError(error: any): Promise<any> {
-    return Promise.reject(error.message || error);
+  public getStations(): Promise<any> {
+    return super.doPost(this.getStationsUrl, {}, null);
   }
 }
