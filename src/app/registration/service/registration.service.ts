@@ -1,7 +1,7 @@
 import {User} from "../../login/model/users";
 import {Headers, Http, RequestOptions} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import {AbstractHttpService} from "../../abstract-http.service";
+import {AbstractHttpService} from "../../common/service/abstract-http.service";
 
 export class RegistrationService extends AbstractHttpService{
 
