@@ -25,7 +25,7 @@ export class RouteSearchComponent implements OnInit {
     this.allStations = this.searchTerms
       .debounceTime(300)
       .distinctUntilChanged()
-      .switchMap(term => term ? this.routeSearchService.getStations() : Observable.of<Station[]>([]))
+      .switchMap(term => term ? this.routeSearchService.getStations(term) : Observable.of<Station[]>([]))
       .catch(error => {
         console.log(error);
         return Observable.of<Station[]>([]);

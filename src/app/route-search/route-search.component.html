@@ -9,10 +9,9 @@
           <p class="col-lg-6" id="station_from_label">Откуда</p>
         </td>
         <td>
-          <input class="span1 col-md-1 form-control" #searchBox (keyup)="search(searchBox.value)"/>
+          <input class="span1 col-md-1 form-control" #searchDepartureStation (keyup)="search(searchDepartureStation.value)"/>
           <div>
-            <div *ngFor="let station of allStations | async"
-                >
+            <div *ngFor="let station of allStations | async" search-result>
               {{station.name}}
             </div>
           </div>
@@ -21,10 +20,9 @@
           <p class="col-lg-6" id="station_to_label">Куда</p>
         </td>
         <td>
-          <input class="span1 col-md-1 form-control" #searchBox (keyup)="search(searchBox.value)"/>
+          <input class="span1 col-md-1 form-control" #searchArrivalStation (keyup)="search(searchArrivalStation.value)"/>
           <div>
-            <div *ngFor="let station of allStations | async"
-                 >
+            <div *ngFor="let station of allStations | async" search-result>
               {{station.name}}
             </div>
           </div>

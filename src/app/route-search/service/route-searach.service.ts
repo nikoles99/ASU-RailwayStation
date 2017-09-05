@@ -8,9 +8,9 @@ export class RouteSearchService extends AbstractHttpService {
 
   private getStationsUrl = 'http://localhost:8080/getAllStations';
 
-  public getStations(): Observable<Station[]> {
+  public getStations(term: string): Observable<Station[]> {
     let options = super.getRequestOptions;
     return this.http.post(this.getStationsUrl, {}, options)
-      .map(response => response.json().data as Station[]);
+      .map(response => response.json() as Station[]);
   }
 }
