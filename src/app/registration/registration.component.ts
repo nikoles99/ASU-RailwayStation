@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from "../login/model/users";
+import {User} from "../common/model/users";
 import {RegistrationService} from "./service/registration.service";
 import {Location}                 from '@angular/common';
 

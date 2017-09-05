@@ -1,4 +1,4 @@
-import {User} from "../model/users";
+import {User} from "../../common/model/users";
 import {URLSearchParams, RequestOptions} from "@angular/http";
 import "rxjs/add/operator/toPromise";
 import {AbstractHttpService} from "../../common/service/abstract-http.service";
