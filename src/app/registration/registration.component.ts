@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from "../login/model/users";
 import {RegistrationService} from "./service/registration.service";
+import {Location}                 from '@angular/common';
 
 @Component({
   selector: 'app-registration',
@@ -9,23 +10,29 @@ import {RegistrationService} from "./service/registration.service";
   providers: [RegistrationService]
 })
 export class RegistrationComponent implements OnInit {
-  user: User;
+  user: User = new User();
 
-  constructor(private registrationService: RegistrationService) {
+  constructor(private registrationService: RegistrationService,
+              private location: Location) {
   }
 
   public ngOnInit() {
   }
 
-  private registrate(user: User): void {
+  public registration(user: User): void {
     if (this.validate(user)) {
       this.registrationService.registration(user);
     }
   }
 
+  public goBack(): void {
+    this.location.back();
+  }
+
   private validate(user: User): boolean {
     if (user.login == null) {
-      return false
+      return false;
     }
   }
+
 }

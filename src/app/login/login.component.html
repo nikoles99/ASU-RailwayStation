@@ -8,7 +8,8 @@
       <p><span class="fontawesome-lock"></span><input [(ngModel)]="password" type="password" class="form-control" placeholder="Пароль"/></p>
       <table>
         <tr>
-          <td><a id="showRegistrationDialog">Регистрация</a><span class="fontawesome-arrow-right"></span></td>
+          <td><a id="showRegistrationDialog" routerLink="/registration" routerLinkActive="active">Регистрация</a><span class="fontawesome-arrow-right"></span>
+          </td>
           <td>
             <button (click)="authenticate(login, password)" class="btn btn-sm btn-success" style="margin-left: 20px" id="enter">ВОЙТИ</button>
           </td>
