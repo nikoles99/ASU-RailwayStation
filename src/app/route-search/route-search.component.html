@@ -9,10 +9,10 @@
           <p class="col-lg-6" id="date_departure_label">Дата отправления</p>
         </td>
         <td>
-          <input type="date" class="form-control" [ngModel]="defaultDate | date:'y-MM-dd'" (ngModelChange)="defaultDate = $event">
+          <input type="date" class="form-control" [ngModel]="arrivalDate | date:'y-MM-dd'" (ngModelChange)="defaultDate = $event">
         </td>
         <td>
-          <input style="margin-left: 3px" type="time" class="form-control" [ngModel]="defaultDate | date:'HH:mm'" (ngModelChange)="defaultDate = $event">
+          <input style="margin-left: 3px" type="time" class="form-control" [ngModel]="arrivalDate | date:'HH:mm'" (ngModelChange)="defaultDate = $event">
         </td>
       </tr>
       <tr>
@@ -20,10 +20,10 @@
           <p class="col-lg-6" id="date_arrival_label">Дата прибытия</p>
         </td>
         <td>
-          <input type="date" class="form-control" [ngModel]="defaultDate | date:'y-MM-dd'" (ngModelChange)="defaultDate = $event">
+          <input type="date" class="form-control" [ngModel]="departureDate | date:'y-MM-dd'" (ngModelChange)="defaultDate = $event">
         </td>
         <td>
-          <input style="margin-left: 3px" type="time" class="form-control" [ngModel]="defaultDate | date:'HH:mm'" (ngModelChange)="defaultDate = $event">
+          <input style="margin-left: 3px" type="time" class="form-control" [ngModel]="departureDate | date:'HH:mm'" (ngModelChange)="defaultDate = $event">
         </td>
         <td>
       </tr>
@@ -57,7 +57,7 @@
       </tr>
 
     </table>
-    <button style="margin-top: 10px" type="button" class="btn btn-sm btn-success" id="searchTrainsBtn">
+    <button (click)="searchRoute()" style="margin-top: 10px" type="button" class="btn btn-sm btn-success" id="searchTrainsBtn">
       <span class="glyphicon glyphicon-search"></span> Найти
     </button>
   </div>
