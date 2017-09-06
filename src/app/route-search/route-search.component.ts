@@ -16,6 +16,7 @@ export class RouteSearchComponent implements OnInit {
   arrivalStations: Observable<Station[]>;
   searchDepartureTerms = new Subject<string>();
   searchArrivalTerms = new Subject<string>();
+  defaultDate = new Date();
 
   constructor(private routeSearchService: RouteSearchService) {
   }
