@@ -44,6 +44,10 @@ export class RouteSearchComponent implements OnInit {
       });
   }
 
+  public  onDateChange(date: Date) {
+    this.departureDate = date;
+  }
+
   public onSelectDepartureStation(station: Station) {
     this.searchDepartureStations('');
     this.selectedDepartureStation = station;
