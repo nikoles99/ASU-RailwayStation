@@ -10,19 +10,27 @@ import {Observable, Subject} from "rxjs";
   providers: [RouteSearchService]
 })
 export class RouteSearchComponent implements OnInit {
-
-  allStations: Observable<Station[]>;
-  private searchTerms = new Subject<string>();
+  selectedDepartureStation: Station = new Station();
+  selectedArrivalStation: Station = new Station();
+  departureStations: Observable<Station[]>;
+  arrivalStations: Observable<Station[]>;
+  searchDepartureTerms = new Subject<string>();
+  searchArrivalTerms = new Subject<string>();
 
   constructor(private routeSearchService: RouteSearchService) {
   }
 
-  search(term: string): void {
-    this.searchTerms.next(term);
-  }
 
   ngOnInit() {
-    this.allStations = this.searchTerms
+    this.departureStations = this.searchDepartureTerms
+      .debounceTime(300)
+      .distinctUntilChanged()
+      .switchMap(term => term ? this.routeSearchService.getStations(term) : Observable.of<Station[]>([]))
+      .catch(error => {
+        console.log(error);
+        return Observable.of<Station[]>([]);
+      });
+    this.arrivalStations = this.searchArrivalTerms
       .debounceTime(300)
       .distinctUntilChanged()
       .switchMap(term => term ? this.routeSearchService.getStations(term) : Observable.of<Station[]>([]))
@@ -32,4 +40,21 @@ export class RouteSearchComponent implements OnInit {
       });
   }
 
+  public onSelectDepartureStation(station: Station) {
+    this.searchDepartureStations('');
+    this.selectedDepartureStation = station;
+  }
+
+  public onSelectArrivalStation(station: Station) {
+    this.searchArrivalStations('');
+    this.selectedArrivalStation = station;
+  }
+
+  public searchDepartureStations(term: string): void {
+    this.searchDepartureTerms.next(term);
+  }
+
+  public searchArrivalStations(term: string): void {
+    this.searchArrivalTerms.next(term);
+  }
 }

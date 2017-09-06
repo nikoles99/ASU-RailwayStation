@@ -6,30 +6,6 @@
     <table id="from_to_stations">
       <tr>
         <td>
-          <p class="col-lg-6" id="station_from_label">Откуда</p>
-        </td>
-        <td>
-          <input class="span1 col-md-1 form-control" #searchDepartureStation (keyup)="search(searchDepartureStation.value)"/>
-          <div>
-            <div *ngFor="let station of allStations | async" search-result>
-              {{station.name}}
-            </div>
-          </div>
-        </td>
-        <td>
-          <p class="col-lg-6" id="station_to_label">Куда</p>
-        </td>
-        <td>
-          <input class="span1 col-md-1 form-control" #searchArrivalStation (keyup)="search(searchArrivalStation.value)"/>
-          <div>
-            <div *ngFor="let station of allStations | async" search-result>
-              {{station.name}}
-            </div>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
           <p class="col-lg-6" id="date_departure_label">Дата отправления</p>
         </td>
         <td>
@@ -42,8 +18,35 @@
           <input class="form-control" id="date_arrival" type="datetime-local" name="date_arrival">
         </td>
       </tr>
+      <tr>
+        <td>
+          <p class="col-lg-6" id="station_from_label">Откуда</p>
+        </td>
+        <td>
+          <input [(ngModel)]="selectedDepartureStation.name" class="span1 col-md-1 form-control" id="station_from" type="text" #searchDepartureStation
+                 (keyup)="searchDepartureStations(searchDepartureStation.value)"/>
+          <div class="search-result">
+            <li class="stationList" *ngFor="let station of departureStations | async" search-result (click)="onSelectDepartureStation(station)">
+              {{station.name}}
+            </li>
+          </div>
+        </td>
+        <td>
+          <p class="col-lg-6" id="station_to_label">Куда</p>
+        </td>
+        <td>
+          <input [(ngModel)]="selectedArrivalStation.name" class="span1 col-md-1 form-control" #searchArrivalStation
+                 (keyup)="searchArrivalStations(searchArrivalStation.value)"/>
+          <div class="search-result">
+            <li class="stationList" *ngFor="let station of arrivalStations | async" search-result (click)="onSelectArrivalStation(station)">
+              {{station.name}}
+            </li>
+          </div>
+        </td>
+      </tr>
+
     </table>
-    <button type="button" class="btn btn-sm btn-success" id="searchTrainsBtn">
+    <button  style="margin-top: 10px" type="button" class="btn btn-sm btn-success" id="searchTrainsBtn">
       <span class="glyphicon glyphicon-search"></span> Найти
     </button>
   </div>

@@ -47,8 +47,7 @@ public class StationController extends AbstractController {
         return stationService.getById(id);
     }
 
-    @RequestMapping(value = "/getStationByName", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    @ResponseBody
+    @RequestMapping(value = "/getStationByName", method = RequestMethod.POST)
     List<StationBean> getStationByName(@RequestParam("name") String name) {
         return stationService.getByName(name);
     }

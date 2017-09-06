@@ -25,59 +25,59 @@ import java.util.List;
 @Repository
 public class StationDaoImpl extends AbstractDao<StationEntity> implements StationDao {
 
-    @Override
-    public void add(StationEntity station) throws StationException {
-        if (station == null || station.getName() == null || station.getName().isEmpty()) {
-            throw new StationException(station + " entity or name is null");
-        }
-        List<StationEntity> stationEntity = getByName(station.getName());
-        if (stationEntity.isEmpty()) {
-            getEntityManager().persist(station);
-            getLogger().info("Station add successfully " + station);
-        } else {
-            String message = "Station already exist " + station;
-            getLogger().info(message);
-            throw new StationException(message);
-        }
-
+  @Override
+  public void add(StationEntity station) throws StationException {
+    if (station == null || station.getName() == null || station.getName().isEmpty()) {
+      throw new StationException(station + " entity or name is null");
+    }
+    List<StationEntity> stationEntity = getByName(station.getName());
+    if (stationEntity.isEmpty()) {
+      getEntityManager().persist(station);
+      getLogger().info("Station add successfully " + station);
+    } else {
+      String message = "Station already exist " + station;
+      getLogger().info(message);
+      throw new StationException(message);
     }
 
-    @Override
-    public List<StationEntity> getByName(String name) {
-        CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
-        CriteriaQuery<StationEntity> criteriaQuery = criteriaBuilder.createQuery(StationEntity.class);
-        Root<StationEntity> stationEntityRoot = criteriaQuery.from(StationEntity.class);
-        criteriaQuery.select(stationEntityRoot);
-        criteriaQuery.where(criteriaBuilder.equal(stationEntityRoot.get("name"), name));
-        TypedQuery<StationEntity> query = getEntityManager().createQuery(criteriaQuery);
-        return query.getResultList();
-    }
+  }
 
-    @Override
-    public List<StationEntity> getAllStations() {
-        CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
-        CriteriaQuery<StationEntity> criteriaQuery = criteriaBuilder.createQuery(StationEntity.class);
-        Root<StationEntity> stationEntityRoot = criteriaQuery.from(StationEntity.class);
-        criteriaQuery.select(stationEntityRoot);
-        List<StationEntity> students = getEntityManager().createQuery(criteriaQuery).getResultList();
-        return students;
-    }
+  @Override
+  public List<StationEntity> getByName(String name) {
+    CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
+    CriteriaQuery<StationEntity> criteriaQuery = criteriaBuilder.createQuery(StationEntity.class);
+    Root<StationEntity> stationEntityRoot = criteriaQuery.from(StationEntity.class);
+    criteriaQuery.select(stationEntityRoot);
+    criteriaQuery.where(criteriaBuilder.like(stationEntityRoot.<String>get("name"), name + "%"));
+    TypedQuery<StationEntity> query = getEntityManager().createQuery(criteriaQuery);
+    return query.getResultList();
+  }
 
-    @Override
-    public void delete(StationEntity station) {
-        List<StationEntity> stations = getByName(station.getName());
-        if (!stations.isEmpty() && stations.size() == 1) {
-            remove(stations.get(0));
-        }
-    }
+  @Override
+  public List<StationEntity> getAllStations() {
+    CriteriaBuilder criteriaBuilder = getEntityManager().getCriteriaBuilder();
+    CriteriaQuery<StationEntity> criteriaQuery = criteriaBuilder.createQuery(StationEntity.class);
+    Root<StationEntity> stationEntityRoot = criteriaQuery.from(StationEntity.class);
+    criteriaQuery.select(stationEntityRoot);
+    List<StationEntity> students = getEntityManager().createQuery(criteriaQuery).getResultList();
+    return students;
+  }
 
-    @Override
-    public StationEntity getById(Integer id) {
-        return getById(StationEntity.class, id);
+  @Override
+  public void delete(StationEntity station) {
+    List<StationEntity> stations = getByName(station.getName());
+    if (!stations.isEmpty() && stations.size() == 1) {
+      remove(stations.get(0));
     }
+  }
 
-    @Override
-    public void update(StationEntity station) {
-        update(station);
-    }
+  @Override
+  public StationEntity getById(Integer id) {
+    return getById(StationEntity.class, id);
+  }
+
+  @Override
+  public void update(StationEntity station) {
+    update(station);
+  }
 }
