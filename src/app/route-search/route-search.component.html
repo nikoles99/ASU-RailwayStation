@@ -9,10 +9,10 @@
           <p class="col-lg-6" id="date_departure_label">Дата отправления</p>
         </td>
         <td>
-          <input type="date" class="form-control" [ngModel]="arrivalDate | date:'y-MM-dd'" (ngModelChange)="defaultDate = $event">
+          <input type="date" class="form-control" #arrivalDateId [ngModel]="arrivalDate | date:'y-MM-dd'" (change)="onArrivalDateChange(arrivalDateId.value)">
         </td>
         <td>
-          <input style="margin-left: 3px" type="time" class="form-control" [ngModel]="arrivalDate | date:'HH:mm'" (ngModelChange)="defaultDate = $event">
+          <input style="margin-left: 3px" type="time" class="form-control" #arrivalTime [ngModel]="arrivalDate | date:'HH:mm'" (change)="onArrivalDateChange(arrivalTime.value)">
         </td>
       </tr>
       <tr>
@@ -20,10 +20,11 @@
           <p class="col-lg-6" id="date_arrival_label">Дата прибытия</p>
         </td>
         <td>
-          <input type="date" class="form-control"  [ngModel]="departureDate | date:'y-MM-dd' ">
+          <input type="date" class="form-control" #depatureDate [ngModel]="departureDate | date:'y-MM-dd'" (change)="onDepartureDateChange(depatureDate.value)">
         </td>
         <td>
-          <input style="margin-left: 3px" type="time" #a class="form-control" [ngModel]="departureDate | date:'HH:mm'" (click)="onDateChange(a.value)">
+          <input style="margin-left: 3px" type="time" #depatureTime class="form-control" [ngModel]="departureDate | date:'HH:mm'"
+                 (change)="onDepartureDateChange(depatureTime.value)">
         </td>
         <td>
       </tr>
