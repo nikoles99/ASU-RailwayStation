@@ -60,8 +60,10 @@ export class RouteSearchComponent implements OnInit {
     return template;
   }
 
-  public  onArrivalDateChange(date: Date) {
-    this.arrivalDate = new Date(date);
+  public  onArrivalDateChange(date: string) {
+    let template = this.arrivalDate.toLocaleString();
+    template = this.setDate(date, template);
+    this.arrivalDate = new Date(template);
   }
 
   public onSelectDepartureStation(station: Station) {
