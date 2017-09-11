@@ -9,11 +9,11 @@ import {Train} from "../../common/model/train";
 export class RouteSearchService extends AbstractHttpService {
 
   private getStationsUrl = 'http://localhost:8080/getStationByName';
-  private getTrainsByParams = "http://localhost:8080/getTrainsByParams";
+  private getTrainsByParams = 'http://localhost:8080/getTrainsByParams';
 
 
   public getStations(term: string): Observable<Station[]> {
-    let options = super.getRequestOptions();
+    const options = super.getRequestOptions();
     const params = new URLSearchParams();
     params.set('name', term);
     options.params = params;
@@ -22,7 +22,7 @@ export class RouteSearchService extends AbstractHttpService {
   }
 
   public searchRoutes(departureDate: Date, departureStation: string, arrivalDate: Date, arrivalStation: string): Promise<Train[]> {
-    let options = this.getRouteOptions(departureStation, arrivalStation, departureDate, arrivalDate);
+    const options = this.getRouteOptions(departureStation, arrivalStation, departureDate, arrivalDate);
     return super.doPost(this.getTrainsByParams, {}, options);
   }
 
@@ -30,8 +30,8 @@ export class RouteSearchService extends AbstractHttpService {
     const params = new URLSearchParams();
     params.set('departureStation', departureStation);
     params.set('arrivalStation', arrivalStation);
-    params.set('departureDate', departureDate.toLocaleString());
-    params.set('arrivalDate', arrivalDate.toLocaleString());
+    params.set('departureDate', JSON.stringify(departureDate.getTime()));
+    params.set('arrivalDate', JSON.stringify(arrivalDate.getTime()));
     const options = super.getRequestOptions();
     options.params = params;
     return options;

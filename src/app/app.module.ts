@@ -8,6 +8,7 @@ import { FormsModule }   from '@angular/forms';
 import { HttpModule }    from '@angular/http';
 import {RegistrationComponent} from "./registration/registration.component";
 import {AppRoutingModule} from "./routing/app-routing.module";
+import {DatePipe} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import {AppRoutingModule} from "./routing/app-routing.module";
     HttpModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

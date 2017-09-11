@@ -9,10 +9,10 @@
           <p class="col-lg-6" id="date_departure_label">Дата отправления</p>
         </td>
         <td>
-          <input type="date" class="form-control" #arrivalDateId [ngModel]="arrivalDate | date:'y-MM-dd'" (change)="onArrivalDateChange(arrivalDateId.value)">
+          <input type="date" class="form-control" #arrivalDateId [ngModel]="departureDate | date:'y-MM-dd'" (change)="onDepartureDateChange(arrivalDateId.value)">
         </td>
         <td>
-          <input style="margin-left: 3px" type="time" class="form-control" #arrivalTime [ngModel]="arrivalDate | date:'HH:mm'" (change)="onArrivalDateChange(arrivalTime.value)">
+          <input style="margin-left: 3px" type="time" class="form-control" #arrivalTime [ngModel]="departureDate | date:'HH:mm'" (change)="onDepartureDateChange(arrivalTime.value)">
         </td>
       </tr>
       <tr>
@@ -20,11 +20,11 @@
           <p class="col-lg-6" id="date_arrival_label">Дата прибытия</p>
         </td>
         <td>
-          <input type="date" class="form-control" #depatureDate [ngModel]="departureDate | date:'y-MM-dd'" (change)="onDepartureDateChange(depatureDate.value)">
+          <input type="date" class="form-control" #depatureDate [ngModel]="arrivalDate | date:'y-MM-dd'" (change)="onArrivalDateChange(depatureDate.value)">
         </td>
         <td>
-          <input style="margin-left: 3px" type="time" #depatureTime class="form-control" [ngModel]="departureDate | date:'HH:mm'"
-                 (change)="onDepartureDateChange(depatureTime.value)">
+          <input style="margin-left: 3px" type="time" #depatureTime class="form-control" [ngModel]="arrivalDate | date:'HH:mm'"
+                 (change)="onArrivalDateChange(depatureTime.value)">
         </td>
         <td>
       </tr>

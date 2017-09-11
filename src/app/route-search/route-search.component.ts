@@ -44,23 +44,23 @@ export class RouteSearchComponent implements OnInit {
       });
   }
 
-  public  onDepartureDateChange(date: string) {
+  public onDepartureDateChange(date: string) {
     let template = this.departureDate.toLocaleString();
     template = this.setDate(date, template);
     this.departureDate = new Date(template);
   }
 
   private setDate(date: string, template: string) {
+    let space = template.indexOf(' ');
     if (date.indexOf(':') != -1) {
-      template = template.replace(template.substring(10, template.length), date);
-    }
-    else {
-      template = template.replace(template.substring(0, 8), date);
+      template = template.replace(template.substring(++space, template.length), date);
+    } else {
+      template = template.replace(template.substring(0, --space), date);
     }
     return template;
   }
 
-  public  onArrivalDateChange(date: string) {
+  public onArrivalDateChange(date: string) {
     let template = this.arrivalDate.toLocaleString();
     template = this.setDate(date, template);
     this.arrivalDate = new Date(template);

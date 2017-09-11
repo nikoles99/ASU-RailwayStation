@@ -36,9 +36,11 @@ public class TrainController extends AbstractController {
     }
 
     @RequestMapping(value = "/getTrainsByParams", method = RequestMethod.POST)
-    List<TrainBean> getTrainsByParams(@RequestParam("arrivalStation") String arrivalStation, @RequestParam("departureStation") String departureStation,
-                                      @RequestParam("arrivalDate") Date arrivalDate, @RequestParam("departureDate") Date departureDate) {
-        return trainService.getByParams(arrivalStation, departureStation, arrivalDate, departureDate);
+    List<TrainBean> getTrainsByParams(@RequestParam("arrivalStation") String arrivalStation,
+                                      @RequestParam("departureStation") String departureStation,
+                                      @RequestParam("arrivalDate") String arrivalTime,
+                                      @RequestParam("departureDate") String departureTime) {
+        return trainService.getByParams(arrivalStation, departureStation, new Date(Long.parseLong(arrivalTime)), new Date(Long.parseLong(departureTime)));
     }
 
     @RequestMapping(value = "/getCarriageById", method = RequestMethod.POST)
