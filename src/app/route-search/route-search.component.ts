@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from "@angular/core";
 import {Station} from "../common/model/station";
 import {RouteSearchService} from "./service/route-searach.service";
 import {Observable, Subject} from "rxjs";
-import {Train} from "../common/model/train";
+import {RouteComponent} from "../routes/route.component";
 
 @Component({
   selector: 'app-route-search',
@@ -11,6 +11,9 @@ import {Train} from "../common/model/train";
   providers: [RouteSearchService]
 })
 export class RouteSearchComponent implements OnInit {
+
+  @ViewChild(RouteComponent) routeComponent;
+
   departureStations: Observable<Station[]>;
   arrivalStations: Observable<Station[]>;
   searchDepartureTerms = new Subject<string>();
@@ -87,13 +90,8 @@ export class RouteSearchComponent implements OnInit {
   }
 
   public searchRoute(): void {
-    if (this.selectedDepartureStation != null && this.selectedArrivalStation != null) {
-      this.routeSearchService.searchRoutes(this.departureDate, this.selectedDepartureStation.name, this.arrivalDate, this.selectedArrivalStation.name)
-        .then(trains => this.redirectToRoutes(trains));
-    }
-  }
-
-  private redirectToRoutes(trains: Train[]) {
+    this.routeComponent.searchRoute(this.departureDate, this.selectedDepartureStation.name, this.arrivalDate, this.selectedArrivalStation.name);
 
   }
+
 }

@@ -9,13 +9,15 @@ import { HttpModule }    from '@angular/http';
 import {RegistrationComponent} from "./registration/registration.component";
 import {AppRoutingModule} from "./routing/app-routing.module";
 import {DatePipe} from "@angular/common";
+import {RouteComponent} from "./routes/route.component";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RouteSearchComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    RouteComponent
   ],
   imports: [
     BrowserModule,

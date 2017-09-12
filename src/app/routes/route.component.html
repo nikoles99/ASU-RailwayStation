@@ -1,0 +1,47 @@
+<div>
+  <table style="text-align: justify  " class="table table-info table-striped-own" id="trains">
+    <tbody>
+    <tr *ngIf="trains">
+      <td>№ Поезда</td>
+      <td>Направление</td>
+      <td>Станция отправления</td>
+      <td>Станция прибытия</td>
+      <td>Время отправления</td>
+      <td>Время прибытия</td>
+      <td>Свободные места</td>
+    </tr>
+    <tr *ngFor="let train of trains">
+      <td>{{train.id}}</td>
+      <td>{{train.name}}</td>
+      <td>f</td>
+      <td>f</td>
+      <td>f</td>
+      <td>f</td>
+      <td>
+        <table>
+          <tbody>
+          <tr>
+            <td>Сидячие</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Общие</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Плацкарт</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Купе</td>
+            <td>1</td>
+          </tr>
+
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
