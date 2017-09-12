@@ -13,32 +13,16 @@
     <tr *ngFor="let train of trains">
       <td>{{train.id}}</td>
       <td>{{train.name}}</td>
-      <td>f</td>
-      <td>f</td>
-      <td>f</td>
-      <td>f</td>
+      <td>{{departureStation.name}}</td>
+      <td>{{arrivalStation.name}}</td>
+      <td>{{getDepartureStationDate(train.schedules) | date: 'dd/MM/yyyy, HH:mm'}}</td>
+      <td>{{getArrivalStationDate(train.schedules) | date: 'dd/MM/yyyy, HH:mm'}}</td>
       <td>
-        <table>
-          <tbody>
-          <tr>
-            <td>Сидячие</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td>Общие</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td>Плацкарт</td>
-            <td>1</td>
-          </tr>
-          <tr>
-            <td>Купе</td>
-            <td>1</td>
-          </tr>
+        <app-free-places [trainId]="train.id"
+                         [departureDate]="getDepartureStationDate(train.schedules)"
+                         [arrivalDate]="getArrivalStationDate(train.schedules) ">
 
-          </tbody>
-        </table>
+        </app-free-places>
       </td>
     </tr>
     </tbody>

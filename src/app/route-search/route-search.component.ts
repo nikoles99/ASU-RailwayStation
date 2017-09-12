@@ -90,7 +90,7 @@ export class RouteSearchComponent implements OnInit {
   }
 
   public searchRoute(): void {
-    this.routeComponent.searchRoute(this.departureDate, this.selectedDepartureStation.name, this.arrivalDate, this.selectedArrivalStation.name);
+    this.routeComponent.searchRoute(this.departureDate, this.selectedDepartureStation, this.arrivalDate, this.selectedArrivalStation);
 
   }
 

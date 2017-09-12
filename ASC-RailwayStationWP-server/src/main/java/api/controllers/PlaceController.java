@@ -22,8 +22,8 @@ public class PlaceController extends AbstractController {
 
     @RequestMapping(value = "/getFreePlacesByType", method = RequestMethod.POST)
     List<PlaceBean> getFreePlacesByType(@RequestParam("trainId") Integer trainId, @RequestParam("carriageType") CarriageType type,
-                                        @RequestParam("departureDate") Date departureDate, @RequestParam("arrivalDate") Date arrivalDate) {
-        return placeService.getFreePlaces(trainId, type, departureDate, arrivalDate);
+                                        @RequestParam("departureDate") Long departureDate, @RequestParam("arrivalDate") Long arrivalDate) {
+        return placeService.getFreePlaces(trainId, type, new Date(departureDate), new Date(arrivalDate));
     }
 
     @RequestMapping(value = "/bookTicket", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)

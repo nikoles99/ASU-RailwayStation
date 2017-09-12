@@ -21,7 +21,7 @@
         </td>
         <td>
           <input [(ngModel)]="selectedDepartureStation.name" class="span1 col-md-1 form-control" id="station_from" type="text" #searchDepartureStation
-                 (keyup)="searchDepartureStations(searchDepartureStation.value)"/>
+                 (keyup)="searchDepartureStations(searchDepartureStation.value)" placeholder="Минск"/>
           <div style="z-index: 1" class="search-result">
             <li class="stationList" *ngFor="let station of departureStations | async" search-result (click)="onSelectDepartureStation(station)">
               {{station.name}}
@@ -45,7 +45,7 @@
         </td>
         <td>
           <input style="margin-top: 8px" [(ngModel)]="selectedArrivalStation.name" class="span1 col-md-1 form-control" #searchArrivalStation
-                 (keyup)="searchArrivalStations(searchArrivalStation.value)"/>
+                 (keyup)="searchArrivalStations(searchArrivalStation.value)" placeholder="Гродно"/>
           <div class="search-result">
             <li class="stationList" *ngFor="let station of arrivalStations | async" search-result (click)="onSelectArrivalStation(station)">
               {{station.name}}

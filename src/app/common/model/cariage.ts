@@ -1,4 +1,6 @@
 export class Carriage {
-  carriageNumber: number;
-  placiesCount: number;
+  id: number;
+  number: number;
+  trainId: number;
+  carriageType: string;
 }

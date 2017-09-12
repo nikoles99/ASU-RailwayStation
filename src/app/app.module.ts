@@ -10,6 +10,7 @@ import {RegistrationComponent} from "./registration/registration.component";
 import {AppRoutingModule} from "./routing/app-routing.module";
 import {DatePipe} from "@angular/common";
 import {RouteComponent} from "./routes/route.component";
+import {FreePlacesComponent} from "./free-places/free-places.component";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import {RouteComponent} from "./routes/route.component";
     LoginComponent,
     RouteSearchComponent,
     RegistrationComponent,
-    RouteComponent
+    RouteComponent,
+    FreePlacesComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
 import {AbstractHttpService} from "../../common/service/abstract-http.service";
 import {Train} from "../../common/model/train";
 import {URLSearchParams} from "@angular/http";
+import {Place} from "../../common/model/place";
 
 export class RouteService extends AbstractHttpService {
 
@@ -21,5 +22,4 @@ export class RouteService extends AbstractHttpService {
     options.params = params;
     return options;
   }
-
 }

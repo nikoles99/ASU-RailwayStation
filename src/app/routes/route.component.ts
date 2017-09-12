@@ -1,7 +1,10 @@
 import {Train} from "../common/model/train";
-import {Input, Component, OnInit} from "@angular/core";
+import {Input, Component, OnInit, ViewChild} from "@angular/core";
 import {RouteService} from "./service/route.service";
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
+import {Schedule} from "../common/model/schedule";
+import {Station} from "../common/model/station";
+import {FreePlacesComponent} from "../free-places/free-places.component";
 
 @Component({
   selector: 'app-routes',
@@ -11,28 +14,44 @@ import {ActivatedRoute, ParamMap} from "@angular/router";
 })
 export class RouteComponent implements OnInit {
 
+  @ViewChild(FreePlacesComponent) freePlacesComponent;
+
   @Input() trains: Train[];
+  departureStation: Station;
+  arrivalStation: Station;
 
   constructor(private routeService: RouteService, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    /*  this.route.paramMap
-     .switchMap((params: ParamMap) => this.searchRoutes(params))
-     .subscribe(trains => this.trains = trains);*/
+
   }
 
-  public  searchRoute(departureDate: Date, departureStation: string, arrivalDate: Date, arrivalStation: string) {
-    return this.routeService.searchRoutes(departureDate, departureStation, arrivalDate, arrivalStation)
+  public  searchRoute(departureDate: Date, departureStation: Station, arrivalDate: Date, arrivalStation: Station) {
+    this.departureStation = Object.assign({}, departureStation);
+    this.arrivalStation = Object.assign({}, arrivalStation);
+    ;
+    return this.routeService.searchRoutes(departureDate, departureStation.name, arrivalDate, arrivalStation.name)
       .then(trains => this.trains = trains);
   }
 
-  /*  private searchRoutes(params: ParamMap) {
-   const departureDate = params.get('departureDate');
-   const departureStation = params.get('departureStation');
-   const arrivalDate = params.get('arrivalDate');
-   const arrivalStation = params.get('arrivalStation');
-   return this.routeService.searchRoutes(new Date(departureDate), departureStation, new Date(arrivalDate), arrivalStation);
-   }*/
+  public getDepartureStationDate(schedules: Schedule[]): Date {
+    let departureDate;
+    schedules.forEach((schedule) => {
+      if (schedule.stationId == this.departureStation.id) {
+        departureDate = new Date(schedule.departureDate);
+      }
+    });
+    return departureDate;
+  }
 
+  public getArrivalStationDate(schedules: Schedule[]): Date {
+    let arrivalDate;
+    schedules.forEach((schedule) => {
+      if (schedule.stationId == this.arrivalStation.id) {
+        arrivalDate = new Date(schedule.arrivalDate);
+      }
+    });
+    return arrivalDate;
+  }
 }

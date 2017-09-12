@@ -1,4 +1,7 @@
 export class Place {
-  curriageId: number;
+  id: number;
   number: number;
+  carriageId: number;
+  trainId: number;
+
 }
