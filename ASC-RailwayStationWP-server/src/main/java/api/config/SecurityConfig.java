@@ -33,10 +33,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/bookTicket").hasAuthority("user")
-                .antMatchers("/deleteStation").hasAuthority("admin")
+                .antMatchers("/deaddTrainleteStation").hasAuthority("admin")
                 .antMatchers("/addStation").hasAuthority("admin")
                 .antMatchers("/removeTicket").hasAuthority("user")
-                .antMatchers("/addTrain").hasAuthority("admin")
+                .antMatchers("/").hasAuthority("admin")
                 .antMatchers("/getBookedTickets").hasAuthority("user")
                 .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()

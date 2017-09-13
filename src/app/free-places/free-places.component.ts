@@ -22,10 +22,14 @@ export class FreePlacesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.placesService.getFreePlaces(this.trainId, 'SEAT_PLACE', this.departureDate, this.arrivalDate).then(places => this.seats = places);
-    this.placesService.getFreePlaces(this.trainId, 'COUP', this.departureDate, this.arrivalDate).then(places => this.coupe = places);
-    this.placesService.getFreePlaces(this.trainId, 'COMMON', this.departureDate, this.arrivalDate).then(places => this.common = places);
-    this.placesService.getFreePlaces(this.trainId, 'RESERVED_SEAT', this.departureDate, this.arrivalDate).then(places => this.reservedSeat = places);
+    this.placesService
+      .getFreePlaces(this.trainId, 'SEAT_PLACE', this.departureDate, this.arrivalDate).then(places => this.seats = places);
+    this.placesService
+      .getFreePlaces(this.trainId, 'COUP', this.departureDate, this.arrivalDate).then(places => this.coupe = places);
+    this.placesService
+      .getFreePlaces(this.trainId, 'COMMON', this.departureDate, this.arrivalDate).then(places => this.common = places);
+    this.placesService
+      .getFreePlaces(this.trainId, 'RESERVED_SEAT', this.departureDate, this.arrivalDate).then(places => this.reservedSeat = places);
 
   }
 
