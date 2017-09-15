@@ -14,12 +14,12 @@ export class User {
   emailError: string;
 
   public clearErrors() {
-    this.loginError = "";
-    this.passwordError = "";
-    this.confirmPasswordError = "";
-    this.firstNameError = "";
-    this.lastNameError = "";
-    this.emailError = "";
+    this.loginError = '';
+    this.passwordError = '';
+    this.confirmPasswordError = '';
+    this.firstNameError = '';
+    this.lastNameError = '';
+    this.emailError = '';
   }
 
 }

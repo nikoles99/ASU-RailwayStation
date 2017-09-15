@@ -18,7 +18,7 @@
       <td>{{getDepartureStationDate(train.schedules) | date: 'dd/MM/yyyy, HH:mm'}}</td>
       <td>{{getArrivalStationDate(train.schedules) | date: 'dd/MM/yyyy, HH:mm'}}</td>
       <td>
-        <app-free-places [trainId]="train.id"
+        <app-free-places [train]="train"
                          [departureDate]="getDepartureStationDate(train.schedules)"
                          [arrivalDate]="getArrivalStationDate(train.schedules) ">
 

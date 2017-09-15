@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by nikita on 26.03.17.
@@ -17,28 +18,35 @@ import java.util.List;
 @RestController
 public class PlaceController extends AbstractController {
 
-    @Autowired
-    private PlaceService placeService;
+  @Autowired
+  private PlaceService placeService;
 
-    @RequestMapping(value = "/getFreePlacesByType", method = RequestMethod.POST)
-    List<PlaceBean> getFreePlacesByType(@RequestParam("trainId") Integer trainId, @RequestParam("carriageType") CarriageType type,
-                                        @RequestParam("departureDate") Long departureDate, @RequestParam("arrivalDate") Long arrivalDate) {
-        return placeService.getFreePlaces(trainId, type, new Date(departureDate), new Date(arrivalDate));
-    }
+  @RequestMapping(value = "/getFreePlacesByType", method = RequestMethod.POST)
+  List<PlaceBean> getFreePlacesByType(@RequestParam("trainId") Integer trainId, @RequestParam("carriageType") CarriageType type,
+                                      @RequestParam("departureDate") Long departureDate, @RequestParam("arrivalDate") Long arrivalDate) {
+    return placeService.getFreePlaces(trainId, type, new Date(departureDate), new Date(arrivalDate));
+  }
 
-    @RequestMapping(value = "/bookTicket", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    Integer bookTicket(TicketBean ticket) throws Exception {
-        return placeService.bookTicket(ticket);
-    }
+  @RequestMapping(value = "/bookTicket", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+  Integer bookTicket(TicketBean ticket) throws Exception {
+    return placeService.bookTicket(ticket);
+  }
 
-    @RequestMapping(value = "/getBookedTickets", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-    @ResponseBody
-    List<TicketBean> getBookedTickets() {
-        return placeService.getBookedTickets();
-    }
+  @RequestMapping(value = "/getBookedTickets", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
+  @ResponseBody
+  List<TicketBean> getBookedTickets() {
+    return placeService.getBookedTickets();
+  }
 
-    @RequestMapping(value = "/removeTicket", method = RequestMethod.POST)
-    void getBookedTickets(@RequestParam("ticketId")  Integer ticketId) {
-        placeService.remove(ticketId);
-    }
+  @RequestMapping(value = "/removeTicket", method = RequestMethod.POST)
+  void getBookedTickets(@RequestParam("ticketId") Integer ticketId) {
+    placeService.remove(ticketId);
+  }
+
+  @RequestMapping(value = "/getFreePlacesSize", method = RequestMethod.POST)
+  Map<CarriageType, Integer> getFreePlacesSize(@RequestParam("trainId") Integer trainId,
+                                         @RequestParam("departureDate") Long departureDate,
+                                         @RequestParam("arrivalDate") Long arrivalDate) {
+    return placeService.getFreePlaces(trainId, new Date(departureDate), new Date(arrivalDate));
+  }
 }

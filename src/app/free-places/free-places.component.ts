@@ -1,6 +1,7 @@
-import {Input, Component, OnInit} from "@angular/core";
-import {Place} from "../common/model/place";
-import {PlaceService} from "./service/free-places.service";
+import {Component, Input, OnInit} from '@angular/core';
+import {PlaceService} from './service/free-places.service';
+import {FreePlaces} from './model/free-places';
+import {Train} from '../common/model/train';
 
 @Component({
   selector: 'app-free-places',
@@ -10,27 +11,17 @@ import {PlaceService} from "./service/free-places.service";
 })
 export class FreePlacesComponent implements OnInit {
 
-  @Input() trainId: number;
+  @Input() train: Train;
   @Input() departureDate: Date;
   @Input() arrivalDate: Date;
-  seats: Place[];
-  coupe: Place[];
-  common: Place[];
-  reservedSeat: Place[];
+  freePlaces: FreePlaces;
 
   constructor(private placesService: PlaceService) {
   }
 
   ngOnInit(): void {
-    this.placesService
-      .getFreePlaces(this.trainId, 'SEAT_PLACE', this.departureDate, this.arrivalDate).then(places => this.seats = places);
-    this.placesService
-      .getFreePlaces(this.trainId, 'COUP', this.departureDate, this.arrivalDate).then(places => this.coupe = places);
-    this.placesService
-      .getFreePlaces(this.trainId, 'COMMON', this.departureDate, this.arrivalDate).then(places => this.common = places);
-    this.placesService
-      .getFreePlaces(this.trainId, 'RESERVED_SEAT', this.departureDate, this.arrivalDate).then(places => this.reservedSeat = places);
-
+    this.placesService.getFreePlacesSize(this.train.id, this.departureDate, this.arrivalDate)
+      .then(freePlaces => this.freePlaces = freePlaces);
   }
 
 }
