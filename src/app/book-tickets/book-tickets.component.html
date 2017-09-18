@@ -1,9 +1,10 @@
-<div class="modal-dialog" role="document" id="choosePlaces">
+<app-login class="col-lg-1 col-centered" *ngIf="!user"></app-login>
+<div class="modal-dialog" role="document" id="choosePlaces" *ngIf="user">
   <div style="width: 700px" class="modal-content">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
       <h2>Выбор посадочных мест</h2>
-    </div>x
+    </div>
     <table style="width: 95%; margin: 3%">
       <tr>
         <td>
@@ -15,23 +16,23 @@
               <table>
                 <tr>
                   <td>Поезд:</td>
-                  <td></td>
+                  <td>{{train.name}}</td>
                 </tr>
                 <tr>
                   <td>Маршрут:</td>
-                  <td></td>
+                  <td>{{departureStation}}-{{arrivalStation}}</td>
                 </tr>
                 <tr>
                   <td>Тип вагона:</td>
-                  <td></td>
+                  <td>{{carriageType}}</td>
                 </tr>
                 <tr>
                   <td>Время отправления:</td>
-                  <td></td>
+                  <td>{{departureDate}}</td>
                 </tr>
                 <tr>
                   <td>Время прибытия:</td>
-                  <td></td>
+                  <td>{{arrivalDate}}</td>
                 </tr>
               </table>
             </div>
@@ -46,11 +47,11 @@
               <table>
                 <tr>
                   <td style="vertical-align:middle"><p id="last_name_label">Фамилия</p></td>
-                  <td><input style="height: 22px" class="form-control input-sm" type="text" id="last_name" readonly/></td>
+                  <td>{{user.lastName}}</td>
                 </tr>
                 <tr>
                   <td style="vertical-align:middle"><p id="name_label">Имя</p></td>
-                  <td><input style=" height: 22px" class="form-control input-sm" type="text" id="name" readonly/></td>
+                  <td>{{user.name}}</td>
                 </tr>
                 <tr>
                   <td style="vertical-align:middle"><p>Взрослые</p></td>

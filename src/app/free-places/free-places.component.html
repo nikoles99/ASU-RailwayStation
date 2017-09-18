@@ -3,19 +3,19 @@
     <tbody>
     <tr>
       <td>Общий</td>
-      <td><a [routerLink]="['/bookTickets']"> {{freePlaces.common}}</a></td>
+      <td><a [routerLink]="['/bookTickets', train.id, departureDate, arrivalDate, 'COMMON']"> {{freePlaces.common}}</a></td>
     </tr>
     <tr>
       <td>Плацкарт</td>
-      <td><a [routerLink]="['/bookTickets']"> {{freePlaces.reservedSeat}}</a></td>
+      <td><a [routerLink]="['/bookTickets',train.id, departureDate, arrivalDate, 'RESERVED_SEAT']"> {{freePlaces.reservedSeat}}</a></td>
     </tr>
     <tr>
       <td>Купе</td>
-      <td><a [routerLink]="['/bookTickets']"> {{freePlaces.coup}}</a></td>
+      <td><a [routerLink]="['/bookTickets',train.id, departureDate, arrivalDate, 'COUP']"> {{freePlaces.coup}}</a></td>
     </tr>
     <tr>
       <td>Сидячие</td>
-      <td><a [routerLink]="['/bookTickets']">{{freePlaces.seatPlaces}}</a></td>
+      <td><a [routerLink]="['/bookTickets',train.id, departureDate, arrivalDate, 'SEAT_PLACES']">{{freePlaces.seatPlaces}}</a></td>
     </tr>
     </tbody>
   </table>

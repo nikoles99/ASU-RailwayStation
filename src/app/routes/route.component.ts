@@ -14,8 +14,6 @@ import {FreePlacesComponent} from "../free-places/free-places.component";
 })
 export class RouteComponent implements OnInit {
 
-  @ViewChild(FreePlacesComponent) freePlacesComponent;
-
   @Input() trains: Train[];
   departureStation: Station;
   arrivalStation: Station;

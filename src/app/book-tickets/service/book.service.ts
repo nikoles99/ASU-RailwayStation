@@ -4,7 +4,6 @@ import {Place} from '../../common/model/place';
 import {URLSearchParams} from '@angular/http';
 import {AbstractHttpService} from '../../common/service/abstract-http.service';
 
-@Injectable()
 export class BookService extends AbstractHttpService {
 
   private bookTicket = 'http://localhost:8080/bookTicket';
