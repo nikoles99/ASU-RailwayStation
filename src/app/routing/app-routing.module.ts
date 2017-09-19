@@ -8,7 +8,10 @@ import {BookTicketsComponent} from '../book-tickets/book-tickets.component';
 const routes: Routes = [
   {path: '', component: RouteSearchComponent},
   {path: 'registration', component: RegistrationComponent},
-  {path: 'bookTickets/:trainId/:departureDate/:arrivalDate/:carriageType', component: BookTicketsComponent}
+  {
+    path: 'bookTickets/:trainId/:departureStation/:departureDate/:arrivalStation/:arrivalDate/:carriageType',
+    component: BookTicketsComponent
+  },
 ];
 
 @NgModule({

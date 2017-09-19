@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {PlaceService} from './service/free-places.service';
 import {FreePlaces} from './model/free-places';
 import {Train} from '../common/model/train';
+import {Station} from '../common/model/station';
 
 @Component({
   selector: 'app-free-places',
@@ -14,6 +15,8 @@ export class FreePlacesComponent implements OnInit {
   @Input() train: Train;
   @Input() departureDate: Date;
   @Input() arrivalDate: Date;
+  @Input() arrivalStation: Station;
+  @Input() departureStation: Station;
   freePlaces: FreePlaces;
 
   constructor(private placesService: PlaceService) {

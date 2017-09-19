@@ -1,7 +1,7 @@
-import {User} from "../../common/model/users";
-import {URLSearchParams, RequestOptions} from "@angular/http";
-import "rxjs/add/operator/toPromise";
-import {AbstractHttpService} from "../../common/service/abstract-http.service";
+import {User} from '../../common/model/users';
+import {URLSearchParams, RequestOptions} from '@angular/http';
+import 'rxjs/add/operator/toPromise';
+import {AbstractHttpService} from '../../common/service/abstract-http.service';
 
 export class LoginService extends AbstractHttpService {
 
@@ -10,8 +10,8 @@ export class LoginService extends AbstractHttpService {
   private isAuthorizedUrl = 'http://localhost:8080/isAuthenticated';
 
   public login(login: string, password: string): Promise<User> {
-    let options = this.getLoginParams(login, password);
-    let promise = super.doPost(this.authorizeUrl, {}, options);
+    const options = this.getLoginParams(login, password);
+    const promise = super.doPost(this.authorizeUrl, {}, options);
     return promise.then(() => this.isAuthenticated());
   }
 

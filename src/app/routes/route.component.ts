@@ -1,10 +1,8 @@
-import {Train} from "../common/model/train";
-import {Input, Component, OnInit, ViewChild} from "@angular/core";
-import {RouteService} from "./service/route.service";
-import {ActivatedRoute} from "@angular/router";
-import {Schedule} from "../common/model/schedule";
-import {Station} from "../common/model/station";
-import {FreePlacesComponent} from "../free-places/free-places.component";
+import {Train} from '../common/model/train';
+import {Component, Input, OnInit} from '@angular/core';
+import {RouteService} from './service/route.service';
+import {Schedule} from '../common/model/schedule';
+import {Station} from '../common/model/station';
 
 @Component({
   selector: 'app-routes',
@@ -18,17 +16,17 @@ export class RouteComponent implements OnInit {
   departureStation: Station;
   arrivalStation: Station;
 
-  constructor(private routeService: RouteService, private route: ActivatedRoute) {
+  constructor(private routeService: RouteService) {
   }
 
   ngOnInit(): void {
 
   }
 
-  public  searchRoute(departureDate: Date, departureStation: Station, arrivalDate: Date, arrivalStation: Station) {
+  public searchRoute(departureDate: Date, departureStation: Station, arrivalDate: Date, arrivalStation: Station) {
     this.departureStation = Object.assign({}, departureStation);
     this.arrivalStation = Object.assign({}, arrivalStation);
-    ;
+
     return this.routeService.searchRoutes(departureDate, departureStation.name, arrivalDate, arrivalStation.name)
       .then(trains => this.trains = trains);
   }
@@ -36,7 +34,7 @@ export class RouteComponent implements OnInit {
   public getDepartureStationDate(schedules: Schedule[]): Date {
     let departureDate;
     schedules.forEach((schedule) => {
-      if (schedule.stationId == this.departureStation.id) {
+      if (schedule.stationId === this.departureStation.id) {
         departureDate = new Date(schedule.departureDate);
       }
     });
@@ -46,7 +44,7 @@ export class RouteComponent implements OnInit {
   public getArrivalStationDate(schedules: Schedule[]): Date {
     let arrivalDate;
     schedules.forEach((schedule) => {
-      if (schedule.stationId == this.arrivalStation.id) {
+      if (schedule.stationId === this.arrivalStation.id) {
         arrivalDate = new Date(schedule.arrivalDate);
       }
     });
