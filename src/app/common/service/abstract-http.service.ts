@@ -32,7 +32,7 @@ export class AbstractHttpService {
   }
 
   protected getRequestOptions() {
-    let headers = new Headers({'Content-Type': 'application/json'});
+    const headers = new Headers({'Content-Type': 'application/json'});
     return new RequestOptions({
       headers: headers,
       withCredentials: true

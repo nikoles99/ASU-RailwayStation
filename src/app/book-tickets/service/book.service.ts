@@ -1,16 +1,23 @@
-import {Injectable} from '@angular/core';
 import {Ticket} from './model/ticket';
 import {Place} from '../../common/model/place';
-import {URLSearchParams} from '@angular/http';
 import {AbstractHttpService} from '../../common/service/abstract-http.service';
+import {Headers, RequestOptions, URLSearchParams} from '@angular/http';
+import 'rxjs/add/operator/toPromise';
 
 export class BookService extends AbstractHttpService {
 
   private bookTicket = 'http://localhost:8080/bookTicket';
   private getFreePlacesByType = 'http://localhost:8080/getFreePlacesByType';
 
+
   public book(ticket: Ticket): Promise<any> {
-    return super.doPost(this.getFreePlacesByType, ticket, null);
+    const headers = new Headers({'Content-Type': 'application/json'});
+    const options = new RequestOptions({
+      headers: headers,
+    });
+    return this.http.post(this.bookTicket, JSON.stringify(ticket), options)
+      .toPromise()
+      .catch(this.handleError);
   }
 
   public getFreePlaces(trainId: number, carriageType: string, departureDate: Date, arrivalDate: Date): Promise<Place[]> {

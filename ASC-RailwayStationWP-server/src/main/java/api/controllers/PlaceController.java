@@ -27,8 +27,8 @@ public class PlaceController extends AbstractController {
     return placeService.getFreePlaces(trainId, type, new Date(departureDate), new Date(arrivalDate));
   }
 
-  @RequestMapping(value = "/bookTicket", produces = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
-  Integer bookTicket(TicketBean ticket) throws Exception {
+  @RequestMapping(value = "/bookTicket",  method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
+  Integer bookTicket(@RequestBody TicketBean ticket) throws Exception {
     return placeService.bookTicket(ticket);
   }
 

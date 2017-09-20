@@ -3,22 +3,22 @@
     <tbody>
     <tr>
       <td>Общий</td>
-      <td><a [routerLink]="['/bookTickets', train.id, departureStation.name, departureDate.getTime(), arrivalStation.name, arrivalDate.getTime(), 'COMMON']">
+      <td><a [routerLink]="['/bookTickets', train.id, train.name, departureStation.name, departureDate.getTime(), arrivalStation.name, arrivalDate.getTime(), 'COMMON']">
         {{freePlaces.common}}</a></td>
     </tr>
     <tr>
       <td>Плацкарт</td>
-      <td><a [routerLink]="['/bookTickets',train.id, departureStation.name,departureDate.getTime(), arrivalStation.name,arrivalDate.getTime(),'RESERVED_SEAT']">
+      <td><a [routerLink]="['/bookTickets',train.id, train.name, departureStation.name,departureDate.getTime(), arrivalStation.name,arrivalDate.getTime(),'RESERVED_SEAT']">
         {{freePlaces.reservedSeat}}</a></td>
     </tr>
     <tr>
       <td>Купе</td>
-      <td><a [routerLink]="['/bookTickets',train.id, departureStation.name,departureDate.getTime(), arrivalStation.name,arrivalDate.getTime(), 'COUP']">
+      <td><a [routerLink]="['/bookTickets',train.id, train.name, departureStation.name,departureDate.getTime(), arrivalStation.name,arrivalDate.getTime(), 'COUP']">
         {{freePlaces.coup}}</a></td>
     </tr>
     <tr>
       <td>Сидячие</td>
-      <td><a [routerLink]="['/bookTickets',train.id, departureStation.name,departureDate.getTime(), arrivalStation.name,arrivalDate.getTime(), 'SEAT_PLACES']">{{freePlaces.seatPlaces}}</a>
+      <td><a [routerLink]="['/bookTickets',train.id, train.name, departureStation.name,departureDate.getTime(), arrivalStation.name,arrivalDate.getTime(), 'SEAT_PLACES']">{{freePlaces.seatPlaces}}</a>
       </td>
     </tr>
     </tbody>

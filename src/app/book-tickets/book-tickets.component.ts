@@ -6,6 +6,7 @@ import {LoginService} from '../login/service/login.service';
 import {Ticket} from './service/model/ticket';
 import 'rxjs/add/operator/switchMap';
 import {ActivatedRoute, ParamMap} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-book-tickets',
@@ -16,16 +17,16 @@ import {ActivatedRoute, ParamMap} from '@angular/router';
 export class BookTicketsComponent implements OnInit {
 
   trainId: number;
-  departureDate: Date;
-  arrivalDate: Date;
-  departureStation: string;
-  arrivalStation: string;
+  trainName: string;
   placeMap = new Map<number, Array<Place>>();
-  carriageType: string;
   user: User;
-  ticket: Ticket;
+  ticket = new Ticket();
+  choosePlaces = new Array<Place>();
 
-  constructor(private bookService: BookService, private loginService: LoginService, private route: ActivatedRoute) {
+  constructor(private bookService: BookService,
+              private loginService: LoginService,
+              private location: Location,
+              private route: ActivatedRoute) {
   }
 
   ngOnInit() {
@@ -34,6 +35,19 @@ export class BookTicketsComponent implements OnInit {
       .subscribe(places => this.setPlaces(places));
     this.loginService.isAuthenticated()
       .then(authorizedUser => this.user = authorizedUser);
+  }
+
+  public goBack(): void {
+    this.location.back();
+  }
+
+  public choosePlace(place: Place): void {
+    const number = this.choosePlaces.indexOf(place);
+    if (number !== -1) {
+      this.choosePlaces.splice(number, 1);
+    } else {
+      this.choosePlaces.push(place);
+    }
   }
 
   private setPlaces(places: Place[]) {
@@ -50,18 +64,23 @@ export class BookTicketsComponent implements OnInit {
   }
 
   private getFreePlaces(params: ParamMap): Promise<Place[]> {
+    this.ticket.departureDate = new Date(+params.get('departureDate'));
+    this.ticket.arrivalDate = new Date(+params.get('arrivalDate'));
+    this.ticket.carriageType = params.get('carriageType');
+    this.ticket.departureStation = params.get('departureStation');
+    this.ticket.arrivalStation = params.get('arrivalStation');
     this.trainId = +params.get('trainId');
-    this.departureDate = new Date(+params.get('departureDate'));
-    this.arrivalDate = new Date(+params.get('arrivalDate'));
-    this.departureStation = params.get('departureStation');
-    this.arrivalStation = params.get('arrivalStation');
-    this.carriageType = params.get('carriageType');
-    return this.bookService.getFreePlaces(this.trainId, this.carriageType, this.departureDate, this.arrivalDate);
+    this.trainName = params.get('trainName');
+    return this.bookService.getFreePlaces(this.trainId, this.ticket.carriageType, this.ticket.departureDate, this.ticket.arrivalDate);
   }
 
-  public book(place: Place): void {
-    // this.bookService.book(this.ticket);
-
+  public book(): void {
+    for (const place of this.choosePlaces) {
+      const ticket = Object.assign({}, this.ticket);
+      ticket.placeId = place.id;
+      ticket.placeNumber = place.number;
+      this.bookService.book(ticket);
+    }
   }
 
 }

@@ -1,8 +1,8 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
-import {Station} from "../common/model/station";
-import {RouteSearchService} from "./service/route-searach.service";
-import {Observable, Subject} from "rxjs";
-import {RouteComponent} from "../routes/route.component";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {Station} from '../common/model/station';
+import {RouteSearchService} from './service/route-searach.service';
+import {Observable, Subject} from 'rxjs';
+import {RouteComponent} from '../routes/route.component';
 
 @Component({
   selector: 'app-route-search',
@@ -55,7 +55,7 @@ export class RouteSearchComponent implements OnInit {
 
   private setDate(date: string, template: string) {
     let space = template.indexOf(' ');
-    if (date.indexOf(':') != -1) {
+    if (date.indexOf(':') !== -1) {
       template = template.replace(template.substring(++space, template.length), date);
     } else {
       template = template.replace(template.substring(0, --space), date);

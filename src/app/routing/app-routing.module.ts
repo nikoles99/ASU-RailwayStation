@@ -9,7 +9,7 @@ const routes: Routes = [
   {path: '', component: RouteSearchComponent},
   {path: 'registration', component: RegistrationComponent},
   {
-    path: 'bookTickets/:trainId/:departureStation/:departureDate/:arrivalStation/:arrivalDate/:carriageType',
+    path: 'bookTickets/:trainId/:trainName/:departureStation/:departureDate/:arrivalStation/:arrivalDate/:carriageType',
     component: BookTicketsComponent
   },
 ];
