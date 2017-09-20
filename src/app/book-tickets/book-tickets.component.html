@@ -1,5 +1,6 @@
-<app-login class="col-lg-1 col-centered" *ngIf="!user"></app-login>
-<div class="modal-dialog" role="document" id="choosePlaces" *ngIf="user">
+<app-login class="col-lg-1 col-centered"></app-login>
+<div [innerHTML]="placesLayout"></div>
+<div class="modal-dialog" role="document" id="choosePlaces">
   <div style="width: 700px" class="modal-content">
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -13,10 +14,10 @@
               <h3 class="panel-title">Информация о поезде</h3>
             </div>
             <div class="panel-body">
-              <table>
+              <table width="90%">
                 <tr>
                   <td>Поезд:</td>
-                  <td>{{train.name}}</td>
+                  <td></td>
                 </tr>
                 <tr>
                   <td>Маршрут:</td>
@@ -28,11 +29,11 @@
                 </tr>
                 <tr>
                   <td>Время отправления:</td>
-                  <td>{{departureDate}}</td>
+                  <td>{{departureDate | date: 'dd/MM/yyyy, HH:mm'}}</td>
                 </tr>
                 <tr>
                   <td>Время прибытия:</td>
-                  <td>{{arrivalDate}}</td>
+                  <td>{{arrivalDate | date: 'dd/MM/yyyy, HH:mm'}}</td>
                 </tr>
               </table>
             </div>
@@ -44,7 +45,7 @@
               <h3 class="panel-title">Информация о пассажирах</h3>
             </div>
             <div class="panel-body">
-              <table>
+              <table width="70%">
                 <tr>
                   <td style="vertical-align:middle"><p id="last_name_label">Фамилия</p></td>
                   <td>{{user.lastName}}</td>
@@ -66,11 +67,23 @@
           </div>
         </td>
       </tr>
+
     </table>
     <div class="modal-body">
       <div id="places" disabled="true">
         <table class="table table-striped" id="free_places">
           <tbody>
+          <tr>
+            <td>Номер вагона</td>
+            <td>Номера свободных мест</td>
+          </tr>
+          <tr *ngFor="let carriageId of placeMap.keys()">
+            <td>{{carriageId}}</td>
+            <td>
+              <button *ngFor="let place of placeMap.get(carriageId)"
+                      class="btn btn-default btn-xs place">{{place.number}}</button>
+            </td>
+          </tr>
           </tbody>
         </table>
       </div>
@@ -80,3 +93,4 @@
     </div>
   </div>
 </div>
+

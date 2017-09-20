@@ -159,7 +159,7 @@ function fillTrains(departureStation, arrivalStation, trains) {
 }
 
 function setHrefData(trainId, trainName, carriageType, places, arrivalDate, departureDate) {
-    return "class=\"freePlaces\" data-train-id=\"" + trainId + "\" " +
+    return "class=\"placeMap\" data-train-id=\"" + trainId + "\" " +
         "data-train-name=\"" + trainName + "\" " +
         "data-carriage-type=\"" + carriageType + "\" " +
         "data-arrivalDate=\"" + arrivalDate + "\" " +

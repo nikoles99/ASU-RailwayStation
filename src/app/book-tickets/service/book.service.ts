@@ -15,7 +15,7 @@ export class BookService extends AbstractHttpService {
 
   public getFreePlaces(trainId: number, carriageType: string, departureDate: Date, arrivalDate: Date): Promise<Place[]> {
     const options = this.getPlacesOptions(trainId, carriageType, departureDate, arrivalDate);
-    return super.doPost(this.bookTicket, {}, options).then(response => response.json() as Place[]);
+    return super.doPost(this.getFreePlacesByType, {}, options).then(response => response.json() as Place[]);
   }
 
   private getPlacesOptions(trainId: number, carriageType: string, departureDate: Date, arrivalDate: Date) {

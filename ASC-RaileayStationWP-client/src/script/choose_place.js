@@ -27,7 +27,7 @@ function fillForm() {
     $("#arrivalDate").text(arrivalDate);
     var departureDate = freePlaces.data("departuredate");
     $("#departureDate").text(departureDate);
-    var freePlacesArray = freePlaces.data("freePlaces");
+    var freePlacesArray = freePlaces.data("placeMap");
 
     ticketTemplate.trainId = trainId;
     ticketTemplate.arrivalStation = arrivalStation;
@@ -36,7 +36,7 @@ function fillForm() {
     ticketTemplate.departureDate = new Date(strToDate(departureDate));
     setPlaces(freePlacesArray);
 }
-$("#trains").on("click", ".freePlaces", function () {
+$("#trains").on("click", ".placeMap", function () {
     var authorize = isAuthorize();
     fillForm.call(this);
     authorize.then(function (data) {
