@@ -18,6 +18,7 @@ export class BookTicketsComponent implements OnInit {
 
   trainId: number;
   trainName: string;
+  carriageType: string;
   placeMap = new Map<number, Array<Place>>();
   user: User;
   ticket = new Ticket();
@@ -66,12 +67,12 @@ export class BookTicketsComponent implements OnInit {
   private getFreePlaces(params: ParamMap): Promise<Place[]> {
     this.ticket.departureDate = new Date(+params.get('departureDate'));
     this.ticket.arrivalDate = new Date(+params.get('arrivalDate'));
-    this.ticket.carriageType = params.get('carriageType');
+    this.carriageType = params.get('carriageType');
     this.ticket.departureStation = params.get('departureStation');
     this.ticket.arrivalStation = params.get('arrivalStation');
     this.trainId = +params.get('trainId');
     this.trainName = params.get('trainName');
-    return this.bookService.getFreePlaces(this.trainId, this.ticket.carriageType, this.ticket.departureDate, this.ticket.arrivalDate);
+    return this.bookService.getFreePlaces(this.trainId, this.carriageType, this.ticket.departureDate, this.ticket.arrivalDate);
   }
 
   public book(): void {

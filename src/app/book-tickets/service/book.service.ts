@@ -11,13 +11,7 @@ export class BookService extends AbstractHttpService {
 
 
   public book(ticket: Ticket): Promise<any> {
-    const headers = new Headers({'Content-Type': 'application/json'});
-    const options = new RequestOptions({
-      headers: headers,
-    });
-    return this.http.post(this.bookTicket, JSON.stringify(ticket), options)
-      .toPromise()
-      .catch(this.handleError);
+    return super.doPost(this.bookTicket, ticket, null);
   }
 
   public getFreePlaces(trainId: number, carriageType: string, departureDate: Date, arrivalDate: Date): Promise<Place[]> {

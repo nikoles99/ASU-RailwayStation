@@ -6,7 +6,6 @@ export class Ticket {
   arrivalStation: string;
   placeNumber: number;
   carriageNumber: number;
-  carriageType: string;
   price: string;
 
 }
