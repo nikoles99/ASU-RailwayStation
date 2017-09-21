@@ -32,7 +32,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/bookTicket").hasAuthority("user")
+              //  .antMatchers("/bookTicket").hasAuthority("user")
                 .antMatchers("/deaddTrainleteStation").hasAuthority("admin")
                 .antMatchers("/addStation").hasAuthority("admin")
                 .antMatchers("/removeTicket").hasAuthority("user")

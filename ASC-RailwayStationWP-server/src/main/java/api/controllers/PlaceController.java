@@ -6,6 +6,7 @@ import api.model.TicketBean;
 import api.service.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -27,6 +28,7 @@ public class PlaceController extends AbstractController {
     return placeService.getFreePlaces(trainId, type, new Date(departureDate), new Date(arrivalDate));
   }
 
+  @PreAuthorize("hasAuthority('user')")
   @RequestMapping(value = "/bookTicket",  method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE})
   Integer bookTicket(@RequestBody TicketBean ticket) throws Exception {
     return placeService.bookTicket(ticket);
