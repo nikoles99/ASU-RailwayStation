@@ -12,6 +12,7 @@ import {DatePipe} from '@angular/common';
 import {RouteComponent} from './routes/route.component';
 import {FreePlacesComponent} from './free-places/free-places.component';
 import {BookTicketsComponent} from './book-tickets/book-tickets.component';
+import { CabinetComponent } from './cabinet/cabinet.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {BookTicketsComponent} from './book-tickets/book-tickets.component';
     RegistrationComponent,
     RouteComponent,
     FreePlacesComponent,
-    BookTicketsComponent
+    BookTicketsComponent,
+    CabinetComponent,
   ],
   imports: [
     BrowserModule,
