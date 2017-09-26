@@ -13,6 +13,7 @@ import {RouteComponent} from './routes/route.component';
 import {FreePlacesComponent} from './free-places/free-places.component';
 import {BookTicketsComponent} from './book-tickets/book-tickets.component';
 import { CabinetComponent } from './cabinet/cabinet.component';
+import { AdministrationComponent } from './src/app/administration/administration.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { CabinetComponent } from './cabinet/cabinet.component';
     FreePlacesComponent,
     BookTicketsComponent,
     CabinetComponent,
+    AdministrationComponent,
   ],
   imports: [
     BrowserModule,
