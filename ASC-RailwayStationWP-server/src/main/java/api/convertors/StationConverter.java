@@ -16,7 +16,7 @@ import java.util.List;
 public class StationConverter extends AbstractConvertor<StationBean, StationEntity> {
 
     @Autowired
-    ScheduleConverter scheduleConverter;
+    private ScheduleConverter scheduleConverter;
 
     @Override
     public StationBean toBean(StationEntity stationEntity) {

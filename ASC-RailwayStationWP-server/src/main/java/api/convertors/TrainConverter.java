@@ -1,11 +1,11 @@
 package api.convertors;
 
 import api.entity.CarriageEntity;
-import api.entity.TrainEntity;
 import api.entity.ScheduleEntity;
+import api.entity.TrainEntity;
 import api.model.CarriageBean;
-import api.model.TrainBean;
 import api.model.ScheduleBean;
+import api.model.TrainBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -8,25 +8,25 @@ import java.util.List;
  */
 public abstract class AbstractConvertor<B, E> {
 
-    abstract public B toBean(E entity);
+  abstract public B toBean(E entity);
 
-    abstract public E toEntity(B bean);
+  abstract public E toEntity(B bean);
 
-    public List<E> toEntityCollection(List<B> beans) {
-        List<E> entities = new ArrayList<E>();
-        for (B bean : beans) {
-            E entity = toEntity(bean);
-            entities.add(entity);
-        }
-        return entities;
-    }
+  public List<E> toEntityCollection(List<B> beans) {
+    List<E> entities = new ArrayList<>();
+    beans.forEach((bean) -> {
+      E entity = toEntity(bean);
+      entities.add(entity);
+    });
+    return entities;
+  }
 
-    public List<B> toBeanCollection(List<E> entities) {
-        List<B> beans = new ArrayList<B>();
-        for (E entity : entities) {
-            B trainBean = toBean(entity);
-            beans.add(trainBean);
-        }
-        return beans;
-    }
+  public List<B> toBeanCollection(List<E> entities) {
+    List<B> beans = new ArrayList<>();
+    entities.forEach((entity -> {
+      B trainBean = toBean(entity);
+      beans.add(trainBean);
+    }));
+    return beans;
+  }
 }

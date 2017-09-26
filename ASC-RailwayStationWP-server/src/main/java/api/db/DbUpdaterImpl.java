@@ -6,7 +6,10 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.*;
 
 /**
@@ -69,7 +72,7 @@ public class DbUpdaterImpl implements DbUpdater {
     }
 
 
-    private void runPatch(int i, InputStream input) throws UnsupportedEncodingException, IOException, SQLException {
+    private void runPatch(int i, InputStream input) throws IOException, SQLException {
         String patchNo = String.format("%05d", i);
         String fullName = PATH + PATCH_PREFIX + patchNo + PATCH_POSTFIX;
         BufferedReader in = new BufferedReader(new InputStreamReader(input, "UTF8"));

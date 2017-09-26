@@ -9,8 +9,4 @@ public class TrainException extends Exception {
         super(message);
     }
 
-    public TrainException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
 }

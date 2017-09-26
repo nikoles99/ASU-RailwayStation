@@ -21,7 +21,6 @@ import java.util.List;
 /**
  * Created by nikita on 14.03.17.
  */
-@Transactional(propagation = Propagation.MANDATORY)
 @Repository
 public class ScheduleDaoImpl extends AbstractDao<ScheduleEntity> implements ScheduleDao {
 

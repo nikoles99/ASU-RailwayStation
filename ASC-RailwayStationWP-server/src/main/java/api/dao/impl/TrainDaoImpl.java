@@ -18,7 +18,6 @@ import java.util.List;
 /**
  * Created by nolesuk on 13-Mar-17.
  */
-@Transactional(propagation = Propagation.MANDATORY)
 @Repository
 public class TrainDaoImpl extends AbstractDao<TrainEntity> implements TrainDao {
 

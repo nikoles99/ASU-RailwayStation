@@ -18,7 +18,6 @@ import java.util.List;
  * Created by nikita on 27.02.17.
  */
 @Service
-@Transactional
 public class StationServiceImpl implements StationService {
 
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());

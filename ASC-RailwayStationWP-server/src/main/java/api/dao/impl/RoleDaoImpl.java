@@ -13,7 +13,6 @@ import java.util.List;
  * Created by nolesuk on 11-Apr-17.
  */
 @Repository
-@Transactional(propagation = Propagation.MANDATORY)
 public class RoleDaoImpl extends AbstractDao<RoleEntity> implements RoleDao {
     @Override
     public RoleEntity getById(Integer id) {

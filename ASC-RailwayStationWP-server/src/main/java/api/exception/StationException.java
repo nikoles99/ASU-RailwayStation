@@ -9,7 +9,4 @@ public class StationException extends Exception {
         super(message);
     }
 
-    public StationException(String message, Throwable cause) {
-        super(message, cause);
-    }
 }

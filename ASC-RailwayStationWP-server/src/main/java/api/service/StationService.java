@@ -3,12 +3,14 @@ package api.service;
 import api.exception.StationException;
 import api.model.SimpleResponseBean;
 import api.model.StationBean;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * Created by nikita on 27.02.17.
  */
+@Transactional
 public interface StationService {
 
     void add(StationBean station) throws StationException;

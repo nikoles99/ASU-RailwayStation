@@ -17,7 +17,6 @@ import java.util.List;
 /**
  * Created by nolesuk on 13-Mar-17.
  */
-@Transactional(propagation = Propagation.MANDATORY)
 @Repository
 public class TicketDaoImpl extends AbstractDao<TicketEntity> implements TicketDao {
 

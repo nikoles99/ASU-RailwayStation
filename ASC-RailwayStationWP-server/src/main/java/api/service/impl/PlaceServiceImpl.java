@@ -20,7 +20,6 @@ import java.util.*;
  * Created by nikita on 14.03.17.
  */
 @Service
-@Transactional
 public class PlaceServiceImpl implements PlaceService {
 
   @Autowired

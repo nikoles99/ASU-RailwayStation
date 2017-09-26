@@ -2,7 +2,6 @@ package api.convertors;
 
 import api.entity.TicketEntity;
 import api.entity.UserEntity;
-import api.model.TicketBean;
 import api.model.UserBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

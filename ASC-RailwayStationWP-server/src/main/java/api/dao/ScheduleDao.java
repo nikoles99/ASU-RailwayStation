@@ -1,6 +1,8 @@
 package api.dao;
 
 import api.entity.ScheduleEntity;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -8,6 +10,7 @@ import java.util.List;
 /**
  * Created by nolesuk on 22-Feb-17.
  */
+@Transactional(propagation = Propagation.MANDATORY)
 public interface ScheduleDao {
 
     void add(ScheduleEntity schedule);

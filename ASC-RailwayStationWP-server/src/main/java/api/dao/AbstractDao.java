@@ -15,14 +15,14 @@ import java.util.List;
  */
 public class AbstractDao<T> {
 
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractDao.class);
 
     @PersistenceContext
     private EntityManager entityManager;
 
     protected void persist(T entity) {
         entityManager.persist(entity);
-        logger.info("Persist was successfully " + entity);
+        LOGGER.info("Persist was successfully " + entity);
     }
 
     protected T getById(Class<T> type, Integer id) {
@@ -43,7 +43,7 @@ public class AbstractDao<T> {
 
     protected void remove(T entity) {
         entityManager.remove(entity);
-        logger.info("Remove was successfully " + entity);
+        LOGGER.info("Remove was successfully " + entity);
     }
 
     protected T merge(T entity) {
@@ -55,7 +55,7 @@ public class AbstractDao<T> {
     }
 
     protected Logger getLogger() {
-        return logger;
+        return LOGGER;
     }
 
 }

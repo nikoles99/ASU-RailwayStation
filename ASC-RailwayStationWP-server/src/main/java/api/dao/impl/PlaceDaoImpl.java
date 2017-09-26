@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 /**
  * Created by nolesuk on 13-Mar-17.
  */
-@Transactional(propagation = Propagation.MANDATORY)
 @Repository
 public class PlaceDaoImpl extends AbstractDao<PlaceEntity> implements PlaceDao {
 
