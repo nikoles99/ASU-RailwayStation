@@ -1,6 +1,6 @@
 import {Train} from '../common/model/train';
 import {Component, Input, OnInit} from '@angular/core';
-import {RouteService} from './service/route.service';
+import {TrainService} from '../common/service/train.service';
 import {Schedule} from '../common/model/schedule';
 import {Station} from '../common/model/station';
 
@@ -8,7 +8,7 @@ import {Station} from '../common/model/station';
   selector: 'app-routes',
   templateUrl: './route.component.html',
   styleUrls: ['./route.component.css'],
-  providers: [RouteService]
+  providers: [TrainService]
 })
 export class RouteComponent implements OnInit {
 
@@ -16,7 +16,7 @@ export class RouteComponent implements OnInit {
   departureStation: Station;
   arrivalStation: Station;
 
-  constructor(private routeService: RouteService) {
+  constructor(private routeService: TrainService) {
   }
 
   ngOnInit(): void {

@@ -1,20 +1,20 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Station} from '../common/model/station';
 import {Observable, Subject} from 'rxjs';
-import {RouteSearchService} from '../route-search/service/route-searach.service';
+import {StationService} from '../common/service/station.service';
 
 @Component({
   selector: 'app-load-station',
   templateUrl: './load-station.component.html',
   styleUrls: ['./load-station.component.css'],
-  providers: [RouteSearchService]
+  providers: [StationService]
 })
 export class LoadStationComponent implements OnInit {
   selectedStation: Station = new Station();
   searchTerms = new Subject<string>();
   stations: Observable<Station[]>;
 
-  constructor(private routeSearchService: RouteSearchService) {
+  constructor(private routeSearchService: StationService) {
   }
 
   ngOnInit() {

@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
               //  .antMatchers("/bookTicket").hasAuthority("user")
                 .antMatchers("/deaddTrainleteStation").hasAuthority("admin")
-                .antMatchers("/addStation").hasAuthority("admin")
+                //.antMatchers("/addStation").hasAuthority("admin")
                 .antMatchers("/removeTicket").hasAuthority("user")
                 .antMatchers("/").hasAuthority("admin")
                 .antMatchers("/getBookedTickets").hasAuthority("user")

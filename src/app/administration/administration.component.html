@@ -12,10 +12,10 @@
             <app-load-station #manageStation></app-load-station>
           </td>
           <td>
-            <input class="btn btn-info btn-block" type="button" value="Добавить" id="addStation" disabled="true"/>
+            <input (click)="addStation(manageStation.selectedStation.name)" class="btn btn-info btn-block" type="button" value="Добавить" id="addStation"/>
           </td>
           <td>
-            <input class="btn btn-info btn-block" type="button" value="Удалить" id="deleteStation" disabled="true"/>
+            <input (click)="removeStation(manageStation.selectedStation.name)" class="btn btn-info btn-block" type="button" value="Удалить" id="deleteStation"/>
           </td>
         </tr>
       </table>

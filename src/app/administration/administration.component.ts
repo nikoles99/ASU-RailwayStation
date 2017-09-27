@@ -1,11 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {DistanceStation} from "./model/distance-station";
-import {Station} from "../common/model/station";
+import {Station} from '../common/model/station';
+import {Train} from '../common/model/train';
+import {TrainService} from '../common/service/train.service';
+import {StationService} from '../common/service/station.service';
 
 @Component({
   selector: 'app-administration',
   templateUrl: './administration.component.html',
   styleUrls: ['./administration.component.css'],
+  providers: [TrainService, StationService]
 })
 export class AdministrationComponent implements OnInit {
 
@@ -16,20 +19,23 @@ export class AdministrationComponent implements OnInit {
   reservedPlacesCarriagesCount = this.defaultCarriagesCount;
   commonCarriagesCount = this.defaultCarriagesCount;
 
+  train = new Train();
+
   route = new Map<Station, number>();
 
 
-  constructor() {
+  constructor(private stationService: StationService, private trainService: TrainService) {
   }
 
   ngOnInit() {
   }
 
-  private addRoute() {
-    const maxRouteSize = 10;
-    if (this.route.size < maxRouteSize) {
-      this.route.set(null, null);
-    }
+  private addStation(stationName: string) {
+    this.stationService.add(stationName);
+  }
+
+  private removeStation(stationName: string) {
+    this.stationService.remove(stationName);
   }
 
   private removeRoute(station: Station) {
