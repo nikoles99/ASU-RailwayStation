@@ -38,6 +38,7 @@ export class AdministrationComponent implements OnInit {
     this.stationService.remove(stationName);
   }
 
+
   private removeRoute(station: Station) {
     this.route.delete(station);
   }
@@ -45,5 +46,9 @@ export class AdministrationComponent implements OnInit {
   private setDistance(station: Station, distance: number) {
     this.route.delete(null);
     this.route.set(station, distance);
+  }
+
+  private addRoute() {
+    this.route.set(new Station(), null);
   }
 }

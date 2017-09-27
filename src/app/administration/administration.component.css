@@ -15,13 +15,15 @@
 }
 
 .table-striped {
-  width: 850px;
   text-align: left;
 }
 
 .table-sm {
   text-align: left;
-  width: 300px;
+  width: 450px;
+}
+.table-striped {
+  margin-left: 10px;
 }
 #manageStation{
   width: 200px;
