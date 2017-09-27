@@ -51,4 +51,8 @@ export class AdministrationComponent implements OnInit {
   private addRoute() {
     this.route.set(new Station(), null);
   }
+
+  private addTrain() {
+    this.trainService.add(this.train);
+  }
 }
