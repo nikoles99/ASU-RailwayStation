@@ -1,0 +1,28 @@
+#buildRoute {
+  width: 170px;
+  height: 30px;
+}
+
+#save {
+  width: 170px;
+  height: 30px;
+}
+
+.form-control-sm {
+  height: 25px;
+  padding: 4px;
+  margin: 2px;
+}
+
+.table-striped {
+  width: 850px;
+  text-align: left;
+}
+
+.table-sm {
+  text-align: left;
+  width: 300px;
+}
+p{
+
+}

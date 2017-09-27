@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {LoginService} from "./service/login.service";
-import {User} from "../common/model/users";
+import {LoginService} from './service/login.service';
+import {User} from '../common/model/users';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,11 +10,11 @@ import {User} from "../common/model/users";
   providers: [LoginService]
 })
 export class LoginComponent implements OnInit {
-  login: string = '';
-  password: string = '';
+  login = '';
+  password = '';
   authorizedUser: User;
 
-  constructor(private loginService: LoginService) {
+  constructor(private loginService: LoginService, private router: Router) {
   }
 
   public ngOnInit() {
@@ -33,11 +34,21 @@ export class LoginComponent implements OnInit {
     this.authorizedUser = null;
   }
 
+  public redirectToCabinet() {
+    let link;
+    if (this.authorizedUser.login === 'admin') {
+      link = ['/administration'];
+    } else {
+      link = ['/cabinet'];
+    }
+    this.router.navigate(link);
+  }
+
   private setAuthorizedUser(user: User) {
     if (user) {
       this.authorizedUser = user;
       this.password = null;
-      this.login = null
+      this.login = null;
     }
   }
 }

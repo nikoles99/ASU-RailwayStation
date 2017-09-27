@@ -13,7 +13,9 @@ import {RouteComponent} from './routes/route.component';
 import {FreePlacesComponent} from './free-places/free-places.component';
 import {BookTicketsComponent} from './book-tickets/book-tickets.component';
 import { CabinetComponent } from './cabinet/cabinet.component';
-import { AdministrationComponent } from './src/app/administration/administration.component';
+import { AdministrationComponent } from './administration/administration.component';
+import { LoadStationComponent } from './load-station/load-station.component';
+import { DateTimeInputComponent } from './date-time-input/date-time-input.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { AdministrationComponent } from './src/app/administration/administration
     BookTicketsComponent,
     CabinetComponent,
     AdministrationComponent,
+    LoadStationComponent,
+    DateTimeInputComponent,
   ],
   imports: [
     BrowserModule,

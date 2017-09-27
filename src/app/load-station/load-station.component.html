@@ -1,0 +1,9 @@
+<div>
+  <input [(ngModel)]="selectedStation.name" class="span1 col-md-1 form-control" id="station_from" #searchStation
+         (keyup)="searchStations(searchStation.value)" placeholder="Станция"/>
+  <div style="z-index: 1" class="search-result">
+    <li class="stationList" *ngFor="let station of stations | async" search-result (click)="onSelectStation(station)">
+      {{station.name}}
+    </li>
+  </div>
+</div>

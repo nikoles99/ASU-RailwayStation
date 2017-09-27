@@ -23,7 +23,7 @@
           <td><p>{{authorizedUser.login}}</p></td>
         </tr>
         <tr>
-          <td><a id="cabinet">Личный кабинет</a><span class="fontawesome-arrow-right"></span></td>
+          <td><a (click)="redirectToCabinet()" id="cabinet">Личный кабинет</a><span class="fontawesome-arrow-right"></span></td>
           <td><a (click)="logout()" id="logout">Logout</a><span class="fontawesome-arrow-right"></span></td>
         </tr>
       </table>

@@ -1,0 +1,15 @@
+.search-result{
+  position: absolute;
+  margin-top: 34px;
+}
+
+
+.stationList {
+  width: 170px;
+  text-align: left;
+  border-bottom: 1px solid gray;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+  background-color: white;
+  list-style-type: none;
+}

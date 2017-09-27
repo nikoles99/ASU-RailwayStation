@@ -1,145 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Administration</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="script/utils/internationalization.js"></script>
+  <meta charset="UTF-8">
+  <title>Administration</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="script/utils/internationalization.js"></script>
 
 </head>
 
 <body>
 
 <div>
-    <p id="rus" onclick="setLanguage('rus')">Русский</p>
-    <p id="eng" onclick="setLanguage('eng')">English</p>
+  <p id="rus" onclick="setLanguage('rus')">Русский</p>
+  <p id="eng" onclick="setLanguage('eng')">English</p>
 </div>
 <div>
-    <fieldset>
-        <table>
-            <legend>Станции</legend>
-            <tr>
-                <td>
-                    <p>Название</p>
-                </td>
-                <td>
-                    <input type="text" id="nameStation" list="stationsDataList" maxlength="19" pattern=".{4,19}"
-                           required title="Expected 4 to 19 chars"/>
-                </td>
-                <td>
-                    <input type="button" value="добавить" id="addStation" disabled="true"/>
-                </td>
-                <td>
-                    <input type="button" value="удалить" id="deleteStation" disabled="true"/>
-                </td>
-            </tr>
-        </table>
+  <fieldset>
+    <table>
+      <legend>Станции</legend>
+      <tr>
+        <td>
+          <p>Название</p>
+        </td>
+        <td>
+          <input type="text" id="nameStation" list="stationsDataList" maxlength="19" pattern=".{4,19}"
+                 required title="Expected 4 to 19 chars"/>
+        </td>
+        <td>
+          <input type="button" value="добавить" id="addStation" disabled="true"/>
+        </td>
+        <td>
+          <input type="button" value="удалить" id="deleteStation" disabled="true"/>
+        </td>
+      </tr>
+    </table>
 
-    </fieldset>
+  </fieldset>
 </div>
 <div id="route">
-    <fieldset>
-        <table>
-            <legend>Добавление поезда по маршруту</legend>
-            <tr>
-                <td>Поезд</td>
-                <td><input type="text" id="trainRoute" disabled="true"></td>
-                <td>Дата отправления</td>
-                <td><input type="datetime-local" id="departureDate"></td>
-                <span/>
-                <td>Дата прибытия</td>
-                <td><input type="datetime-local" id="arrivalDate" disabled="true"></td>
-            </tr>
-        </table>
-        <div>
-            <fieldset>
-                <table id="carriages">
-                    <legend>Типы вагонов</legend>
-                    <tr>
-                        <td> Общее количесво вагонов</td>
-                        <td>
-                            <input type="number" id="countCarriages" min="10" max="30"/><span/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Общий</td>
-                        <td>
-                            <input type="number" id="countCommon" min="2" max="10"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Плацкарт</td>
-                        <td>
-                            <input type="number" id="countReservedSeat" min="2" max="10"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Купе</td>
-                        <td>
-                            <input type="number" id="countCoups" min="2" max="10"/>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Сидячий</td>
-                        <td>
-                            <input type="number" id="countSeatPlaces" min="2" max="10"/>
-                        </td>
-                    </tr>
+  <fieldset>
+    <table>
+      <legend>Добавление поезда по маршруту</legend>
+      <tr>
+        <td>Поезд</td>
+        <td><input type="text" id="trainRoute" disabled="true"></td>
+        <td>Дата отправления</td>
+        <td><input type="datetime-local" id="departureDate"></td>
+        <span/>
+        <td>Дата прибытия</td>
+        <td><input type="datetime-local" id="arrivalDate" disabled="true"></td>
+      </tr>
+    </table>
+    <div>
+      <fieldset>
+        <table id="carriages">
+          <legend>Типы вагонов</legend>
+          <tr>
+            <td> Общее количесво вагонов</td>
+            <td>
+              <input type="number" id="countCarriages" min="10" max="30"/><span/>
+            </td>
+          </tr>
+          <tr>
+            <td>Общий</td>
+            <td>
+              <input type="number" id="countCommon" min="2" max="10"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Плацкарт</td>
+            <td>
+              <input type="number" id="countReservedSeat" min="2" max="10"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Купе</td>
+            <td>
+              <input type="number" id="countCoups" min="2" max="10"/>
+            </td>
+          </tr>
+          <tr>
+            <td>Сидячий</td>
+            <td>
+              <input type="number" id="countSeatPlaces" min="2" max="10"/>
+            </td>
+          </tr>
 
-                </table>
-            </fieldset>
-        </div>
-        <div>
-            <fieldset>
-                <table id="stations">
-                    <legend>Построение маршрута</legend>
-                    <input type="button" id="addStationToRoute" value="+">
-                    <tr>
-                        <td>Станция</td>
-                        <td><input type="text" class="station" list="stationsDataList"/></td>
-                        <td>Расстояние до следующей станции(км)</td>
-                        <td><input type="number" min="20" max="200" class="distance"></td>
-                    </tr>
-                    <tr>
-                        <td>Станция</td>
-                        <td><input type="text" class="station" list="stationsDataList"/></td>
-                        <td>Расстояние до следующей станции(км)</td>
-                        <td><input type="number" min="20" max="200" class="distance"></td>
-                    </tr>
-                    <tr>
-                        <td>Станция</td>
-                        <td><input type="text" class="station" list="stationsDataList"/></td>
-                        <td>Расстояние до следующей станции(км)</td>
-                        <td><input type="number" min="20" max="200" class="distance"></td>
-                    </tr>
-                </table>
-            </fieldset>
-        </div>
-        <input type="button" id="buildRoute" value="Построить маршрут">
-        <input type="button" id="save" value="Сохранить" disabled="true">
-    </fieldset>
+        </table>
+      </fieldset>
+    </div>
+    <div>
+      <fieldset>
+        <table id="stations">
+          <legend>Построение маршрута</legend>
+          <input type="button" id="addStationToRoute" value="+">
+          <tr>
+            <app-load-station></app-load-station>
+            <app-load-station></app-load-station>
+            <app-load-station></app-load-station>
+            <td>Расстояние до следующей станции(км)</td>
+            <td><input type="number" min="20" max="200" class="distance"></td>
+          </tr>
+          <tr>
+            <td>Станция</td>
+            <td><input type="text" class="station" list="stationsDataList"/></td>
+            <td>Расстояние до следующей станции(км)</td>
+            <td><input type="number" min="20" max="200" class="distance"></td>
+          </tr>
+          <tr>
+            <td>Станция</td>
+            <td><input type="text" class="station" list="stationsDataList"/></td>
+            <td>Расстояние до следующей станции(км)</td>
+            <td><input type="number" min="20" max="200" class="distance"></td>
+          </tr>
+        </table>
+      </fieldset>
+    </div>
+    <input type="button" id="buildRoute" value="Построить маршрут">
+    <input type="button" id="save" value="Сохранить" disabled="true">
+  </fieldset>
 </div>
 <div>
-    <fieldset>
-        <table>
-            <legend>Текущие маршруты</legend>
-            <tr>
-                <td>
-                    <p>Название</p>
-                </td>
-                <td>
-                    <input type="text" id="nameSearch" size="30"
-                           placeholder="Маршрут"
-                           pattern=".{5,19}" required title="Either 0 OR (5 to 19 chars)"/>
-                </td>
-                <td>
-                    <input type="button" value="Поиск" id="search" disabled="true"/>
-                </td>
-            </tr>
-        </table>
-        <table id="trains" cellspacing="1" border="1" cellpadding="5" width="1000" style="visibility: hidden"></table>
+  <fieldset>
+    <table>
+      <legend>Текущие маршруты</legend>
+      <tr>
+        <td>
+          <p>Название</p>
+        </td>
+        <td>
+          <input type="text" id="nameSearch" size="30"
+                 placeholder="Маршрут"
+                 pattern=".{5,19}" required title="Either 0 OR (5 to 19 chars)"/>
+        </td>
+        <td>
+          <input type="button" value="Поиск" id="search" disabled="true"/>
+        </td>
+      </tr>
+    </table>
+    <table id="trains" cellspacing="1" border="1" cellpadding="5" width="1000" style="visibility: hidden"></table>
 
-    </fieldset>
+  </fieldset>
 </div>
 <datalist id="stationsDataList"/>
 <script src="script/administration.js"></script>

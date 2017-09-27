@@ -1,0 +1,10 @@
+<div>
+  <td>
+    <input type="date" class="form-control" #date [ngModel]="dateTime | date:'y-MM-dd'"
+           (change)="onDateChange(date.value)">
+  </td>
+  <td>
+    <input style="margin-left: 3px" type="time" class="form-control" #time [ngModel]="dateTime | date:'HH:mm'"
+           (change)="onDateChange(time.value)">
+  </td>
+</div>
