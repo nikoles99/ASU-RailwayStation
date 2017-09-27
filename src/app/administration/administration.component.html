@@ -2,20 +2,20 @@
   <div class="panel panel-info">
     <div class="panel-heading">Добавление поезда по маршруту</div>
     <div class="panel-body">
-      <table class="table table-sm">
+      <table class="table table-striped">
         <h3>Станции</h3>
         <tr>
           <td>
             <p>Название</p>
           </td>
           <td>
-            <input id="nameStation" maxlength="19" pattern=".{4,19}" required title="Expected 4 to 19 chars"/>
+            <app-load-station #manageStation></app-load-station>
           </td>
           <td>
-            <input class="btn btn-info btn-block" type="button" value="добавить" id="addStation" disabled="true"/>
+            <input class="btn btn-info btn-block" type="button" value="Добавить" id="addStation" disabled="true"/>
           </td>
           <td>
-            <input class="btn btn-info btn-block" type="button" value="удалить" id="deleteStation" disabled="true"/>
+            <input class="btn btn-info btn-block" type="button" value="Удалить" id="deleteStation" disabled="true"/>
           </td>
         </tr>
       </table>
@@ -23,9 +23,13 @@
         <h3>Даты</h3>
         <tr>
           <td>Дата отправления</td>
-          <td><input type="datetime-local" id="departureDate"></td>
+          <td>
+            <app-date-time-input #departureDate></app-date-time-input>
+          </td>
           <td>Дата прибытия</td>
-          <td><input type="datetime-local" id="arrivalDate" disabled="true"></td>
+          <td>
+            <app-date-time-input #arrivatlDate></app-date-time-input>
+          </td>
         </tr>
       </table>
       <div>
@@ -33,33 +37,27 @@
           <table class="table table-sm" id="carriages">
             <h3>Типы вагонов</h3>
             <tr>
-              <td> Общее количесво вагонов</td>
-              <td>
-                <input class="form-control form-control-sm" type="number" id="countCarriages" min="10" max="30"/>
-              </td>
-            </tr>
-            <tr>
               <td>Общий</td>
               <td>
-                <input class="form-control form-control-sm" type="number" id="countCommon" min="2" max="10"/>
+                <input class="form-control form-control-sm" value="{{commonCarriagesCount}}" type="number" id="countCommon" min="2" max="10"/>
               </td>
             </tr>
             <tr>
               <td>Плацкарт</td>
               <td>
-                <input class="form-control form-control-sm" type="number" id="countReservedSeat" min="2" max="10"/>
+                <input class="form-control form-control-sm" value="{{reservedPlacesCarriagesCount}}" type="number" id="countReservedSeat" min="2" max="10"/>
               </td>
             </tr>
             <tr>
               <td>Купе</td>
               <td>
-                <input class="form-control form-control-sm" type="number" id="countCoups" min="2" max="10"/>
+                <input class="form-control form-control-sm" value="{{coupCarriagesCount}}" type="number" id="countCoups" min="2" max="10"/>
               </td>
             </tr>
             <tr>
               <td>Сидячий</td>
               <td>
-                <input class="form-control form-control-sm" type="number" id="countSeatPlaces" min="2" max="10"/>
+                <input class="form-control form-control-sm" value="{{seatPlacesCarriagesCount}}" type="number" id="countSeatPlaces" min="2" max="10"/>
               </td>
             </tr>
 
@@ -68,24 +66,18 @@
         <div>
           <table class="table table-striped" id="stations">
             <h3>Построение маршрута</h3>
-            <input type="button" id="addStationToRoute" value="+">
-            <tr>
+            <input (click)="addRoute()" type="button" id="addStationToRoute" value="+">
+            <tr *ngFor="let route of route.keys()">
               <td>Станция</td>
-              <td><app-load-station></app-load-station></td>
+              <td>
+                <app-load-station #station route=[selectedStation]></app-load-station>
+              </td>
               <td>Расстояние до следующей станции(км)</td>
-              <td><input class="form-control form-control-sm" type="number" min="20" max="200"></td>
-            </tr>
-            <tr>
-              <td>Станция</td>
-              <td><app-load-station></app-load-station></td>
-              <td>Расстояние до следующей станции(км)</td>
-              <td><input class="form-control form-control-sm" type="number" min="20" max="200"></td>
-            </tr>
-            <tr>
-              <td>Станция</td>
-              <td><app-load-station></app-load-station></td>
-              <td>Расстояние до следующей станции(км)</td>
-              <td><input class="form-control form-control-sm" type="number" min="20" max="200"></td>
+              <td><input #distance class="form-control form-control-sm" type="number" min="20" max="200"
+                         (change)="setDistance(station.selectedStation, distance.value)"></td>
+              <td>
+                <button (click)="removeRoute(station.selectedStation)">x</button>
+              </td>
             </tr>
           </table>
         </div>

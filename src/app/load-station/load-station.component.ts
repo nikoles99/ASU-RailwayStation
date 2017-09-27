@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Station} from '../common/model/station';
 import {Observable, Subject} from 'rxjs';
 import {RouteSearchService} from '../route-search/service/route-searach.service';
@@ -10,9 +10,9 @@ import {RouteSearchService} from '../route-search/service/route-searach.service'
   providers: [RouteSearchService]
 })
 export class LoadStationComponent implements OnInit {
+  selectedStation: Station = new Station();
   searchTerms = new Subject<string>();
   stations: Observable<Station[]>;
-  selectedStation: Station = new Station();
 
   constructor(private routeSearchService: RouteSearchService) {
   }
